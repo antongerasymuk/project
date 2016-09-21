@@ -6,6 +6,7 @@
 use backend\assets\AdminAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 
 AdminAsset::register( $this );
 ?>
@@ -134,17 +135,17 @@ AdminAsset::register( $this );
 						enabled to use this site.</p>
 				</div>
 			</noscript>
-
 			<!-- start: Content -->
 			<div id="content" class="span10">
-				<ul class="breadcrumb">
-					<li>
-						<i class="icon-home"></i>
-						<a href="index.html">Home</a>
-						<i class="icon-angle-right"></i>
-					</li>
-					<li><a href="#">Dashboard</a></li>
-				</ul>
+                <?= Breadcrumbs::widget([
+                    'homeLink' => [
+                        'label' => 'Home',
+                        'template' => '<li><i class="icon-home"></i><a href="' . Url::to(['site/index']) . '">{link}</a></li>',
+                        'url' => ''
+                    ],
+                    'itemTemplate' => "<li><a href='#'>{link}</a></li>\n",
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
 				<div class="row-fluid"><?= $content ?></div>
 			</div><!--/.fluid-container-->
 

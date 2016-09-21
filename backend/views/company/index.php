@@ -1,6 +1,8 @@
 <?php use yii\helpers\Url;
 
-$this->title = 'Companies'; ?>
+$this->title = 'Companies';
+$this->params['breadcrumbs'][] = $this->title;
+?>
 
 <div class="row-fluid sortable">
 	<div class="box span12">

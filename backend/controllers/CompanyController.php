@@ -19,7 +19,11 @@ class CompanyController extends BackEndController
 
 	public function actionCreate()
 	{
-		$model = new Company();
+        $model = new Company();
+
+	    if ($model->load(Yii::$app->request->post()) && $model->save()) {
+	        // saved success
+        }
 
 		return $this->render('create', ['model' => $model]);
 	}

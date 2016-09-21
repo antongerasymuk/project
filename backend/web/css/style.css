@@ -2971,5 +2971,12 @@ ul.messagesList li span.date {
 		background: url(../img/chat-right-metro@2x.png) no-repeat 0px 0px;
 		background-size: 100%;
 	}
-    
+}
+
+#login-form .input-prepend p {
+    font-size: 16px;
+}
+
+.help-block-error {
+    color: red;
 }

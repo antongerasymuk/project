@@ -11,8 +11,8 @@ class m160921_093955_os_review extends Migration
                   $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
               }
               $this->createTable('os_review', [
-                  'os_id' => $this->integer(),
-                  'review_id' =>  $this->integer(),
+                  'os_id' => $this->integer()->notNull(),
+                  'review_id' =>  $this->integer()->notNull(),
               ], $tableOptions);
     }
 

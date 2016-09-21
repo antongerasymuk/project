@@ -11,8 +11,8 @@ class m160921_074122_company_license extends Migration
                   $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
               }
               $this->createTable('company_license', [
-                  'company_id' => $this->primaryKey(),
-                  'license_id' => $this->integer(),                  
+                  'company_id' => $this->primaryKey()->notNull(),
+                  'license_id' => $this->integer()->notNull(),                  
               ], $tableOptions);
     }
 

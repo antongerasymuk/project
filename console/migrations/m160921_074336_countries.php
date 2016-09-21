@@ -12,7 +12,7 @@ class m160921_074336_countries extends Migration
               }
               $this->createTable('countries', [
                   'id' => $this->primaryKey(),
-                  'title' => $this->string(20)->notNull(),
+                  'title' => $this->string(20),
               ], $tableOptions);
     }
 

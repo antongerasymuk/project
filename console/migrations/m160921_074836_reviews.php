@@ -13,7 +13,7 @@ class m160921_074836_reviews extends Migration
               $this->createTable('reviews', [
                   'id' => $this->primaryKey(),
                   'logo' => $this->string(255),
-                  'category_id' => $this->integer(),
+                  'category_id' => $this->integer()->notNull(),
                   'adress' => $this->string(100),
               ], $tableOptions);
     }

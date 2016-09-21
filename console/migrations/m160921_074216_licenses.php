@@ -12,8 +12,8 @@ class m160921_074216_licenses extends Migration
               }
               $this->createTable('licenses', [
                   'id' => $this->primaryKey(),
-                  'title' => $this->string(25),
-                  'url' => $this->string(255),
+                  'title' => $this->string(25)->notNull(),
+                  'url' => $this->string(255)->notNull(),
               ], $tableOptions);
     }
 

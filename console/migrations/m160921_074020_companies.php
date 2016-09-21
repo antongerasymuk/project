@@ -12,7 +12,7 @@ class m160921_074020_companies extends Migration
         }
         $this->createTable('companies', [
             'id' => $this->primaryKey(),
-            'title' => $this->string(50)->notNull(),
+            'title' => $this->string(50),
             'description' => $this->text(),
             'bg_color' => $this->string(7),
             'logo' => $this->string(255),

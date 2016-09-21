@@ -11,8 +11,8 @@ class m160921_074816_review_rating extends Migration
                   $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
               }
               $this->createTable('review_rating', [
-                  'company_id' => $this->integer(),
-                  'rating_id' => $this->integer(),
+                  'company_id' => $this->integer()->notNull(),
+                  'rating_id' => $this->integer()->notNull(),
 
               ], $tableOptions);
     }

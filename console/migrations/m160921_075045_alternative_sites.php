@@ -14,7 +14,7 @@ class m160921_075045_alternative_sites extends Migration
                   'id' => $this->primaryKey(),
                   'title' => $this->string(15),
                   'url' => $this->string(255),
-                  'review_id' => $this->string(255),
+                  'review_id' => $this->string(255)->notNull(),
               ], $tableOptions);
     }
 

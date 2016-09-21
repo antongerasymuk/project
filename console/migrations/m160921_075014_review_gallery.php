@@ -12,7 +12,7 @@ class m160921_075014_review_gallery extends Migration
               }
               $this->createTable('review_gallery', [
                   'id' => $this->integer(),
-                  'review_id' =>  $this->integer(),
+                  'review_id' =>  $this->integer()->notNull(),
                   'image' => $this->string(255),
               ], $tableOptions);
     }

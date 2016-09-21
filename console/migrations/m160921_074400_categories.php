@@ -12,7 +12,7 @@ class m160921_074400_categories extends Migration
               }
               $this->createTable('categories', [
                   'id' => $this->primaryKey(),
-                  'title' => $this->string(30)->notNull(),
+                  'title' => $this->string(30),
                   'company_id' => $this->integer()->notNull(),
 
               ], $tableOptions);

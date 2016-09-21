@@ -14,7 +14,7 @@ class m160921_074644_directors extends Migration
           'id' => $this->primaryKey(),
           'description' => $this->string(255),
           'photo' => $this->string(255),
-          'company_id' => $this->integer(),
+          'company_id' => $this->integer()->notNull(),
       ], $tableOptions);
     }
 

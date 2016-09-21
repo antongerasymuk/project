@@ -13,9 +13,9 @@ $this->title = 'Login';
 	<div class="login-box">
 		<div class="icons">
 			<a href="/"><i class="halflings-icon home"></i></a>
-			<a href="#"><i class="halflings-icon cog"></i></a>
+<!--			<a href="#"><i class="halflings-icon cog"></i></a>-->
 		</div>
-		<h2>Login to your account</h2>
+		<h2>Login to admin panel</h2>
 		<?php $form = ActiveForm::begin([
 			'id' => 'login-form',
 			'options' => ['class' => 'form-horizontal'],
@@ -37,7 +37,7 @@ $this->title = 'Login';
 				</div>
 				<div class="clearfix"></div>
 
-				<div class="input-prepend form-group field-username required has-error" title="Password">
+				<div class="input-prepend form-group field-password required has-error" title="Password">
 					<span class="add-on"><i class="halflings-icon lock"></i></span>
 					<?= $form->field($model, 'password')->passwordInput([
 						'id' => 'password',

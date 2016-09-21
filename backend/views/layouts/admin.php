@@ -137,15 +137,7 @@ AdminAsset::register( $this );
 			</noscript>
 			<!-- start: Content -->
 			<div id="content" class="span10">
-                <?= Breadcrumbs::widget([
-                    'homeLink' => [
-                        'label' => 'Home',
-                        'template' => '<li><i class="icon-home"></i><a href="' . Url::to(['site/index']) . '">{link}</a></li>',
-                        'url' => ''
-                    ],
-                    'itemTemplate' => "<li><a href='#'>{link}</a></li>\n",
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
+                <!-- Breadcrumbs here -->
 				<div class="row-fluid"><?= $content ?></div>
 			</div><!--/.fluid-container-->
 

@@ -26,7 +26,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <header>
+    <header class="home">
 				<div class="header-top">
 					<div class="container">
 						<div class="row">
@@ -51,6 +51,10 @@ AppAsset::register($this);
 					</div>
 				</div>
 
+				<div class="header-info">
+					<h1>UK's Top Gambling Sites</h1>
+					<p>Grab your bonus for <a href="#">Casino,</a> <a href="#">Sport,</a> <a href="#">Bingo,</a> <a href="#">Poker</a></p>
+				</div>
 
 			</header>
 

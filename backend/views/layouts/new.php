@@ -356,6 +356,7 @@ AdminAsset::register( $this );
 					</li>
 					<li><a href="#">Dashboard</a></li>
 				</ul>
+				<div class="row-fluid"><?= $content ?></div>
 			</div><!--/.fluid-container-->
 
 			<!-- end: Content -->

@@ -4,7 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
+//use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
@@ -26,38 +26,37 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+    <header class="home">
+				<div class="header-top">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-sm-3">
+								<div class="logo"><a href="#"><img src="images/logo.png" alt=""></a></div>
+							</div>
+
+							<div class="col-sm-9">
+								<a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
+								<nav class="header-menu clearfix">
+									<ul>
+										<li><a href="#">Casino</a></li>
+										<li><a href="#">Sport</a></li>
+										<li><a href="#">Bingo</a></li>
+										<li><a href="#">Poker</a></li>
+									</ul>
+								</nav>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="header-info">
+					<h1>UK's Top Gambling Sites</h1>
+					<p>Grab your bonus for <a href="#">Casino,</a> <a href="#">Sport,</a> <a href="#">Bingo,</a> <a href="#">Poker</a></p>
+				</div>
+
+			</header>
 
     <div class="container">
         <?= Breadcrumbs::widget([
@@ -68,13 +67,63 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+	<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-9 col-sm-8 col-xs-12">
+							<nav class="footer-menu clearfix">
+								<ul>
+									<li><a href="#">Contact Us</a></li>
+									<li><span>·</span></li>
+									<li><a href="#">Privacy</a></li>
+									<li><span>·</span></li>
+									<li><a href="#">Terms and Conditions</a></li>
+									<li><span>·</span></li>
+									<li><a href="#">Site Map</a></li>
+									<li><span>·</span></li>
+									<li><a href="#">Glossary</a></li>
+								</ul>
+							</nav>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+							<div class="footer-info">
+								It is your responsibility to verify and examine all aspects of your bonus. Please read the terms and conditions carefully.<br/>
+We provide no guarantee as to the timeliness or accuracy of the information found on this site.
+							</div>
+
+							<div class="copyright hidden-xs">
+								<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
+								<p>Design by <a href="http://perfecto-web.pro" target="_blank">Perfecto Web</a></p>
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
+							<div class="b-opened">
+								<div class="cnt">5 7 3 8 9</div>
+								<div class="txt">Bonuses opened</div>
+							</div>
+
+							<div class="clearfix"></div>
+							<div class="follow">
+								<p>Follow us to get new bonuses</p>
+								<ul class="clearfix">
+									<li class="fb"><a href="#"><i class="flaticon-soc-fb"></i></a></li>
+									<li class="tw"><a href="#"><i class="flaticon-soc-tw"></i></a></li>
+									<li class="gp"><a href="#"><i class="flaticon-soc-gp"></i></a></li>
+								</ul>
+							</div>
+
+							<div class="copyright hidden-lg hidden-md hidden-sm visible-xs-block">
+								<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
+								<p>Design by <a href="http://perfecto-web.pro" target="_blank">Perfecto Web</a></p>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</footer><!-- .Footer -->
+
 
 <?php $this->endBody() ?>
 </body>

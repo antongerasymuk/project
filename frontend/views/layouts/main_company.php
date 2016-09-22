@@ -26,33 +26,41 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <header>
-				<div class="header-top">
-					<div class="container">
-						<div class="row">
+  <header class="whill">
+      <div class="header-top">
+        <div class="container">
+          <div class="row">
 
-							<div class="col-sm-3">
-								<div class="logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
-							</div>
+            <div class="col-sm-3">
+              <div class="logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
+            </div>
 
-							<div class="col-sm-9">
-								<a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
-								<nav class="header-menu clearfix">
-									<ul>
-										<li><a href="#">Casino</a></li>
-										<li><a href="#">Sport</a></li>
-										<li><a href="#">Bingo</a></li>
-										<li><a href="#">Poker</a></li>
-									</ul>
-								</nav>
-							</div>
+            <div class="col-sm-9">
+              <a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
+              <nav class="header-menu clearfix">
+                <ul>
+                  <li class="active"><a href="#">Casino</a></li>
+                  <li><a href="#">Sport</a></li>
+                  <li><a href="#">Bingo</a></li>
+                  <li><a href="#">Poker</a></li>
+                </ul>
+              </nav>
+            </div>
 
-						</div>
-					</div>
-				</div>
+          </div>
+        </div>
+      </div>
 
+      <div class="header-lg">
+        <a target="_blank" href="#"><img src="/images/lg-williamHill.png" alt=""></a>
+        <p>Grab your bonus for <a href="#">Casino,</a> <a href="#">Sport,</a> <a href="#">Bingo,</a> <a href="#">Poker</a></p>
+      </div>
 
-			</header>
+      <div class="container">
+        <div class="visit-btn"><a href="#">Visit William Hill Casino <i class="flaticon-arr-right"></i></a></div>
+      </div>
+
+    </header><!-- .Header -->
 
     <div class="container">
         <?= Breadcrumbs::widget([

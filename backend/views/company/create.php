@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ['id' => 'color-picker', 'name' => 'color-picker'])
     ->label('Background color')
 ?>
-<?= $form->field($model, 'logo')->fileInput()->label('Logo file') ?>
+<?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
 
 <div class="form-group">

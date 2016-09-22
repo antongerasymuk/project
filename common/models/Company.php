@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "companies".
@@ -19,7 +21,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Company extends \yii\db\ActiveRecord
 {
-    public $logo;
+    const LOGO_PATH = 'uploads/';
+    public $logoFile;
 	/**
 	 * @inheritdoc
 	 */
@@ -38,8 +41,10 @@ class Company extends \yii\db\ActiveRecord
 			[['created_at', 'updated_at'], 'integer'],
 			[['title'], 'string', 'max' => 50],
 			[['bg_color'], 'string', 'max' => 7],
-			[['logo'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif'],
+            [['logo'], 'string', 'max' => 255],
             [['site_url'], 'string', 'max' => 255],
+            [['logoFile'], 'safe'],
+            [['logoFile'], 'file', 'extensions'=>'jpg, gif, png'],
 		];
 	}
 
@@ -66,15 +71,5 @@ class Company extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className(),
         ];
-    }
-
-    public function upload()
-    {
-        if ($this->validate()) {
-            $this->logo->saveAs('@frontend/uploads/' . $this->logo->baseName . '.' . $this->logo->extension);
-            return true;
-        } else {
-            return false;
-        }
     }
 }

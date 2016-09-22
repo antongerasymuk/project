@@ -1,10 +1,28 @@
-<?php use yii\helpers\Url;
+<?php
+/**
+ * @var $company \common\models\Company
+ */
+
+use yii\bootstrap\Alert;
+use yii\helpers\Url;
 
 $this->title = 'Companies';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="row-fluid sortable">
+<?php $message = Yii::$app->session->getFlash('success'); ?>
+<div class="row-fluid">
+    <?php if (!empty($message)) : ?>
+        <?= Alert::widget([
+            'options' => [
+                'class' => 'alert-success',
+            ],
+            'body' => $message,
+        ]);
+        ?>
+    <?php endif; ?>
+</div>
+<div class="row-fluid">
 	<div class="box span12">
 		<a href="<?= Url::to(['company/create']) ?>" class="btn btn-primary">Create company</a>
 		<div class="box-header" data-original-title>
@@ -26,22 +44,31 @@ $this->params['breadcrumbs'][] = $this->title;
 				</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Company 1</td>
-						<td class="center">Company 1 description</td>
-						<td class="center">Image</td>
-						<td class="center">
-							<a class="btn btn-success" href="#">
-								<i class="halflings-icon white zoom-in"></i>
-							</a>
-							<a class="btn btn-info" href="#">
-								<i class="halflings-icon white edit"></i>
-							</a>
-							<a class="btn btn-danger" href="#">
-								<i class="halflings-icon white trash"></i>
-							</a>
-						</td>
-				</tr>
+                <?php if (empty($companies)) : ?>
+                <?php else : ?>
+                    <?php foreach ($companies as $company) : ?>
+                        <tr>
+                            <td><?= $company->title ?></td>
+                            <td class="center"><?= $company->description ?></td>
+                            <td class="center">
+                                <?php if (!empty($company->logo)) : ?>
+                                    <img src="/<?= $company->logo ?>" alt="<?= basename($company->logo) ?>" class="company-logo">
+                                <?php endif; ?>
+                            </td>
+                            <td class="center">
+                                <a class="btn btn-success" href="#">
+                                    <i class="halflings-icon white zoom-in"></i>
+                                </a>
+                                <a class="btn btn-info" href="#">
+                                    <i class="halflings-icon white edit"></i>
+                                </a>
+                                <a class="btn btn-danger" href="#">
+                                    <i class="halflings-icon white trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
 				</tbody>
 			</table>
 		</div>

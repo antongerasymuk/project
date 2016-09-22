@@ -22,7 +22,10 @@ class CompanyController extends BackEndController
         $model = new Company();
 
 	    if ($model->load(Yii::$app->request->post()) && $model->save()) {
-	        // saved success
+	        // Upload company logo
+	        if ($model->upload()) {
+
+            }
         }
 
 		return $this->render('create', ['model' => $model]);

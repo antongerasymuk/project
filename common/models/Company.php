@@ -37,7 +37,8 @@ class Company extends \yii\db\ActiveRecord
 			[['created_at', 'updated_at'], 'integer'],
 			[['title'], 'string', 'max' => 50],
 			[['bg_color'], 'string', 'max' => 7],
-			[['logo', 'site_url'], 'string', 'max' => 255],
+			[['logo'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, gif'],
+            [['site_url'], 'string', 'max' => 255],
 		];
 	}
 
@@ -64,5 +65,15 @@ class Company extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className(),
         ];
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->logo->saveAs('@frontend/uploads/' . $this->logo->baseName . '.' . $this->logo->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

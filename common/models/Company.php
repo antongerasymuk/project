@@ -19,6 +19,7 @@ use yii\behaviors\TimestampBehavior;
  */
 class Company extends \yii\db\ActiveRecord
 {
+    public $logo;
 	/**
 	 * @inheritdoc
 	 */

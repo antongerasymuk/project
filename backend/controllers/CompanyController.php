@@ -3,9 +3,11 @@ namespace backend\controllers;
 
 use common\models\Company;
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * Company controller
@@ -21,10 +23,11 @@ class CompanyController extends BackEndController
 	{
         $model = new Company();
 
-	    if ($model->load(Yii::$app->request->post()) && $model->save()) {
-	        // Upload company logo
-	        if ($model->upload()) {
+        if (Yii::$app->request->isPost) {
+            $model->logo = UploadedFile::getInstance($model, 'logo');
 
+            if ($model->logo && $model->save()) {
+                $model->logo->saveAs(Url::to('@frontend/web/uploads/') . $model->logo->baseName . '.' . $model->logo->extension);
             }
         }
 

@@ -22,6 +22,7 @@ use yii\web\UploadedFile;
 class Company extends \yii\db\ActiveRecord
 {
     const LOGO_PATH = 'uploads/';
+    public $reviewIds;
     public $logoFile;
 	/**
 	 * @inheritdoc
@@ -44,6 +45,7 @@ class Company extends \yii\db\ActiveRecord
             [['logo'], 'string', 'max' => 255],
             [['site_url'], 'string', 'max' => 255],
             [['logoFile'], 'safe'],
+            [['reviewIds'], 'safe'],
             [['logoFile'], 'file', 'extensions'=>'jpg, gif, png'],
 		];
 	}
@@ -71,5 +73,10 @@ class Company extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className(),
         ];
+    }
+
+    public function getReviews()
+    {
+
     }
 }

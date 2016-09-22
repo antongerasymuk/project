@@ -28,10 +28,11 @@ class Review extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id'], 'required'],
-            [['category_id'], 'integer'],
-            [['logo'], 'string', 'max' => 255],
-            [['adress'], 'string', 'max' => 100],
+//            [['category_id', 'title'], 'required'],
+//            [['category_id'], 'integer'],
+//            [['logo'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
+            [['address'], 'string', 'max' => 100],
         ];
     }
 
@@ -42,9 +43,9 @@ class Review extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'logo' => 'Logo',
-            'category_id' => 'Category ID',
-            'adress' => 'Adress',
+//            'logo' => 'Logo',
+//            'category_id' => 'Category ID',
+            'address' => 'Address',
         ];
     }
 }

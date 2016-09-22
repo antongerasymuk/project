@@ -2,11 +2,9 @@
 namespace backend\controllers;
 
 use common\models\Company;
+use common\models\Review;
 use Yii;
 use yii\helpers\Url;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 
 /**
@@ -27,6 +25,7 @@ class CompanyController extends BackEndController
 	public function actionCreate()
 	{
         $model = new Company();
+        $review = new Review();
 
         if ($model->load(Yii::$app->request->post())) {
             // get the uploaded file instance. for multiple file uploads
@@ -50,10 +49,13 @@ class CompanyController extends BackEndController
             }
         }
 
-		return $this->render('create', ['model' => $model]);
+		return $this->render('create', [
+		    'model' => $model,
+            'review' => $review
+        ]);
 	}
 
-	public function actionUpdate($id)
+	public function actionEdit($id)
 	{
 
 	}

@@ -12,27 +12,16 @@ class m160921_074836_reviews extends Migration
               }
               $this->createTable('reviews', [
                   'id' => $this->primaryKey(),
+                  'title' => $this->string(50),
+                  'description' => $this->text(),
                   'logo' => $this->string(255),
                   'category_id' => $this->integer()->notNull(),
-                  'adress' => $this->string(100),
+                  'address' => $this->string(100),
               ], $tableOptions);
     }
 
     public function down()
     {
-        echo "m160921_074836_reviews cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('reviews');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

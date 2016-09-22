@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					<th>Name</th>
 					<th>Description</th>
 					<th>Logo</th>
+                    <th>Created at</th>
 					<th>Actions</th>
 				</tr>
 				</thead>
@@ -56,10 +57,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?php endif; ?>
                             </td>
                             <td class="center">
+                                <?= date('d.m.Y', $company->created_at) ?>
+                            </td>
+                            <td class="center">
                                 <a class="btn btn-success" href="#">
                                     <i class="halflings-icon white zoom-in"></i>
                                 </a>
-                                <a class="btn btn-info" href="#">
+                                <a class="btn btn-info" href="<?= Url::to(['company/edit', 'id' => $company->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
                                 <a class="btn btn-danger" href="#">

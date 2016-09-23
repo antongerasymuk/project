@@ -12,7 +12,7 @@ class AdminAsset extends AssetBundle
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-		'css/bootstrap.min.css',
+//		'css/bootstrap.min.css',
 		'css/bootstrap-responsive.min.css',
 		'css/style.css',
 		'css/style-responsive.css',
@@ -53,5 +53,6 @@ class AdminAsset extends AssetBundle
 	];
 	public $depends = [
 		'yii\web\YiiAsset',
+        'backend\assets\SwaltAsset'
 	];
 }

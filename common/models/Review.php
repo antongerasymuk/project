@@ -37,7 +37,7 @@ class Review extends \yii\db\ActiveRecord
             [['address'], 'string', 'max' => 100],
             [['preview'], 'string'],
             [['previewFile'], 'safe'],
-            [['previewFile'], 'file', 'extensions'=>'jpg, gif, png'],
+            [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }
 

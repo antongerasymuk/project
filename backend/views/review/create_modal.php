@@ -8,8 +8,8 @@ use yii\bootstrap\Html;
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
-<div id="review-create-modal" class="modal modal-content fade" role="dialog">
-
+<div id="review-create-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -56,9 +56,12 @@ use yii\bootstrap\Html;
                 <?= Html::submitButton('Create', [
                     'class' => 'btn btn-primary',
                     'id' => 'review-create',
-                    'name' => 'review-button']) ?>
+                    'name' => 'review-button'])
+                ?>
             </div>
             <div id="preloader" class="preloader" style="display: none;"></div>
         </div>
+
+    </div>
 </div>
 <?php ActiveForm::end(); ?>

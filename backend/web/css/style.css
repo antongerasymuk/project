@@ -2992,3 +2992,8 @@ ul.messagesList li span.date {
     right: 50%;
     margin-right: -32px;
 }
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}

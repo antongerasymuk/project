@@ -21,7 +21,6 @@ use yii\web\UploadedFile;
  */
 class Company extends \yii\db\ActiveRecord
 {
-    const LOGO_PATH = 'uploads/';
     public $reviewIds;
     public $logoFile;
 	/**

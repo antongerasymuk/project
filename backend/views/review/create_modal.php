@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var $model \common\models\Review
+ */
 use dosamigos\tinymce\TinyMce;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
@@ -32,6 +35,7 @@ use yii\bootstrap\Html;
                         ]
                     ])
                     ?>
+                    <?= $form->field($model, 'previewFile')->fileInput() ?>
                     <?= $form->field($model, 'address')->widget(TinyMce::className(), [
                         'options'       => ['rows' => 6],
                         'language'      => 'es',
@@ -54,6 +58,7 @@ use yii\bootstrap\Html;
                     'id' => 'review-create',
                     'name' => 'review-button']) ?>
             </div>
+            <div id="preloader" class="preloader" style="display: none;"></div>
         </div>
 </div>
 <?php ActiveForm::end(); ?>

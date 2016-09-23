@@ -14,6 +14,7 @@ use Yii;
  */
 class Review extends \yii\db\ActiveRecord
 {
+    public $previewFile;
     /**
      * @inheritdoc
      */
@@ -28,11 +29,15 @@ class Review extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['category_id', 'title'], 'required'],
+            [['title'], 'required'],
+            [['description'], 'string'],
 //            [['category_id'], 'integer'],
 //            [['logo'], 'string', 'max' => 255],
             [['title'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 100],
+            [['preview'], 'string'],
+            [['previewFile'], 'safe'],
+            [['previewFile'], 'file', 'extensions'=>'jpg, gif, png'],
         ];
     }
 
@@ -43,9 +48,9 @@ class Review extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-//            'logo' => 'Logo',
-//            'category_id' => 'Category ID',
             'address' => 'Address',
+            'preview' => 'Preview',
+            'description' => 'Description'
         ];
     }
 }

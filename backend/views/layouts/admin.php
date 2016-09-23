@@ -51,7 +51,7 @@ AdminAsset::register( $this );
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="<?= Url::to(['site/index']) ?>"><span>Bonus Admin Panel</span></a>
+				<a class="brand" href="<?= Url::to(['site/index']) ?>"><span>Bonus Dashboard</span></a>
 
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">

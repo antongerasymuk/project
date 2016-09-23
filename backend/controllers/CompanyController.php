@@ -39,6 +39,11 @@ class CompanyController extends BackEndController
 
             if($model->save()){
                 $logoFile->saveAs($path);
+
+                //safe related reviews
+                foreach ($model->reviewIds as $id) {
+                    $model->link('reviews', Review::findOne(['id' => $id]));
+                }
                 // Set flash message
                 Yii::$app->getSession()->setFlash('success', 'Company created success');
 

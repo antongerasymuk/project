@@ -74,8 +74,10 @@ class Company extends \yii\db\ActiveRecord
         ];
     }
 
+    // for relation with reviews
     public function getReviews()
     {
-
+        return $this->hasMany(Review::className(), ['id' => 'review_id'])
+                    ->viaTable('company_review', ['company_id' => 'id']);
     }
 }

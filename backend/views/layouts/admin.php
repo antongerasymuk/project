@@ -45,16 +45,9 @@ AdminAsset::register( $this );
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container-fluid">
-				<a class="btn btn-navbar" data-toggle="collapse"
-				   data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="<?= Url::to(['site/index']) ?>"><span>Bonus Admin Panel</span></a>
-
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
+					<a class="brand" href="<?= Url::to(['site/index']) ?>"><span>Bonus Dashboard</span></a>
 				</div>
 				<!-- end: Header Menu -->
 			</div>

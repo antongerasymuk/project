@@ -14,6 +14,8 @@ use Yii;
  */
 class Review extends \yii\db\ActiveRecord
 {
+    public $bonuseIds;
+    public $previewFile;
     /**
      * @inheritdoc
      */
@@ -28,10 +30,16 @@ class Review extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id'], 'required'],
-            [['category_id'], 'integer'],
-            [['logo'], 'string', 'max' => 255],
-            [['adress'], 'string', 'max' => 100],
+            [['title'], 'required'],
+            [['description'], 'string'],
+//            [['category_id'], 'integer'],
+//            [['logo'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
+            [['address'], 'string', 'max' => 100],
+            [['preview'], 'string'],
+            [['previewFile'], 'safe'],
+            [['bonuseIds'], 'safe'],
+            [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }
 
@@ -42,9 +50,16 @@ class Review extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'logo' => 'Logo',
-            'category_id' => 'Category ID',
-            'adress' => 'Adress',
+            'address' => 'Address',
+            'preview' => 'Preview',
+            'description' => 'Description'
         ];
+    }
+
+    // for relation with bonuses
+    public function getBonuses()
+    {
+        return $this->hasMany(Bonuse::className(), ['id' => 'bonus_id'])
+                    ->viaTable('review_bonuse', ['review_id' => 'id']);
     }
 }

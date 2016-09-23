@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "companies".
@@ -19,6 +21,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Company extends \yii\db\ActiveRecord
 {
+    public $reviewIds;
+    public $logoFile;
 	/**
 	 * @inheritdoc
 	 */
@@ -37,7 +41,11 @@ class Company extends \yii\db\ActiveRecord
 			[['created_at', 'updated_at'], 'integer'],
 			[['title'], 'string', 'max' => 50],
 			[['bg_color'], 'string', 'max' => 7],
-			[['logo', 'site_url'], 'string', 'max' => 255],
+            [['logo'], 'string', 'max' => 255],
+            [['site_url'], 'string', 'max' => 255],
+            [['logoFile'], 'safe'],
+            [['reviewIds'], 'safe'],
+            [['logoFile'], 'file', 'extensions'=>'jpg, gif, png'],
 		];
 	}
 
@@ -64,5 +72,12 @@ class Company extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className(),
         ];
+    }
+
+    // for relation with reviews
+    public function getReviews()
+    {
+        return $this->hasMany(Review::className(), ['id' => 'review_id'])
+                    ->viaTable('company_review', ['company_id' => 'id']);
     }
 }

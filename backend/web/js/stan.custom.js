@@ -18,6 +18,7 @@ $('#review-create').on('click', function (e) {
                 console.log(response);
 
                 if (response.success) {
+                    Select2.appendItem('#company-reviewids', response.item);
                     var form = document.getElementById('review-create-form');
 
                     Preloader.hide();
@@ -67,4 +68,11 @@ var Swalt = {
     success: function (title, text) {
         this.alert(title, text, "success");
     }
+};
+
+var Select2 = {
+  appendItem: function (blockId, options) {
+      var element = '<option value="'+ options.id +'">' + options.value + '</option>';
+      $(blockId).append(element);
+  }
 };

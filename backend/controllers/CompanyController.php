@@ -4,6 +4,7 @@ namespace backend\controllers;
 use common\models\Company;
 use common\models\Review;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
@@ -48,10 +49,16 @@ class CompanyController extends BackEndController
                 Yii::$app->getSession()->setFlash('error', 'Oops! Something wrong');
             }
         }
+        $reviewsData = Review::find()
+            ->select('id, title')
+            ->asArray()
+            ->all();
+        $reviewsData = ArrayHelper::map($reviewsData, 'id', 'title');
 
 		return $this->render('create', [
 		    'model' => $model,
-            'review' => $review
+            'review' => $review,
+            'reviewsData' => $reviewsData
         ]);
 	}
 

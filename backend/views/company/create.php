@@ -55,7 +55,7 @@ $this->registerJsFile('js/stan.custom.js', [
 <?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
-//    'data' => [],
+    'data' => $reviewsData,
     'language' => 'en',
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [

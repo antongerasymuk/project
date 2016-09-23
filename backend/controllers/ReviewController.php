@@ -33,7 +33,13 @@ class ReviewController extends BackEndController
             if($model->save()) $previewFile->saveAs($path);
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-            return ['success' => $model->id];
+            return [
+                'success' => $model->id,
+                'item' => [
+                    'id' => $model->id,
+                    'value' => $model->title
+                ]
+            ];
         }
 
         return $this->renderAjax('create', ['model' => $model]);

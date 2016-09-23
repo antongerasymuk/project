@@ -36,6 +36,8 @@ $('#review-create').on('click', function (e) {
             contentType: false,
             processData: false
         });
+    } else {
+        Swalt.warning('Oops!', 'Please, check review fields and try again');
     }
 });
 

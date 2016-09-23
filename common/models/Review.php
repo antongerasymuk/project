@@ -14,6 +14,7 @@ use Yii;
  */
 class Review extends \yii\db\ActiveRecord
 {
+    public $bonuseIds;
     public $previewFile;
     /**
      * @inheritdoc
@@ -37,6 +38,7 @@ class Review extends \yii\db\ActiveRecord
             [['address'], 'string', 'max' => 100],
             [['preview'], 'string'],
             [['previewFile'], 'safe'],
+            [['bonuseIds'], 'safe'],
             [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }
@@ -52,5 +54,12 @@ class Review extends \yii\db\ActiveRecord
             'preview' => 'Preview',
             'description' => 'Description'
         ];
+    }
+
+    // for relation with bonuses
+    public function getBonuses()
+    {
+        return $this->hasMany(Bonuse::className(), ['id' => 'bonus_id'])
+                    ->viaTable('review_bonuse', ['review_id' => 'id']);
     }
 }

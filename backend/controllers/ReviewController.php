@@ -4,6 +4,11 @@ namespace backend\controllers;
 use common\models\Bonus;
 use common\models\Bonuse;
 use common\models\Company;
+use common\models\Country;
+use common\models\DepositMethod;
+use common\models\Minuse;
+use common\models\Os;
+use common\models\Pros;
 use common\models\Rating;
 use common\models\Review;
 use Yii;
@@ -44,6 +49,30 @@ class ReviewController extends BackEndController
 
                 foreach ($model->ratingIds as $id) {
                     $model->link('ratings', Rating::findOne(['id' => $id]));
+                }
+
+                foreach ($model->plusIds as $id) {
+                    $model->link('pros', Pros::findOne(['id' => $id]));
+                }
+
+                foreach ($model->minusIds as $id) {
+                    $model->link('minuses', Minuse::findOne(['id' => $id]));
+                }
+
+                foreach ($model->depositIds as $id) {
+                    $model->load('deposits', DepositMethod::findOne(['id' => $id]));
+                }
+
+                foreach ($model->osIds as $id) {
+                    $model->load('oses', Os::findOne(['id' => $id]));
+                }
+
+                foreach ($model->allowedIds as $id) {
+                    $model->load('allowed', Country::findOne(['id' => $id]));
+                }
+
+                foreach ($model->deniedIds as $id) {
+                    $model->load('denied', Country::findOne(['id' => $id]));
                 }
             }
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

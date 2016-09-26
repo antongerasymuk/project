@@ -24,6 +24,7 @@ use yii\bootstrap\Html;
                              ->textInput(['autofocus' => true])
                              ->label('Title')
                     ?>
+                    <?= $form->field($model, 'logoFile')->fileInput() ?>
                 </p>
             </div>
             <div class="modal-footer">

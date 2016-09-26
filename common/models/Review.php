@@ -95,4 +95,28 @@ class Review extends \yii\db\ActiveRecord
         return $this->hasMany(Pros::className(), ['id' => 'minus_id'])
                     ->viaTable('review_minus', ['review_id' => 'id']);
     }
+
+    public function getDeposits()
+    {
+        return $this->hasMany(DepositMethod::className(), ['id' => 'deposit_id'])
+            ->viaTable('review_dep_method', ['review_id' => 'id']);
+    }
+
+    public function getOses()
+    {
+        return $this->hasMany(DepositMethod::className(), ['id' => 'os_id'])
+                    ->viaTable('os_review', ['review_id' => 'id']);
+    }
+
+    public function getAllowed()
+    {
+        return $this->hasMany(Country::className(), ['id' => 'country_id'])
+                    ->viaTable('allowed_countries', ['review_id' => 'id']);
+    }
+
+    public function getDenied()
+    {
+        return $this->hasMany(Country::className(), ['id' => 'country_id'])
+                    ->viaTable('denied_countries', ['review_id' => 'id']);
+    }
 }

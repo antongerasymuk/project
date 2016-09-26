@@ -35,6 +35,30 @@ $('#plus-create').on('click', function (e) {
     });
 });
 
+$('#minus-create').on('click', function (e) {
+    e.preventDefault();
+
+    Model.create({
+        formId: 'minus-create-form',
+        formIndex: 4,
+        createActionUrl: '/backend/minus/create',
+        select2Selector: '#review-minusids',
+        modalSelector: '#minus-create-modal'
+    });
+});
+
+$('#deposit-create').on('click', function (e) {
+    e.preventDefault();
+
+    Model.create({
+        formId: 'deposit-create-form',
+        formIndex: 5,
+        createActionUrl: '/backend/deposit/create',
+        select2Selector: '#review-depositids',
+        modalSelector: '#deposit-create-modal'
+    });
+});
+
 // Create review event
 $('#review-create').on('click', function (e) {
     e.preventDefault();

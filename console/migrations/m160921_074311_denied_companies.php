@@ -10,8 +10,8 @@ class m160921_074311_denied_companies extends Migration
               if ($this->db->driverName === 'mysql') {
                   $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
               }
-              $this->createTable('denided_companies', [
-                  'company_id' => $this->integer()->notNull(),
+              $this->createTable('denied_countries', [
+                  'review_id' => $this->integer()->notNull(),
                   'country_id' => $this->integer()->notNull(),
               ], $tableOptions);
     }

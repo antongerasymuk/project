@@ -18,6 +18,7 @@ use Yii;
  */
 class Bonuse extends \yii\db\ActiveRecord
 {
+    public $logoFile;
     /**
      * @inheritdoc
      */
@@ -35,10 +36,12 @@ class Bonuse extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
-            [['type'], 'integer'],
+            [['type'], 'boolean'],
             [['title'], 'string', 'max' => 50],
             [['logo', 'referal_url'], 'string', 'max' => 255],
             [['code'], 'string', 'max' => 15],
+            [['logoFile'], 'safe'],
+            [['logoFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }
 

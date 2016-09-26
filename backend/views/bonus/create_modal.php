@@ -41,6 +41,10 @@ use yii\bootstrap\Html;
                     <?= $form->field($model, 'code')->textInput() ?>
                     <?= $form->field($model, 'referal_url')->textInput() ?>
                     <?= $form->field($model, 'type')->checkbox()->label('Main?') ?>
+                    <?= $form->field($model, 'min_deposit')->textInput() ?>
+                    <?= $form->field($model, 'expiry')->textInput() ?>
+                    <?= $form->field($model, 'rollover_requirement')->textInput() ?>
+                    <?= $form->field($model, 'restrictions')->textInput() ?>
                 </p>
             </div>
             <div class="modal-footer">

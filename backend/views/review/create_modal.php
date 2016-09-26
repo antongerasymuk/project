@@ -71,6 +71,15 @@ use yii\bootstrap\Html;
                     ])->label('Ratings');
                     ?>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rating-create-modal">+</button>
+                    <?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
+                        'data' => [],
+                        'language' => 'en',
+                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ])->label('Ratings');
+                    ?>
                 </p>
             </div>
             <div class="modal-footer">

@@ -1,8 +1,10 @@
 <?php
 namespace backend\controllers;
 
+use common\models\Bonus;
 use common\models\Bonuse;
 use common\models\Company;
+use common\models\Rating;
 use common\models\Review;
 use Yii;
 use yii\helpers\Url;
@@ -37,11 +39,11 @@ class ReviewController extends BackEndController
                 // save relations
 
                 foreach ($model->bonusIds as $id) {
-                    $model->link('bonuses', Review::findOne(['id' => $id]));
+                    $model->link('bonuses', Bonus::findOne(['id' => $id]));
                 }
 
                 foreach ($model->ratingIds as $id) {
-                    $model->link('ratings', Review::findOne(['id' => $id]));
+                    $model->link('ratings', Rating::findOne(['id' => $id]));
                 }
             }
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

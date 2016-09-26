@@ -31,7 +31,19 @@ class ReviewController extends BackEndController
             // store the source file name
             $model->preview = $params['uploadUrl'] . $previewFile->baseName . '.' . $previewFile->extension;
 
-            if($model->save()) $previewFile->saveAs($path);
+            if($model->save()) {
+                $previewFile->saveAs($path);
+
+                // save relations
+
+                foreach ($model->bonusIds as $id) {
+                    $model->link('bonuses', Review::findOne(['id' => $id]));
+                }
+
+                foreach ($model->ratingIds as $id) {
+                    $model->link('ratings', Review::findOne(['id' => $id]));
+                }
+            }
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
             return [

@@ -4,6 +4,7 @@ namespace backend\controllers;
 use common\models\Bonus;
 use common\models\Bonuse;
 use common\models\Company;
+use common\models\Rating;
 use common\models\Review;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -62,12 +63,11 @@ class CompanyController extends BackEndController
             ->all();
         $reviewsData = ArrayHelper::map($reviewsData, 'id', 'title');
 
-        $bonus = new Bonus();
-
 		return $this->render('create', [
 		    'model' => $model,
             'review' => $review,
-            'bonus' => $bonus,
+            'bonus' => new Bonus(),
+            'rating' => new Rating(),
             'reviewsData' => $reviewsData
         ]);
 	}

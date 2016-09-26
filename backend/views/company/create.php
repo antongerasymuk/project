@@ -72,3 +72,4 @@ $this->registerJsFile('js/stan.custom.js', [
 
 <?= $this->render('//review/create_modal', ['model' => $review]) ?>
 <?= $this->render('//bonus/create_modal', ['model' => $bonus]) ?>
+<?= $this->render('//rating/create_modal', ['model' => $rating]) ?>

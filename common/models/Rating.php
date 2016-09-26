@@ -28,6 +28,7 @@ class Rating extends \yii\db\ActiveRecord
     {
         return [
             [['mark'], 'integer'],
+            [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
         ];
     }

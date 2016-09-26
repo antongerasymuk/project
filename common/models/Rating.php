@@ -27,7 +27,7 @@ class Rating extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['mark'], 'integer', 'min' => 1, 'max' => 10],
+            [['mark'], 'double', 'min' => 1, 'max' => 10],
             [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
         ];

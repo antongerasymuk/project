@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\Bonuse;
 use common\models\Company;
 use common\models\Review;
 use Yii;
@@ -42,11 +43,10 @@ class ReviewController extends BackEndController
             ];
         }
 
-        return $this->renderAjax('create', ['model' => $model]);
+        return $this->render('create', ['model' => $model]);
     }
 
-    public function editCreate()
+    public function actionEdit()
     {
-
     }
 }

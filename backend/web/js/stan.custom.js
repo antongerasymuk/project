@@ -1,60 +1,95 @@
+// Create bonus event
+$('#bonus-create').on('click', function (e) {
+    e.preventDefault();
+
+    Model.create({
+        formId: 'bonus-create-form',
+        formIndex: 2,
+        createActionUrl: '/backend/bonus/create',
+        select2Selector: '#review-bonusids',
+        modalSelector: '#bonus-create-modal'
+    });
+});
+
+// Create review event
 $('#review-create').on('click', function (e) {
     e.preventDefault();
-    var form = $('#review-create-form');
-    var validated = form.yiiActiveForm('submitForm');
 
-    if (validated) {
-        // !!!!!don't saved without this line
-        tinyMCE.triggerSave();
-        var formData = new FormData($('form')[1]);
-        console.log(formData);
-        // submit form - saving file form via ajax
-        $.ajax({
-            url: '/backend/review/create',
-            type: 'POST',
-            beforeSend: beforeSendHandler,
-            data: formData,
-            success: function (response) {
-                console.log(response);
+    Model.create({
+        formId: 'review-create-form',
+        formIndex: 1,
+        createActionUrl: '/backend/review/create',
+        select2Selector: '#company-reviewids',
+        modalSelector: '#review-create-modal'
+    });
 
-                if (response.success) {
-                    Select2.appendItem('#company-reviewids', response.item);
-                    var form = document.getElementById('review-create-form');
-
-                    Preloader.hide();
-                    Swalt.success('Success', 'Review created');
-                    form.reset();
-                    // clear file input
-                    $(form).find('.filename').text('No file selected');
-                    $('#review-create-modal').modal('hide');
-                }
-            },
-            error: function (response) {
-                console.log(response);
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-    } else {
-        Swalt.warning('Oops!', 'Please, check review fields and try again');
-    }
 });
 
 function beforeSendHandler() {
-    Preloader.show();
+    Loader.show();
 }
 
-var Preloader = {
-    preloader: '#preloader',
+var Model = {
+    create: function (options) {
+        options.fileSelector = options.fileSelector || '.filename';
+
+        var $form = $('#' + options.formId);
+        var validated = $form.yiiActiveForm('submitForm');
+
+        if (validated) {
+            // !!!!!don't saved without this line
+            var form = document.getElementById(options.formId);
+            tinyMCE.triggerSave();
+            var formData = new FormData(form);
+            console.log(formData);
+            // submit form - saving file form via ajax
+            $.ajax({
+                url: options.createActionUrl,
+                type: 'POST',
+                beforeSend: beforeSendHandler,
+                data: formData,
+                success: function (response) {
+                    console.log(response);
+                    Loader.hide();
+
+                    if (response.success) {
+                        Select2.appendItem(options.select2Selector, response.item);
+                        form.reset();
+
+                        Swalt.success('Success', 'Review created');
+                        // clear file input
+                        $form.find(options.fileSelector).text('No file selected');
+                        $(options.modalSelector).modal('hide');
+                    } else {
+                        Swalt.warning('Ops!', 'Not saved');
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        } else {
+            Swalt.warning('Oops!', 'Please, check review fields and try again');
+        }
+    }
+};
+
+var Loader = {
+    loaderSelector: '#preloader',
+    submitBtnSelector: '#review-create',
+    append: function () {
+        $(this.submitBtnSelector).parent().append('<div id="preloader" class="preloader" style="display: none;"></div>')
+    },
     show: function () {
-        $(this.preloader).show();
+        this.append();
+        $(this.loaderSelector).show();
     },
     hide: function () {
-        $(this.preloader).hide();
-    },
-    toggle: function () {
-        $(this.preloader).toggle();
+        $(this.loaderSelector).hide();
+        $(this.loaderSelector).remove();
     }
 };
 

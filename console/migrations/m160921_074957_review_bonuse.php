@@ -18,19 +18,6 @@ class m160921_074957_review_bonuse extends Migration
 
     public function down()
     {
-        echo "m160921_074957_review_bonuse cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('review_bonuse');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

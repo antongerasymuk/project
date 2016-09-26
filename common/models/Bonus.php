@@ -16,7 +16,7 @@ use Yii;
  * @property string $referal_url
  * @property integer $type
  */
-class Bonuse extends \yii\db\ActiveRecord
+class Bonus extends \yii\db\ActiveRecord
 {
     public $logoFile;
     /**

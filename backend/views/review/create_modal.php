@@ -1,8 +1,10 @@
 <?php
 /**
  * @var $model \common\models\Review
+ * @var $bonus \common\models\Bonuse
  */
 use dosamigos\tinymce\TinyMce;
+use kartik\select2\Select2;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 ?>
@@ -49,6 +51,16 @@ use yii\bootstrap\Html;
                         ]
                     ])
                     ?>
+                    <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
+                        'data' => [],
+                        'language' => 'en',
+                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ])->label('Bonuses');
+                    ?>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bonus-create-modal">+</button>
                 </p>
             </div>
             <div class="modal-footer">
@@ -59,9 +71,7 @@ use yii\bootstrap\Html;
                     'name' => 'review-button'])
                 ?>
             </div>
-            <div id="preloader" class="preloader" style="display: none;"></div>
         </div>
-
     </div>
 </div>
 <?php ActiveForm::end(); ?>

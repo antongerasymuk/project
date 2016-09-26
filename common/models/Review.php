@@ -14,8 +14,9 @@ use Yii;
  */
 class Review extends \yii\db\ActiveRecord
 {
-    public $bonuseIds;
+    public $bonusIds;
     public $previewFile;
+    public $ratingIds;
     /**
      * @inheritdoc
      */
@@ -32,13 +33,12 @@ class Review extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['description'], 'string'],
-//            [['category_id'], 'integer'],
-//            [['logo'], 'string', 'max' => 255],
             [['title'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 100],
             [['preview'], 'string'],
             [['previewFile'], 'safe'],
-            [['bonuseIds'], 'safe'],
+            [['bonusIds'], 'safe'],
+            [['reviewIds'], 'safe'],
             [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }
@@ -59,7 +59,14 @@ class Review extends \yii\db\ActiveRecord
     // for relation with bonuses
     public function getBonuses()
     {
-        return $this->hasMany(Bonuse::className(), ['id' => 'bonus_id'])
-                    ->viaTable('review_bonuse', ['review_id' => 'id']);
+        return $this->hasMany(Bonus::className(), ['id' => 'bonus_id'])
+                    ->viaTable('review_bonus', ['review_id' => 'id']);
+    }
+
+    // for relation with rating
+    public function getRatings()
+    {
+        return $this->hasMany(Rating::className(), ['id' => 'rating_id'])
+            ->viaTable('review_rating', ['review_id' => 'id']);
     }
 }

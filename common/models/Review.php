@@ -43,9 +43,13 @@ class Review extends \yii\db\ActiveRecord
             [['address'], 'string', 'max' => 100],
             [['preview'], 'string'],
             [['previewFile'], 'safe'],
+            [['ratingIds'], 'safe'],
+            [['osIds'], 'default', 'value' => []],
+            [['allowedIds'], 'default', 'value' => []],
+            [['deniedIds'], 'default', 'value' => []],
+            [['minusIds', 'depositIds', 'osIds'], 'safe'],
             [['bonusIds'], 'safe'],
             [['plusIds'], 'safe'],
-            [['reviewIds'], 'safe'],
             [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }

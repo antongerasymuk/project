@@ -15,16 +15,6 @@ class m160921_074627_review_pros extends Migration
                   'pos_id' => $this->integer()->notNull(),
 
               ], $tableOptions);
-
-        $tableOptions = null;
-        if ($this->db->driverName === 'mysql') {
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-        }
-        $this->createTable('review_minus', [
-            'review_id' => $this->integer()->notNull(),
-            'minus_id' => $this->integer()->notNull(),
-
-        ], $tableOptions);
     }
 
     public function down()

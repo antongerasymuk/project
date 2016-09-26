@@ -13,6 +13,7 @@ use common\models\Rating;
 use common\models\Review;
 use Yii;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
 
 /**

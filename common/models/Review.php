@@ -17,6 +17,12 @@ class Review extends \yii\db\ActiveRecord
     public $bonusIds;
     public $previewFile;
     public $ratingIds;
+    public $plusIds;
+    public $minusIds;
+    public $depositIds;
+    public $osIds;
+    public $allowedIds;
+    public $deniedIds;
     /**
      * @inheritdoc
      */
@@ -38,6 +44,7 @@ class Review extends \yii\db\ActiveRecord
             [['preview'], 'string'],
             [['previewFile'], 'safe'],
             [['bonusIds'], 'safe'],
+            [['plusIds'], 'safe'],
             [['reviewIds'], 'safe'],
             [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
@@ -52,7 +59,11 @@ class Review extends \yii\db\ActiveRecord
             'id' => 'ID',
             'address' => 'Address',
             'preview' => 'Preview',
-            'description' => 'Description'
+            'description' => 'Description',
+            'depositIds' => 'Deposit methods',
+            'osIds' => 'Compatible With',
+            'allowedIds' => 'Allowed countries',
+            'deniedIds' => 'Denied countries'
         ];
     }
 
@@ -68,5 +79,20 @@ class Review extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Rating::className(), ['id' => 'rating_id'])
             ->viaTable('review_rating', ['review_id' => 'id']);
+    }
+
+    // for relation with pros(pluses)
+
+    public function getPros()
+    {
+        return $this->hasMany(Pros::className(), ['id' => 'pros_id'])
+            ->viaTable('review_pros', ['review_id' => 'id']);
+    }
+
+    // for relation with minuses
+    public function getMinuses()
+    {
+        return $this->hasMany(Pros::className(), ['id' => 'minus_id'])
+                    ->viaTable('review_minus', ['review_id' => 'id']);
     }
 }

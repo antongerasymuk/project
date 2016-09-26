@@ -4,6 +4,9 @@ namespace backend\controllers;
 use common\models\Bonus;
 use common\models\Bonuse;
 use common\models\Company;
+use common\models\DepositMethod;
+use common\models\Minuse;
+use common\models\Pros;
 use common\models\Rating;
 use common\models\Review;
 use Yii;
@@ -68,6 +71,9 @@ class CompanyController extends BackEndController
             'review' => $review,
             'bonus' => new Bonus(),
             'rating' => new Rating(),
+            'plus' => new Pros(),
+            'minus' => new Minuse(),
+            'deposit' => new DepositMethod(),
             'reviewsData' => $reviewsData
         ]);
 	}

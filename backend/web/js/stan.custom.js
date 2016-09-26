@@ -11,6 +11,30 @@ $('#bonus-create').on('click', function (e) {
     });
 });
 
+$('#rating-create').on('click', function (e) {
+    e.preventDefault();
+
+    Model.create({
+        formId: 'rating-create-form',
+        formIndex: 3,
+        createActionUrl: '/backend/rating/create',
+        select2Selector: '#review-ratingids',
+        modalSelector: '#rating-create-modal'
+    });
+});
+
+$('#plus-create').on('click', function (e) {
+    e.preventDefault();
+
+    Model.create({
+        formId: 'plus-create-form',
+        formIndex: 3,
+        createActionUrl: '/backend/plus/create',
+        select2Selector: '#review-plusids',
+        modalSelector: '#plus-create-modal'
+    });
+});
+
 // Create review event
 $('#review-create').on('click', function (e) {
     e.preventDefault();
@@ -22,7 +46,6 @@ $('#review-create').on('click', function (e) {
         select2Selector: '#company-reviewids',
         modalSelector: '#review-create-modal'
     });
-
 });
 
 function beforeSendHandler() {

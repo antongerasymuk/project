@@ -10,11 +10,21 @@ class m160921_074627_review_pros extends Migration
               if ($this->db->driverName === 'mysql') {
                   $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
               }
-              $this->createTable('review_pos', [
+              $this->createTable('review_pros', [
                   'review_id' => $this->integer()->notNull(),
                   'pos_id' => $this->integer()->notNull(),
 
               ], $tableOptions);
+
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+        $this->createTable('review_minus', [
+            'review_id' => $this->integer()->notNull(),
+            'minus_id' => $this->integer()->notNull(),
+
+        ], $tableOptions);
     }
 
     public function down()
@@ -23,15 +33,4 @@ class m160921_074627_review_pros extends Migration
 
         return false;
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

@@ -71,14 +71,68 @@ use yii\bootstrap\Html;
                     ])->label('Ratings');
                     ?>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rating-create-modal">+</button>
-                    <?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
+
+                    <?= $form->field($model, 'plusIds')->widget(Select2::classname(), [
                         'data' => [],
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
-                    ])->label('Ratings');
+                    ])->label('Pros');
+                    ?>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#plus-create-modal">+</button>
+
+                    <?= $form->field($model, 'minusIds')->widget(Select2::classname(), [
+                        'data' => [],
+                        'language' => 'en',
+                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ])->label('Minuses');
+                    ?>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#minus-create-modal">+</button>
+
+                    <?= $form->field($model, 'depositIds')->widget(Select2::classname(), [
+                        'data' => [],
+                        'language' => 'en',
+                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deposit-create-modal">+</button>
+
+                    <?= $form->field($model, 'osIds')->widget(Select2::classname(), [
+                        'data' => [],
+                        'language' => 'en',
+                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
+
+                    <?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
+                        'data' => [],
+                        'language' => 'en',
+                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?>
+
+                    <?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
+                        'data' => [],
+                        'language' => 'en',
+                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
                     ?>
                 </p>
             </div>

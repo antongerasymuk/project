@@ -35,6 +35,18 @@ $('#plus-create').on('click', function (e) {
     });
 });
 
+$('#director-create').on('click', function (e) {
+    e.preventDefault();
+
+    Model.create({
+        formId: 'director-create-form',
+        formIndex: 6,
+        createActionUrl: '/backend/director/create',
+        select2Selector: '#company-directorid',
+        modalSelector: '#director-create-modal'
+    });
+});
+
 $('#minus-create').on('click', function (e) {
     e.preventDefault();
 

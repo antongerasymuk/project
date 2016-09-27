@@ -5,6 +5,7 @@ use common\models\Bonus;
 use common\models\Bonuse;
 use common\models\Company;
 use common\models\DepositMethod;
+use common\models\Director;
 use common\models\Minuse;
 use common\models\Pros;
 use common\models\Rating;
@@ -38,33 +39,46 @@ class CompanyController extends BackEndController
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
             $logoFile = UploadedFile::getInstance($model, 'logoFile');
-            $path = Url::to(Yii::$app->params['uploadPath']) . $logoFile->baseName . '.' . $logoFile->extension;
 
-            // store the source file name
-            $model->logo = Yii::$app->params['uploadUrl'] . $logoFile->baseName . '.' . $logoFile->extension;
+            if ($logoFile) {
+                $path = Url::to(Yii::$app->params['uploadPath']) . $logoFile->baseName . '.' . $logoFile->extension;
 
-            if($model->save()){
-                $logoFile->saveAs($path);
+                // store the source file name
+                $model->logo = Yii::$app->params['uploadUrl'] . $logoFile->baseName . '.' . $logoFile->extension;
 
-                //safe related reviews
-                foreach ($model->reviewIds as $id) {
-                    $model->link('reviews', Review::findOne(['id' => $id]));
+                if($model->save()){
+                    $logoFile->saveAs($path);
+
+                    //safe related reviews
+                    foreach ($model->reviewIds as $id) {
+                        $model->link('reviews', Review::findOne(['id' => $id]));
+                    }
+                    // Set flash message
+                    Yii::$app->getSession()->setFlash('success', 'Company created success');
+
+                    return $this->redirect(['company/index']);
+                } else {
+                    // error in saving model
+
+                    Yii::$app->getSession()->setFlash('error', 'Oops! Something wrong');
                 }
-                // Set flash message
-                Yii::$app->getSession()->setFlash('success', 'Company created success');
-
-                return $this->redirect(['company/index']);
             } else {
-                // error in saving model
-
-                Yii::$app->getSession()->setFlash('error', 'Oops! Something wrong');
+                $model->addError('logoFile', 'Logo file not choosed');
             }
         }
+
         $reviewsData = Review::find()
             ->select('id, title')
             ->asArray()
             ->all();
         $reviewsData = ArrayHelper::map($reviewsData, 'id', 'title');
+
+        $directorsData = Director::find()
+            ->select('id, title')
+            ->asArray()
+            ->all();
+
+        $directorsData = ArrayHelper::map($directorsData, 'id', 'title');
 
 		return $this->render('create', [
 		    'model' => $model,
@@ -72,9 +86,11 @@ class CompanyController extends BackEndController
             'bonus' => new Bonus(),
             'rating' => new Rating(),
             'plus' => new Pros(),
+            'director' => new Director(),
             'minus' => new Minuse(),
             'deposit' => new DepositMethod(),
-            'reviewsData' => $reviewsData
+            'reviewsData' => $reviewsData,
+            'directorsData' => $directorsData
         ]);
 	}
 

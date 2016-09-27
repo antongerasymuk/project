@@ -135,6 +135,8 @@ use yii\bootstrap\Html;
                         ],
                     ]);
                     ?>
+
+                    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true]) ?>
                 </p>
             </div>
             <div class="modal-footer">

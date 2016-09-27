@@ -14,6 +14,7 @@ use Yii;
  */
 class Director extends \yii\db\ActiveRecord
 {
+    public $photoFile;
     /**
      * @inheritdoc
      */
@@ -28,9 +29,9 @@ class Director extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id'], 'required'],
-            [['company_id'], 'integer'],
-            [['description', 'photo'], 'string', 'max' => 255],
+            [['title'], 'required'],
+            [['photoFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
+            [['description', 'title'], 'string', 'max' => 255],
         ];
     }
 
@@ -43,7 +44,7 @@ class Director extends \yii\db\ActiveRecord
             'id' => 'ID',
             'description' => 'Description',
             'photo' => 'Photo',
-            'company_id' => 'Company ID',
+            'title' => 'Title'
         ];
     }
 }

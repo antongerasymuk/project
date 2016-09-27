@@ -69,7 +69,7 @@ $this->registerJsFile('js/stan.custom.js', [
 <?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
 <?= $form->field($model, 'directorId')->widget(Select2::classname(), [
-    'data' => [],
+    'data' => $directorsData,
     'language' => 'en',
     'options' => ['placeholder' => 'Select a state ...'],
     'pluginOptions' => [
@@ -101,3 +101,4 @@ $this->registerJsFile('js/stan.custom.js', [
 <?= $this->render('//plus/create_modal', ['model' => $plus]) ?>
 <?= $this->render('//minus/create_modal', ['model' => $minus]) ?>
 <?= $this->render('//deposit/create_modal', ['model' => $deposit]) ?>
+<?= $this->render('//director/create_modal', ['model' => $director]) ?>

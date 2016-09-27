@@ -12,9 +12,9 @@ class m160921_074644_directors extends Migration
       }
       $this->createTable('directors', [
           'id' => $this->primaryKey(),
+          'title' => $this->string(25),
           'description' => $this->string(255),
           'photo' => $this->string(255),
-          'company_id' => $this->integer()->notNull(),
       ], $tableOptions);
     }
 

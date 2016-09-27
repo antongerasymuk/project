@@ -4,8 +4,6 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\helpers\Url;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "companies".
@@ -21,7 +19,7 @@ use yii\web\UploadedFile;
  */
 class Company extends \yii\db\ActiveRecord
 {
-    public $reviewIds;
+    public $reviewIds = [];
     public $logoFile;
     public $directorId;
 	/**
@@ -48,7 +46,6 @@ class Company extends \yii\db\ActiveRecord
             [['rating'], 'required'],
             [['directorId'], 'integer', 'min' => 1],
             [['logoFile'], 'safe'],
-            [['reviewIds'], 'safe'],
             [['logoFile'], 'file', 'extensions'=>'jpg, gif, png'],
 		];
 	}

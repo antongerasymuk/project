@@ -16,6 +16,7 @@ class Review extends \yii\db\ActiveRecord
 {
     public $bonusIds;
     public $gallery;
+    public $galleryIds;
     public $previewFile;
     public $ratingIds;
     public $plusIds;
@@ -45,15 +46,29 @@ class Review extends \yii\db\ActiveRecord
             [['preview'], 'string'],
             [['previewFile'], 'safe'],
             [['gallery'], 'safe'],
+            [['gallery'], 'file', 'extensions'=>'jpg, gif, png', 'maxFiles' => 3],
             [['ratingIds'], 'each', 'rule' => 'integer'],
+            [['galleryIds'], 'each', 'rule' => 'integer'],
             [['ratingIds'], 'safe'],
-            [['osIds'], 'default', 'value' => []],
-            [['allowedIds'], 'default', 'value' => []],
-            [['deniedIds'], 'default', 'value' => []],
             [['minusIds', 'depositIds', 'osIds'], 'safe'],
             [['bonusIds'], 'safe'],
             [['plusIds'], 'safe'],
+            [['previewFile'], 'safe'],
             [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
+            [
+                [
+                    'bonusIds',
+                    'ratingIds',
+                    'plusIds',
+                    'minusIds',
+                    'depositIds',
+                    'osIds',
+                    'allowedIds',
+                    'deniedIds',
+                ],
+                'default',
+                'value' => []
+            ]
         ];
     }
 
@@ -125,5 +140,11 @@ class Review extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Country::className(), ['id' => 'country_id'])
                     ->viaTable('denied_countries', ['review_id' => 'id']);
+    }
+
+    public function getGallery()
+    {
+        return $this->hasMany(Country::className(), ['id' => 'gallery_id'])
+                    ->viaTable('review_gallery', ['review_id' => 'id']);
     }
 }

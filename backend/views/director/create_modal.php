@@ -10,16 +10,17 @@ use yii\bootstrap\Html;
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'director-create-form']); ?>
-<div id="plus-create-modal" class="modal fade" role="dialog">
+<div id="director-create-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Create plus</h4>
+                <h4 class="modal-title">Create director</h4>
             </div>
             <div class="modal-body">
                 <p>
+                    <?= $form->field($model, 'title')->textInput() ?>
                     <?= $form->field($model, 'description')->widget(TinyMce::className(), [
                         'options'       => ['rows' => 6],
                         'language'      => 'es',
@@ -33,15 +34,15 @@ use yii\bootstrap\Html;
                         ]
                     ])
                     ?>
-                    <?= $form->field($model, 'photo')->fileInput() ?>
+                    <?= $form->field($model, 'photoFile')->fileInput() ?>
                 </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <?= Html::submitButton('Create', [
                     'class' => 'btn btn-primary',
-                    'id' => 'plus-create',
-                    'name' => 'plus-button'])
+                    'id' => 'director-create',
+                    'name' => 'director-button'])
                 ?>
             </div>
         </div>

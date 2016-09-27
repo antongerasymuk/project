@@ -11,7 +11,7 @@ class m160921_074243_allowed_countries extends Migration
                   $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
               }
               $this->createTable('allowed_countries', [
-                  'company_id' => $this->integer()->notNull(),
+                  'review_id' => $this->integer()->notNull(),
                   'country_id' => $this->integer()->notNull(),
               ], $tableOptions);
     }

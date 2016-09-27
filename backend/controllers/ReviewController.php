@@ -1,10 +1,19 @@
 <?php
 namespace backend\controllers;
 
+use common\models\Bonus;
+use common\models\Bonuse;
 use common\models\Company;
+use common\models\Country;
+use common\models\DepositMethod;
+use common\models\Minuse;
+use common\models\Os;
+use common\models\Pros;
+use common\models\Rating;
 use common\models\Review;
 use Yii;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
 
 /**
@@ -30,7 +39,43 @@ class ReviewController extends BackEndController
             // store the source file name
             $model->preview = $params['uploadUrl'] . $previewFile->baseName . '.' . $previewFile->extension;
 
-            if($model->save()) $previewFile->saveAs($path);
+            if($model->save()) {
+                $previewFile->saveAs($path);
+
+                // save relations
+
+                foreach ($model->bonusIds as $id) {
+                    $model->link('bonuses', Bonus::findOne(['id' => $id]));
+                }
+
+                foreach ($model->ratingIds as $id) {
+                    $model->link('ratings', Rating::findOne(['id' => $id]));
+                }
+
+                foreach ($model->plusIds as $id) {
+                    $model->link('pros', Pros::findOne(['id' => $id]));
+                }
+
+                foreach ($model->minusIds as $id) {
+                    $model->link('minuses', Minuse::findOne(['id' => $id]));
+                }
+
+                foreach ($model->depositIds as $id) {
+                    $model->load('deposits', DepositMethod::findOne(['id' => $id]));
+                }
+
+                foreach ($model->osIds as $id) {
+                    $model->load('oses', Os::findOne(['id' => $id]));
+                }
+
+                foreach ($model->allowedIds as $id) {
+                    $model->load('allowed', Country::findOne(['id' => $id]));
+                }
+
+                foreach ($model->deniedIds as $id) {
+                    $model->load('denied', Country::findOne(['id' => $id]));
+                }
+            }
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
             return [
@@ -42,11 +87,10 @@ class ReviewController extends BackEndController
             ];
         }
 
-        return $this->renderAjax('create', ['model' => $model]);
+        return $this->render('create', ['model' => $model]);
     }
 
-    public function editCreate()
+    public function actionEdit()
     {
-
     }
 }

@@ -16,8 +16,9 @@ use Yii;
  * @property string $referal_url
  * @property integer $type
  */
-class Bonuse extends \yii\db\ActiveRecord
+class Bonus extends \yii\db\ActiveRecord
 {
+    public $logoFile;
     /**
      * @inheritdoc
      */
@@ -35,10 +36,16 @@ class Bonuse extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
-            [['type'], 'integer'],
+            [['type'], 'boolean'],
+            [['min_deposit'], 'number'],
+            [['expiry'], 'integer'],
+            [['rollover_requirement'], 'string'],
+            [['restrictions'], 'string'],
             [['title'], 'string', 'max' => 50],
             [['logo', 'referal_url'], 'string', 'max' => 255],
             [['code'], 'string', 'max' => 15],
+            [['logoFile'], 'safe'],
+            [['logoFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }
 
@@ -56,6 +63,10 @@ class Bonuse extends \yii\db\ActiveRecord
             'code' => 'Code',
             'referal_url' => 'Referal Url',
             'type' => 'Type',
+            'min_deposit' => 'Minimum Deposit',
+            'expiry' => 'Expiry',
+            'rollover_requirement' => 'Rollover Requirement',
+            'restrictions' => 'Restrictions'
         ];
     }
 }

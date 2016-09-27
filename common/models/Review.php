@@ -15,6 +15,7 @@ use Yii;
 class Review extends \yii\db\ActiveRecord
 {
     public $bonusIds;
+    public $gallery;
     public $previewFile;
     public $ratingIds;
     public $plusIds;
@@ -43,6 +44,7 @@ class Review extends \yii\db\ActiveRecord
             [['address'], 'string', 'max' => 100],
             [['preview'], 'string'],
             [['previewFile'], 'safe'],
+            [['gallery'], 'safe'],
             [['ratingIds'], 'each', 'rule' => 'integer'],
             [['ratingIds'], 'safe'],
             [['osIds'], 'default', 'value' => []],

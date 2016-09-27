@@ -48,12 +48,37 @@ $this->registerJsFile('js/stan.custom.js', [
     ]
 ])
 ?>
+<?= $form->field($model, 'address')->widget(TinyMce::className(), [
+    'options'       => ['rows' => 6],
+    'language'      => 'es',
+    'clientOptions' => [
+        'plugins' => [
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    ]
+])
+?>
+<?= $form->field($model, 'rating')->textInput() ?>
 <?= $form->field($model, 'bg_color')->widget(\dpodium\colorpicker\ColorPickerWidget::className(),
     ['id' => 'color-picker', 'name' => 'color-picker'])
     ->label('Background color')
 ?>
 <?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
+<?= $form->field($model, 'directorId')->widget(Select2::classname(), [
+    'data' => [],
+    'language' => 'en',
+    'options' => ['placeholder' => 'Select a state ...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+])->label('Director');
+
+?>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#director-create-modal">+</button>
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
     'data' => $reviewsData,
     'language' => 'en',

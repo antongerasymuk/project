@@ -20,13 +20,13 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "2amigos/yii2-tinymce-widget": "~1.1",
         "dpodium/yii2-colorpicker": "^0.2.0",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "2amigos/yii2-file-input-widget": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
         "yiisoft/yii2-gii": "~2.0.0",
         "yiisoft/yii2-faker": "~2.0.0",
-
         "codeception/base": "^2.2.3",
         "codeception/verify": "~0.3.1"
     },

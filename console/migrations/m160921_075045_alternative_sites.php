@@ -6,16 +6,16 @@ class m160921_075045_alternative_sites extends Migration
 {
     public function up()
     {
-      $tableOptions = null;
-              if ($this->db->driverName === 'mysql') {
-                  $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-              }
-              $this->createTable('alternative_sites', [
-                  'id' => $this->primaryKey(),
-                  'title' => $this->string(15),
-                  'url' => $this->string(255),
-                  'review_id' => $this->string(255)->notNull(),
-              ], $tableOptions);
+//      $tableOptions = null;
+//              if ($this->db->driverName === 'mysql') {
+//                  $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+//              }
+//              $this->createTable('alternative_sites', [
+//                  'id' => $this->primaryKey(),
+//                  'title' => $this->string(15),
+//                  'url' => $this->string(255),
+//                  'review_id' => $this->string(255)->notNull(),
+//              ], $tableOptions);
     }
 
     public function down()

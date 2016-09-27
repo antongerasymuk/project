@@ -3,6 +3,7 @@
  * @var $model \common\models\Review
  * @var $bonus \common\models\Bonuse
  */
+use dosamigos\fileinput\BootstrapFileInput;
 use dosamigos\tinymce\TinyMce;
 use kartik\select2\Select2;
 use yii\bootstrap\ActiveForm;

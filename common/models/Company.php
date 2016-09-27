@@ -23,6 +23,7 @@ class Company extends \yii\db\ActiveRecord
 {
     public $reviewIds;
     public $logoFile;
+    public $directorId;
 	/**
 	 * @inheritdoc
 	 */
@@ -43,6 +44,9 @@ class Company extends \yii\db\ActiveRecord
 			[['bg_color'], 'string', 'max' => 7],
             [['logo'], 'string', 'max' => 255],
             [['site_url'], 'string', 'max' => 255],
+            [['rating'], 'double', 'min' => 1, 'max' => 10],
+            [['rating'], 'required'],
+            [['directorId'], 'integer', 'min' => 1],
             [['logoFile'], 'safe'],
             [['reviewIds'], 'safe'],
             [['logoFile'], 'file', 'extensions'=>'jpg, gif, png'],

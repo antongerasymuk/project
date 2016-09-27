@@ -24,6 +24,7 @@ use yii\bootstrap\Html;
                              ->textInput(['autofocus' => true])
                              ->label('Title')
                     ?>
+                    <?= $form->field($model, 'file_label')->textInput() ?>
                     <?= $form->field($model, 'licenseFile')->fileInput() ?>
                 </p>
             </div>

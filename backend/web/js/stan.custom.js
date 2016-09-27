@@ -46,6 +46,17 @@ $('#director-create').on('click', function (e) {
         modalSelector: '#director-create-modal'
     });
 });
+$('#license-create').on('click', function (e) {
+    e.preventDefault();
+
+    Model.create({
+        formId: 'license-create-form',
+        formIndex: 7,
+        createActionUrl: '/backend/license/create',
+        select2Selector: '#company-licenseids',
+        modalSelector: '#license-create-modal'
+    });
+});
 
 $('#minus-create').on('click', function (e) {
     e.preventDefault();

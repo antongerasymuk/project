@@ -38,6 +38,16 @@ use yii\bootstrap\Html;
                         ]
                     ])
                     ?>
+                    <?= $form->field($model, 'categoryId')->widget(Select2::classname(), [
+                        'data' => \common\models\Categorie::getArr(),
+                        'language' => 'en',
+                        'options' => ['placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ])->label('Category');
+                    ?>
+
                     <?= $form->field($model, 'previewFile')->fileInput() ?>
                     <?= $form->field($model, 'address')->widget(TinyMce::className(), [
                         'options'       => ['rows' => 6],
@@ -53,7 +63,7 @@ use yii\bootstrap\Html;
                     ])
                     ?>
                     <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
-                        'data' => [],
+                        'data' => \common\models\Bonus::getArr(),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -63,7 +73,7 @@ use yii\bootstrap\Html;
                     ?>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bonus-create-modal">+</button>
                     <?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
-                        'data' => [],
+                        'data' => \common\models\Rating::getArr(),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -74,7 +84,7 @@ use yii\bootstrap\Html;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rating-create-modal">+</button>
 
                     <?= $form->field($model, 'plusIds')->widget(Select2::classname(), [
-                        'data' => [],
+                        'data' => \common\models\Pros::getArr(),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -85,7 +95,7 @@ use yii\bootstrap\Html;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#plus-create-modal">+</button>
 
                     <?= $form->field($model, 'minusIds')->widget(Select2::classname(), [
-                        'data' => [],
+                        'data' => \common\models\Minuse::getArr(),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -96,7 +106,7 @@ use yii\bootstrap\Html;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#minus-create-modal">+</button>
 
                     <?= $form->field($model, 'depositIds')->widget(Select2::classname(), [
-                        'data' => [],
+                        'data' => \common\models\DepositMethod::getArr(),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -107,7 +117,7 @@ use yii\bootstrap\Html;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deposit-create-modal">+</button>
 
                     <?= $form->field($model, 'osIds')->widget(Select2::classname(), [
-                        'data' => [],
+                        'data' => \common\models\Os::getArr(),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -116,8 +126,9 @@ use yii\bootstrap\Html;
                     ]);
                     ?>
 
+                    <?php $countries = \common\models\Country::getArr(); ?>
                     <?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
-                        'data' => [],
+                        'data' => $countries,
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -127,7 +138,7 @@ use yii\bootstrap\Html;
                     ?>
 
                     <?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
-                        'data' => [],
+                        'data' => $countries,
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [

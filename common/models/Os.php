@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "os".
@@ -12,6 +13,7 @@ use Yii;
  */
 class Os extends \yii\db\ActiveRecord
 {
+    public $logoFile;
     /**
      * @inheritdoc
      */
@@ -26,8 +28,10 @@ class Os extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'title'], 'required'],
-            [['id'], 'integer'],
+            [['title'], 'required'],
+            [['logoFile'], 'safe'],
+            [['logo'], 'string'],
+            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions' => ['jpg', 'png', 'gif']],
             [['title'], 'string', 'max' => 10],
         ];
     }
@@ -41,5 +45,15 @@ class Os extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
         ];
+    }
+
+    public static function getArr()
+    {
+        $prosData = Os::find()
+                             ->select('id, title')
+                             ->asArray()
+                             ->all();
+
+        return ArrayHelper::map($prosData, 'id', 'title');
     }
 }

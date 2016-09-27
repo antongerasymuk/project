@@ -76,9 +76,18 @@ $this->registerJsFile('js/stan.custom.js', [
         'allowClear' => true
     ],
 ])->label('Director');
-
 ?>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#director-create-modal">+</button>
+<?= $form->field($model, 'licenseIds')->widget(Select2::classname(), [
+    'data' => [],
+    'language' => 'en',
+    'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+])->label('Licenses');
+?>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#license-create-modal">+</button>
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
     'data' => $reviewsData,
     'language' => 'en',

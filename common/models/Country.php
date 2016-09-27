@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "countries".
@@ -39,5 +40,15 @@ class Country extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
         ];
+    }
+
+    public static function getArr()
+    {
+        $prosData = Country::find()
+                      ->select('id, title')
+                      ->asArray()
+                      ->all();
+
+        return ArrayHelper::map($prosData, 'id', 'title');
     }
 }

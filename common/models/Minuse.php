@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "minuses".
@@ -39,5 +40,15 @@ class Minuse extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
         ];
+    }
+
+    public static function getArr()
+    {
+        $minusesData = Minuse::find()
+                             ->select('id, title')
+                             ->asArray()
+                             ->all();
+
+        return ArrayHelper::map($minusesData, 'id', 'title');
     }
 }

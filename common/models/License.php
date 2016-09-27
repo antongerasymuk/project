@@ -13,6 +13,7 @@ use Yii;
  */
 class License extends \yii\db\ActiveRecord
 {
+    public $licenseFile;
     /**
      * @inheritdoc
      */
@@ -27,6 +28,7 @@ class License extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['licenseFile'], 'file', 'skipOnEmpty' => false],
             [['title', 'url'], 'required'],
             [['title'], 'string', 'max' => 25],
             [['url'], 'string', 'max' => 255],

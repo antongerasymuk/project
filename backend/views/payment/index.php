@@ -6,7 +6,7 @@
 use yii\bootstrap\Alert;
 use yii\helpers\Url;
 
-$this->title = 'Companies';
+$this->title = 'Payment methods';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -24,9 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="row-fluid">
     <div class="box span12">
-        <a href="<?= Url::to(['category/create']) ?>" class="btn btn-primary">Create category</a>
+        <a href="<?= Url::to(['payment/create']) ?>" class="btn btn-primary">Create payment method</a>
         <div class="box-header" data-original-title>
-            <h2><i class="icon-building"></i><span class="break"></span>Categories</h2>
+            <h2><i class="icon-building"></i><span class="break"></span>Payment methods</h2>
             <div class="box-icon">
                 <!--				<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>-->
                 <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -38,20 +38,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Logo</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php if (empty($categories)) : ?>
+                <?php if (empty($payments)) : ?>
                 <?php else : ?>
-                    <?php foreach ($categories as $company) : ?>
+                    <?php foreach ($payments as $payment) : ?>
                         <tr>
-                            <td><?= $company->title ?></td>
+                            <td><?= $payment->title ?></td>
+                            <td class="center">
+                                <img src="/<?= $payment->logo ?>">
+                            </td>
                             <td class="center">
                                 <a class="btn btn-success" href="#">
                                     <i class="halflings-icon white zoom-in"></i>
                                 </a>
-                                <a class="btn btn-info" href="<?= Url::to(['company/edit', 'id' => $company->id]) ?>">
+                                <a class="btn btn-info" href="<?= Url::to(['payment/edit', 'id' => $payment->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
                                 <a class="btn btn-danger" href="#">

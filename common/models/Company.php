@@ -19,9 +19,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Company extends \yii\db\ActiveRecord
 {
-    public $reviewIds = [];
+    public $reviewIds;
     public $logoFile;
     public $directorId;
+    public $licenseIds;
 	/**
 	 * @inheritdoc
 	 */
@@ -44,6 +45,7 @@ class Company extends \yii\db\ActiveRecord
             [['site_url'], 'string', 'max' => 255],
             [['rating'], 'double', 'min' => 1, 'max' => 10],
             [['rating'], 'required'],
+            [['reviewIds', 'licenseIds'], 'default', 'value' => []],
             [['directorId'], 'integer', 'min' => 1],
             [['logoFile'], 'safe'],
             [['logoFile'], 'file', 'extensions'=>'jpg, gif, png'],

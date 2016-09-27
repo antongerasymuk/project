@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "categories".
@@ -27,8 +28,7 @@ class Categorie extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id'], 'required'],
-            [['company_id'], 'integer'],
+            [['title'], 'required'],
             [['title'], 'string', 'max' => 30],
         ];
     }
@@ -43,5 +43,14 @@ class Categorie extends \yii\db\ActiveRecord
             'title' => 'Title',
             'company_id' => 'Company ID',
         ];
+    }
+
+    public static function getArr()
+    {
+        $categoriesData = Categorie::find()
+                             ->select('id, title')
+                             ->asArray()
+                             ->all();
+        return ArrayHelper::map($categoriesData, 'id', 'title');
     }
 }

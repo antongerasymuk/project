@@ -25,6 +25,7 @@ class Review extends \yii\db\ActiveRecord
     public $osIds;
     public $allowedIds;
     public $deniedIds;
+    public $categoryId;
     /**
      * @inheritdoc
      */
@@ -52,6 +53,8 @@ class Review extends \yii\db\ActiveRecord
             [['ratingIds'], 'safe'],
             [['minusIds', 'depositIds', 'osIds'], 'safe'],
             [['bonusIds'], 'safe'],
+            [['categoryId'], 'required'],
+            [['categoryId'], 'integer', 'min' => 1],
             [['plusIds'], 'safe'],
             [['previewFile'], 'safe'],
             [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],

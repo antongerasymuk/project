@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "deposit_methods".
@@ -32,7 +33,7 @@ class DepositMethod extends \yii\db\ActiveRecord
             ['title', 'required'],
             [['title'], 'string', 'max' => 15],
             [['logoFile'], 'safe'],
-            [['logoFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
+            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png'],
         ];
     }
 
@@ -46,5 +47,15 @@ class DepositMethod extends \yii\db\ActiveRecord
             'logo' => 'Logo',
             'title' => 'Title',
         ];
+    }
+
+    public static function getArr()
+    {
+        $prosData = DepositMethod::find()
+            ->select('id, title')
+            ->asArray()
+            ->all();
+
+        return ArrayHelper::map($prosData, 'id', 'title');
     }
 }

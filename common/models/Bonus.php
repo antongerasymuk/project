@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "bonuses".
@@ -68,5 +69,14 @@ class Bonus extends \yii\db\ActiveRecord
             'rollover_requirement' => 'Rollover Requirement',
             'restrictions' => 'Restrictions'
         ];
+    }
+
+    public static function getArr()
+    {
+        $bonusesData = Bonus::find()
+                                   ->select('id, title')
+                                   ->asArray()
+                                   ->all();
+        return ArrayHelper::map($bonusesData, 'id', 'title');
     }
 }

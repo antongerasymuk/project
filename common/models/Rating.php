@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "rating".
@@ -43,5 +44,14 @@ class Rating extends \yii\db\ActiveRecord
             'title' => 'Title',
             'mark' => 'Mark',
         ];
+    }
+
+    public static function getArr()
+    {
+        $ratingsData = Rating::find()
+                                   ->select('id, title')
+                                   ->asArray()
+                                   ->all();
+        return ArrayHelper::map($ratingsData, 'id', 'title');
     }
 }

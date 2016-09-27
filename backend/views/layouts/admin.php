@@ -87,27 +87,15 @@ AdminAsset::register( $this );
 							</a>
 						</li>
 						<li>
-							<a href="<?= Url::to(['category/index']) ?>">
+							<a href="<?= Url::to(['country/index']) ?>">
 								<i class="icon-flag"></i>
 								<span class="hidden-tablet">Countries</span>
 							</a>
 						</li>
 						<li>
-							<a href="<?= Url::to(['category/index']) ?>">
-								<i class="icon-key"></i>
-								<span class="hidden-tablet">Licenses</span>
-							</a>
-						</li>
-						<li>
-							<a href="<?= Url::to(['category/index']) ?>">
+							<a href="<?= Url::to(['os/index']) ?>">
 								<i class="icon-desktop"></i>
 								<span class="hidden-tablet">Operating systems</span>
-							</a>
-						</li>
-						<li>
-							<a href="<?= Url::to(['category/index']) ?>">
-								<i class="icon-facetime-video"></i>
-								<span class="hidden-tablet">Reviews</span>
 							</a>
 						</li>
 						<li>

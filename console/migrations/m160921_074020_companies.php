@@ -17,6 +17,7 @@ class m160921_074020_companies extends Migration
             'bg_color' => $this->string(7),
             'logo' => $this->string(255),
             'site_url' => $this->string(255),
+            'address' => $this->text(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $tableOptions);

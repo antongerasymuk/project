@@ -28,7 +28,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <header>
+    <header class="hpoker">
 				<div class="header-top">
 					<div class="container">
 						<div class="row">
@@ -52,6 +52,75 @@ AppAsset::register($this);
 						</div>
 					</div>
 				</div>
+        <div class="container h-filters">
+					<div class="row">
+						<div class="col-md-7 pdr0">
+
+							<div class="filter-gp">
+								<label>Sort by</label>
+								<div class="btns clearfix">
+									<button type="button" class="btn-filter lr">Best Poker Site</button>
+									<button type="button" class="btn-filter active">Top Bonus %</button>
+									<button type="button" class="btn-filter rr">Max Bonus</button>
+								</div>
+							</div>
+
+							<div class="filter-gp">
+								<label>Filter by bonus type</label>
+								<div class="btns clearfix">
+									<button type="button" class="btn-filter lr">Deposit Bonus</button>
+									<button type="button" class="btn-filter active">No Deposit Required</button>
+									<button type="button" class="btn-filter rr">Bonus Codes</button>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-5 pdl0 clearfix">
+							<div class="fc-right">
+
+								<div class="filter-gp clearfix">
+
+									<div class="fsel">
+										<label>Banking Options</label>
+										<select class="f-select" style="width: 160px;">
+											<option value="1">VISA</option>
+											<option value="2">PayPal</option>
+											<option value="3">MasterCard</option>
+											<option value="4">Maestro</option>
+									</select>
+									</div>
+
+									<div class="fsel">
+										<label>Choose Your Country</label>
+										<select class="f-select" style="width: 200px;">
+											<option value="1">Australia</option>
+											<option value="2">China</option>
+											<option value="3">Russia</option>
+											<option value="4">USA</option>
+									</select>
+									</div>
+
+								</div>
+
+								<div class="filter-gp clearfix">
+									<div class="fcomp">
+										<label>By Software Compatibillity</label>
+										<div class="btns clearfix">
+											<button type="button" class="btn-comp">ANY</button>
+											<button type="button" class="btn-comp"><i class="flaticon-os-android"></i></button>
+											<button type="button" class="btn-comp active"><i class="flaticon-os-windows"></i></button>
+											<button type="button" class="btn-comp"><i class="flaticon-os-mac"></i></button>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div><!-- .h-filters -->
 			</header>
       <main>
       <div class="main-top">
@@ -137,5 +206,13 @@ We provide no guarantee as to the timeliness or accuracy of the information foun
 
 <?php $this->endBody() ?>
 </body>
+<script>
+	$(function(){
+	  $(".f-select").chosen({
+	   inherit_select_classes: true,
+	   disable_search: true
+	 });
+	});
+</script>
 </html>
 <?php $this->endPage() ?>

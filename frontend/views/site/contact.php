@@ -11,35 +11,48 @@ use yii\captcha\Captcha;
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="row">
 
-    <p>
-        If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.
-    </p>
+						<div class="col-sm-6">
+							<div class="contact-form">
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+								<div class="grp">
+									<label>Full name</label>
+									<input type="text" value="" />
+								</div>
 
-                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+								<div class="grp">
+									<label>Email</label>
+									<input type="text" value="" />
+								</div>
 
-                <?= $form->field($model, 'email') ?>
+								<div class="grp">
+									<label>Message</label>
+									<textarea name=""></textarea>
+								</div>
 
-                <?= $form->field($model, 'subject') ?>
+								<div class="btn">
+									<button type="button">SUBMIT</button>
+								</div>
 
-                <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
-                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                ]) ?>
+							</div>
+						</div><!-- .contact-form -->
 
-                <div class="form-group">
-                    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-                </div>
+						<div class="col-sm-6">
+							<div class="contact-info">
+								<h3>We love to receive feedback, suggestions and comments about the site.</h3>
+								<div class="phn">
+									<i class="flaticon-phone"></i>
+									Phone: Call our UK office on <a href="tel: +44 (0) 0000 000-000">+44 (0) 0000 000-000</a>
+								</div>
 
-            <?php ActiveForm::end(); ?>
-        </div>
-    </div>
+								<div class="eml">
+									<i class="flaticon-email"></i>
+									Email: Contact us via email at <a href="mailto:info@bonusonline.co.uk">info@bonusonline.co.uk</a> and we try to respond within 24 hours.
+								</div>
 
-</div>
+							</div>
+						</div>
+
+					</div>

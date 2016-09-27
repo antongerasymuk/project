@@ -15,7 +15,7 @@ AppAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
-<head>
+<head >
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
@@ -25,8 +25,8 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrapper">
-  <header class="whill">
+<div class="wrap">
+  <header class="hcontact">
       <div class="header-top">
         <div class="container">
           <div class="row">
@@ -51,21 +51,14 @@ AppAsset::register($this);
         </div>
       </div>
 
-      <div class="header-lg">
-        <a target="_blank" href="#"><img src="/images/lg-williamHill.png" alt=""></a>
-        <p>Grab your bonus for <a href="#">Casino,</a> <a href="#">Sport,</a> <a href="#">Bingo,</a> <a href="#">Poker</a></p>
-      </div>
-
-      <div class="container">
-        <div class="visit-btn"><a href="#">Visit William Hill Casino <i class="flaticon-arr-right"></i></a></div>
-      </div>
-</div>
+      <div class="hc-info">
+      					<p>Contact us</p>
+      					<span>Have a question? Don’t cry, contact us!</span>
+      				</div>
     </header><!-- .Header -->
 <main>
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+    <div class="container contact-page">
+        
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

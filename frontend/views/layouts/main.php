@@ -6,9 +6,11 @@
 use yii\helpers\Html;
 //use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+//use yii\widgets\Breadcrumbs;
+use common\widgets\BreadcrumbsBonus;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+var_dump($this->params['breadcrumbs']);
 
 AppAsset::register($this);
 ?>
@@ -53,11 +55,24 @@ AppAsset::register($this);
 
 
 			</header>
-
+      <div class="main-top">
+            <div class="container">
+      						<div class="row">
+      							<div class="col-sm-8">
+      <?= BreadcrumbsBonus::widget([
+          'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+      ]) ?>
+    </div>
+        <div class="col-sm-4 clearfix pdl0">
+          <a href="#" class="close-filters">CLOSE FILTERS</a>
+        </div>
+    </div>
+</div>
+</div>
+  </div><!-- .main-top -->
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+
+
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

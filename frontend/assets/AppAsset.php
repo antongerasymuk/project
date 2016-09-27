@@ -19,9 +19,14 @@ class AppAsset extends AssetBundle
         'js/riot.min.js',
         'js/jquery-2.1.1.min.js',
          //'js/riot_mount.js',
+         'js/compatible_with.js',
         'js/common.js',
         'js/company_offer.js',
         'js/companies_list_data.js',
+        'js/bonuses_list_data.js',
+        'js/raw.js',
+        'js/rating_by_stars.js',
+        'js/bonuses_list.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -76,10 +76,16 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionBonuses()
+    {
+        return $this->render('bonuses_by_filter');
+    }
+
+
 
     public function actionCompany()
     {
-       $this->layout = "main_company";
+        $this->layout = "main_company";
         return $this->render('index');
     }
     /**

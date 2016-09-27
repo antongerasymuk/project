@@ -10,7 +10,7 @@ use yii\bootstrap\Html;
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'license-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
-<div id="deposit-create-modal" class="modal fade" role="dialog">
+<div id="license-create-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">

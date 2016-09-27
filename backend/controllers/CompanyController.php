@@ -6,6 +6,7 @@ use common\models\Bonuse;
 use common\models\Company;
 use common\models\DepositMethod;
 use common\models\Director;
+use common\models\License;
 use common\models\Minuse;
 use common\models\Pros;
 use common\models\Rating;
@@ -89,6 +90,7 @@ class CompanyController extends BackEndController
             'director' => new Director(),
             'minus' => new Minuse(),
             'deposit' => new DepositMethod(),
+            'license' => new License(),
             'reviewsData' => $reviewsData,
             'directorsData' => $directorsData
         ]);

@@ -111,3 +111,4 @@ $this->registerJsFile('js/stan.custom.js', [
 <?= $this->render('//minus/create_modal', ['model' => $minus]) ?>
 <?= $this->render('//deposit/create_modal', ['model' => $deposit]) ?>
 <?= $this->render('//director/create_modal', ['model' => $director]) ?>
+<?= $this->render('//license/create_modal', ['model' => $license]) ?>

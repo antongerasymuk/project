@@ -76,10 +76,17 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionBonuses()
+    {
+  $this->layout = "main_bonus";
+        return $this->render('bonuses_by_filter');
+    }
+
+
 
     public function actionCompany()
     {
-       $this->layout = "main_company";
+        $this->layout = "main_company";
         return $this->render('index');
     }
     /**
@@ -122,7 +129,9 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new ContactForm();
+        $this->layout = "main_contact";
+          return $this->render('contact');
+      /*  $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -135,7 +144,7 @@ class SiteController extends Controller
             return $this->render('contact', [
                 'model' => $model,
             ]);
-        }
+        }*/
     }
 
     /**

@@ -1,8 +1,7 @@
 <?php
 namespace frontend\controllers;
 
-use common\actions\CompanyIndexAction;
-use common\models\actions\IndexAction;
+use common\models\Bonus;
 use common\models\Company;
 use Yii;
 use yii\rest\ActiveController;
@@ -35,6 +34,13 @@ class CompanyController extends ActiveController
 
     public function actionIndex()
     {
-        $companies = Company::find()->with('reviews')->all();
+        $companies = Company::find()
+            ->with(['reviews.category', 'reviews.bonuses' => function($query){
+                $query->andWhere(['type' => Bonus::MAIN]);
+            }])
+            ->asArray()
+            ->all();
+
+        return $companies;
     }
 }

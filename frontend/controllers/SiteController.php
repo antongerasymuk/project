@@ -78,7 +78,7 @@ class SiteController extends Controller
 
     public function actionBonuses()
     {
-  $this->layout = "main_bonus";
+        $this->layout = "main_bonus";
         return $this->render('bonuses_by_filter');
     }
 

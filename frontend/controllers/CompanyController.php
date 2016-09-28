@@ -2,7 +2,6 @@
 namespace frontend\controllers;
 
 use common\models\Bonus;
-use common\models\Company;
 //use Yii;
 
 use yii\data\ActiveDataProvider;
@@ -33,18 +32,6 @@ class CompanyController extends ActiveController
 
     public function actionIndex()
     {
-/*
-
-    //    $companies = Company::find()->with('reviews')->asArray()->all();
-        $companies = Company::find()
-            ->with(['reviews.category', 'reviews.bonuses' => function($query){
-                $query->andWhere(['type' => Bonus::MAIN]);
-            }])
-            ->asArray()
-            ->all();
-
-
-        return $companies;*/
 
         $modelClass = $this->modelClass;
 

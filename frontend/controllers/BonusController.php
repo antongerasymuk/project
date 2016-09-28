@@ -46,7 +46,7 @@ class BonusController extends ActiveController
             'query' => $bonuses
         ]);
 
-        return $this->sort($data);
+        return $this->setRank(array_chunk($this->sort($data), 5));
     }
 
     /**
@@ -75,11 +75,27 @@ class BonusController extends ActiveController
             }
         }
 
-        return array_chunk($data, 5);
+        return $data;
     }
 
-    protected function setRank()
+    /**
+     * data is array div on 5 parts
+     * @param array $data
+     */
+    protected function setRank(array $data)
     {
+        $dataLength = count($data);
 
+        // length = 5 parts;
+        for ($i = 0; $i < $dataLength; $i++) {
+            $bonusesLength = count($data[$i]);
+
+            for ($j = 0; $j < $bonusesLength; $j++) {
+                // set rank
+                $data[$i][$j]['rank'] = $i + 1;
+            }
+        }
+
+        return $data;
     }
 }

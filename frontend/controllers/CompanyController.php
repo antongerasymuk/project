@@ -1,10 +1,8 @@
 <?php
 namespace frontend\controllers;
 
-use common\actions\CompanyIndexAction;
-use common\models\actions\IndexAction;
 use common\models\Company;
-use Yii;
+//use Yii;
 use yii\rest\ActiveController;
 
 class CompanyController extends ActiveController
@@ -35,6 +33,7 @@ class CompanyController extends ActiveController
 
     public function actionIndex()
     {
-        $companies = Company::find()->with('reviews')->all();
+        $companies = Company::find()->with('reviews')->asArray()->all();
+        return $companies;
     }
 }

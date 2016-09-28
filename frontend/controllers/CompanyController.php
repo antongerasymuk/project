@@ -20,10 +20,10 @@ class CompanyController extends ActiveController
     {
         return [
             'index' => ['GET', 'HEAD'],
-            'view' => ['GET', 'HEAD'],
-            'create' => ['POST'],
-            'update' => ['PUT', 'PATCH'],
-            'delete' => ['DELETE'],
+//            'view' => ['GET', 'HEAD'],
+//            'create' => ['POST'],
+//            'update' => ['PUT', 'PATCH'],
+//            'delete' => ['DELETE'],
         ];
     }
 

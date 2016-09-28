@@ -1,10 +1,10 @@
-companies_list = {};
+/*companies_list = {};
 companies_list['Ladbrokes']= {};
-companies_list['Ladbrokes']['image'] = "images/ladbrokes.png";
-companies_list['Ladbrokes']['name'] = "Ladbrokes Offers";
+companies_list['Ladbrokes']['logo'] = "images/ladbrokes.png";
+companies_list['Ladbrokes']['title'] = "Ladbrokes";
 companies_list['Ladbrokes']['bg_color'] = "#e32419";
-companies_list['Ladbrokes']['prices'] = '\{"casino":"300","sport":50, "bingo":"30", "poker":"1200"\}';
-
+companies_list['Ladbrokes']['prices'] = '\{"casino":"300","sport":50, "bingo":"30", "poker":"1200"\}';*/
+/*
 companies_list['Bet365']= {};
 companies_list['Bet365']['image'] = "images/bet365.png";
 companies_list['Bet365']['name'] = "Bet365 Offers";
@@ -135,6 +135,6 @@ companies_list['Bet Online']= {};
 companies_list['Bet Online']['image'] = "images/betonline.png";
 companies_list['Bet Online']['name'] = "Bet Online";
 companies_list['Bet Online']['bg_color'] = "#c0262b";
-companies_list['Bet Online']['prices'] = '\{"casino":"1000","sport":20, "poker":"500"\}';
+companies_list['Bet Online']['prices'] = '\{"casino":"1000","sport":20, "poker":"500"\}';*/
 
-companies_list = JSON.stringify(companies_list);
+//companies_list = JSON.stringify(companies_list);

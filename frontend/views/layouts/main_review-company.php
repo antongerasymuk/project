@@ -6,7 +6,7 @@
 use yii\helpers\Html;
 //use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use common\widgets\BreadcrumbsBonus;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
@@ -59,13 +59,22 @@ AppAsset::register($this);
       <div class="container">
         <div class="visit-btn"><a href="#">Visit William Hill Casino <i class="flaticon-arr-right"></i></a></div>
       </div>
-</div>
+
     </header><!-- .Header -->
 <main>
-    <div class="container">
-        <?= Breadcrumbs::widget([
+  <div class="main-top">
+        <div class="container">
+              <div class="row">
+                <div class="col-sm-8">
+            <?= BreadcrumbsBonus::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+      </div>
+
+        </div>
+    </div>
+
+      </div><!-- .main-top -->
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
@@ -127,7 +136,7 @@ We provide no guarantee as to the timeliness or accuracy of the information foun
 					</div>
 				</div>
 			</footer><!-- .Footer -->
-
+</div>
 
 <?php $this->endBody() ?>
 </body>

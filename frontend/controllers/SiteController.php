@@ -82,12 +82,16 @@ class SiteController extends Controller
         return $this->render('bonuses_by_filter');
     }
 
-
-
     public function actionCompany()
     {
-        $this->layout = "main_company";
-        return $this->render('index');
+        $this->layout = "main_review-company";
+        return $this->render('company');
+    }
+
+    public function actionReview()
+    {
+        $this->layout = "main_review-company";
+        return $this->render('review');
     }
     /**
      * Logs in a user.

@@ -150,4 +150,9 @@ class Review extends \yii\db\ActiveRecord
         return $this->hasMany(Country::className(), ['id' => 'gallery_id'])
                     ->viaTable('review_gallery', ['review_id' => 'id']);
     }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Categorie::className(), ['id' => 'category_id']);
+    }
 }

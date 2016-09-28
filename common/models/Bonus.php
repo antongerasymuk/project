@@ -19,6 +19,7 @@ use yii\helpers\ArrayHelper;
  */
 class Bonus extends \yii\db\ActiveRecord
 {
+    const MAIN = 1;
     public $logoFile;
     /**
      * @inheritdoc

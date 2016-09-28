@@ -42,7 +42,10 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => ['class' => 'yii\rest\UrlRule', 'controller' => 'companies'],
+            'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'company'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'bonus']
+            ],
         ],
     ],
     'params' => $params,

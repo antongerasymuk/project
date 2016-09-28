@@ -75,9 +75,15 @@ class Bonus extends \yii\db\ActiveRecord
     public static function getArr()
     {
         $bonusesData = Bonus::find()
-                                   ->select('id, title')
-                                   ->asArray()
-                                   ->all();
+                            ->select('id, title')
+                            ->asArray()
+                            ->all();
         return ArrayHelper::map($bonusesData, 'id', 'title');
+    }
+
+    public function getReviews()
+    {
+        return $this->hasMany(Review::className(), ['id' => 'bonus_id'])
+                    ->viaTable('review_bonus', ['review_id' => 'id']);
     }
 }

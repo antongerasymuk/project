@@ -27,6 +27,8 @@ class AppAsset extends AssetBundle
         'js/raw.js',
         'js/rating_by_stars.js',
         'js/bonuses_list.js',
+        'js/oboe-browser.min.js',
+        'js/oboe_index.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

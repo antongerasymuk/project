@@ -2,8 +2,10 @@
 namespace frontend\controllers;
 
 use common\models\Bonus;
+use common\models\Company;
+//use Yii;
+
 use yii\data\ActiveDataProvider;
-use yii\helpers\Url;
 use Yii;
 use yii\rest\ActiveController;
 
@@ -19,12 +21,8 @@ class CompanyController extends ActiveController
     public function verbs()
     {
         return [
-            'index' => ['GET', 'HEAD'],
-//            'view' => ['GET', 'HEAD'],
-//            'create' => ['POST'],
-//            'update' => ['PUT', 'PATCH'],
-//            'delete' => ['DELETE'],
-        ];
+            'index' => ['GET', 'HEAD'],];
+
     }
 
     public function actions()
@@ -35,6 +33,19 @@ class CompanyController extends ActiveController
 
     public function actionIndex()
     {
+/*
+
+    //    $companies = Company::find()->with('reviews')->asArray()->all();
+        $companies = Company::find()
+            ->with(['reviews.category', 'reviews.bonuses' => function($query){
+                $query->andWhere(['type' => Bonus::MAIN]);
+            }])
+            ->asArray()
+            ->all();
+
+
+        return $companies;*/
+
         $modelClass = $this->modelClass;
 
         return new ActiveDataProvider([
@@ -44,5 +55,6 @@ class CompanyController extends ActiveController
                 }])
                 ->asArray()
         ]);
+
     }
 }

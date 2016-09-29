@@ -1,3 +1,4 @@
 riot.tag2('raw', '', '', '', function(opts) {
-    this.root.innerHTML = opts.content
+  console.log(this.root);
+    this.root.innerHTML = opts.content;
 });

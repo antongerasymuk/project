@@ -79,7 +79,7 @@ class BonusController extends ActiveController
     }
 
     /**
-     * data is array div on 5 parts
+     * data is array div on 5 parts of bonuses
      * @param array $data
      */
     protected function setRank(array $data)

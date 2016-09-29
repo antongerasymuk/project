@@ -3,7 +3,7 @@ riot.tag2('company-offer', '<div class="item" riot-style="background-color: {opt
     console.log(JSON.stringify(opts));
     prices = [];
     for (i = 0; i < opts.reviews.length; i++) {
-        prices[opts.reviews[i].bonuses[0].title ] = opts.reviews[i].bonuses[0].price;
+        prices[opts.reviews[i].category.title ] = opts.reviews[i].bonuses[0].price;
     }
 });
 

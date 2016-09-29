@@ -7,5 +7,5 @@ bonuses_list['Bet365']['description'] = "100% up to £100<br/>Plus £5 Free No D
 bonuses_list['Bet365']['refault_url'] = "";
 bonuses_list['Bet365']['bonus_category'] = "Poker";
 bonuses_list['Bet365']['os'] = '\{"mac":"mac","windows":"windows", "android":"android"\}';
-
+bonuses_list['Bet365']['category_id'] = 1;
 bonuses_list = JSON.stringify(bonuses_list);

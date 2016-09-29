@@ -10,7 +10,6 @@ use yii\bootstrap\NavBar;
 use common\widgets\BreadcrumbsBonus;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
-var_dump($this->params['breadcrumbs']);
 
 AppAsset::register($this);
 ?>
@@ -34,18 +33,15 @@ AppAsset::register($this);
 						<div class="row">
 
 							<div class="col-sm-3">
-								<div class="logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
+								<div class="logo"><a href="<?= Yii::$app->getHomeUrl() ?>"><img src="/images/logo.png" alt=""></a></div>
 							</div>
 
 							<div class="col-sm-9">
 								<a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
 								<nav class="header-menu clearfix">
-									<ul>
-										<li><a href="#">Casino</a></li>
-										<li><a href="#">Sport</a></li>
-										<li><a href="#">Bingo</a></li>
-										<li><a href="#">Poker</a></li>
-									</ul>
+									<?= \common\widgets\OwnNav::widget([
+										'items' => \common\models\Categorie::getForNav()
+									]) ?>
 								</nav>
 							</div>
 

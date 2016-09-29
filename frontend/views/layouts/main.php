@@ -10,7 +10,6 @@ use yii\bootstrap\NavBar;
 use common\widgets\BreadcrumbsBonus;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
-var_dump($this->params['breadcrumbs']);
 
 AppAsset::register($this);
 ?>

@@ -29,53 +29,56 @@ class BonusController extends ActiveController
         ];
     }
 
+    protected function calcRating($arr)
+    {
+        $length = count($arr);
+        $sum = $count = 0;
+
+        for ($i = 0; $i < $length; $i++) {
+//            $arr[$i]
+            if (isset($arr[$i]['reviews'][0]['ratings'])) {
+                $count = count($arr[$i]['reviews'][0]['ratings']);
+
+                foreach ($arr[$i]['reviews'][0]['ratings'] as $rating) {
+                    $sum += $rating['mark'];
+                }
+
+                $arr[$i]['reviews'][0]['ratings'] = $sum / $count;
+                $arr[$i]['rating'] = $arr[$i]['reviews'][0]['ratings'];
+                $sum = $count = 0;
+            }
+        }
+
+        return $arr;
+    }
+
     public function actionIndex()
     {
         $modelClass = $this->modelClass;
 
         $bonuses = $modelClass::find()
             ->with(['reviews' => function($query){
-                $query->select('id')->limit(1)->one();
+                $query->select('id');
             }, 'reviews.ratings' => function($query){
-                $query->select('id, avg(mark) as rating');
+                $query->select(['id', 'mark']);
             }, 'oses'])
-            ->orderBy('')
             ->asArray();
 
         $data = new ActiveDataProvider([
             'query' => $bonuses
         ]);
 
-        return $this->setRank(array_chunk($this->sort($data), 5));
-    }
-
-    /**
-     * @param $data ActiveDataProvider
-     */
-    protected function sort($data)
-    {
         $data = $data->query->all();
-        $data[0]['reviews'][0]['ratings'][0]['rating'] = 5.000;
+        $data = $this->calcRating($data);
 
-        $length = count($data);
+        usort($data, function($a, $b){
+            if ($a['reviews'][0]['ratings'] < $b['reviews'][0]['ratings']) return 1;
+            if ($a['reviews'][0]['ratings'] > $b['reviews'][0]['ratings']) return -1;
 
-        for ($j = 0; $j < $length - 1; $j++){
-            for ($i = 0; $i < $length - $j - 1; $i++){
-                if (empty($data[$i]['reviews'][0]['ratings'][0]['rating'])) {
-                    continue;
-                }
+            return 0;
+        });
 
-                // если текущий элемент больше следующего
-                if ($data[$i]['reviews'][0]['ratings'][0]['rating'] < $data[$i + 1]['reviews'][0]['ratings'][0]['rating']){
-                    // меняем местами элементы
-                    $tmp_var = $data[$i + 1];
-                    $data[$i + 1] = $data[$i];
-                    $data[$i] = $tmp_var;
-                }
-            }
-        }
-
-        return $data;
+        return $this->sortRank($data);
     }
 
     /**
@@ -86,16 +89,28 @@ class BonusController extends ActiveController
     {
         $dataLength = count($data);
 
-        // length = 5 parts;
         for ($i = 0; $i < $dataLength; $i++) {
-            $bonusesLength = count($data[$i]);
-
-            for ($j = 0; $j < $bonusesLength; $j++) {
-                // set rank
-                $data[$i][$j]['rank'] = $i + 1;
-            }
+            $data[$i]['rank'] = $i + 1;
         }
 
         return $data;
+    }
+
+    protected function sortRank($arr_ratings)
+    {
+        $arr_ranks = [];
+        $r = 1;//ранк счетчик
+        $length = count($arr_ratings);
+
+        for ($i = 0; $i < $length; $i++) {
+            $arr_ratings[$i]['rank'] = $r;
+
+            if (isset($arr_ratings[$i+1])) {
+                if ($arr_ratings[$i]['rating'] > $arr_ratings[$i+1]['rating'])
+                    $r++;
+            }
+        }
+
+        return $arr_ratings;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Categorie;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -229,5 +230,12 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionCategory($id)
+    {
+        $this->layout = 'main_bonus';
+
+        return $this->render('bonuses_by_filter', ['title' => Categorie::findOne($id)->title]);
     }
 }

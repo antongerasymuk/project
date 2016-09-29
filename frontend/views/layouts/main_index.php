@@ -4,11 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-//use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
-use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
@@ -32,18 +28,15 @@ AppAsset::register($this);
 						<div class="row">
 
 							<div class="col-sm-3">
-								<div class="logo"><a href="#"><img src="images/logo.png" alt=""></a></div>
+								<div class="logo"><a href="<?= Yii::$app->getHomeUrl() ?>"><img src="images/logo.png" alt=""></a></div>
 							</div>
 
 							<div class="col-sm-9">
 								<a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
 								<nav class="header-menu clearfix">
-									<ul>
-										<li><a href="#">Casino</a></li>
-										<li><a href="#">Sport</a></li>
-										<li><a href="#">Bingo</a></li>
-										<li><a href="#">Poker</a></li>
-									</ul>
+									<?= \common\widgets\OwnNav::widget([
+									    'items' => \common\models\Categorie::getForNav()
+                                    ]) ?>
 								</nav>
 							</div>
 

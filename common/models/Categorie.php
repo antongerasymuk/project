@@ -53,4 +53,20 @@ class Categorie extends \yii\db\ActiveRecord
                              ->all();
         return ArrayHelper::map($categoriesData, 'id', 'title');
     }
+
+    public static function getForNav()
+    {
+        $categories = Categorie::find()->all();
+
+        $items = [];
+
+        foreach ($categories as $category) {
+            $items[] = [
+                'label' => $category->title,
+                'url' => ['site/category', 'id' => $category->id]
+            ];
+        }
+
+        return $items;
+    }
 }

@@ -1,4 +1,3 @@
-
 riot.tag2('companies-list', '<div class="row"> ' +
     '<div class="h-title">' +
     '<h2>UK Betting Sites</h2>' +
@@ -9,37 +8,37 @@ riot.tag2('companies-list', '<div class="row"> ' +
     '</div>',
     '',
     '',
-    function(opts) {
-           console.log('Here');
-           var self = this;
-           self.companies_list = [] ;
-               this.on('mount', function () {
-               console.log(this);
-               self.trigger('get');
-           });
+    function (opts) {
+        console.log('Here');
+        var self = this;
+        self.companies_list = [];
+        this.on('mount', function () {
+            console.log(this);
+            self.trigger('get');
+        });
 
-          this.on('get', function () {
-               console.log('Get data');
-               oboe('/company')
-                .node('!.*', function(data){
-                   //.done(function(data) {
-                   console.log('here');
-                     //  console.log(JSON.stringify(data[0]));
-                    //self.companies_list = data;
-                  //  index =data[0].title;
+        this.on('get', function () {
+            console.log('Get data');
+            oboe({
+                url: 'http://bonus.loc/company', method: 'GET', headers: {
+                    Accept: 'application/json'
+                }
+            })
+                .node('!.*', function (data) {
+                    console.log('Node');
+                    console.log(data);
+                })
+                .done(function (data) {
+                    console.log('Done');
+                    console.log(data);
+                })
+                .fail(function (data) {
+                    console.log(this.headers);
+                });
 
-                     self.companies_list.push(data);
-                     console.log(JSON.stringify(self.companies_list));
-                     self.update();
-                     console.log(JSON.stringify(self.companies_list));
-                   })
-                   .fail(function() {
-                       console.log('Fail');
-                   });
-
-});
+        });
         console.log(JSON.stringify(companies_list));
-   });
+    });
 
 
 riot.mount('companies-list', {})

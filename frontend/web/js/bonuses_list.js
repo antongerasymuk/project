@@ -13,7 +13,7 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '<th class="text-center">Compatible with</th>' +
     '<th class="text-center">Join site</th> ' +
     '</tr> </thead> <tbody> ' +
-    '<tr each="{ bonuses_list }" > ' +
+    '<tr each="{ bonuses_list }" each="{ bonuses_list.bonuses }"> ' +
     '<td data-column="Rank">' +
     '<div class="rank">{rank}</div>' +
     '</td> <td data-column="Poker Site">' +
@@ -22,7 +22,7 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '</div> ' +
     '<a href="#" class="psite">Read Review</a> ' +
     '</td> <td data-column="Rating" class="text-left">' +
-    '<rating-by-stars rating="{rating}">' +
+    '<rating-by-stars rating="{ratings}">' +
     '</rating-by-stars>' +
     '</td>' +
     '<td data-column="Bonus Details" class="text-left"> ' +
@@ -54,37 +54,23 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
         this.on('get', function () {
             console.log('Get data');
             oboe({
-                url: '/bonuses?='+opts.category,
+                url: '/bonus?category_id='+opts.category,
                 headers:  {Accept: 'application/json'}, 
-
             })
-             .node('!.*', function(data){
+            .node('!.*', function(data){
 
-             console.log(JSON.stringify(data));
-             self.bonuses_list[self.i++]= data;
-            console.log(JSON.stringify(self.bonuses_list));
-            self.update();
-
-            }).fail(function(error) {
+                //console.log(JSON.stringify(data.bonuses));
+                self.bonuses_list[self.i++] = data.bonuses;
+                //console.log(JSON.stringify(self.bonuses_list));
+                self.update();
+            })
+            .fail(function(error) {
                 console.log(error);
             });
 
+        });
+
     });
-
-    /*
-     bonuses_list = JSON.parse(opts.params);
-
-<<<<<<< HEAD
-$.each(bonuses_list, function (index, value) {
-if (value.bonus_category != opts.filter) {
-delete bonuses_list[index];
-console.log(value.bonus_category);
-console.log(index);
-}
-});*/
-
-
-});
 riot.mount('raw', {});
 riot.mount('compatible-with', {});
 riot.mount('bonuses-filter-list', {});

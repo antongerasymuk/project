@@ -22,7 +22,7 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '</div> ' +
     '<a href="#" class="psite">Read Review</a> ' +
     '</td> <td data-column="Rating" class="text-left">' +
-    '<rating-by-stars rating="{ratings}">' +
+    '<rating-by-stars rating="{rating}">' +
     '</rating-by-stars>' +
     '</td>' +
     '<td data-column="Bonus Details" class="text-left"> ' +

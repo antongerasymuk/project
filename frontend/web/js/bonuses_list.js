@@ -60,7 +60,7 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
             .node('!.*', function(data){
 
                 //console.log(JSON.stringify(data.bonuses));
-                self.bonuses_list[self.i++] = data.bonuses;
+                self.bonuses_list[self.i++] = data;
                 //console.log(JSON.stringify(self.bonuses_list));
                 self.update();
             })

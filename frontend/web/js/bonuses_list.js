@@ -1,13 +1,13 @@
 riot.tag2('bonuses-filter-list', '<div class="row">' +
     '<div class="h-title">' +
-    '<h1>The UK\'s Top 15 {opts.filter} Sites</h1>' +
+    '<h1>The UK\'s Top 15 Poker Sites</h1>' +
     '</div>' +
     '<div class="col-xs-12">' +
     '<table class="table-top-sites">' +
     '<thead>' +
     '<tr>' +
     '<th class="text-center">Rank</th>' +
-    '<th class="text-left">{opts.filter} Site</th>' +
+    '<th class="text-left">Poker Site</th>' +
     '<th class="text-left">Rating</th> ' +
     '<th class="text-left">Bonus Details</th>' +
     '<th class="text-center">Compatible with</th>' +
@@ -16,7 +16,7 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '<tr each="{ bonuses_list }" > ' +
     '<td data-column="Rank">' +
     '<div class="rank">{rank}</div>' +
-    '</td> <td data-column="Poker Site"> ' +
+    '</td> <td data-column="Poker Site">' +
     '<div class="img">' +
     '<img riot-src="{logo}" alt="">' +
     '</div> ' +
@@ -30,8 +30,7 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '</div> ' +
     '</td> ' +
     '<td data-column="Compatible with" class="text-center"> ' +
-    '<compatible-with params="{value.os}">' +
-    '</compatible-with>' +
+    '<compatible-with params="{oses}"></compatible-with>'+
     '</td> ' +
     '<td data-column="Join site" class="text-center"> ' +
     '<div class="join-btn">' +
@@ -41,8 +40,11 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '</tr> ' +
     '</tbody> ' +
     '</table> ' +
-    '</div>', '', '', function (opts) {
+    '</div>', '', '', function (opts) 
+    {
+        os = '\{"mac":"mac","windows":"windows", "android":"android"\}';
         var self = this;
+        self.i = 0;
         self.bonuses_list = [];
         console.log(opts.category);
         this.on('mount', function () {
@@ -53,18 +55,18 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
             console.log('Get data');
             oboe({
                 url: '/bonuses?='+opts.category,
-                headers:  {Accept: 'application/json'},        
+                headers:  {Accept: 'application/json'}, 
+
             })
-            .node('!.*', function(data){
+             .node('!.*', function(data){
 
-                //console.log('here');
-                console.log(self);
-              self.bonuses_list.push(data);
-              console.log(JSON.stringify(data));
-               self.update();
+             console.log(JSON.stringify(data));
+             self.bonuses_list[self.i++]= data;
+            console.log(JSON.stringify(self.bonuses_list));
+            self.update();
 
-            }).fail(function() {
-                console.log('Fail');
+            }).fail(function(error) {
+                console.log(error);
             });
 
         });
@@ -79,7 +81,8 @@ console.log(value.bonus_category);
 console.log(index);
 }
 });*/
+
 });
-//riot.mount('raw', {});
-//riot.mount('compatible-with', {});
+riot.mount('raw', {});
+riot.mount('compatible-with', {});
 riot.mount('bonuses-filter-list', {});

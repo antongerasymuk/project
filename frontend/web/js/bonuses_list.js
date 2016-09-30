@@ -69,11 +69,12 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
                 console.log(error);
             });
 
-        });
+    });
 
-/*
-bonuses_list = JSON.parse(opts.params);
+    /*
+     bonuses_list = JSON.parse(opts.params);
 
+<<<<<<< HEAD
 $.each(bonuses_list, function (index, value) {
 if (value.bonus_category != opts.filter) {
 delete bonuses_list[index];
@@ -81,6 +82,7 @@ console.log(value.bonus_category);
 console.log(index);
 }
 });*/
+
 
 });
 riot.mount('raw', {});

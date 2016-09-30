@@ -9,7 +9,7 @@ use yii\rest\ActiveController;
 
 class BonusController extends ActiveController
 {
-    public $modelClass = 'common\models\Bonus';
+    public $modelClass = 'common\models\Review';
 
     public function checkAccess($action, $model = null, $params = [])
     {
@@ -35,16 +35,14 @@ class BonusController extends ActiveController
         $sum = $count = 0;
 
         for ($i = 0; $i < $length; $i++) {
-//            $arr[$i]
-            if (isset($arr[$i]['reviews'][0]['ratings'])) {
-                $count = count($arr[$i]['reviews'][0]['ratings']);
+            if (isset($arr[$i]['ratings'])) {
+                $count = count($arr[$i]['ratings']);
 
-                foreach ($arr[$i]['reviews'][0]['ratings'] as $rating) {
+                foreach ($arr[$i]['ratings'] as $rating) {
                     $sum += $rating['mark'];
                 }
 
-                $arr[$i]['reviews'][0]['ratings'] = $sum / $count;
-                $arr[$i]['rating'] = $arr[$i]['reviews'][0]['ratings'];
+                $arr[$i]['ratings'] = $sum / $count;
                 $sum = $count = 0;
             }
         }
@@ -52,28 +50,38 @@ class BonusController extends ActiveController
         return $arr;
     }
 
-    public function actionIndex()
+    public function actionIndex($category_id = null)
     {
         $modelClass = $this->modelClass;
 
-        $bonuses = $modelClass::find()
-            ->with(['reviews' => function($query){
-                $query->select('id');
-            }, 'reviews.ratings' => function($query){
-                $query->select(['id', 'mark']);
-            }, 'oses'])
-            ->asArray();
-
+        if ($category_id == null) {
+            $bonuses = $modelClass::find()
+                ->with(['reviews' => function($query){
+                    $query->select('id');
+                }, 'reviews.ratings' => function($query){
+                    $query->select(['id', 'mark']);
+                }, 'oses'])
+                ->asArray();
+        } else {
+            $bonuses = $modelClass::find()
+                ->where(['category_id' => $category_id])
+                ->with('bonuses')
+                ->with('ratings')
+                ->with('bonuses.oses')
+                ->asArray();
+        }
         $data = new ActiveDataProvider([
             'query' => $bonuses
         ]);
 
         $data = $data->query->all();
+
+//        return $data;
         $data = $this->calcRating($data);
 
         usort($data, function($a, $b){
-            if ($a['reviews'][0]['ratings'] < $b['reviews'][0]['ratings']) return 1;
-            if ($a['reviews'][0]['ratings'] > $b['reviews'][0]['ratings']) return -1;
+            if ($a['ratings'] < $b['ratings']) return 1;
+            if ($a['ratings'] > $b['ratings']) return -1;
 
             return 0;
         });
@@ -98,7 +106,6 @@ class BonusController extends ActiveController
 
     protected function sortRank($arr_ratings)
     {
-        $arr_ranks = [];
         $r = 1;//ранк счетчик
         $length = count($arr_ratings);
 

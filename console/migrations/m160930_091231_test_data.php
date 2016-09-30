@@ -70,9 +70,13 @@ class m160930_091231_test_data extends Migration
             'title' => 'Sing up bonus 1',
             'description' => 'Sing up bonus 1 description',
             'logo' => '/uploads/bet365-poker.jpg',
-            'price' => '10',
+            'price' => 30,
             'code' => 'CODE1',
-            'referal_url' => 'http://bonus1.referal'
+            'min_deposit' => 10,
+            'referal_url' => 'http://bonus1.referal',
+            'expiry' => 12,
+            'rollover_requirement' => 'sadfjqdwjkqw',
+            'restrictions' => 'asdnqwofhiuqwed'
         ]);
     }
 

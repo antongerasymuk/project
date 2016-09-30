@@ -104,7 +104,6 @@ class BonusController extends ActiveController
 
     protected function sortRank($arr_ratings)
     {
-        $bonuses = [];
         $r = 1;//ранк счетчик
         $length = count($arr_ratings);
 

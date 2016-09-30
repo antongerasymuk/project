@@ -38,12 +38,10 @@ AppAsset::register($this);
             <div class="col-sm-9">
               <a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
               <nav class="header-menu clearfix">
-                <ul>
-                  <li class="active"><a href="#">Casino</a></li>
-                  <li><a href="#">Sport</a></li>
-                  <li><a href="#">Bingo</a></li>
-                  <li><a href="#">Poker</a></li>
-                </ul>
+	              <?php $items = \common\models\Categorie::getForNav() ?>
+	              <?= \common\widgets\OwnNav::widget([
+		              'items' => $items
+	              ]) ?>
               </nav>
             </div>
 
@@ -52,7 +50,7 @@ AppAsset::register($this);
       </div>
 
       <div class="header-lg">
-        <a target="_blank" href="#"><img src="/images/lg-williamHill.png" alt=""></a>
+        <a target="_blank" href="#"><img src="<?= $this->params['logo'] ?>" alt=""></a>
         <p>Grab your bonus for <a href="#">Casino,</a> <a href="#">Sport,</a> <a href="#">Bingo,</a> <a href="#">Poker</a></p>
       </div>
 

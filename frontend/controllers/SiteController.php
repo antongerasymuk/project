@@ -2,6 +2,8 @@
 namespace frontend\controllers;
 
 use common\models\Categorie;
+use common\models\Company;
+use common\models\Review;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -89,10 +91,31 @@ class SiteController extends Controller
         return $this->render('company');
     }
 
-    public function actionReview()
+    public function actionReview($id)
     {
-        $this->layout = "main_review-company";
-        return $this->render('review');
+        $this->layout = "main_review";
+        // get review data
+        $company = Company::find()->with(['reviews' => function($query) use ($id) {
+            $query->andWhere(['id' => $id])->with([
+                'bonuses',
+                'gallery',
+                'category',
+                'ratings',
+                'pros',
+                'minuses',
+                'oses',
+                'deposits'
+            ]);
+        }])->asArray()->one();
+
+        $this->view->params['company'] = [
+            'id' => $company['id'],
+            'url' => $company['site_url'],
+            'name' => $company['title']
+        ];
+        $this->view->params['logo'] = $company['logo'];
+
+        return $this->render('review', ['company' => $company]);
     }
     /**
      * Logs in a user.

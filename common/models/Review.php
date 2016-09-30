@@ -110,7 +110,7 @@ class Review extends \yii\db\ActiveRecord
 
     public function getPros()
     {
-        return $this->hasMany(Pros::className(), ['id' => 'pros_id'])
+        return $this->hasMany(Pros::className(), ['id' => 'pos_id'])
             ->viaTable('review_pros', ['review_id' => 'id']);
     }
 
@@ -129,7 +129,7 @@ class Review extends \yii\db\ActiveRecord
 
     public function getOses()
     {
-        return $this->hasMany(DepositMethod::className(), ['id' => 'os_id'])
+        return $this->hasMany(Os::className(), ['id' => 'os_id'])
                     ->viaTable('os_review', ['review_id' => 'id']);
     }
 
@@ -147,12 +147,46 @@ class Review extends \yii\db\ActiveRecord
 
     public function getGallery()
     {
-        return $this->hasMany(Country::className(), ['id' => 'gallery_id'])
+        return $this->hasMany(Gallery::className(), ['id' => 'gallery_id'])
                     ->viaTable('review_gallery', ['review_id' => 'id']);
     }
 
     public function getCategory()
     {
         return $this->hasOne(Categorie::className(), ['id' => 'category_id']);
+    }
+
+    public static function getTop($category_id, $current_review_id, $limit = 5)
+    {
+        $reviews = Review::find()->select('id, title')
+            ->where(['<>', 'id', $current_review_id])
+            ->andWhere(['category_id' => $category_id])
+            ->with('ratings')
+            ->asArray()->all();
+
+        $length = count($reviews);
+        $sum = $count = 0;
+
+        for ($i = 0; $i < $length; $i++) {
+            if (isset($reviews[$i]['ratings'])) {
+                $count = count($reviews[$i]['ratings']);
+
+                foreach ($reviews[$i]['ratings'] as $rating) {
+                    $sum += $rating['mark'];
+                }
+
+                $reviews[$i]['ratings'] = $sum / $count;
+                $sum = $count = 0;
+            }
+        }
+
+        usort($reviews, function($a, $b){
+            if ($a['ratings'] < $b['ratings']) return 1;
+            if ($a['ratings'] > $b['ratings']) return -1;
+
+            return 0;
+        });
+
+        return array_slice($reviews, 0, $limit, true);
     }
 }

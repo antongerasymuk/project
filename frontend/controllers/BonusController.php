@@ -56,11 +56,9 @@ class BonusController extends ActiveController
 
         if ($category_id == null) {
             $bonuses = $modelClass::find()
-                ->with(['reviews' => function($query){
-                    $query->select('id');
-                }, 'reviews.ratings' => function($query){
-                    $query->select(['id', 'mark']);
-                }, 'oses'])
+                ->with('bonuses')
+                ->with('ratings')
+                ->with('bonuses.oses')
                 ->asArray();
         } else {
             $bonuses = $modelClass::find()

@@ -1,13 +1,13 @@
 riot.tag2('bonuses-filter-list', '<div class="row">' +
     '<div class="h-title">' +
-    '<h1>The UK\'s Top 15 Poker Sites</h1>' +
+    '<h1>The UK\'s Top 15 {opts.title} Sites</h1>' +
     '</div>' +
     '<div class="col-xs-12">' +
     '<table class="table-top-sites">' +
     '<thead>' +
     '<tr>' +
     '<th class="text-center">Rank</th>' +
-    '<th class="text-left">Poker Site</th>' +
+    '<th class="text-left">{opts.title} Site</th>' +
     '<th class="text-left">Rating</th> ' +
     '<th class="text-left">Bonus Details</th>' +
     '<th class="text-center">Compatible with</th>' +
@@ -16,13 +16,13 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '<tr each="{ bonuses_list }" each="{ bonuses_list.bonuses }"> ' +
     '<td data-column="Rank">' +
     '<div class="rank">{rank}</div>' +
-    '</td> <td data-column="Poker Site">' +
+    '</td> <td data-column="{opts.title} Site">' +
     '<div class="img">' +
     '<img riot-src="{logo}" alt="">' +
     '</div> ' +
-    '<a href="#" class="psite">Read Review</a> ' +
+    '<a href="/site/review?id={review_id}" class="psite">Read Review</a> ' +
     '</td> <td data-column="Rating" class="text-left">' +
-    '<rating-by-stars rating="{ratings}">' +
+    '<rating-by-stars rating="{rating}">' +
     '</rating-by-stars>' +
     '</td>' +
     '<td data-column="Bonus Details" class="text-left"> ' +

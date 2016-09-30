@@ -13,20 +13,20 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '<th class="text-center">Compatible with</th>' +
     '<th class="text-center">Join site</th> ' +
     '</tr> </thead> <tbody> ' +
-    '<tr each="{ name, value in bonuses_list }" > ' +
+    '<tr each="{ bonuses_list }" > ' +
     '<td data-column="Rank">' +
-    '<div class="rank">{value.rank}</div>' +
-    '</td> <td data-column="{opts.filter} Site"> ' +
+    '<div class="rank">{rank}</div>' +
+    '</td> <td data-column="Poker Site"> ' +
     '<div class="img">' +
-    '<img riot-src="{value.image}" alt="">' +
+    '<img riot-src="{logo}" alt="">' +
     '</div> ' +
     '<a href="#" class="psite">Read Review</a> ' +
     '</td> <td data-column="Rating" class="text-left">' +
-    '<rating-by-stars rating="{value.bonuses_rating}">' +
+    '<rating-by-stars rating="{rating}">' +
     '</rating-by-stars>' +
     '</td>' +
     '<td data-column="Bonus Details" class="text-left"> ' +
-    '<div class="details"><raw content="{value.description }">' +
+    '<div class="details"><raw content="{description }">' +
     '</div> ' +
     '</td> ' +
     '<td data-column="Compatible with" class="text-center"> ' +
@@ -42,17 +42,44 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '</tbody> ' +
     '</table> ' +
     '</div>', '', '', function (opts) {
-    companies_list_old_prices = '\{"casino":"100","sport":200, "bingo":"100", "poker":"100"\}';
-    bonuses_list = JSON.parse(opts.params);
+        var self = this;
+        self.bonuses_list = [];
+        console.log(opts.category);
+        this.on('mount', function () {
+            console.log(this);
+            self.trigger('get');
+        });
+        this.on('get', function () {
+            console.log('Get data');
+            oboe({
+                url: '/bonuses?='+opts.category,
+                headers:  {Accept: 'application/json'},        
+            })
+            .node('!.*', function(data){
 
-    $.each(bonuses_list, function (index, value) {
-        if (value.bonus_category != opts.filter) {
-            delete bonuses_list[index];
-            console.log(value.bonus_category);
-            console.log(index);
-        }
-    });
+                //console.log('here');
+                console.log(self);
+              self.bonuses_list.push(data);
+              console.log(JSON.stringify(data));
+               self.update();
+
+            }).fail(function() {
+                console.log('Fail');
+            });
+
+        });
+
+/*
+bonuses_list = JSON.parse(opts.params);
+
+$.each(bonuses_list, function (index, value) {
+if (value.bonus_category != opts.filter) {
+delete bonuses_list[index];
+console.log(value.bonus_category);
+console.log(index);
+}
+});*/
 });
-riot.mount('raw', {});
-riot.mount('compatible-with', {});
+//riot.mount('raw', {});
+//riot.mount('compatible-with', {});
 riot.mount('bonuses-filter-list', {});

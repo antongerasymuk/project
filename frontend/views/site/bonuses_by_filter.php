@@ -2,9 +2,13 @@
 use yii\helpers\Html;
 $filter = "Poker";
 $this->title = "$filter Sites";
-$this->params['breadcrumbs'][] = $this->title;?>
+$this->params['breadcrumbs'][] = $this->title;
+$request = Yii::$app->request;
+?>
 
-<bonuses-filter-list params="{bonuses_list}" filter='<?= $filter ?>'></bonuses-filter-list>
+<?php $get = $request->get(); ?>
+<?php $this->registerJsFile('/js/bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>
+<bonuses-filter-list params="{bonuses_list}" category='<?= $get[id] ?>' filter='<?= $filter ?>'></bonuses-filter-list>
 
 <div class="clearfix"></div>
 

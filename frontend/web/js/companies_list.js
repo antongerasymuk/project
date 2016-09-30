@@ -19,17 +19,17 @@ riot.tag2('companies-list', '<div class="row"> ' +
         this.on('get', function () {
             console.log('Get data');
             oboe({
-   url: '/company',
-   headers:  {Accept: 'application/json'},        
-  
-})
-   .node('!.*', function(data){
+                url: '/company',
+                headers:  {Accept: 'application/json'},        
+
+            })
+            .node('!.*', function(data){
 //.done(function(data) {
 
     console.log('here');
     self.companies_list.push(data);
-    //console.log(JSON.stringify(self.companies_list));
-    self.update();
+//console.log(JSON.stringify(self.companies_list));
+self.update();
 //console.log(JSON.stringify(self.companies_list[0].reviews));
 }).fail(function() {
     console.log('Fail');
@@ -40,4 +40,4 @@ riot.tag2('companies-list', '<div class="row"> ' +
 });
 
 
-            riot.mount('companies-list', {})
+riot.mount('companies-list', {})

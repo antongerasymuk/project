@@ -24,9 +24,8 @@ class AppAsset extends AssetBundle
         'js/company_offer.js',
         'js/companies_list_data.js',
         'js/bonuses_list_data.js',
-        'js/raw.js',
-        'js/rating_by_stars.js',
-        'js/bonuses_list.js',
+        //'js/raw.js',
+        //'js/rating_by_stars.js',
         'js/oboe-browser.min.js',
         'js/oboe_index.js',
     ];

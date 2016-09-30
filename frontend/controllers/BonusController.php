@@ -84,7 +84,7 @@ class BonusController extends ActiveController
             return 0;
         });
 
-        return $this->sortRank($data);
+        return $this->normalize($this->sortRank($data));
     }
 
     /**
@@ -104,6 +104,7 @@ class BonusController extends ActiveController
 
     protected function sortRank($arr_ratings)
     {
+        $bonuses = [];
         $r = 1;//ранк счетчик
         $length = count($arr_ratings);
 
@@ -117,5 +118,20 @@ class BonusController extends ActiveController
         }
 
         return $arr_ratings;
+    }
+
+    protected function normalize($arr)
+    {
+        $bonuses = [];
+
+        foreach ($arr as $review) {
+            foreach ($review['bonuses'] as $bonus) {
+                $bonus['rank'] = $review['rank'];
+                $bonus['rating'] = $review['rating'];
+                $bonuses[] = $bonus;
+            }
+        }
+
+        return $bonuses;
     }
 }

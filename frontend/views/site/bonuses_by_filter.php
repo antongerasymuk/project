@@ -1,14 +1,14 @@
 <?php
 use yii\helpers\Html;
-$filter = "Poker";
-$this->title = "$filter Sites";
+
+$this->title = ucfirst($title)." Sites";
 $this->params['breadcrumbs'][] = $this->title;
 $request = Yii::$app->request;
 ?>
 
 <?php $get = $request->get(); ?>
 
-<bonuses-filter-list params="{bonuses_list}" category='<?= $get["id"] ?>' filter='<?= $filter ?>'></bonuses-filter-list>
+<bonuses-filter-list params="{bonuses_list}" category='<?= $get["id"] ?>' title='<?= ucfirst($title) ?>'></bonuses-filter-list>
 <?php $this->registerJsFile('/js/bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>
 <div class="clearfix"></div>
 

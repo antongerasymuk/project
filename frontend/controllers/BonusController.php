@@ -127,7 +127,7 @@ class BonusController extends ActiveController
         foreach ($arr as $review) {
             foreach ($review['bonuses'] as $bonus) {
                 $bonus['rank'] = $review['rank'];
-                $bonus['rating'] = $review['rating'];
+                $bonus['rating'] = $review['ratings'];
                 $bonuses[] = $bonus;
             }
         }

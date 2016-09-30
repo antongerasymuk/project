@@ -42,43 +42,43 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '</tbody> ' +
     '</table> ' +
     '</div>', '', '', function (opts) {
-        var self = this;
-        self.bonuses_list = [];
-        console.log(opts.category);
-        this.on('mount', function () {
-            console.log(this);
-            self.trigger('get');
-        });
-        this.on('get', function () {
-            console.log('Get data');
-            oboe({
-                url: '/bonuses?='+opts.category,
-                headers:  {Accept: 'application/json'},        
-            })
-            .node('!.*', function(data){
+    "use strict";
+    var self = this;
+    self.bonuses_list = [];
+    console.log(opts.category);
+    this.on('mount', function () {
+        console.log(this);
+        self.trigger('get');
+    });
+    this.on('get', function () {
+        oboe({
+            url: '/bonus',
+            headers: {Accept: 'application/json'}
+        })
+            .node('!.*', function (data) {
+                console.log(data);
+                self.bonuses_list.push(data);
+                // self.bonuses_list.push(data);
+                // console.log(JSON.stringify(data));
+                self.update();
 
-                //console.log('here');
-                console.log(self);
-              self.bonuses_list.push(data);
-              console.log(JSON.stringify(data));
-               self.update();
-
-            }).fail(function() {
-                console.log('Fail');
-            });
-
+            }).fail(function (data) {
+                console.log(data);
+            console.log('Fail');
         });
 
-/*
-bonuses_list = JSON.parse(opts.params);
+    });
 
-$.each(bonuses_list, function (index, value) {
-if (value.bonus_category != opts.filter) {
-delete bonuses_list[index];
-console.log(value.bonus_category);
-console.log(index);
-}
-});*/
+    /*
+     bonuses_list = JSON.parse(opts.params);
+
+     $.each(bonuses_list, function (index, value) {
+     if (value.bonus_category != opts.filter) {
+     delete bonuses_list[index];
+     console.log(value.bonus_category);
+     console.log(index);
+     }
+     });*/
 });
 //riot.mount('raw', {});
 //riot.mount('compatible-with', {});

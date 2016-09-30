@@ -13,7 +13,7 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '<th class="text-center">Compatible with</th>' +
     '<th class="text-center">Join site</th> ' +
     '</tr> </thead> <tbody> ' +
-    '<tr each="{ bonuses_list }" each="{ bonuses_list.bonuses }"> ' +
+    '<tr each="{ bonuses_list }" > ' +
     '<td data-column="Rank">' +
     '<div class="rank">{rank}</div>' +
     '</td> <td data-column="{opts.title} Site">' +
@@ -27,6 +27,7 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '</td>' +
     '<td data-column="Bonus Details" class="text-left"> ' +
     '<div class="details"><raw content="{description }">' +
+    '</raw>' +
     '</div> ' +
     '</td> ' +
     '<td data-column="Compatible with" class="text-center"> ' +

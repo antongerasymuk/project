@@ -7,9 +7,9 @@ $request = Yii::$app->request;
 ?>
 
 <?php $get = $request->get(); ?>
-<?php $this->registerJsFile('/js/bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>
-<bonuses-filter-list params="{bonuses_list}" category='<?= $get['id'] ?>' filter='<?= $filter ?>'></bonuses-filter-list>
 
+<bonuses-filter-list params="{bonuses_list}" category='<?= $get["id"] ?>' filter='<?= $filter ?>'></bonuses-filter-list>
+<?php $this->registerJsFile('/js/bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>
 <div class="clearfix"></div>
 
 <div class="static-content">

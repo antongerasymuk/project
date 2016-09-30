@@ -1,3 +1,4 @@
-riot.tag2('compatible-with', '<div class="compatible" > <span each="{name, value in compatibles}" class="flaticon-os-{value} {value}"></span> </div>', '', '', function(opts) {
-compatibles=JSON.parse(opts.params);
+riot.tag2('compatible-with', '<div class="compatible" > <span each="{compatibles}" class="flaticon-os-{title} {title}"></span> </div>', '', '', function(opts) {
+console.log(opts.params);
+    compatibles=opts.params;
 });

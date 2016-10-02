@@ -12,32 +12,35 @@ $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
-
-						<div class="col-sm-6">
+	<div class="col-sm-6">
 							<div class="contact-form">
 
-								<div class="grp">
-									<label>Full name</label>
-									<input type="text" value="" />
-								</div>
+                <?php $form = ActiveForm::begin(['fieldConfig' => [
+                'options' => [
+                    'tag' => false,
+                ]
+            ]]);  ?>
+                <div class="grp">
 
-								<div class="grp">
-									<label>Email</label>
-									<input type="text" value="" />
-								</div>
+                    <?= $form->field($model, 'name')->textInput(['autofocus' => true])->label('Full name'); ?>
+                 </div>
+                <div class="grp">
+                    <?= $form->field($model, 'email')->label('Email'); ?>
+                </div>
+                <div class="grp">
+                    <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
+                </div>
 
-								<div class="grp">
-									<label>Message</label>
-									<textarea name=""></textarea>
-								</div>
+                    <div class="btn">
+                        <?= Html::submitButton('Submit', [ 'name' => 'contact-button']) ?>
+                    </div>
 
-								<div class="btn">
-									<button type="button">SUBMIT</button>
-								</div>
+                <?php ActiveForm::end(); ?>
 
+            </div>
+        </div>
 
-							</div>
-						</div><!-- .contact-form -->
+					<!-- .contact-form -->
 
 						<div class="col-sm-6">
 							<div class="contact-info">

@@ -135,8 +135,11 @@ class SiteController extends Controller
     public function actionContact()
     {
         $this->layout = "main_contact";
-          return $this->render('contact');
-      /*  $model = new ContactForm();
+          //var_dump($model);
+         // return $this->render('contact');
+        $model = new ContactForm();
+        var_dump($model);
+        //die();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -149,7 +152,7 @@ class SiteController extends Controller
             return $this->render('contact', [
                 'model' => $model,
             ]);
-        }*/
+        }
     }
 
     /**

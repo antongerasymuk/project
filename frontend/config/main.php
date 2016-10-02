@@ -12,6 +12,9 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'starMaker' => [
+            'class' => \common\helpers\StarMaker::class
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'parsers' => [

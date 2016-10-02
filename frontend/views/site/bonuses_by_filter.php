@@ -13,7 +13,7 @@ $request = Yii::$app->request;
 <div class="clearfix"></div>
 
 <div class="static-content">
-    <p class="text-center"><strong>Welcome to Bonus Online <?= $filter ?>, the site that allows you to find and compare the latest <?= strtolower($filter) ?> bonus offers. Read reviews and compare offers to find the perfect choice for you. All <?= strtolower($filter) ?>  providers have been hand-picked by Sign Up Bonuses as trusted online operators. You can see at a glance the promotions that require a deposit and the ones you can play for free, no deposit required. Click <span style="color: #e6a714;">‘Get Bonus’</span> to receive extra free chips and start playing now!</strong></p>
+    <p class="text-center"><strong>Welcome to Bonus Online <?= $title ?>, the site that allows you to find and compare the latest <?= strtolower($title) ?> bonus offers. Read reviews and compare offers to find the perfect choice for you. All <?= strtolower($title) ?>  providers have been hand-picked by Sign Up Bonuses as trusted online operators. You can see at a glance the promotions that require a deposit and the ones you can play for free, no deposit required. Click <span style="color: #e6a714;">‘Get Bonus’</span> to receive extra free chips and start playing now!</strong></p>
 
     <div class="info-block">
         <span><strong>Please Note:</strong></span>

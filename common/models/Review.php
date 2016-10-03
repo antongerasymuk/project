@@ -14,6 +14,8 @@ use Yii;
  */
 class Review extends \yii\db\ActiveRecord
 {
+    const REVIEW = 1;
+    const COMPANY = 2;
     public $bonusIds;
     public $gallery;
     public $galleryIds;
@@ -45,6 +47,7 @@ class Review extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 100],
             [['preview'], 'string'],
+            [['type'], 'default', 'value' => self::REVIEW],
             [['preview_title'], 'string', 'max' => 255 ],
             [['previewFile'], 'safe'],
             [['gallery'], 'safe'],
@@ -177,7 +180,11 @@ class Review extends \yii\db\ActiveRecord
                     $sum += $rating['mark'];
                 }
 
-                $reviews[$i]['ratings'] = $sum / $count;
+                if (!empty($reviews[$i]['ratings'])) {
+                    $reviews[$i]['ratings'] = $sum / $count;
+                } else {
+                    $reviews[$i]['ratings'] = 0;
+                }
                 $sum = $count = 0;
             }
         }

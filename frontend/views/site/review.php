@@ -117,6 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div><!-- .sr-menu (Review Rating) -->
                     <?php endif; ?>
+                    <?php if (!empty($pros) || !empty($minuses)) : ?>
                     <div class="sr-menu">
                         <div class="srm-head">Review Summary</div>
                         <?php $pros = current($company['reviews'])['pros'] ?>
@@ -131,20 +132,24 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php endforeach; ?>
                         </div>
                     </div><!-- .sr-menu (Review Summary) -->
+                    <?php endif; ?>
 
+                    <?php $oses = current($company['reviews'])['oses'] ?>
+                    <?php if (!empty($oses)) : ?>
                     <div class="sr-menu">
                         <div class="srm-head">Compatible With</div>
-                        <?php $oses = current($company['reviews'])['oses'] ?>
                         <div class="srm-list srm-compatible">
                             <?php foreach ($oses as $os) : ?>
                                 <div><i class="flaticon-os-<?= $os['title'] ?>"></i></div>
                             <?php endforeach; ?>
                         </div>
                     </div><!-- .sr-menu (Compatible With) -->
+                    <?php endif; ?>
 
+                    <?php $dep_methods = current($company['reviews'])['deposits'] ?>
+                    <?php if (!empty($dep_methods)) : ?>
                     <div class="sr-menu">
                         <div class="srm-head">Deposit Methods</div>
-                        <?php $dep_methods = current($company['reviews'])['deposits'] ?>
                         <div class="srm-list srm-dmethods clearfix">
                             <?php foreach ($dep_methods as $method) : ?>
                             <a class="item" href="#" target="_blank" style="
@@ -155,7 +160,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php endforeach; ?>
                         </div>
                     </div><!-- .sr-menu (Deposit Methods) -->
+                    <?php endif; ?>
 
+                    <?php if (!empty($review['address'])) : ?>
                     <div class="sr-menu srm-contact">
                         <div class="srm-head">Contact Details</div>
                         <div class="srm-list">
@@ -165,19 +172,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         </div>
                     </div><!-- .sr-menu (Contact Details) -->
+                    <?php endif; ?>
 
+                    <?php $reviews = Review::getTop($review['category']['id'], $review['id']); ?>
+                    <?php if (!empty($reviews)) : ?>
                     <div class="sr-menu">
                         <div class="srm-head">Alternative <?= $review['category']['title'] ?> Websites</div>
                         <div class="srm-list srm-pwebsites">
                             <ul>
-                                <?php $reviews = Review::getTop($review['category']['id'], $review['id']); ?>
                                 <?php foreach ($reviews as $review) : ?>
                                     <li><a href="<?= Url::to(['site/review', 'id' => $review['id']]) ?>" target="_blank"><?= $review['title'] ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
                     </div><!-- .sr-menu (Contact Details) -->
-
+                    <?php endif; ?>
                 </div>
             </div><!-- .side-right -->
 

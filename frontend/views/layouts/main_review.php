@@ -84,19 +84,9 @@ AppAsset::register($this);
     <div class="container">
         <div class="row">
             <div class="col-md-9 col-sm-8 col-xs-12">
-                <nav class="footer-menu clearfix">
-                    <ul>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><span>·</span></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><span>·</span></li>
-                        <li><a href="#">Terms and Conditions</a></li>
-                        <li><span>·</span></li>
-                        <li><a href="#">Site Map</a></li>
-                        <li><span>·</span></li>
-                        <li><a href="#">Glossary</a></li>
-                    </ul>
-                </nav>
+               <nav class="footer-menu clearfix">
+                 <?= \common\widgets\FooterNav::widget() ?>
+               </nav>
 
                 <div class="footer-info">
                     It is your responsibility to verify and examine all aspects of your bonus. Please read the terms and conditions carefully.<br/>

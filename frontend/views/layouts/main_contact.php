@@ -34,7 +34,6 @@ AppAsset::register($this);
             <div class="col-sm-3">
               <div class="logo"><a href="<?= Yii::$app->getHomeUrl() ?>"><img src="/images/logo.png" alt=""></a></div>
             </div>
-
             <div class="col-sm-9">
               <a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
               <nav class="header-menu clearfix">
@@ -53,6 +52,9 @@ AppAsset::register($this);
       					<span>Have a question? Don’t cry, contact us!</span>
       				</div>
     </header><!-- .Header -->
+<pre>
+<?php var_dump(\common\models\Categorie::getForNav()); ?>
+</pre>
 <main>
     <div class="container contact-page">
         
@@ -61,62 +63,52 @@ AppAsset::register($this);
     </div>
 
 </main>
-	<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-9 col-sm-8 col-xs-12">
-							<nav class="footer-menu clearfix">
-								<ul>
-									<li><a href="#">Contact Us</a></li>
-									<li><span>·</span></li>
-									<li><a href="#">Privacy</a></li>
-									<li><span>·</span></li>
-									<li><a href="#">Terms and Conditions</a></li>
-									<li><span>·</span></li>
-									<li><a href="#">Site Map</a></li>
-									<li><span>·</span></li>
-									<li><a href="#">Glossary</a></li>
-								</ul>
-							</nav>
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 col-sm-8 col-xs-12">
 
-							<div class="footer-info">
-								It is your responsibility to verify and examine all aspects of your bonus. Please read the terms and conditions carefully.<br/>
-We provide no guarantee as to the timeliness or accuracy of the information found on this site.
-							</div>
-
-							<div class="copyright hidden-xs">
-								<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
-								<p>Design by <a href="http://perfecto-web.pro" target="_blank">Perfecto Web</a></p>
-							</div>
-
-						</div>
-
-						<div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
-							<div class="b-opened">
-								<div class="cnt">5 7 3 8 9</div>
-								<div class="txt">Bonuses opened</div>
-							</div>
-
-							<div class="clearfix"></div>
-							<div class="follow">
-								<p>Follow us to get new bonuses</p>
-								<ul class="clearfix">
-									<li class="fb"><a href="#"><i class="flaticon-soc-fb"></i></a></li>
-									<li class="tw"><a href="#"><i class="flaticon-soc-tw"></i></a></li>
-									<li class="gp"><a href="#"><i class="flaticon-soc-gp"></i></a></li>
-								</ul>
-							</div>
-
-							<div class="copyright hidden-lg hidden-md hidden-sm visible-xs-block">
-								<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
-								<p>Design by <a href="http://perfecto-web.pro" target="_blank">Perfecto Web</a></p>
-							</div>
-
-						</div>
-
-					</div>
+				<nav class="footer-menu clearfix">
+					<?= \common\widgets\FooterNav::widget() ?>
+				</nav>
+				<div class="footer-info">
+					It is your responsibility to verify and examine all aspects of your bonus. Please read the terms and conditions carefully.<br/>
+					We provide no guarantee as to the timeliness or accuracy of the information found on this site.
 				</div>
-			</footer><!-- .Footer -->
+
+				<div class="copyright hidden-xs">
+					<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
+					<p>Design by <a href="http://perfecto-web.pro" target="_blank">Perfecto Web</a></p>
+				</div>
+
+			</div>
+
+			<div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
+				<div class="b-opened">
+					<div class="cnt">5 7 3 8 9</div>
+					<div class="txt">Bonuses opened</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="follow">
+					<p>Follow us to get new bonuses</p>
+					<ul class="clearfix">
+						<li class="fb"><a href="#"><i class="flaticon-soc-fb"></i></a></li>
+						<li class="tw"><a href="#"><i class="flaticon-soc-tw"></i></a></li>
+						<li class="gp"><a href="#"><i class="flaticon-soc-gp"></i></a></li>
+					</ul>
+				</div>
+
+				<div class="copyright hidden-lg hidden-md hidden-sm visible-xs-block">
+					<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
+					<p>Design by <a href="http://perfecto-web.pro" target="_blank">Perfecto Web</a></p>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</footer><!-- .Footer -->
 
 
 <?php $this->endBody() ?>

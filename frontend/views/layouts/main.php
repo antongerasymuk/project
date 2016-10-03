@@ -39,12 +39,9 @@ AppAsset::register($this);
 							<div class="col-sm-9">
 								<a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
 								<nav class="header-menu clearfix">
-									<ul>
-										<li><a href="#">Casino</a></li>
-										<li><a href="#">Sport</a></li>
-										<li><a href="#">Bingo</a></li>
-										<li><a href="#">Poker</a></li>
-									</ul>
+									<?= \common\widgets\OwnNav::widget([
+									    'items' => \common\models\Categorie::getForNav()
+                                    ]) ?>
 								</nav>
 							</div>
 

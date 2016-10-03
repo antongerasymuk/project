@@ -15,6 +15,7 @@ class m160921_074836_reviews extends Migration
                   'title' => $this->string(50),
                   'description' => $this->text(),
                   'logo' => $this->string(255),
+                  'preview_title' => $this->string(),
                   'category_id' => $this->integer()->notNull(),
                   'address' => $this->string(100),
               ], $tableOptions);

@@ -32,7 +32,7 @@ AppAsset::register($this);
                 <div class="row">
 
                     <div class="col-sm-3">
-                        <div class="logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
+                        <div class="logo"><a href="<?= Yii::$app->homeUrl ?>"><img src="/images/logo.png" alt=""></a></div>
                     </div>
 
                     <div class="col-sm-9">
@@ -102,7 +102,7 @@ AppAsset::register($this);
 
             <div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
                 <div class="b-opened">
-                    <div class="cnt">5 7 3 8 9</div>
+                    <div class="cnt"><?= \common\models\Bonus::find()->count() ?></div>
                     <div class="txt">Bonuses opened</div>
                 </div>
 
@@ -122,7 +122,6 @@ AppAsset::register($this);
                 </div>
 
             </div>
-
         </div>
     </div>
 </footer><!-- .Footer -->

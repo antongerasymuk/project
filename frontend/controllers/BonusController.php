@@ -35,7 +35,7 @@ class BonusController extends ActiveController
         $sum = $count = 0;
 
         for ($i = 0; $i < $length; $i++) {
-            if (isset($arr[$i]['ratings'])) {
+            if (!empty($arr[$i]['ratings'])) {
                 $count = count($arr[$i]['ratings']);
 
                 foreach ($arr[$i]['ratings'] as $rating) {
@@ -44,6 +44,8 @@ class BonusController extends ActiveController
 
                 $arr[$i]['ratings'] = $sum / $count;
                 $sum = $count = 0;
+            } else {
+                $arr[$i]['ratings'] = 0;
             }
         }
 

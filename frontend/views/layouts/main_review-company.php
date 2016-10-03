@@ -100,7 +100,7 @@ We provide no guarantee as to the timeliness or accuracy of the information foun
 
 						<div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
 							<div class="b-opened">
-								<div class="cnt">5 7 3 8 9</div>
+								<div class="cnt"><?= \common\models\Bonus::find()->count() ?></div>
 								<div class="txt">Bonuses opened</div>
 							</div>
 

@@ -52,9 +52,7 @@ AppAsset::register($this);
       					<span>Have a question? Don’t cry, contact us!</span>
       				</div>
     </header><!-- .Header -->
-<pre>
-<?php var_dump(\common\models\Categorie::getForNav()); ?>
-</pre>
+
 <main>
     <div class="container contact-page">
         
@@ -63,6 +61,7 @@ AppAsset::register($this);
     </div>
 
 </main>
+
 <footer>
 	<div class="container">
 		<div class="row">
@@ -87,6 +86,7 @@ AppAsset::register($this);
 				<div class="b-opened">
 					<div class="cnt">5 7 3 8 9</div>
 					<div class="txt">Bonuses opened</div>
+
 				</div>
 
 				<div class="clearfix"></div>

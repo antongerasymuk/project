@@ -83,4 +83,20 @@ class Company extends \yii\db\ActiveRecord
         return $this->hasMany(Review::className(), ['id' => 'review_id'])
                     ->viaTable('company_review', ['company_id' => 'id']);
     }
+
+    public static function getRelatedReviews($company_id, $current_review_id)
+    {
+        return Company::find()
+            ->select('id')
+            ->with(['reviews' => function($query) use ($current_review_id){
+                $query
+                    ->with(['bonuses' => function($query){
+                        $query->where(['type' => 1])->one();
+                    }])
+                    ->where(['<>', 'id', $current_review_id]);
+            }])
+            ->where(['id' => $company_id])
+            ->asArray()
+            ->one();
+    }
 }

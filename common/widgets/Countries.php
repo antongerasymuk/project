@@ -24,9 +24,7 @@ class Countries extends Widget
 
         if (!empty($this->countries)) {
             foreach ($this->countries as $country) {
-                foreach ($this->methods as $method) {
-                    $options .= Html::tag('option', $method['title'], ['option' => $method['id']]);
-                }
+                $options .= Html::tag('option', $country['title'], ['option' => $country['id']]);
             }
         }
 

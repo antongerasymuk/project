@@ -83,18 +83,8 @@ AppAsset::register($this);
 					<div class="row">
 						<div class="col-md-9 col-sm-8 col-xs-12">
 							<nav class="footer-menu clearfix">
-								<ul>
-									<li><a href="#">Contact Us</a></li>
-									<li><span>·</span></li>
-									<li><a href="#">Privacy</a></li>
-									<li><span>·</span></li>
-									<li><a href="#">Terms and Conditions</a></li>
-									<li><span>·</span></li>
-									<li><a href="#">Site Map</a></li>
-									<li><span>·</span></li>
-									<li><a href="#">Glossary</a></li>
-								</ul>
-							</nav>
+					           <?= \common\widgets\FooterNav::widget() ?>
+			             	</nav>
 
 							<div class="footer-info">
 								It is your responsibility to verify and examine all aspects of your bonus. Please read the terms and conditions carefully.<br/>
@@ -110,7 +100,7 @@ We provide no guarantee as to the timeliness or accuracy of the information foun
 
 						<div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
 							<div class="b-opened">
-								<div class="cnt">5 7 3 8 9</div>
+								<div class="cnt"><?= \common\models\Bonus::find()->count() ?></div>
 								<div class="txt">Bonuses opened</div>
 							</div>
 

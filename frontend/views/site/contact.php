@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'email')->label('Email'); ?>
                 </div>
                 <div class="grp">
-                    <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
+                    <?= $form->field($model, 'message')->textArea(['rows' => 6]) ?>
                 </div>
 
                     <div class="btn">

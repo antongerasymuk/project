@@ -9,10 +9,16 @@ riot.tag2('company-offer', '<div class="item" riot-style="background-color: {opt
     //console.log(JSON.stringify(opts));
     prices = {};
 
-    for (var i = 0; i < opts.reviews.length; i++) {
-        index = opts.reviews[i].category.title;
-        index = index.charAt(0).toUpperCase() + index.substr(1);
-        prices[ index ] = {price: opts.reviews[i].bonuses[0].price, review_id: opts.reviews[i].id};
+    for (var index = 0; index < opts.reviews.length; index++) {
+        title = opts.reviews[index].category.title;
+        title = title.charAt(0).toUpperCase() + title.substr(1);
+        if (opts.reviews[index].bonuses) { 
+             for (var bonus_index = 0; bonus_index < opts.reviews[index].bonuses.length; bonus_index++) { 
+                if (opts.reviews[index].bonuses[bonus_index].type == 1) {
+                    prices[ title ] = {price: opts.reviews[index].bonuses[bonus_index].price, review_id: opts.reviews[index].id};
+                }
+             }
+        }
     }
 });
 

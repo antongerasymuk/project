@@ -27,6 +27,7 @@ class Countries extends Widget
 
             foreach ($this->countries as $country) {
                 $optionArr = ['option' => $country['id']];
+
                 if ($ip->country == $country['title']) {
                     $optionArr['selected'] = 'selected';
                 }

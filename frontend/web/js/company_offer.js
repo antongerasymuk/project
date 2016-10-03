@@ -8,12 +8,13 @@ riot.tag2('company-offer', '<div class="item" riot-style="background-color: {opt
     '</div>', '', '', function(opts) {
     //console.log(JSON.stringify(opts));
     prices = {};
-    this.review_id = opts.reviews[0]['id'];
+    this.review_id = 0;
 
     for (var i = 0; i < opts.reviews.length; i++) {
         index = opts.reviews[i].category.title;
         index = index.charAt(0).toUpperCase() + index.substr(1);
         prices[ index ] = opts.reviews[i].bonuses[0].price;
+        this.review_id = opts.reviews[i].id
     }
     console.log(prices);
 });

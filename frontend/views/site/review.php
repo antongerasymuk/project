@@ -78,12 +78,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $review['description'] ?>
                         <div class="warning-block">
                             <i class="flaticon-deny"></i>
-                            <span>EXCLUDE:</span> Afghanistan, American Samoa, Bermuda, Bulgaria, China, Congo The Democratic Republic, Democratic Peoples Republic of Korea, Denmark, France, France, Metropolitan, French Guiana, French Polynesia, French Southern Territories, Greece, Grenada, Guadeloupe, Guam, Haiti, India, Iran, Iraq, Israel, Italy, Myanmar, New Caledonia, Northern Mariana Islands, Pakistan, Puerto Rico, Portugal, Republic of Sudan, Reunion, Romania, Rwanda, Samoa, Sierra Leone, Singapore, Slovenia, Spain, St Barthelemy, St Martin, Syrian Arab Republic, Turkey, Ukraine, United States Minor Outlying Islands, United States of America, Virgin Islands (U.S.)
+                            <span>EXCLUDE:</span> <?= \common\widgets\CountryPermition::widget([
+                                'type' => 'denied',
+                                'review_id' => $review['id']
+                            ]) ?>
                         </div>
 
                         <div class="info-block">
                             <i class="flaticon-info"></i>
-                            <span>ANY TEXT:</span> Afghanistan, American Samoa, Bermuda, Bulgaria, China, Congo The Democratic Republic, Democratic Peoples Republic of Korea, Denmark, France, France, Metropolitan, French Guiana, French Polynesia, French Southern Territories, Greece, Grenada, Guadeloupe, Guam, Haiti, India, Iran, Iraq, Israel, Italy, Myanmar, New Caledonia, Northern Mariana Islands, Pakistan, Puerto Rico, Portugal, Republic of Sudan, Reunion, Romania, Rwanda, Samoa, Sierra Leone, Singapore, Slovenia, Spain, St Barthelemy, St Martin, Syrian Arab Republic, Turkey, Ukraine, United States Minor Outlying Islands, United States of America, Virgin Islands (U.S.)
+                            <span>ANY TEXT:</span> <?= \common\widgets\CountryPermition::widget([
+                                'type' => 'allowed',
+                                'review_id' => $review['id']
+                            ]) ?>
                         </div>
 
                     </div>

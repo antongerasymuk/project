@@ -185,3 +185,37 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 </div>
+<div class="claim-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="tit">Like <?= $review['title'] ?> ?</div>
+                <p>Claim your <?= $review['title'] ?> Bonus Today!</p>
+                <div class="btn">
+                    <a href="<?= $this->params['company']['url'] ?>">
+                        <button type="button" class="btn-dft">Claim now</button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="websites-block">
+    <div class="container">
+        <?php $related_reviews = \common\models\Company::getRelatedReviews($company['id'], current($company['reviews'])['id'])['reviews'] ?>
+
+        <?php foreach ($related_reviews as $review) : ?>
+        <div class="row">
+            <div class="item">
+                <div class="tit"><a href="<?= Url::to(['site/review', 'id' => $review['id']]) ?>"><?= $review['title'] ?></a>
+                    <?php $bonus = current($review['bonuses']); ?>
+                    <p><?= $bonus['description'] ?>: <strong> £<?= $bonus['min_deposit'] ?></strong></p>
+                </div>
+                <div class="img"><img src="<?= $review['preview'] ?>" alt=""></div>
+                <div class="inf"><?= $review['preview_title'] ?></div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>

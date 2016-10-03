@@ -34,8 +34,9 @@ AppAsset::register($this);
 							<div class="col-sm-9">
 								<a href="#" class="toggle-menu visible-sm-block visible-xs-block"><span></span></a>
 								<nav class="header-menu clearfix">
+									<?php $items = \common\models\Categorie::getForNav(); ?>
 									<?= \common\widgets\OwnNav::widget([
-									    'items' => \common\models\Categorie::getForNav()
+									    'items' => $items
                                     ]) ?>
 								</nav>
 							</div>
@@ -46,7 +47,9 @@ AppAsset::register($this);
 
 				<div class="header-info">
 					<h1>UK's Top Gambling Sites</h1>
-					<p>Grab your bonus for <a href="#">Casino,</a> <a href="#">Sport,</a> <a href="#">Bingo,</a> <a href="#">Poker</a></p>
+					<p>Grab your bonus for
+                        <?= \common\helpers\CategoryList::generate($items) ?>
+                    </p>
 				</div>
 
 			</header>
@@ -89,7 +92,7 @@ We provide no guarantee as to the timeliness or accuracy of the information foun
 
 						<div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
 							<div class="b-opened">
-								<div class="cnt">5 7 3 8 9</div>
+								<div class="cnt"><?= \common\models\Bonus::find()->count() ?></div>
 								<div class="txt">Bonuses opened</div>
 							</div>
 

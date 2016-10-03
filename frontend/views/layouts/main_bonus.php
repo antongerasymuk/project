@@ -79,24 +79,13 @@ AppAsset::register($this);
 
 									<div class="fsel">
 										<label>Banking Options</label>
-										<select class="f-select" style="width: 160px;">
-											<option value="1">VISA</option>
-											<option value="2">PayPal</option>
-											<option value="3">MasterCard</option>
-											<option value="4">Maestro</option>
-										</select>
+										<?= \common\widgets\DepositMethods::widget() ?>
 									</div>
 
 									<div class="fsel">
 										<label>Choose Your Country</label>
-										<select class="f-select" style="width: 200px;">
-											<option value="1">Australia</option>
-											<option value="2">China</option>
-											<option value="3">Russia</option>
-											<option value="4">USA</option>
-										</select>
+										<?= \common\widgets\Countries::widget() ?>
 									</div>
-
 								</div>
 
 								<div class="filter-gp clearfix">

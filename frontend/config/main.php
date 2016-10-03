@@ -12,6 +12,9 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'geoip' => [
+            'class' => 'lysenkobv\GeoIP\GeoIP'
+        ],
         'starMaker' => [
             'class' => \common\helpers\StarMaker::class
         ],

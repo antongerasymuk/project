@@ -21,7 +21,8 @@
         "2amigos/yii2-tinymce-widget": "~1.1",
         "dpodium/yii2-colorpicker": "^0.2.0",
         "kartik-v/yii2-widget-select2": "@dev",
-        "2amigos/yii2-file-input-widget": "~1.0"
+        "2amigos/yii2-file-input-widget": "~1.0",
+        "lysenkobv/yii2-geoip": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -38,10 +38,7 @@ class CompanyController extends ActiveController
 
         return new ActiveDataProvider([
             'query' => $modelClass::find()
-                ->with(['reviews' => function($query){
-                },'reviews.category', 'reviews.bonuses' => function($query){
-                    $query->andWhere(['type' => Bonus::MAIN]);
-                }])
+                ->with('reviews.bonuses')
                 ->asArray()
         ]);
 

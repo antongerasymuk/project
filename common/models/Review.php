@@ -100,8 +100,7 @@ class Review extends \yii\db\ActiveRecord
     // for relation with bonuses
     public function getBonuses()
     {
-        return $this->hasMany(Bonus::className(), ['id' => 'bonus_id'])
-                    ->viaTable('review_bonus', ['review_id' => 'id']);
+        return $this->hasMany(Bonus::className(), ['review_id' => 'id']);
     }
 
     // for relation with rating

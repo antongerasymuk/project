@@ -19,7 +19,7 @@ class Os extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'os';
+        return 'oses';
     }
 
     /**

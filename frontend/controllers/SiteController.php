@@ -16,6 +16,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 //use frontend\models\Contact;
 use frontend\models\ContactForm;
+use yii\web\NotFoundHttpException;
 
 
 /**
@@ -31,22 +32,22 @@ public function behaviors()
     return [
     'access' => [
     'class' => AccessControl::className(),
-    'only' => ['logout', 'signup'],
+    'only'  => ['logout', 'signup'],
     'rules' => [
     [
     'actions' => ['signup'],
-    'allow' => true,
-    'roles' => ['?'],
+    'allow'   => true,
+    'roles'   => ['?'],
     ],
     [
     'actions' => ['logout'],
-    'allow' => true,
-    'roles' => ['@'],
+    'allow'   => true,
+    'roles'   => ['@'],
     ],
     ],
     ],
-    'verbs' => [
-    'class' => VerbFilter::className(),
+    'verbs'  => [
+    'class'   => VerbFilter::className(),
     'actions' => [
     'logout' => ['post'],
     ],
@@ -60,11 +61,11 @@ public function behaviors()
 public function actions()
 {
     return [
-    'error' => [
+    'error'   => [
     'class' => 'yii\web\ErrorAction',
     ],
     'captcha' => [
-    'class' => 'yii\captcha\CaptchaAction',
+    'class'           => 'yii\captcha\CaptchaAction',
     'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
     ],
     ];
@@ -78,47 +79,63 @@ public function actions()
 public function actionIndex()
 {
     $this->layout = "main_index";
+
     return $this->render('index');
 }
 
 public function actionBonuses()
 {
     $this->layout = "main_bonus";
+
     return $this->render('bonuses_by_filter');
 }
 
 public function actionCompany()
 {
     $this->layout = "main_review-company";
+
     return $this->render('company');
 }
 
 public function actionReview($id)
 {
     $this->layout = "main_review";
+
+    $review = Review::findOne($id);
+
+    if (empty($review)) {
+        throw new NotFoundHttpException('Review not found');
+    }
+
+    $company = Company::find()->with([
+        'reviews' => function ($query) use ($id) {
+            $query->andWhere(['id' => $id])->with([
+                'bonuses',
+                'gallery',
+                'category',
+                'ratings',
+                'pros',
+                'minuses',
+                'oses',
+                'deposits'
+                ]);
+        }
+        ])->asArray()->one();
+
+    $is_company = $review->type == Review::COMPANY;
+
 // get review data
-    $company = Company::find()->with(['reviews' => function($query) use ($id) {
-        $query->andWhere(['id' => $id])->with([
-            'bonuses',
-            'gallery',
-            'category',
-            'ratings',
-            'pros',
-            'minuses',
-            'oses',
-            'deposits'
-            ]);
-    }])->asArray()->one();
 
     $this->view->params['company'] = [
-    'id' => $company['id'],
-    'url' => $company['site_url'],
+    'id'   => $company['id'],
+    'url'  => $company['site_url'],
     'name' => $company['title']
     ];
-    $this->view->params['logo'] = $company['logo'];
+    $this->view->params['logo']    = $company['logo'];
 
-    return $this->render('review', ['company' => $company]);
+    return $this->render('review', ['company' => $company, 'is_company' => (bool)$is_company]);
 }
+
 /**
 * Logs in a user.
 *
@@ -126,7 +143,7 @@ public function actionReview($id)
 */
 public function actionLogin()
 {
-    if (!Yii::$app->user->isGuest) {
+    if ( ! Yii::$app->user->isGuest) {
         return $this->goHome();
     }
 
@@ -159,43 +176,43 @@ public function actionLogout()
 */
 
 
-   
-     public function actionContact()
-    {
-        $this->layout = "main_contact";
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-    /*$this->layout = "main_contact";
-
-    $model = new Contact();
-    var_dump($model);exit;
-    if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
+public function actionContact()
+{
+    $this->layout = "main_contact";
+    $model        = new ContactForm();
+    if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
         Yii::$app->session->setFlash('contactFormSubmitted');
 
-        return $this->render('contact', [
+        return $this->refresh();
+    }
 
-            'model' => $model,
+    return $this->render('contact', [
+        'model' => $model,
+        ]);
+}
+/*$this->layout = "main_contact";
 
-            ]);
+$model = new Contact();
+var_dump($model);exit;
+if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-    } else {
+Yii::$app->session->setFlash('contactFormSubmitted');
 
-        return $this->render('contact', [
+return $this->render('contact', [
 
-            'model' => $model,
+'model' => $model,
 
-            ]);
+]);
 
-    }}*/
+} else {
+
+return $this->render('contact', [
+
+'model' => $model,
+
+]);
+
+}}*/
 
 
 /**
@@ -208,10 +225,17 @@ public function actionAbout()
     return $this->render('about');
 }
 
+
 public function actionSitemap()
 {
     return $this->render('sitemap');
 }
+
+/**
+* Signs user up.
+*
+* @return mixed
+*/
 
 /**
 * Signs user up.
@@ -226,6 +250,7 @@ public function actionSignup()
             if (Yii::$app->getUser()->login($user)) {
                 return $this->goHome();
             }
+
         }
     }
 
@@ -261,6 +286,7 @@ public function actionRequestPasswordReset()
 * Resets password.
 *
 * @param string $token
+*
 * @return mixed
 * @throws BadRequestHttpException
 */

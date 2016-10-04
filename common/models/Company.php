@@ -93,7 +93,8 @@ class Company extends \yii\db\ActiveRecord
                     ->with(['bonuses' => function($query){
                         $query->where(['type' => 1])->one();
                     }])
-                    ->where(['<>', 'id', $current_review_id]);
+                    ->where(['<>', 'id', $current_review_id])
+                    ->andWhere(['type' => Review::REVIEW]);
             }])
             ->where(['id' => $company_id])
             ->asArray()

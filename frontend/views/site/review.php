@@ -15,6 +15,40 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
     <div class="row">
+        <?php if ($is_company) : ?>
+            <?php
+            $company_reviews = \common\models\Company::find(['id' => $company['id']])
+                ->with(['reviews' => function($query){
+                    $query->andWhere(['type' => Review::REVIEW])
+                        ->with(['bonuses' => function($query){
+                            $query->andWhere(['type' => \common\models\Bonus::MAIN]);
+                        }]);
+                }])->one();
+
+            ?>
+        <div class="customer-offers-block clearfix">
+            <div class="tit"><?= $company['title'] ?> New Customer Offers</div>
+            <?php if (!empty($company_reviews->reviews)) : ?>
+            <div class="items col-xs-12">
+            <?php foreach ($company_reviews->reviews as $review) : ?>
+                <div class="item">
+                    <div class="img"><img src="<?= $review->logo ?>" alt=""></div>
+                    <div class="i-tit"><a href="<?= Url::to(['site/review', 'id' => $review->id]) ?>"><?= $review->title ?> Review</a></div>
+                    <p>
+                        <?php $bonus = current($review->bonuses); ?>
+                        <?= $bonus->description ?> <?php echo empty($bonus->code) ? '': '<br><strong>Code: '.$bonus->code.'</strong>' ?>
+                    </p>
+                    <div class="btn">
+                        <a href="<?= $bonus->referal_url ?>">
+                            <button class="btn-hulf" type="button">Claim now</button>
+                        </a>
+                    </div>
+                </div><!-- .item -->
+            <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
         <div class="bonus-blocks clearfix">
             <?php $bonuses = current($company['reviews'])['bonuses']; ?>
             <?php if (!empty($bonuses)) : ?>
@@ -69,13 +103,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </div><!-- .web-screens -->
         <?php endif; ?>
         <div class="ltr-catalog clearfix">
-
             <div class="col-md-9">
                 <div class="side-left">
                     <div class="sl-content">
                         <?php $review = current($company['reviews']); ?>
                         <h1><?= $review['title'] ?> Review</h1>
                         <?= $review['description'] ?>
+                        <?php if (!$is_company) : ?>
                         <div class="warning-block">
                             <i class="flaticon-deny"></i>
                             <span>EXCLUDE:</span> <?= \common\widgets\CountryPermition::widget([
@@ -91,7 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'review_id' => $review['id']
                             ]) ?>
                         </div>
-
+                        <?php endif; ?>
                     </div>
 
                 </div>
@@ -152,6 +186,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div><!-- .sr-menu (Compatible With) -->
                     <?php endif; ?>
 
+                    <?php if ($is_company): ?>
+                        <?php $director = \common\models\Director::findOne($company['director_id']); ?>
+                        <div class="sr-menu">
+                            <div class="srm-head"><?= $director->title ?></div>
+                            <div class="srm-list srm-ceo clearfix">
+                                <p><img class="img-left" src="<?= $director->photo ?>" alt=""> <?= $director->description ?> </p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                     <?php $dep_methods = current($company['reviews'])['deposits'] ?>
                     <?php if (!empty($dep_methods)) : ?>
                     <div class="sr-menu">
@@ -181,7 +225,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php endif; ?>
 
                     <?php $reviews = Review::getTop($review['category']['id'], $review['id']); ?>
-                    <?php if (!empty($reviews)) : ?>
+                    <?php if (!empty($reviews) && !$is_company) : ?>
                     <div class="sr-menu">
                         <div class="srm-head">Alternative <?= $review['category']['title'] ?> Websites</div>
                         <div class="srm-list srm-pwebsites">
@@ -192,6 +236,32 @@ $this->params['breadcrumbs'][] = $this->title;
                             </ul>
                         </div>
                     </div><!-- .sr-menu (Contact Details) -->
+                    <?php endif; ?>
+
+                    <?php if ($is_company) : ?>
+                        <?php $alternative = \common\models\Company::find()
+                                                                   ->with(['reviews' => function($query){
+                                                                       $query->andWhere(['type' => Review::COMPANY]);
+                                                                   }])
+                                                                   ->where(['<>', 'id', $company['id']])
+                                                                   ->orderBy('rating')
+                                                                   ->limit(5)
+                                                                   ->all();
+                        ?>
+                        <?php if (!empty($alternative)) : ?>
+                        <div class="sr-menu">
+                            <div class="srm-head">Alternative Companies</div>
+                            <div class="srm-list srm-pwebsites">
+                                <ul>
+                                    <?php foreach ($alternative as $company) : ?>
+                                        <?php foreach ($company->reviews as $review) : ?>
+                                            <li><a href="<?= Url::to(['site/review', 'id' => $review['id']]) ?>" target="_blank"><?= $company->title ?></a></li>
+                                        <?php endforeach; ?>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div><!-- .sr-menu (Contact Details) -->
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </div><!-- .side-right -->
@@ -220,8 +290,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container">
         <?php $related_reviews = \common\models\Company::getRelatedReviews($company['id'], current($company['reviews'])['id'])['reviews'] ?>
 
-        <?php foreach ($related_reviews as $review) : ?>
         <div class="row">
+        <?php foreach ($related_reviews as $review) : ?>
             <div class="item">
                 <div class="tit"><a href="<?= Url::to(['site/review', 'id' => $review['id']]) ?>"><?= $review['title'] ?></a>
                     <?php $bonus = current($review['bonuses']); ?>
@@ -230,7 +300,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="img"><img src="<?= $review['preview'] ?>" alt=""></div>
                 <div class="inf"><?= $review['preview_title'] ?></div>
             </div>
-        </div>
         <?php endforeach; ?>
+        </div>
     </div>
 </div>

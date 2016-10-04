@@ -4,6 +4,7 @@ namespace frontend\controllers;
 use common\models\Bonus;
 //use Yii;
 
+use common\models\Review;
 use yii\data\ActiveDataProvider;
 use Yii;
 use yii\rest\ActiveController;
@@ -37,7 +38,8 @@ class CompanyController extends ActiveController
 
         return new ActiveDataProvider([
             'query' => $modelClass::find()
-                ->with(['reviews.category', 'reviews.bonuses' => function($query){
+                ->with(['reviews' => function($query){
+                },'reviews.category', 'reviews.bonuses' => function($query){
                     $query->andWhere(['type' => Bonus::MAIN]);
                 }])
                 ->asArray()

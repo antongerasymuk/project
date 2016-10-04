@@ -23,8 +23,16 @@ class Countries extends Widget
         $options .= Html::tag('option', 'Ukraine', ['option' => 1]);
 
         if (!empty($this->countries)) {
+            $ip = Yii::$app->geoip->ip('173.201.183.172');
+
             foreach ($this->countries as $country) {
-                $options .= Html::tag('option', $country['title'], ['option' => $country['id']]);
+                $optionArr = ['option' => $country['id']];
+
+                if ($ip->country == $country['title']) {
+                    $optionArr['selected'] = 'selected';
+                }
+
+                $options .= Html::tag('option', $country['title'], $optionArr);
             }
         }
 

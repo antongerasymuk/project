@@ -19,10 +19,9 @@ class Countries extends Widget
     public function run()
     {
         $html = $options = '';
-        // Test country
-        $options .= Html::tag('option', 'Ukraine', ['option' => 1]);
 
         if (!empty($this->countries)) {
+            // For test - USA ip
             $ip = Yii::$app->geoip->ip('173.201.183.172');
 
             foreach ($this->countries as $country) {

@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\CHtml;   
 use frontend\assets\AppAsset;
 
 AppAsset::register($this);
@@ -55,7 +56,7 @@ AppAsset::register($this);
 			</header>
 
     <div class="container">
-      
+   
         <?= $content ?>
     </div>
 </div>

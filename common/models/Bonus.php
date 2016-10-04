@@ -89,7 +89,7 @@ class Bonus extends \yii\db\ActiveRecord
 
     public function getOses()
     {
-        return $this->hasMany(Os::className(), ['id' => 'bonus_id'])
-                    ->viaTable('os_bonus', ['os_id' => 'id']);
+        return $this->hasMany(Os::className(), ['id' => 'os_id'])
+                    ->viaTable('os_bonus', ['bonus_id' => 'id']);
     }
 }

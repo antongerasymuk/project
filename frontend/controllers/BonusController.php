@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Bonus;
+use frontend\models\BonusFilter;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use Yii;
@@ -135,5 +136,16 @@ class BonusController extends ActiveController
         }
 
         return $bonuses;
+    }
+
+    public function actionFilter($category_id = null)
+    {
+        $model = new BonusFilter();
+
+        if ($model->load(Yii::$app->request->post())) {
+            return $model->filtered();
+        }
+
+        return $this->actionIndex($category_id);
     }
 }

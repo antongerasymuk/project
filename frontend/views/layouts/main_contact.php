@@ -56,7 +56,7 @@ AppAsset::register($this);
 			<main>
 				<div class="container contact-page">
 
-					<?= Alert::widget() ?>
+					
 					<?= $content ?>
 				</div>
 

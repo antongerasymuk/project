@@ -14,6 +14,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
         self.companies_list = [];
         this.on('mount', function () {
             console.log(this);
+
             self.trigger('get');
         });
         this.on('get', function () {
@@ -28,7 +29,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
 
     console.log('here');
     self.companies_list.push(data);
-//console.log(JSON.stringify(self.companies_list));
+console.log(JSON.stringify(self.companies_list));
 self.update();
 //console.log(JSON.stringify(self.companies_list[0].reviews));
 }).fail(function() {

@@ -1,8 +1,22 @@
 <?php
 namespace common\helpers;
 
+use yii\helpers\Html;
+
 class StarMaker
 {
+    public function generate($rating)
+    {
+        $ratingArr = $this->make($rating);
+
+        $html = '';
+
+        foreach ($ratingArr as $star) {
+            $html .= Html::tag('span', '', ['class' => "star flaticon-star-$star"]);
+        }
+
+        return $html;
+    }
     public function make($rating)
     {
 //        $rating = 9.5;

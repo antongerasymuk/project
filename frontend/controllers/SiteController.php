@@ -102,21 +102,20 @@ public function actionReview($id)
     $this->layout = "main_review";
 
     $review = Review::findOne($id);
+
     $this->view->params['company'] = [
-        'id'   => '111',
-        'url'  => '12312',
-        'name' => 'dfsfds'
+        'id'   => $review->company->id,
+        'url'  => $review->company->site_url,
+        'name' => $review->company->title
     ];
-    $this->view->params['logo'] = 'asdasdwqe';
+    $this->view->params['logo'] = $review->company->logo;
 
     if ($review->type == Review::REVIEW_TYPE) {
-        var_dump('Review');
         // render review
         return $this->render('review', ['review' => $review]);
     } elseif ($review->type == Review::COMPANY_TYPE) {
-        var_dump('Company review');
         // render company review
-        return $this->render('company_review');
+        return $this->render('company_review', ['review' => $review]);
     } else {
         throw new NotFoundHttpException('Unknown review type');
     }

@@ -50,7 +50,7 @@ AppAsset::register($this);
         </div>
 
         <div class="header-lg">
-            <a target="_blank" href="#"><img src="<?= $this->params['logo'] ?>" alt=""></a>
+            <a target="_blank" href="<?= $this->params['company']['url'] ?>"><img src="<?= $this->params['logo'] ?>" alt=""></a>
         </div>
 
         <div class="container">

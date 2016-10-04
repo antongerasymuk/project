@@ -8,7 +8,7 @@ class m161004_091649_review_dep_method extends Migration
     {
         $this->createTable('{{%review_dep_method}}', [
             'review_id' => $this->integer(),
-            'dep_method' => $this->integer()
+            'dep_id' => $this->integer()
         ]);
     }
 

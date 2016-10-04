@@ -1,15 +1,13 @@
 <?php
 namespace common\widgets;
 
-use common\models\Review;
 use Yii;
 use yii\base\Widget;
-use yii\helpers\ArrayHelper;
 
 class CountryPermition extends Widget
 {
+    public $model;
     public $type = 'allowed';
-    public $review_id;
 
     public function init()
     {
@@ -19,9 +17,8 @@ class CountryPermition extends Widget
     public function run()
     {
         // render allowed countries
-        $review = Review::findOne($this->review_id);
         $type = $this->type;
-        $allowedArr = $review->$type;
+        $allowedArr = $this->model->$type;
         $result = [];
 
         if (!empty($allowedArr)) {
@@ -30,6 +27,6 @@ class CountryPermition extends Widget
             }
         }
 
-        echo implode(', ', $result);
+        return implode(', ', $result);
     }
 }

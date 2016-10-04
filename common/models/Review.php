@@ -112,22 +112,22 @@ class Review extends \yii\db\ActiveRecord
 
     // for relation with pros(pluses)
 
-    public function getPros()
+    public function getPluses()
     {
-        return $this->hasMany(Pros::className(), ['id' => 'pos_id'])
-            ->viaTable('review_pros', ['review_id' => 'id']);
+        return $this->hasMany(Plus::className(), ['id' => 'plus_id'])
+            ->viaTable('review_plus', ['review_id' => 'id']);
     }
 
     // for relation with minuses
     public function getMinuses()
     {
-        return $this->hasMany(Pros::className(), ['id' => 'minus_id'])
+        return $this->hasMany(Minuse::className(), ['id' => 'minus_id'])
                     ->viaTable('review_minus', ['review_id' => 'id']);
     }
 
     public function getDeposits()
     {
-        return $this->hasMany(DepositMethod::className(), ['id' => 'deposit_id'])
+        return $this->hasMany(DepositMethod::className(), ['id' => 'dep_id'])
             ->viaTable('review_dep_method', ['review_id' => 'id']);
     }
 
@@ -145,16 +145,16 @@ class Review extends \yii\db\ActiveRecord
     public function getAllowed()
     {
         return $this->hasMany(Country::className(), ['id' => 'country_id'])
-                    ->viaTable('allowed_countries', ['review_id' => 'id']);
+                    ->viaTable('allowed_country', ['review_id' => 'id']);
     }
 
     public function getDenied()
     {
         return $this->hasMany(Country::className(), ['id' => 'country_id'])
-                    ->viaTable('denied_countries', ['review_id' => 'id']);
+                    ->viaTable('denied_country', ['review_id' => 'id']);
     }
 
-    public function getGallery()
+    public function getGalleries()
     {
         return $this->hasMany(Gallery::className(), ['id' => 'gallery_id'])
                     ->viaTable('review_gallery', ['review_id' => 'id']);
@@ -165,11 +165,20 @@ class Review extends \yii\db\ActiveRecord
         return $this->hasOne(Categorie::className(), ['id' => 'category_id']);
     }
 
-    public static function getTop($category_id, $current_review_id, $limit = 5)
+    public function getRelated()
     {
-        $reviews = Review::find()->select('id, title')
-            ->where(['<>', 'id', $current_review_id])
-            ->andWhere(['category_id' => $category_id])
+        return self::find()
+            ->where(['company_id' => $this->company_id])
+            ->andWhere(['type' => self::REVIEW_TYPE])
+            ->andWhere(['<>', 'id', $this->id])
+            ->all();
+    }
+
+    public function getTop($limit = 5)
+    {
+        $reviews = Review::find()
+            ->where(['<>', 'id', $this->id])
+            ->andWhere(['category_id' => $this->category_id])
             ->with('ratings')
             ->asArray()->all();
 

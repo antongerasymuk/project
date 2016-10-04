@@ -11,14 +11,14 @@ use yii\helpers\ArrayHelper;
  * @property integer $id
  * @property string $title
  */
-class Pros extends \yii\db\ActiveRecord
+class Plus extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'pros';
+        return 'pluses';
     }
 
     /**

@@ -101,6 +101,9 @@ class SiteController extends Controller
     {
         $this->layout = "main_review";
 
+        var_dump(Company::find()->with(['reviews' => function($query) use ($id){
+            $query->where(['id' => $id]);
+        }])->all()[1]->reviews);exit;
         $review = Review::findOne($id);
 
         if (empty($review)) {
@@ -120,7 +123,7 @@ class SiteController extends Controller
                     'deposits'
                 ]);
             }
-        ])->asArray()->one();
+        ])->asArray();
 
         $is_company = $review->type == Review::COMPANY;
 

@@ -208,6 +208,11 @@ public function actionAbout()
     return $this->render('about');
 }
 
+public function actionSitemap()
+{
+    return $this->render('sitemap');
+}
+
 /**
 * Signs user up.
 *

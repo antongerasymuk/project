@@ -22,7 +22,7 @@ class FooterNav extends Nav
                            'url' =>'/site/terms_and_conditions'];
         $this->items[]  = '<li><span>·</span></li>';
         $this->items[]  = ['label' => 'Site Map',
-                           'url'=>'/site/site_map'];
+                           'url'=>'/site/sitemap'];
         $this->items[]  = '<li><span>·</span></li>'; 
         $this->items[]  = ['label' => 'Glossary',
                            'url' =>'/site/glossary']; 

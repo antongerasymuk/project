@@ -22,12 +22,11 @@ class AppAsset extends AssetBundle
          'js/compatible_with.js',
         'js/common.js',
         'js/company_offer.js',
-        'js/companies_list_data.js',
-        'js/bonuses_list_data.js',
+        'js/bookmaker_bonus.js',
         'js/raw.js',
         'js/rating_by_stars.js',
         'js/oboe-browser.min.js',
-        'js/oboe_index.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

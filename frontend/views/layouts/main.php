@@ -58,9 +58,7 @@ AppAsset::register($this);
           'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
       ]) ?>
     </div>
-        <div class="col-sm-4 clearfix pdl0">
-          <a href="#" class="close-filters">CLOSE FILTERS</a>
-        </div>
+       
     </div>
 </div>
 

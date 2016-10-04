@@ -102,37 +102,26 @@ public function actionReview($id)
     $this->layout = "main_review";
 
     $review = Review::findOne($id);
+    $this->view->params['company'] = [
+        'id'   => '111',
+        'url'  => '12312',
+        'name' => 'dfsfds'
+    ];
+    $this->view->params['logo'] = 'asdasdwqe';
 
-    if (empty($review)) {
-        throw new NotFoundHttpException('Review not found');
+    if ($review->type == Review::REVIEW_TYPE) {
+        var_dump('Review');
+        // render review
+        return $this->render('review', ['review' => $review]);
+    } elseif ($review->type == Review::COMPANY_TYPE) {
+        var_dump('Company review');
+        // render company review
+        return $this->render('company_review');
+    } else {
+        throw new NotFoundHttpException('Unknown review type');
     }
 
-    $company = Company::find()->with([
-        'reviews' => function ($query) use ($id) {
-            $query->andWhere(['id' => $id])->with([
-                'bonuses',
-                'gallery',
-                'category',
-                'ratings',
-                'pros',
-                'minuses',
-                'oses',
-                'deposits'
-                ]);
-            }])->asArray();
 
-    $is_company = $review->type == Review::COMPANY;
-
-// get review data
-
-    $this->view->params['company'] = [
-    'id'   => $company['id'],
-    'url'  => $company['site_url'],
-    'name' => $company['title']
-    ];
-    $this->view->params['logo']    = $company['logo'];
-
-    return $this->render('review', ['company' => $company, 'is_company' => (bool)$is_company]);
 }
 
 /**

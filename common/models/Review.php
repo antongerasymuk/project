@@ -14,8 +14,8 @@ use Yii;
  */
 class Review extends \yii\db\ActiveRecord
 {
-    const REVIEW = 1;
-    const COMPANY = 2;
+    const REVIEW_TYPE = 1;
+    const COMPANY_TYPE = 2;
     public $bonusIds;
     public $gallery;
     public $galleryIds;
@@ -129,6 +129,11 @@ class Review extends \yii\db\ActiveRecord
     {
         return $this->hasMany(DepositMethod::className(), ['id' => 'deposit_id'])
             ->viaTable('review_dep_method', ['review_id' => 'id']);
+    }
+
+    public function getCompany()
+    {
+        return $this->hasOne(Company::className(), ['id' => 'company_id']);
     }
 
     public function getOses()

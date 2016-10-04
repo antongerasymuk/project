@@ -38,7 +38,7 @@ class CompanyController extends ActiveController
 
         return new ActiveDataProvider([
             'query' => $modelClass::find()
-                ->with('reviews.bonuses')
+                ->with(['reviews.category', 'reviews.bonuses'])
                 ->asArray()
         ]);
 

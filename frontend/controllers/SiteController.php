@@ -115,6 +115,8 @@ public function actionReview($id)
         return $this->render('review', ['review' => $review]);
     } elseif ($review->type == Review::COMPANY_TYPE) {
         // render company review
+        $this->view->params['is_company'] = true;
+
         return $this->render('company_review', ['review' => $review]);
     } else {
         throw new NotFoundHttpException('Unknown review type');

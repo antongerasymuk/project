@@ -1,11 +1,9 @@
-riot.tag2('companies-list', '<div class="row"> ' +
-    '<div class="h-title">' +
-    '<h2>UK Betting Sites</h2>' +
-    '</div> <div class="betting-sites-items clearfix" >' +
-    '<company-offer class="col-md-4 col-sm-6"  each="{ companies_list }" bg_color="{bg_color}" title="{title}" logo="{logo}" reviews="{reviews}">' +
-    '</company-offer></div>' +
-    '</div>' +
-    '</div>',
+riot.tag2('bookmaker-bonuses-list' ,
+    
+    '<h1>Bookmaker Bonuses</h1>'+
+    '<div class="bonuses-items"> ' +
+    '<bookmaker-bonus each="{ companies_list }" bg_color="{bg_color}" title="{title}" logo="{logo}" reviews="{reviews}">' +
+    '</bookmaker-bonus>',
     '',
     '',
     function(opts) {
@@ -39,5 +37,5 @@ self.update();
 //console.log(JSON.stringify(companies_list));
 });
 
-riot.mount('company-offer');
-riot.mount('companies-list', {});
+riot.mount('bookmaker-bonus');
+riot.mount('bookmaker-bonuses-list', {})

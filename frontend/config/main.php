@@ -50,7 +50,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'company'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'bonus']
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'bonus'],
             ],
         ],
     ],

@@ -18,9 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <?php if (!empty($review->bonuses)) : ?>
         <div class="bonus-blocks clearfix">
+            <?php $bonusClass = 'bs-lt';?>
             <?php foreach ($review->bonuses as $bonus) : ?>
             <div class="col-md-6 col-sm-12">
-                <div class="bs-lt clearfix">
+                <div class="<?= $bonusClass ?> clearfix">
                     <div class="left">
                         <div class="tit"><?= $bonus->title ?></div>
                         <p><?= $bonus->description ?></p>
@@ -39,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div>
             </div><!-- .bs-lt -->
+            <?php $bonusClass = 'bs-rt'; ?>
             <?php endforeach; ?>
 
         </div><!-- .bonus-blocks -->

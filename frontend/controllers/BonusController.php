@@ -59,8 +59,10 @@ class BonusController extends ActiveController
         $sort_by = null,
         $filter_by = null,
         $country_id = null,
-        $dep_method_id = null,
-        $os_id = null
+        $deposit_id = null,
+        $os_id = null,
+        $limit = 10,
+        $offset = 0
     )
     {
         $modelClass = $this->modelClass;
@@ -75,7 +77,7 @@ class BonusController extends ActiveController
             $bonuses = $modelClass::find()
                 ->where(['category_id' => $category_id])
                 ->with(['bonuses' => function($query) use ($filter_by){
-                    if ($filter_by != null && $filter_by != 0) {
+                    if ((int)$filter_by) {
                         switch ($filter_by) {
                             case 1 :
                                 $query->andWhere(['not', ['min_deposit' => null]]);
@@ -85,11 +87,25 @@ class BonusController extends ActiveController
                                 break;
                         }
                     }
-                }])
-                ->with('ratings')
-                ->with('bonuses.oses')
+                }, 'ratings', 'bonuses.oses'])
                 ->andWhere(['type' => Review::REVIEW_TYPE])
                 ->asArray();
+
+            if ((int)$deposit_id) {
+
+                $bonuses->innerJoinWith('deposits')
+                    ->andWhere(['deposit_methods.id' => 1]);
+            }
+
+            if ((int)$os_id) {
+                $bonuses->innerJoinWith('oses')
+                    ->andWhere(['oses.id' => $os_id]);
+            }
+
+            if ((int)$country_id) {
+                $bonuses->innerJoinWith('allowed')
+                        ->andWhere(['countries.id' => $country_id]);
+            }
         }
         $data = new ActiveDataProvider([
             'query' => $bonuses
@@ -109,7 +125,7 @@ class BonusController extends ActiveController
 
         $bonuses = $this->normalize($this->sortRank($data));
 
-        if ($sort_by != null) {
+        if ((int)$sort_by) {
             //
             switch ($sort_by) {
                 // Sort by top bonus %
@@ -123,7 +139,7 @@ class BonusController extends ActiveController
             }
         }
 
-        return $bonuses;
+        return array_slice($bonuses, (int)$offset, (int)$limit);
     }
 
     /**
@@ -149,6 +165,8 @@ class BonusController extends ActiveController
 
             return 0;
         });
+
+        return $bonuses;
     }
 
     protected function sortByPrice($bonuses)

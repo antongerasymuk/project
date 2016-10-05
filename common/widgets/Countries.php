@@ -20,6 +20,8 @@ class Countries extends Widget
     {
         $html = $options = '';
 
+        $options .= Html::tag('option', 'None', ['option' => 0]);
+
         if (!empty($this->countries)) {
             // For test - USA ip
             //TODO remove ip

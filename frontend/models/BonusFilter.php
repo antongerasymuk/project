@@ -20,8 +20,6 @@ class BonusFilter extends ActiveRecord
         3 => 'bonusCodes'
     ];
 
-
-
     public $category_id;
     public $sort_by;
     public $filter_by;
@@ -29,14 +27,16 @@ class BonusFilter extends ActiveRecord
 
     public function filtered()
     {
+        var_dump($this->sort_by);
         // hire return search results
         $bonusesQuery = Review::find()
                 ->where(['category_id' => $this->category_id])
                 ->with('bonuses')
                 ->with('ratings')
-                ->with('bonuses.oses');
+                ->with('bonuses.oses')
+                ->asArray();
 
-        return $bonusesQuery->asArray()->all();
+        return $bonusesQuery;
     }
 
     public function attributes()

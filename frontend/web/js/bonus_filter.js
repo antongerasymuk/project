@@ -33,9 +33,8 @@ var Filter = {
         console.log(this.params);
 
         $.ajax({
-            url: '/bonus/filter',
-            method: 'POST',
-            data: {BonusFilter: this.params},
+            url: '/bonus?category_id=1&filter_by=2&sort_by=1',
+            method: 'GET',
             success: function (response) {
                 console.log(response);
             }

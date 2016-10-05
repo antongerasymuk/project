@@ -1,12 +1,16 @@
 <?php
 use yii\helpers\Html;
 
+/**
+ * @var $this \yii\web\View
+ */
 $this->title = ucfirst($title)." Sites";
 $this->params['breadcrumbs'][] = $this->title;
 $request = Yii::$app->request;
 ?>
 
 <?php $get = $request->get(); ?>
+<?php $this->registerJsFile('/js/bonus_filter.js', ['depends' => 'frontend\assets\AppAsset']); ?>
 
 <bonuses-filter-list params="{bonuses_list}" category='<?= $get["id"] ?>' title='<?= ucfirst($title) ?>'></bonuses-filter-list>
 <?php $this->registerJsFile('/js/bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>

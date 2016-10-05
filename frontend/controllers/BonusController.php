@@ -21,6 +21,7 @@ class BonusController extends ActiveController
     {
         return [
             'index' => ['GET', 'HEAD'],
+            'filter' => ['POST']
         ];
     }
 
@@ -138,14 +139,15 @@ class BonusController extends ActiveController
         return $bonuses;
     }
 
-    public function actionFilter($category_id = null)
+    public function actionFilter()
     {
+
         $model = new BonusFilter();
 
         if ($model->load(Yii::$app->request->post())) {
             return $model->filtered();
         }
 
-        return $this->actionIndex($category_id);
+        return $this->actionIndex();
     }
 }

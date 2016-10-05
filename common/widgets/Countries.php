@@ -22,6 +22,7 @@ class Countries extends Widget
 
         if (!empty($this->countries)) {
             // For test - USA ip
+            //TODO remove ip
             $ip = Yii::$app->geoip->ip('173.201.183.172');
 
             foreach ($this->countries as $country) {

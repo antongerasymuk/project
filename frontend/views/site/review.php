@@ -173,7 +173,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <ul>
                                 <?php foreach ($topReviews as $topReview) : ?>
                                     <li>
-                                        <a href="<?= Url::to(['site/review', 'id' => $topReview->id]) ?>" target="_blank"><?= $topReview->title ?></a>
+                                        <a href="<?= Url::to(['site/review', 'id' => $topReview['id']]) ?>" target="_blank"><?= $topReview['title'] ?></a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>

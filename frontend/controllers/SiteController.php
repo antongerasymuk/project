@@ -301,7 +301,9 @@ public function actionResetPassword($token)
 public function actionCategory($id)
 {
     $this->layout = 'main_bonus';
+    $title = Categorie::findOne($id)->title;
+    $this->view->params['category_title'] = $title;
 
-    return $this->render('bonuses_by_filter', ['title' => Categorie::findOne($id)->title]);
+    return $this->render('bonuses_by_filter', ['title' => $title]);
 }
 }

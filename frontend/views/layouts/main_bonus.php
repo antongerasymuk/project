@@ -51,25 +51,22 @@ AppAsset::register($this);
 				<div class="container h-filters">
 					<div class="row">
 						<div class="col-md-7 pdr0">
-
 							<div class="filter-gp">
 								<label>Sort by</label>
 								<div class="btns clearfix">
-									<button type="button" class="btn-filter lr">Best Poker Site</button>
-									<button type="button" class="btn-filter active">Top Bonus %</button>
-									<button type="button" class="btn-filter rr">Max Bonus</button>
+									<button type="button" data-type="sort" data-filter="1" class="btn-filter lr">Best <?php echo empty($this->params['category_title']) ? '' : $this->params['category_title']; ?> Site</button>
+									<button type="button" data-type="sort" data-filter="2" class="btn-filter active">Top Bonus %</button>
+									<button type="button" data-type="sort" data-filter="3" class="btn-filter rr">Max Bonus</button>
 								</div>
 							</div>
-
 							<div class="filter-gp">
 								<label>Filter by bonus type</label>
 								<div class="btns clearfix">
-									<button type="button" class="btn-filter lr">Deposit Bonus</button>
-									<button type="button" class="btn-filter active">No Deposit Required</button>
-									<button type="button" class="btn-filter rr">Bonus Codes</button>
+									<button type="button" data-type="filter" data-filter="1" class="btn-filter lr">Deposit Bonus</button>
+									<button type="button" data-type="filter" data-filter="0" class="btn-filter active">No Deposit Required</button>
+									<button type="button" data-type="filter" data-filter="2" class="btn-filter rr">Bonus Codes</button>
 								</div>
 							</div>
-
 						</div>
 
 						<div class="col-md-5 pdl0 clearfix">

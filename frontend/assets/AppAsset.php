@@ -17,9 +17,9 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/riot.min.js',
-        'js/jquery-2.1.1.min.js',
-         //'js/riot_mount.js',
-         'js/compatible_with.js',
+        //'js/jquery-2.1.1.min.js',
+        //'js/riot_mount.js',
+        'js/compatible_with.js',
         'js/common.js',
         'js/company_offer.js',
         'js/bookmaker_bonus.js',

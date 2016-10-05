@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Bonus;
+use common\models\Review;
 use frontend\models\BonusFilter;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
@@ -21,7 +22,6 @@ class BonusController extends ActiveController
     {
         return [
             'index' => ['GET', 'HEAD'],
-            'filter' => ['POST']
         ];
     }
 
@@ -54,7 +54,14 @@ class BonusController extends ActiveController
         return $arr;
     }
 
-    public function actionIndex($category_id = null)
+    public function actionIndex(
+        $category_id = null,
+        $sort_by = null,
+        $filter_by = null,
+        $country_id = null,
+        $dep_method_id = null,
+        $os_id = null
+    )
     {
         $modelClass = $this->modelClass;
 
@@ -70,6 +77,7 @@ class BonusController extends ActiveController
                 ->with('bonuses')
                 ->with('ratings')
                 ->with('bonuses.oses')
+                ->andWhere(['type' => Review::REVIEW_TYPE])
                 ->asArray();
         }
         $data = new ActiveDataProvider([
@@ -88,7 +96,11 @@ class BonusController extends ActiveController
             return 0;
         });
 
-        return $this->normalize($this->sortRank($data));
+        $bonuses = $this->normalize($this->sortRank($data));
+
+        if ($sort_by != null) {
+            //
+        }
     }
 
     /**
@@ -104,6 +116,18 @@ class BonusController extends ActiveController
         }
 
         return $data;
+    }
+
+    protected function sortByPrice($bonuses)
+    {
+        usort($bonuses, function ($a, $b){
+            if ($a['price'] < $b['price']) return 1;
+            if ($a['price'] > $b['price']) return -1;
+
+            return 0;
+        });
+
+        return $bonuses;
     }
 
     protected function sortRank($arr_ratings)
@@ -137,17 +161,5 @@ class BonusController extends ActiveController
         }
 
         return $bonuses;
-    }
-
-    public function actionFilter()
-    {
-
-        $model = new BonusFilter();
-
-        if ($model->load(Yii::$app->request->post())) {
-            return $model->filtered();
-        }
-
-        return $this->actionIndex();
     }
 }

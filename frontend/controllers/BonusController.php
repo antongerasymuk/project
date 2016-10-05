@@ -74,7 +74,18 @@ class BonusController extends ActiveController
         } else {
             $bonuses = $modelClass::find()
                 ->where(['category_id' => $category_id])
-                ->with('bonuses')
+                ->with(['bonuses' => function($query) use ($filter_by){
+                    if ($filter_by != null && $filter_by != 0) {
+                        switch ($filter_by) {
+                            case 1 :
+                                $query->andWhere(['not', ['min_deposit' => null]]);
+                                break;
+                            case 2 :
+                                $query->andWhere(['not', ['code' => null]]);
+                                break;
+                        }
+                    }
+                }])
                 ->with('ratings')
                 ->with('bonuses.oses')
                 ->andWhere(['type' => Review::REVIEW_TYPE])
@@ -100,7 +111,19 @@ class BonusController extends ActiveController
 
         if ($sort_by != null) {
             //
+            switch ($sort_by) {
+                // Sort by top bonus %
+                case 1 :
+                    $bonuses = $this->sortByPercent($bonuses);
+                    break;
+                // Sort by max bonus
+                case 2 :
+                    $bonuses = $this->sortByPrice($bonuses);
+                    break;
+            }
         }
+
+        return $bonuses;
     }
 
     /**
@@ -116,6 +139,16 @@ class BonusController extends ActiveController
         }
 
         return $data;
+    }
+
+    protected function sortByPercent($bonuses)
+    {
+        usort($bonuses, function ($a, $b){
+            if ($a['percent'] < $b['percent']) return 1;
+            if ($a['percent'] > $b['percent']) return -1;
+
+            return 0;
+        });
     }
 
     protected function sortByPrice($bonuses)

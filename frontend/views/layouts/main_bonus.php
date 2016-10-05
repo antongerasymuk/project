@@ -25,7 +25,7 @@ AppAsset::register($this);
 </head>
 <body>
 	<?php $this->beginBody() ?>
-
+<?= var_dump($this->params['breadcrumbs']) ?>
 	<div class="wrap">
 		<header class="hpoker">
 			<div class="header-top">

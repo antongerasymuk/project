@@ -4,8 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-//use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use \common\helpers\CategoryList;
 use common\widgets\BreadcrumbsBonus;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
@@ -50,7 +49,15 @@ AppAsset::register($this);
         </div>
 
         <div class="header-lg">
-            <a target="_blank" href="#"><img src="<?= $this->params['logo'] ?>" alt=""></a>
+            <a target="_blank" href="<?= $this->params['company']['url'] ?>">
+                <img src="<?= $this->params['logo'] ?>" alt="">
+            </a>
+            <?php if (isset($this->params['is_company'])) : ?>
+                <p>
+                    Grab your bonus for
+                    <?= CategoryList::generate($items) ?>
+                </p>
+            <?php endif; ?>
         </div>
 
         <div class="container">

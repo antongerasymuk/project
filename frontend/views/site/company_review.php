@@ -142,11 +142,13 @@ use \yii\helpers\Url;
                                             ->where(['type' => Review::COMPANY_TYPE])
                                             ->one()
                                         ?>
+                                        <?php if (!empty($companyReview)) : ?>
                                         <li>
                                             <a href="<?= Url::to(['site/review', 'id' => $companyReview->id]) ?>" target="_blank">
                                                 <?= $companyReview->title ?>
                                             </a>
                                         </li>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 </ul>
                             </div>

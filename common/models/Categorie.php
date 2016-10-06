@@ -47,16 +47,32 @@ class Categorie extends \yii\db\ActiveRecord
 
     public static function getArr()
     {
-        $categoriesData = Categorie::find()
-                             ->select('id, title')
-                             ->asArray()
-                             ->all();
-        return ArrayHelper::map($categoriesData, 'id', 'title');
+        $categoriesData = Categorie::getDb()->cache(function($db){
+            return Categorie::find()
+                     ->select('id, title')
+                     ->asArray()
+                     ->all();
+        });
+
+        $categoriesCache = Yii::$app->cache->get('categoriesCache');
+
+        if ($categoriesCache === false) {
+            $catArr = ArrayHelper::map($categoriesData, 'id', 'title');
+
+            Yii::$app->cache->set('categoriesCache', $catArr);
+        } else {
+            $categoriesData = $categoriesCache;
+        }
+
+        return $categoriesData;
     }
 
     public static function getForNav()
     {
-        $categories = Categorie::find()->all();
+        // cached
+        $categories = Categorie::getDb()->cache(function ($db){
+            return Categorie::find()->all();
+        });
 
         $items = [];
 

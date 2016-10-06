@@ -1,5 +1,8 @@
 $(document).ready(function(){
-
+    console.log(tinyMCE);
+    tinyMCE.Editor.on('blur', function(e){
+console.log('Blur');
+});   
 });
 // Create bonus event
 $('#bonus-create').on('click', function (e) {

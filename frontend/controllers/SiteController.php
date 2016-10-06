@@ -81,15 +81,19 @@ class SiteController extends Controller
     {
         $this->layout = "main_index";
 
-public function actionPage($category,$slug)
-{
-    $site = Site::find()
-    ->where(['slug' => $slug, 'category' => $category])
-    ->asArray()->one();
-     $this->layout = "main";
+       return $this->render('index');
+    }
+    
 
-    return $this->render('page' ,['content' => $site['content'], 'title' => $site['title']]);
-}
+   public function actionPage($category,$slug)
+   {
+      $site = Site::find()
+      ->where(['slug' => $slug, 'category' => $category])
+      ->asArray()->one();
+       $this->layout = "main";
+
+       return $this->render('page' ,['content' => $site['content'], 'title' => $site['title']]);
+    }
 
 
     public function actionBonuses()

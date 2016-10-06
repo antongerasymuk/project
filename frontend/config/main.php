@@ -53,6 +53,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'page/<category>/<slug>' => 'site/page',
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'company'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'bonus'],
             ],

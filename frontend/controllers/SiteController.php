@@ -33,11 +33,7 @@ class SiteController extends Controller
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'duration' => 300,
-                'dependency' => [
-                    'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM companies',
-                ],
+                'duration' => 300
             ],
             'access' => [
                 'class' => AccessControl::className(),

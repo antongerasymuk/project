@@ -87,14 +87,18 @@ AppAsset::register($this);
 								<div class="filter-gp clearfix">
 									<div class="fcomp">
 										<label>By Software Compatibillity</label>
+										<?php $oses = \common\models\Os::find()->all(); ?>
 										<div class="btns clearfix">
-											<button type="button" class="btn-comp">ANY</button>
-											<button type="button" class="btn-comp"><i class="flaticon-os-android"></i></button>
-											<button type="button" class="btn-comp active"><i class="flaticon-os-windows"></i></button>
-											<button type="button" class="btn-comp"><i class="flaticon-os-mac"></i></button>
-										</div>
+											<button type="button" class="btn-comp active" data-type="os" data-filter="0">ANY</button>
+											<?php if (!empty($oses)) : ?>
+                                                <?php foreach ($oses as $os) : ?>
+                                                    <button type="button" class="btn-comp" data-type="os" data-filter="<?= $os->id ?>">
+                                                        <i class="flaticon-os-<?= strtolower($os->title) ?>"></i>
+                                                    </button>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </div>
 									</div>
-
 								</div>
 
 							</div>

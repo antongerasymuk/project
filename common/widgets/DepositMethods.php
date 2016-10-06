@@ -19,7 +19,8 @@ class DepositMethods extends Widget
 
     public function run()
     {
-        $html = $options = '';
+        $options = '';
+        $options .= Html::tag('option', 'None', ['option' => 0]);
 
         foreach ($this->methods as $method) {
             $options .= Html::tag('option', $method['title'], ['option' => $method['id']]);

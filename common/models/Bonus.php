@@ -81,10 +81,9 @@ class Bonus extends \yii\db\ActiveRecord
         return ArrayHelper::map($bonusesData, 'id', 'title');
     }
 
-    public function getReviews()
+    public function getReview()
     {
-        return $this->hasMany(Review::className(), ['id' => 'review_id'])
-                    ->viaTable('review_bonus', ['bonus_id' => 'id']);
+        return $this->hasOne(Review::className(), ['id' => 'review_id']);
     }
 
     public function getOses()

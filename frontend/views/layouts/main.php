@@ -65,9 +65,6 @@ AppAsset::register($this);
 
         </div><!-- .main-top -->
         <div class="container">
-
-
-            <?= Alert::widget() ?>
             <?= $content ?>
         </div>
 </div>

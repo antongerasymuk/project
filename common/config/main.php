@@ -16,6 +16,7 @@ return [
 	        'enablePrettyUrl' => true,
 	        'showScriptName' => false,
           'rules' => [
+          'page/<category>/<slug>' => 'site/page',
         '/' => 'site/index',
         'login' => 'site/login',
         'logout' => 'site/logout',

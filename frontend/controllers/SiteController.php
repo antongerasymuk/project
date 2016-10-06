@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Site;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -81,6 +82,16 @@ public function actionIndex()
     $this->layout = "main_index";
 
     return $this->render('index');
+}
+
+public function actionPage($category,$slug)
+{
+    $site = Site::find()
+    ->where(['slug' => $slug, 'category' => $category])
+    ->asArray()->one();
+     $this->layout = "main";
+
+    return $this->render('page' ,['content' => $site['content'], 'title' => $site['title']]);
 }
 
 public function actionBonuses()

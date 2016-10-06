@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<ul>
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About Us</a></li>
-					<li><a href="#">Privacy Policy</a></li>
+					<li><a href="../page/navigation/policy_details">Privacy Policy</a></li>
 					<li><a href="#">Terms and Conditions</a></li>
 					<li><a href="#">Site Map</a></li>																														
 				</ul>

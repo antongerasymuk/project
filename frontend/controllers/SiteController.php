@@ -31,6 +31,14 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => 60,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM companies',
+                ],
+            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'only'  => ['logout', 'signup'],
@@ -53,6 +61,7 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+
         ];
     }
 

@@ -9,8 +9,12 @@ return [
 //            'password' => '123QWEasdZXC',
 //            'charset' => 'utf8',
 //        ],
+//        'cache' => [
+//            'class' => 'yii\caching\FileCache',
+//        ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\ApcCache',
+            'useApcu' => true
         ],
         'urlManager' => [
 	        'enablePrettyUrl' => true,

@@ -18,6 +18,7 @@ class Review extends \yii\db\ActiveRecord
     const COMPANY_TYPE = 2;
     public $bonusIds;
     public $gallery;
+    public $logoFile;
     public $galleryIds;
     public $previewFile;
     public $ratingIds;
@@ -27,7 +28,6 @@ class Review extends \yii\db\ActiveRecord
     public $osIds;
     public $allowedIds;
     public $deniedIds;
-    public $categoryId;
     /**
      * @inheritdoc
      */
@@ -42,40 +42,17 @@ class Review extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
-            [['description'], 'string'],
-            [['title'], 'string', 'max' => 255],
-            [['address'], 'string', 'max' => 100],
-            [['preview'], 'string'],
-            [['type'], 'default', 'value' => self::REVIEW],
-            [['preview_title'], 'string', 'max' => 255 ],
-            [['previewFile'], 'safe'],
-            [['gallery'], 'safe'],
-            [['gallery'], 'file', 'extensions'=>'jpg, gif, png', 'maxFiles' => 3],
-//            [['ratingIds'], 'each', 'rule' => 'integer'],
-//            [['galleryIds'], 'each', 'rule' => 'integer'],
-            [['ratingIds'], 'safe'],
-            [['minusIds', 'depositIds', 'osIds'], 'safe'],
-            [['bonusIds'], 'safe'],
-            [['categoryId'], 'required'],
-            [['categoryId'], 'integer', 'min' => 1],
-            [['plusIds'], 'safe'],
-            [['previewFile'], 'safe'],
-            [['previewFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
+            [['title', 'category_id', 'preview_title', 'address', 'type'], 'required'],
+            [['type'], 'default', 'value' => self::REVIEW_TYPE],
+            [['type'], 'in', 'range' => [self::REVIEW_TYPE, self::COMPANY_TYPE]],
             [
-                [
-                    'bonusIds',
-                    'ratingIds',
-                    'plusIds',
-                    'minusIds',
-                    'depositIds',
-                    'osIds',
-                    'allowedIds',
-                    'deniedIds',
-                ],
-                'default',
-                'value' => []
-            ]
+                ['previewFile', 'logoFile'],
+                'file',
+                'skipOnEmpty' => false,
+                'extensions' => ['jpg', 'png', 'gif']
+            ],
+            [['gallery'], 'file', 'extensions' => ['jpg', 'png', 'gif']],
+            [['preview', 'logo', 'preview_title', 'address'], 'string']
         ];
     }
 
@@ -88,6 +65,8 @@ class Review extends \yii\db\ActiveRecord
             'id' => 'ID',
             'address' => 'Address',
             'preview' => 'Preview',
+            'logoFile' => 'Logo file',
+            'category_id' => 'Category',
             'preview_title' => 'Preview Title',
             'description' => 'Description',
             'depositIds' => 'Deposit methods',

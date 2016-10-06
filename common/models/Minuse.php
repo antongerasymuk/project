@@ -41,14 +41,4 @@ class Minuse extends \yii\db\ActiveRecord
             'title' => 'Title',
         ];
     }
-
-    public static function getArr()
-    {
-        $minusesData = Minuse::find()
-                             ->select('id, title')
-                             ->asArray()
-                             ->all();
-
-        return ArrayHelper::map($minusesData, 'id', 'title');
-    }
 }

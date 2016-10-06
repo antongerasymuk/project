@@ -40,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					<th>Name</th>
 					<th>Description</th>
 					<th>Logo</th>
-                    <th>Created at</th>
 					<th>Actions</th>
 				</tr>
 				</thead>
@@ -53,11 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td class="center"><?= $company->description ?></td>
                             <td class="center">
                                 <?php if (!empty($company->logo)) : ?>
-                                    <img src="/<?= $company->logo ?>" alt="<?= basename($company->logo) ?>" class="company-logo">
+                                    <img src="<?= $company->logo ?>" alt="<?= basename($company->logo) ?>" class="company-logo">
                                 <?php endif; ?>
-                            </td>
-                            <td class="center">
-                                <?= date('d.m.Y', $company->created_at) ?>
                             </td>
                             <td class="center">
                                 <a class="btn btn-success" href="#">

@@ -48,14 +48,4 @@ class DepositMethod extends \yii\db\ActiveRecord
             'title' => 'Title',
         ];
     }
-
-    public static function getArr()
-    {
-        $prosData = DepositMethod::find()
-            ->select('id, title')
-            ->asArray()
-            ->all();
-
-        return ArrayHelper::map($prosData, 'id', 'title');
-    }
 }

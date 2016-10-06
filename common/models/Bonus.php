@@ -38,7 +38,10 @@ class Bonus extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
-            [['type'], 'boolean'],
+            [['percent'], 'number'],
+            [['currency'], 'string', 'max' => 1],
+            [['type'], 'default', 'value' => 0],
+            [['type'], 'in', 'range' => [0, Bonus::MAIN]],
             [['min_deposit'], 'number'],
             [['expiry'], 'integer'],
             [['rollover_requirement'], 'string'],
@@ -70,15 +73,6 @@ class Bonus extends \yii\db\ActiveRecord
             'rollover_requirement' => 'Rollover Requirement',
             'restrictions' => 'Restrictions'
         ];
-    }
-
-    public static function getArr()
-    {
-        $bonusesData = Bonus::find()
-                            ->select('id, title')
-                            ->asArray()
-                            ->all();
-        return ArrayHelper::map($bonusesData, 'id', 'title');
     }
 
     public function getReview()

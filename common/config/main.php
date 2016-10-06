@@ -15,14 +15,6 @@ return [
         'urlManager' => [
 	        'enablePrettyUrl' => true,
 	        'showScriptName' => false,
-          'rules' => [
-          'page/<category>/<slug>' => 'site/page',
-        '/' => 'site/index',
-        'login' => 'site/login',
-        'logout' => 'site/logout',
-        'signup' => 'site/signup',
-        'request-password-reset' => 'site/request-password-reset',
-        'reset-password' => 'site/reset-password',],
         ],
     ],
 ];

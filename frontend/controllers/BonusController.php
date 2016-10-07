@@ -87,7 +87,7 @@ class BonusController extends ActiveController
                                 break;
                         }
                     }
-                }, 'ratings', 'bonuses.oses'])
+                }, 'ratings'])
                 ->andWhere(['type' => Review::REVIEW_TYPE])
                 ->asArray();
 
@@ -98,7 +98,7 @@ class BonusController extends ActiveController
             }
 
             if ((int)$os_id) {
-                $bonuses->innerJoinWith('oses')
+                $bonuses->innerJoinWith('bonuses.oses')
                     ->andWhere(['oses.id' => $os_id]);
             }
 

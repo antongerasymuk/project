@@ -1,8 +1,3 @@
-$(document).ready(function(){
-    tinyMCE.EditorManager.get('company-address').blur(function (){
-        console.log('Company address blur');
-    });
-});
 // Create bonus event
 $('#bonus-create').on('click', function (e) {
     e.preventDefault();
@@ -196,3 +191,10 @@ var Select2 = {
       $(blockId).append(element);
   }
 };
+
+
+function reviewAddressCallback(Editor) {
+    Editor.on('NodeChange', function(e){
+        tinyMCE.triggerSave();
+    });
+}

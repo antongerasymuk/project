@@ -117,8 +117,8 @@ class Review extends \yii\db\ActiveRecord
 
     public function getOses()
     {
-        return $this->hasMany(Os::className(), ['id' => 'review_id'])
-                    ->viaTable('os_review', ['os_id' => 'id']);
+        return $this->hasMany(Os::className(), ['id' => 'os_id'])
+                    ->viaTable('os_review', ['review_id' => 'id']);
     }
 
     public function getAllowed()

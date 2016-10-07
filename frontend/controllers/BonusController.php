@@ -76,7 +76,13 @@ class BonusController extends ActiveController
         } else {
             $bonuses = $modelClass::find()
                 ->where(['category_id' => $category_id])
-                ->with(['bonuses' => function($query) use ($filter_by){
+                ->with(['bonuses' => function($query) use ($filter_by, $os_id){
+                    if ((int)$os_id) {
+                        $query->innerJoinWith('oses')
+                                ->where(['oses.id' => $os_id]);
+                    } else {
+                        $query->with('oses');
+                    }
                     if ((int)$filter_by) {
                         switch ($filter_by) {
                             case 1 :
@@ -87,19 +93,19 @@ class BonusController extends ActiveController
                                 break;
                         }
                     }
+
                 }, 'ratings'])
                 ->andWhere(['type' => Review::REVIEW_TYPE])
                 ->asArray();
 
-            if ((int)$deposit_id) {
-
-                $bonuses->innerJoinWith('deposits')
-                    ->andWhere(['deposit_methods.id' => 1]);
-            }
-
             if ((int)$os_id) {
                 $bonuses->innerJoinWith('bonuses.oses')
-                    ->andWhere(['oses.id' => $os_id]);
+                      ->where(['oses.id' => $os_id]);
+            }
+
+            if ((int)$deposit_id) {
+                $bonuses->innerJoinWith('deposits')
+                    ->andWhere(['deposit_methods.id' => $deposit_id]);
             }
 
             if ((int)$country_id) {
@@ -141,7 +147,7 @@ class BonusController extends ActiveController
             }
 
             // cached sorted bonuses
-            Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses);
+//            Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses);
         } else {
             $bonuses = $bonusesCache;
         }

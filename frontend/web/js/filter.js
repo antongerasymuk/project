@@ -16,11 +16,12 @@ function makeActive($button) {
 
   $(document).ready(function() {
         $(".filter-gp button").click(function() { 
+        makeFilter($(this)) ;
          //console.log('here');
          //console.log($('#bonuses-filter-list').attr('category'));
          //console.log('data-filter:');
          //console.log($(this).attr("data-filter")); 
-         filter_string = $('#bonuses-filter-list').attr('filter');
+        /* filter_string = $('#bonuses-filter-list').attr('filter');
          if ($(this).attr("data-type") == 'filter') {
          filter_string = filter_string.replace(new RegExp("&filter_by=\\d+?&"), '&'); 
          filter_string = filter_string.replace(new RegExp("&filter_by=\\d+"), ''); 
@@ -39,5 +40,24 @@ function makeActive($button) {
 
          $('#bonuses-filter-list').attr("filter" , filter_string);
           riot.mount('bonuses-filter-list', {});
-     });
+     });*/
+
   });
+  function makeFilter(object) {
+  var key = "";
+  if (object.attr("data-type")) {
+  switch (object) {
+    case 'filter':
+        key = "&filter_by=";
+        break;
+    case 'sort':
+        key = "&sort_by=";
+        break;
+    case 'os':
+        key = "&os_id=";
+        break;
+    }
+         filter_string = filter_string.replace(new RegExp("&"+key+"\\d+?&"), '&'); 
+         filter_string = filter_string.replace(new RegExp("&"+key+"\\d+"), ''); 
+         filter_string = filter_string + key + object.attr("data-filter");
+    }

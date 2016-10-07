@@ -38,7 +38,7 @@ class Countries extends Widget
             }
         }
 
-        $html = Html::tag('select', $options, ['class' => 'f-select', 'style' => 'width: 200px;']);
+        $html = Html::tag('select', $options, ['class' => 'f-select', 'id' => 'countries', 'style' => 'width: 200px;']);
 
         echo $html;
     }

@@ -54,7 +54,7 @@ AppAsset::register($this);
 								<label>Sort by</label>
 								<div class="btns clearfix">
 									<button type="button" data-type="sort" data-filter="1" class="btn-filter lr">Best <?php echo empty($this->params['category_title']) ? '' : $this->params['category_title']; ?> Site</button>
-									<button type="button" data-type="sort" data-filter="2" class="btn-filter active">Top Bonus %</button>
+									<button type="button" data-type="sort" data-filter="2" class="btn-filter ">Top Bonus %</button>
 									<button type="button" data-type="sort" data-filter="3" class="btn-filter rr">Max Bonus</button>
 								</div>
 							</div>
@@ -62,7 +62,7 @@ AppAsset::register($this);
 								<label>Filter by bonus type</label>
 								<div class="btns clearfix">
 									<button type="button" data-type="filter" data-filter="1" class="btn-filter lr">Deposit Bonus</button>
-									<button type="button" data-type="filter" data-filter="0" class="btn-filter active">No Deposit Required</button>
+									<button type="button" data-type="filter" data-filter="0" class="btn-filter">No Deposit Required</button>
 									<button type="button" data-type="filter" data-filter="2" class="btn-filter rr">Bonus Codes</button>
 								</div>
 							</div>
@@ -89,7 +89,7 @@ AppAsset::register($this);
 										<label>By Software Compatibillity</label>
 										<?php $oses = \common\models\Os::find()->all(); ?>
 										<div class="btns clearfix">
-											<button type="button" class="btn-comp active" data-type="os" data-filter="0">ANY</button>
+											<button type="button" class="btn-comp" data-type="os" data-filter="0">ANY</button>
 											<?php if (!empty($oses)) : ?>
                                                 <?php foreach ($oses as $os) : ?>
                                                     <button type="button" class="btn-comp" data-type="os" data-filter="<?= $os->id ?>">
@@ -184,6 +184,9 @@ AppAsset::register($this);
 		<?php $this->endBody() ?>
 	</body>
 	<script>
+		
+
+
 		$(function(){
 			$(".f-select").chosen({
 				inherit_select_classes: true,

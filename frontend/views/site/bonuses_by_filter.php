@@ -14,7 +14,7 @@ AppAsset::register($this);
 <?php 
 $get_url = '';
 foreach ($get as $key => $value) {
-  echo $key ;
+  
   if ($key != 'id') {
     $get_url .=  '&'.$key.'='.$value;
 }

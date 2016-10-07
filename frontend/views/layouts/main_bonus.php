@@ -190,6 +190,7 @@ AppAsset::register($this);
 				disable_search: true
 			});
 		});
+		
 	</script>
 	</html>
 	<?php $this->endPage() ?>

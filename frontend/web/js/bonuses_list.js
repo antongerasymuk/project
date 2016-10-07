@@ -1,18 +1,4 @@
-riot.tag2('bonuses-filter-list', '<div class="row">' +
-    '<div class="h-title">' +
-    '<h1>The UK\'s Top 15 {opts.title} Sites</h1>' +
-    '</div>' +
-    '<div class="col-xs-12">' +
-    '<table class="table-top-sites">' +
-    '<thead>' +
-    '<tr>' +
-    '<th class="text-center">Rank</th>' +
-    '<th class="text-left">{opts.title} Site</th>' +
-    '<th class="text-left">Rating</th> ' +
-    '<th class="text-left">Bonus Details</th>' +
-    '<th class="text-center">Compatible with</th>' +
-    '<th class="text-center">Join site</th> ' +
-    '</tr> </thead> <tbody> ' +
+riot.tag2('bonuses-filter-list', 
     '<tr each="{ bonuses_list }" > ' +
     '<td data-column="Rank">' +
     '<div class="rank">{rank}</div>' +
@@ -42,24 +28,22 @@ riot.tag2('bonuses-filter-list', '<div class="row">' +
     '</a>'+
     '</div>' +
     '</td> ' +
-    '</tr> ' +
-    '</tbody> ' +
-    '</table> ' +
-    '</div>', '', '', function (opts) 
+    '</tr> ' 
+    , '', '', function (opts) 
     {
         os = '\{"mac":"mac","windows":"windows", "android":"android"\}';
+        console.log("MY");
+        //console.log(opts.filter);
         var self = this;
         self.i = 0;
         self.bonuses_list = [];
-        console.log(opts.category);
         this.on('mount', function () {
-            console.log(this);
             self.trigger('get');
         });
         this.on('get', function () {
-            console.log('Get data');
-            oboe({
-                url: '/bonus?category_id='+opts.category,
+            console.log('/bonus?category_id='+opts.category+opts.filter);
+             oboe({
+                url: '/bonus?category_id='+opts.category+opts.filter,
                 headers:  {Accept: 'application/json'}, 
             })
             .node('!.*', function(data){

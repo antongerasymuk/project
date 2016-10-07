@@ -1,4 +1,4 @@
-
+/*
 $('.btn-filter').on('click', function () {
     var $button = $(this);
     makeActive($button);
@@ -40,4 +40,4 @@ var Filter = {
             }
         });
     }
-};
+};*/

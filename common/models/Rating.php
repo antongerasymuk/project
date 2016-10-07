@@ -45,13 +45,4 @@ class Rating extends \yii\db\ActiveRecord
             'mark' => 'Mark',
         ];
     }
-
-    public static function getArr()
-    {
-        $ratingsData = Rating::find()
-                                   ->select('id, title')
-                                   ->asArray()
-                                   ->all();
-        return ArrayHelper::map($ratingsData, 'id', 'title');
-    }
 }

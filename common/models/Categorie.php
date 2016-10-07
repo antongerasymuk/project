@@ -45,18 +45,12 @@ class Categorie extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getArr()
-    {
-        $categoriesData = Categorie::find()
-                             ->select('id, title')
-                             ->asArray()
-                             ->all();
-        return ArrayHelper::map($categoriesData, 'id', 'title');
-    }
-
     public static function getForNav()
     {
-        $categories = Categorie::find()->all();
+        // cached
+        $categories = Categorie::getDb()->cache(function ($db){
+            return Categorie::find()->all();
+        });
 
         $items = [];
 

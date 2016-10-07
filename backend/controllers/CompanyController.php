@@ -8,6 +8,7 @@ use common\models\DepositMethod;
 use common\models\Director;
 use common\models\License;
 use common\models\Minuse;
+use common\models\Plus;
 use common\models\Pros;
 use common\models\Rating;
 use common\models\Review;
@@ -50,9 +51,22 @@ class CompanyController extends BackEndController
                 if($model->save()){
                     $logoFile->saveAs($path);
 
-                    //safe related reviews
-                    foreach ($model->reviewIds as $id) {
-                        $model->link('reviews', Review::findOne(['id' => $id]));
+                    //safe company reviews
+//                    foreach ($model->reviewIds as $id) {
+//                        $model->link('reviews', Review::findOne(['id' => $id]));
+//                    }
+                    if (!empty($model->reviewIds)) {
+                        foreach ($model->reviewIds as $id) {
+                            $review = Review::findOne($id);
+                            $review->company_id = $model->id;
+                            $review->update();
+                        }
+                    }
+                    // safe company licenses
+                    if (!empty($model->licenseIds)) {
+                        foreach ($model->licenseIds as $id) {
+                            $model->link('licenses', License::findOne($id));
+                        }
                     }
                     // Set flash message
                     Yii::$app->getSession()->setFlash('success', 'Company created success');
@@ -86,7 +100,7 @@ class CompanyController extends BackEndController
             'review' => $review,
             'bonus' => new Bonus(),
             'rating' => new Rating(),
-            'plus' => new Pros(),
+            'plus' => new Plus(),
             'director' => new Director(),
             'minus' => new Minuse(),
             'deposit' => new DepositMethod(),

@@ -33,14 +33,15 @@ class CompanyController extends ActiveController
 
     public function actionIndex()
     {
-
         $modelClass = $this->modelClass;
 
-        return new ActiveDataProvider([
-            'query' => $modelClass::find()
+        $data = $modelClass::getDb()->cache(function($db) use ($modelClass){
+            return $modelClass::find()
                 ->with(['reviews.category', 'reviews.bonuses'])
                 ->asArray()
-        ]);
+                ->all();
+        });
 
+        return $data;
     }
 }

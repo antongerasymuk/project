@@ -41,14 +41,4 @@ class Plus extends \yii\db\ActiveRecord
             'title' => 'Title',
         ];
     }
-
-    public static function getArr()
-    {
-        $prosData = Categorie::find()
-            ->select('id, title')
-            ->asArray()
-            ->all();
-
-        return ArrayHelper::map($prosData, 'id', 'title');
-    }
 }

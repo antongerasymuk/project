@@ -44,13 +44,6 @@ class Gallery extends \yii\db\ActiveRecord
         ];
     }
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
-
     public static function upload(array $files)
     {
         $galleryIds = [];

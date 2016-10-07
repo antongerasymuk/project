@@ -87,7 +87,7 @@ class BonusController extends ActiveController
                                 break;
                         }
                     }
-                }, 'ratings', 'bonuses.oses'])
+                }, 'ratings'])
                 ->andWhere(['type' => Review::REVIEW_TYPE])
                 ->asArray();
 
@@ -98,7 +98,7 @@ class BonusController extends ActiveController
             }
 
             if ((int)$os_id) {
-                $bonuses->innerJoinWith('oses')
+                $bonuses->innerJoinWith('bonuses.oses')
                     ->andWhere(['oses.id' => $os_id]);
             }
 
@@ -107,36 +107,43 @@ class BonusController extends ActiveController
                         ->andWhere(['countries.id' => $country_id]);
             }
         }
-        $data = new ActiveDataProvider([
-            'query' => $bonuses
-        ]);
 
-        $data = $data->query->all();
-
-//        return $data;
-        $data = $this->calcRating($data);
-
-        usort($data, function($a, $b){
-            if ($a['ratings'] < $b['ratings']) return 1;
-            if ($a['ratings'] > $b['ratings']) return -1;
-
-            return 0;
+        $data =  $modelClass::getDb()->cache(function($db) use ($bonuses){
+            return $bonuses->all();
         });
 
-        $bonuses = $this->normalize($this->sortRank($data));
+        $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_'.(int)$sort_by);
 
-        if ((int)$sort_by) {
-            //
-            switch ($sort_by) {
-                // Sort by top bonus %
-                case 1 :
-                    $bonuses = $this->sortByPercent($bonuses);
-                    break;
-                // Sort by max bonus
-                case 2 :
-                    $bonuses = $this->sortByPrice($bonuses);
-                    break;
+        if ($bonusesCache === false) {
+            $data = $this->calcRating($data);
+
+            usort($data, function($a, $b){
+                if ($a['ratings'] < $b['ratings']) return 1;
+                if ($a['ratings'] > $b['ratings']) return -1;
+
+                return 0;
+            });
+
+            $bonuses = $this->normalize($this->sortRank($data));
+
+            if ((int)$sort_by) {
+                //
+                switch ($sort_by) {
+                    // Sort by top bonus %
+                    case 1 :
+                        $bonuses = $this->sortByPercent($bonuses);
+                        break;
+                    // Sort by max bonus
+                    case 2 :
+                        $bonuses = $this->sortByPrice($bonuses);
+                        break;
+                }
             }
+
+            // cached sorted bonuses
+            Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses);
+        } else {
+            $bonuses = $bonusesCache;
         }
 
         return array_slice($bonuses, (int)$offset, (int)$limit);

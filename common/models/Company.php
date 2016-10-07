@@ -21,7 +21,6 @@ class Company extends \yii\db\ActiveRecord
 {
     public $reviewIds;
     public $logoFile;
-    public $directorId;
     public $licenseIds;
 	/**
 	 * @inheritdoc
@@ -37,18 +36,11 @@ class Company extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['description'], 'string'],
-			[['created_at', 'updated_at'], 'integer'],
-			[['title'], 'string', 'max' => 50],
-			[['bg_color'], 'string', 'max' => 7],
-            [['logo'], 'string', 'max' => 255],
-            [['site_url'], 'string', 'max' => 255],
-            [['rating'], 'double', 'min' => 1, 'max' => 10],
-            [['rating'], 'required'],
-            [['reviewIds', 'licenseIds'], 'default', 'value' => []],
-            [['directorId'], 'integer', 'min' => 1],
-            [['logoFile'], 'safe'],
-            [['logoFile'], 'file', 'extensions'=>'jpg, gif, png'],
+			[['title', 'director_id', 'address', 'rating'], 'required'],
+            ['rating', 'double'],
+            [['description'], 'string'],
+            [['bg_color'], 'default', 'value' => '#000'],
+            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png']
 		];
 	}
 
@@ -64,18 +56,17 @@ class Company extends \yii\db\ActiveRecord
 			'bg_color' => 'Bg Color',
 			'logo' => 'Logo',
 			'site_url' => 'Site Url',
-			'created_at' => 'Created At',
-			'updated_at' => 'Updated At',
+            'director_id' => 'Director'
 		];
 	}
 
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            TimestampBehavior::className(),
+//        ];
+//    }
 
     // for relation with reviews
     public function getReviews()

@@ -1,16 +1,17 @@
 <?php
 /**
  * @var $model \common\models\Review
- * @var $bonus \common\models\Bonuse
+ * @var $bonus \common\models\Bonus
  */
-use dosamigos\fileinput\BootstrapFileInput;
 use dosamigos\tinymce\TinyMce;
 use kartik\select2\Select2;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
+use \common\helpers\ModelMapHelper;
+use \common\models\Plus;
 ?>
 
-<?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]);?>
 <div id="review-create-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -38,8 +39,8 @@ use yii\bootstrap\Html;
                         ]
                     ])
                     ?>
-                    <?= $form->field($model, 'categoryId')->widget(Select2::classname(), [
-                        'data' => \common\models\Categorie::getArr(),
+                    <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
+                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Categorie::class),
                         'language' => 'en',
                         'options' => ['placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -48,7 +49,17 @@ use yii\bootstrap\Html;
                     ])->label('Category');
                     ?>
 
+                    <?= $form->field($model, 'type')
+                        ->checkbox([
+                            'uncheck' => \common\models\Review::REVIEW_TYPE,
+                            'value' => \common\models\Review::COMPANY_TYPE]
+                        )
+                        ->label('Company review?');
+                    ?>
+
+                    <?= $form->field($model, 'logoFile')->fileInput() ?>
                     <?= $form->field($model, 'previewFile')->fileInput() ?>
+                    <?= $form->field($model, 'preview_title')->textInput() ?>
                     <?= $form->field($model, 'address')->widget(TinyMce::className(), [
                         'options'       => ['rows' => 6],
                         'language'      => 'es',
@@ -63,7 +74,7 @@ use yii\bootstrap\Html;
                     ])
                     ?>
                     <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
-                        'data' => \common\models\Bonus::getArr(),
+                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -73,7 +84,7 @@ use yii\bootstrap\Html;
                     ?>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bonus-create-modal">+</button>
                     <?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
-                        'data' => \common\models\Rating::getArr(),
+                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Rating::class),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -84,7 +95,7 @@ use yii\bootstrap\Html;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rating-create-modal">+</button>
 
                     <?= $form->field($model, 'plusIds')->widget(Select2::classname(), [
-                        'data' => \common\models\Pros::getArr(),
+                        'data' => ModelMapHelper::getIdTitleMap(Plus::class),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -95,7 +106,7 @@ use yii\bootstrap\Html;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#plus-create-modal">+</button>
 
                     <?= $form->field($model, 'minusIds')->widget(Select2::classname(), [
-                        'data' => \common\models\Minuse::getArr(),
+                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Minuse::class),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -106,7 +117,7 @@ use yii\bootstrap\Html;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#minus-create-modal">+</button>
 
                     <?= $form->field($model, 'depositIds')->widget(Select2::classname(), [
-                        'data' => \common\models\DepositMethod::getArr(),
+                        'data' => ModelMapHelper::getIdTitleMap(\common\models\DepositMethod::class),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
@@ -117,7 +128,7 @@ use yii\bootstrap\Html;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deposit-create-modal">+</button>
 
                     <?= $form->field($model, 'osIds')->widget(Select2::classname(), [
-                        'data' => \common\models\Os::getArr(),
+                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Os::class),
                         'language' => 'en',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [

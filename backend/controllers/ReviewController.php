@@ -34,16 +34,19 @@ class ReviewController extends BackEndController
         if ($model->load(Yii::$app->request->post())) {
             $params = Yii::$app->params;
 
-            $previewFile = UploadedFile::getInstance($model, 'previewFile');
+            $model->previewFile = UploadedFile::getInstance($model, 'previewFile');
+            $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
 
-            if ($previewFile) {
-                $path = Url::to($params['uploadPath']) . $previewFile->baseName . '.' . $previewFile->extension;
-
+            if ($model->previewFile && $model->logoFile) {
+                $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . '.' . $model->previewFile->extension;
+                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 // store the source file name
-                $model->preview = $params['uploadUrl'] . $previewFile->baseName . '.' . $previewFile->extension;
+                $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension;
+                $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
                 if($model->save()) {
-                    $previewFile->saveAs($path);
+                    $model->previewFile->saveAs($previewPath);
+                    $model->logoFile->saveAs($logoPath);
                     // save relations
 
                     $galleryFiles = UploadedFile::getInstances($model, 'gallery');
@@ -54,36 +57,54 @@ class ReviewController extends BackEndController
                         $galleryIds = Gallery::upload($galleryFiles);
                     }
 
-                    foreach ($model->bonusIds as $id) {
-                        $model->link('bonuses', Bonus::findOne(['id' => $id]));
+                    if (!empty($model->bonusIds)) {
+                        foreach ($model->bonusIds as $id) {
+                            $bonus = Bonus::findOne($id);
+                            $bonus->review_id = $model->id;
+                            $bonus->update();
+                        }
                     }
 
-                    foreach ($model->ratingIds as $id) {
-                        $model->link('ratings', Rating::findOne(['id' => $id]));
+                    if (!empty($model->ratingIds)) {
+                        foreach ($model->ratingIds as $id) {
+                            $model->link('ratings', Rating::findOne(['id' => $id]));
+                        }
                     }
 
-                    foreach ($model->plusIds as $id) {
-                        $model->link('pros', Pros::findOne(['id' => $id]));
+                    if (!empty($model->plusIds)) {
+                        foreach ($model->plusIds as $id) {
+                            $model->link('pluses', Plus::findOne(['id' => $id]));
+                        }
                     }
 
-                    foreach ($model->minusIds as $id) {
-                        $model->link('minuses', Minuse::findOne(['id' => $id]));
+                    if (!empty($model->minusIds)) {
+                        foreach ($model->minusIds as $id) {
+                            $model->link('minuses', Minuse::findOne(['id' => $id]));
+                        }
                     }
 
-                    foreach ($model->depositIds as $id) {
-                        $model->load('deposits', DepositMethod::findOne(['id' => $id]));
+                    if (!empty($model->depositIds)) {
+                        foreach ($model->depositIds as $id) {
+                            $model->load('deposits', DepositMethod::findOne(['id' => $id]));
+                        }
                     }
 
-                    foreach ($model->osIds as $id) {
-                        $model->load('oses', Os::findOne(['id' => $id]));
+                    if (!empty($model->osIds)) {
+                        foreach ($model->osIds as $id) {
+                            $model->load('oses', Os::findOne(['id' => $id]));
+                        }
                     }
 
-                    foreach ($model->allowedIds as $id) {
-                        $model->load('allowed', Country::findOne(['id' => $id]));
+                    if (!empty($model->allowedIds)) {
+                        foreach ($model->allowedIds as $id) {
+                            $model->load('allowed', Country::findOne(['id' => $id]));
+                        }
                     }
 
-                    foreach ($model->deniedIds as $id) {
-                        $model->load('denied', Country::findOne(['id' => $id]));
+                    if (!empty($model->deniedIds)) {
+                        foreach ($model->deniedIds as $id) {
+                            $model->load('denied', Country::findOne(['id' => $id]));
+                        }
                     }
                 }
             } else {
@@ -95,9 +116,8 @@ class ReviewController extends BackEndController
             return [
                 'success' => $model->id,
                 'item' => [
-                    'id' => $model->id,
+                    'id' => $model->getErrors(),
                     'value' => $model->title,
-                    'gallery' => $galleryIds
                 ]
             ];
         }

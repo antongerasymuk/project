@@ -36,6 +36,8 @@ use yii\bootstrap\Html;
                         ]
                     ])
                     ?>
+                    <?= $form->field($model, 'percent')->textInput() ?>
+                    <?= $form->field($model, 'currency')->textInput() ?>
                     <?= $form->field($model, 'logoFile')->fileInput() ?>
                     <?= $form->field($model, 'price')->textInput() ?>
                     <?= $form->field($model, 'code')->textInput() ?>

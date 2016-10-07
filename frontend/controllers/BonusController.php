@@ -117,9 +117,11 @@ class BonusController extends ActiveController
         $data =  $modelClass::getDb()->cache(function($db) use ($bonuses){
             return $bonuses->all();
         });
+        $data = $bonuses->all();
 
         $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_'.(int)$sort_by);
 
+        $bonusesCache = false;
         if ($bonusesCache === false) {
             $data = $this->calcRating($data);
 

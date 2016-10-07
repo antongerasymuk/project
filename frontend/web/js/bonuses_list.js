@@ -33,7 +33,7 @@ riot.tag2('bonuses-filter-list',
     {
         os = '\{"mac":"mac","windows":"windows", "android":"android"\}';
         console.log("MY");
-        //console.log(opts.filter);
+        console.log(opts.filter);
         var self = this;
         self.i = 0;
         self.bonuses_list = [];

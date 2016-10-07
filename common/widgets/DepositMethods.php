@@ -26,7 +26,7 @@ class DepositMethods extends Widget
             $options .= Html::tag('option', $method['title'], ['option' => $method['id']]);
         }
 
-        $html = Html::tag('select', $options, ['class' => 'f-select', 'style' => 'width: 160px;']);
+        $html = Html::tag('select', $options, ['class' => 'f-select', 'id' => 'banking', 'style' => 'width: 160px;']);
 
         echo $html;
     }

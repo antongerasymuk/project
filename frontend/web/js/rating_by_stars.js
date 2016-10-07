@@ -7,6 +7,6 @@ opts.rating_array[i] = 'full';
 if (opts.rating%2!=0) {
 opts.rating_array[parseInt(opts.rating/2)] ='half';
 }
-console.log(opts.rating_array);
+//console.log(opts.rating_array);
 });
 riot.mount('rating-by-stars', {})

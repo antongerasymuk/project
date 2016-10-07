@@ -42,6 +42,11 @@ class CompanyController extends ActiveController
                 ->all();
         });
 
+        return $modelClass::find()
+                          ->with(['reviews.category', 'reviews.bonuses'])
+                          ->asArray()
+                          ->all();
+
         return $data;
     }
 }

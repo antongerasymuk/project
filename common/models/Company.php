@@ -38,6 +38,7 @@ class Company extends \yii\db\ActiveRecord
 		return [
 			[['title', 'director_id', 'address', 'rating'], 'required'],
             ['rating', 'double'],
+            [['reviewIds', 'licenseIds'], 'safe'],
             [['description'], 'string'],
             [['bg_color'], 'default', 'value' => '#000'],
             [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png']
@@ -72,6 +73,17 @@ class Company extends \yii\db\ActiveRecord
     public function getReviews()
     {
         return $this->hasMany(Review::className(), ['company_id' => 'id']);
+    }
+
+    public function getDirector()
+    {
+        return $this->hasOne(Director::className(), ['director_id' => 'id']);
+    }
+
+    public function getLicenses()
+    {
+        return $this->hasMany(License::className(), ['id' => 'license_id'])
+            ->viaTable('company_license', ['company_id' => 'id']);
     }
 
     public static function getRelatedReviews($company_id, $current_review_id)

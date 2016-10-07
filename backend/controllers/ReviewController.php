@@ -61,7 +61,7 @@ class ReviewController extends BackEndController
                         foreach ($model->bonusIds as $id) {
                             $bonus = Bonus::findOne($id);
                             $bonus->review_id = $model->id;
-                            $bonus->update();
+                            $bonus->update(true, ['review_id']);
                         }
                     }
 
@@ -116,7 +116,7 @@ class ReviewController extends BackEndController
             return [
                 'success' => $model->id,
                 'item' => [
-                    'id' => $model->getErrors(),
+                    'id' => $model->id,
                     'value' => $model->title,
                 ]
             ];

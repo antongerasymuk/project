@@ -21,6 +21,7 @@ class Bonus extends \yii\db\ActiveRecord
 {
     const MAIN = 1;
     public $logoFile;
+    public $reviewIds;
     /**
      * @inheritdoc
      */
@@ -38,6 +39,8 @@ class Bonus extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
+            [['reviewIds'], 'safe'],
+            [['review_id'], 'integer'],
             [['percent'], 'number'],
             [['currency'], 'string', 'max' => 1],
             [['type'], 'default', 'value' => 0],

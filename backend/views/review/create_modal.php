@@ -64,6 +64,11 @@ use \common\models\Plus;
                         'options'       => ['rows' => 6],
                         'language'      => 'es',
                         'clientOptions' => [
+                            'setup' => 'function(editor) {
+                                editor.on("blur", function(e) {
+                                    console.log("blur");
+                                });
+                            }',
                             'plugins' => [
                                 "advlist autolink lists link charmap print preview anchor",
                                 "searchreplace visualblocks code fullscreen",

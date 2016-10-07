@@ -61,9 +61,12 @@ use \common\models\Plus;
                     <?= $form->field($model, 'previewFile')->fileInput() ?>
                     <?= $form->field($model, 'preview_title')->textInput() ?>
                     <?= $form->field($model, 'address')->widget(TinyMce::className(), [
-                        'options'       => ['rows' => 6],
+                        'options'       => [
+                            'rows' => 6,
+                        ],
                         'language'      => 'es',
                         'clientOptions' => [
+                            "init_instance_callback" => "reviewAddressCallback",
                             'plugins' => [
                                 "advlist autolink lists link charmap print preview anchor",
                                 "searchreplace visualblocks code fullscreen",

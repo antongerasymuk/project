@@ -88,14 +88,18 @@ function makeFilter(object) {
         key = "&os_id=";
         break;
     }
+    console.log('key');
+    console.log(key);
     var filter_string = $('#bonuses-filter-list').attr('filter');
-    filter_string = filter_string.replace(new RegExp("&"+key+"\\d+?&"), '&'); 
-    filter_string = filter_string.replace(new RegExp("&"+key+"\\d+"), ''); 
+    filter_string = filter_string.replace(new RegExp(key+"\\d+?&"), '&'); 
+    filter_string = filter_string.replace(new RegExp(key+"\\d+"), ''); 
     filter_string = filter_string + key + object.attr("data-filter");
     return filter_string;
 }
 }
 function makeFilterSelector(key,value) {
+
+
  var current_filter_string = $('#bonuses-filter-list').attr('filter'); 
  current_filter_string = current_filter_string.replace(new RegExp("&" + key + "=\\d+?&"), '&'); 
  current_filter_string = current_filter_string.replace(new RegExp("&" + key + "=\\d+"), ''); 

@@ -1,5 +1,7 @@
 $(document).ready(function(){
-
+    tinyMCE.EditorManager.get('company-address').blur(function (){
+        console.log('Company address blur');
+    });
 });
 // Create bonus event
 $('#bonus-create').on('click', function (e) {

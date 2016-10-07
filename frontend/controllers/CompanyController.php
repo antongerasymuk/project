@@ -35,17 +35,14 @@ class CompanyController extends ActiveController
     {
         $modelClass = $this->modelClass;
 
+        $dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM companies']);
+
         $data = $modelClass::getDb()->cache(function($db) use ($modelClass){
             return $modelClass::find()
                 ->with(['reviews.category', 'reviews.bonuses'])
                 ->asArray()
                 ->all();
-        });
-
-        return $modelClass::find()
-                          ->with(['reviews.category', 'reviews.bonuses'])
-                          ->asArray()
-                          ->all();
+        }, 0, $dependency);
 
         return $data;
     }

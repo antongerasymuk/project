@@ -79,7 +79,7 @@ class BonusController extends ActiveController
                 ->with(['bonuses' => function($query) use ($filter_by, $os_id){
                     if ((int)$os_id) {
                         $query->innerJoinWith('oses')
-                                ->where(['oses.id' => $os_id]);
+                     ->where(['oses.id' => $os_id]);;
                     } else {
                         $query->with('oses');
                     }
@@ -98,10 +98,10 @@ class BonusController extends ActiveController
                 ->andWhere(['type' => Review::REVIEW_TYPE])
                 ->asArray();
 
-            if ((int)$os_id) {
-                $bonuses->innerJoinWith('bonuses.oses')
-                      ->where(['oses.id' => $os_id]);
-            }
+           // if ((int)$os_id) {
+             //   $bonuses->innerJoinWith('bonuses.oses')
+              //        ->where(['oses.id' => $os_id]);
+            //}
 
             if ((int)$deposit_id) {
                 $bonuses->innerJoinWith('deposits')

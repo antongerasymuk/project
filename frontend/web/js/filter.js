@@ -1,6 +1,9 @@
 
-
-get = JSON.parse($('#bonuses-filter-list').attr('get'));
+if ($('#bonuses-filter-list').attr('get')) {
+    get = JSON.parse($('#bonuses-filter-list').attr('get'));
+} else {
+    get = '';
+}
 $.each(get , function( index, value ) {
    var key;
    switch (index) {

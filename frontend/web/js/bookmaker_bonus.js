@@ -1,6 +1,6 @@
 
 riot.tag2('bookmaker-bonus', '<div class="item">'+
-   '<div class="tit"><a href="#">{opts.title}</a></div>'+
+   '<div class="tit"><a href="{opts.company_url}">{opts.title}</a></div>'+
     '<ul>'+
      '<li each="{ name, value in opts.prices }">'+
      '<a href="/site/review?id={value.review_id}">{name}</a>: <span>£{value.price}</span>'+
@@ -8,6 +8,17 @@ riot.tag2('bookmaker-bonus', '<div class="item">'+
     '</ul></div>', '', '', function(opts) {
     console.log(JSON.stringify(opts));
     opts.prices = {};
+   opts.company_url = '';
+
+   for (var i = 0; i < opts.reviews.length; i++) {
+          // 2 - it's company review type
+
+        if (opts.reviews[i].type == 2) {
+            opts.company_url = '/site/review?id=' + opts.reviews[i].id;
+        }
+   }
+
+
     opts.title  = "";
     for (var index = 0; index < opts.reviews.length; index++) {
        if (opts.reviews[index].category) {

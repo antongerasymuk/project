@@ -29,7 +29,7 @@ AppAsset::register($this);
 						<div class="row">
 
 							<div class="col-sm-3">
-								<div class="logo"><a href="<?= Yii::$app->getHomeUrl() ?>"><img src="images/logo.png" alt=""></a></div>
+								<div class="logo"><a href="<?= Yii::$app->getHomeUrl() ?>"><img src="/images/logo.png" alt=""></a></div>
 							</div>
 
 							<div class="col-sm-9">
@@ -66,7 +66,9 @@ AppAsset::register($this);
 					<div class="row">
 						<div class="col-md-9 col-sm-8 col-xs-12">
 							<nav class="footer-menu clearfix">
-								<?= \common\widgets\FooterNav::widget() ?>
+								<?= \common\widgets\FooterNav::widget([
+									'items' => \common\models\Site::getForOther()['footer']
+									]); ?>
 							</nav>
 
 							<div class="footer-info">

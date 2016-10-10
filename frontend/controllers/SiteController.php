@@ -31,6 +31,7 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 300,
@@ -40,6 +41,7 @@ class SiteController extends Controller
                     'sql' => 'SELECT COUNT(*) FROM categories',
                 ],
             ],
+
             'access' => [
                 'class' => AccessControl::className(),
                 'only'  => ['logout', 'signup'],
@@ -97,9 +99,15 @@ class SiteController extends Controller
 
    public function actionPage($category,$slug)
    {
-      $site = Site::find()
-      ->where(['slug' => $slug, 'category' => $category])
-      ->asArray()->one();
+      $modelClass = 'common\models\Site';
+      $dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM sites']);
+      
+    //  $site =  $modelClass::getDb()->cache(function($db) use ($modelClass){ return $modelClass::find()
+    //  ->where(['slug' => $slug, 'category' => $category])
+    //  ->asArray()->one();  
+    // }, 0, $dependency);
+     $site = Site::find()->where(['slug' => $slug, 'category' => $category])->asArray()->one();  
+  
        $this->layout = "main";
 
        return $this->render('page' ,['content' => $site['content'], 'title' => $site['title']]);
@@ -321,7 +329,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionCategory($id)
+    public function actionCategory($id = null)
     {
         $this->layout                         = 'main_bonus';
         $title                                = Categorie::findOne($id)->title;

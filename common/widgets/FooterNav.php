@@ -7,25 +7,25 @@ use yii\bootstrap\Nav;
 class FooterNav extends Nav
 {
     
-    public $items = array();
+    
     public function init()
     {
-        
-        $this->items = array();
-        $this->items[]  = ['label' => 'Contact Us',
-                           'url' =>'/site/contact'];
-        $this->items[]  = '<li><span>·</span></li>';
-        $this->items[]  = ['label' => 'Privacy',
-                           'url' =>'/site/privacy'];
-        $this->items[]  = '<li><span>·</span></li>';
-        $this->items[]  = ['label' => 'Terms and Conditions',
-                           'url' =>'/site/terms_and_conditions'];
-        $this->items[]  = '<li><span>·</span></li>';
-        $this->items[]  = ['label' => 'Site Map',
-                           'url'=>'/site/sitemap'];
-        $this->items[]  = '<li><span>·</span></li>'; 
-        $this->items[]  = ['label' => 'Glossary',
-                           'url' =>'/site/glossary']; 
+ 
+     
+        for ($i = 1; $i < count($this->items); $i++) {
+        $inserted = array( '<li><span>·</span></li>' ); // Not necessarily an array
+        array_splice($this->items, $i, 0, $inserted); 
+        $i++;
+        }
+        foreach ( $this->items as $key => $item) {
+         
+        if (is_array ($this->items[$key])) {
+        $this->items[$key]['url'] = '/page/'.$this->items[$key]['url']; 
+        }
+               
+        }
+       
+       
 
         parent::init();
 

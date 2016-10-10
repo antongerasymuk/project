@@ -48,4 +48,22 @@ class Site extends \yii\db\ActiveRecord
             'category' => 'Category',
         ];
     }
+
+    public static function getForOther()
+    {
+        // cached
+        $sites = Site::find()->all();
+        //$sites = Site::getDb()->cache(function ($db){
+        //    return Site::find()->all();
+        //});
+      
+        $items = [];
+        foreach ($sites as $site) {
+            $items[$site->category][] = [
+                'label' => $site->title,
+                'url' =>  $site->category.'/'.$site->slug
+            ];
+        }
+        return $items;
+    }
 }

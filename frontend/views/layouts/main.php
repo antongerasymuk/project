@@ -74,7 +74,10 @@ AppAsset::register($this);
         <div class="row">
             <div class="col-md-9 col-sm-8 col-xs-12">
                 <nav class="footer-menu clearfix">
-                    <?= \common\widgets\FooterNav::widget() ?>
+                    
+                    <?= \common\widgets\FooterNav::widget([
+									'items' => \common\models\Site::getForOther()['footer']
+									]); ?>
                 </nav>
 
                 <div class="footer-info">
@@ -92,7 +95,7 @@ AppAsset::register($this);
 
             <div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
                 <div class="b-opened">
-                    <div class="cnt">5 7 3 8 9</div>
+                    <div class="cnt"><?= \common\models\Bonus::find()->count() ?></div>
                     <div class="txt">Bonuses opened</div>
                 </div>
 

@@ -44,6 +44,7 @@ class Review extends \yii\db\ActiveRecord
         return [
             [['title', 'category_id', 'preview_title', 'address', 'type'], 'required'],
             [['type'], 'default', 'value' => self::REVIEW_TYPE],
+            [['company_id'], 'integer'],
             [['type'], 'in', 'range' => [self::REVIEW_TYPE, self::COMPANY_TYPE]],
             [
                 ['previewFile', 'logoFile'],

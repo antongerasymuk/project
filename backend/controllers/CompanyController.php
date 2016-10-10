@@ -40,16 +40,16 @@ class CompanyController extends BackEndController
         if ($model->load(Yii::$app->request->post())) {
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
-            $logoFile = UploadedFile::getInstance($model, 'logoFile');
+            $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
 
-            if ($logoFile) {
-                $path = Url::to(Yii::$app->params['uploadPath']) . $logoFile->baseName . '.' . $logoFile->extension;
+            if ($model->logoFile) {
+                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
                 // store the source file name
-                $model->logo = Yii::$app->params['uploadUrl'] . $logoFile->baseName . '.' . $logoFile->extension;
+                $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
                 if($model->save()){
-                    $logoFile->saveAs($path);
+                    $model->logoFile->saveAs($path);
 
                     //safe company reviews
 //                    foreach ($model->reviewIds as $id) {
@@ -59,7 +59,7 @@ class CompanyController extends BackEndController
                         foreach ($model->reviewIds as $id) {
                             $review = Review::findOne($id);
                             $review->company_id = $model->id;
-                            $review->update();
+                            $review->update(true, ['company_id']);
                         }
                     }
                     // safe company licenses
@@ -112,6 +112,17 @@ class CompanyController extends BackEndController
 
 	public function actionEdit($id)
 	{
+	    $model = Company::findOne($id);
 
+        $model->licenseIds = ArrayHelper::map($model->getLicenses()
+            ->asArray()
+            ->all(),
+            'id, title',
+            'id', 'title'
+        );
+
+	    return $this->render('update', [
+            'model' => $model
+        ]);
 	}
 }

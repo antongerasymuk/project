@@ -42,7 +42,7 @@ $('#director-create').on('click', function (e) {
         formId: 'director-create-form',
         formIndex: 6,
         createActionUrl: '/backend/director/create',
-        select2Selector: '#company-directorid',
+        select2Selector: '#company-director_id',
         modalSelector: '#director-create-modal'
     });
 });
@@ -116,7 +116,6 @@ var Model = {
                 // !!!!!don't saved without this line
                 var form = document.getElementById(options.formId);
                 var formData = new FormData(form);
-                console.log(formData);
                 // submit form - saving file form via ajax
                 $.ajax({
                     url: options.createActionUrl,
@@ -131,7 +130,7 @@ var Model = {
                             Select2.appendItem(options.select2Selector, response.item);
                             form.reset();
 
-                            Swalt.success('Success', 'Review created');
+                            Swalt.success('Success', 'Created');
                             // clear file input
                             $form.find(options.fileSelector).text('No file selected');
                             $(options.modalSelector).modal('hide');
@@ -152,6 +151,7 @@ var Model = {
         });
 
         $form.yiiActiveForm('submitForm');
+        $form.data('yiiActiveForm').validated = false;
     }
 };
 
@@ -187,6 +187,7 @@ var Swalt = {
 
 var Select2 = {
   appendItem: function (blockId, options) {
+      console.log(options);
       var element = '<option value="'+ options.id +'">' + options.value + '</option>';
       $(blockId).append(element);
   }

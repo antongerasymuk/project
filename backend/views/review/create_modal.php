@@ -104,7 +104,7 @@ use \common\models\Plus;
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
-                    ])->label('Pros');
+                    ])->label('Pluses');
                     ?>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#plus-create-modal">+</button>
 

@@ -30,8 +30,8 @@ class Os extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['logoFile'], 'safe'],
-            [['logo'], 'string'],
-            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions' => ['jpg', 'png', 'gif']],
+            [['src'], 'string'],
+            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions' => ['jpg', 'png', 'gif'], 'except' => 'edit'],
             [['title'], 'string', 'max' => 10],
         ];
     }

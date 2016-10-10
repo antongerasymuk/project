@@ -1,27 +1,12 @@
 <?php
-use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Html;
-use dosamigos\tinymce\TinyMce;
-use yii\bootstrap\Modal;
-use kartik\select2\Select2;
-
 /**
- * @var $this \yii\web\View
- * @var $model \common\models\Company
- */
-$this->title = 'Oses';
-$this->params['breadcrumbs'][] = $this->title;
-?>
-
-<?php
-/**
- * @var $company \common\models\Company
+ * @var $review \common\models\Company
  */
 
 use yii\bootstrap\Alert;
 use yii\helpers\Url;
 
-$this->title = 'Oses';
+$this->title = 'Reviews';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -39,29 +24,30 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="row-fluid">
     <div class="box span12">
-        <a href="<?= Url::to(['os/create']) ?>" class="btn btn-primary">Create os</a>
         <div class="box-content">
             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                 <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Logo</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php if (empty($oses)) : ?>
+                <?php if (empty($reviews)) : ?>
                 <?php else : ?>
-                    <?php foreach ($oses as $os) : ?>
+                    <?php foreach ($reviews as $review) : ?>
                         <tr>
-                            <td><?= $os->title ?></td>
+                            <td><?= $review->title ?></td>
+                            <td class="center"><?= $review->description ?></td>
                             <td class="center">
-                                <?php if (!empty($os->src)) : ?>
-                                    <img src="<?= $os->src ?>" alt="<?= basename($os->src) ?>" class="company-logo">
+                                <?php if (!empty($review->logo)) : ?>
+                                    <img src="<?= $review->logo ?>" alt="<?= basename($review->logo) ?>" class="company-logo">
                                 <?php endif; ?>
                             </td>
                             <td class="center">
-                                <a class="btn btn-info" href="<?= Url::to(['os/edit', 'id' => $os->id]) ?>">
+                                <a class="btn btn-info" href="<?= Url::to(['review/edit', 'id' => $review->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
                                 <a class="btn btn-danger" href="#">

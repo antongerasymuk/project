@@ -21,45 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= \common\widgets\BonusesOtherItems::widget([
 									'items' => \common\models\Categorie::getForNav()
 									]) ?>
-
+        <?= \common\widgets\OtherItems::widget([
+									'items' => \common\models\Site::getForOther()
+									]) ?>
 			
-
-			<div class="item">
-				<div class="tit">Bookmaker Offers</div>
-				<ul>
-					<li><a href="#">Free Bets</a></li>
-					<li><a href="#">Free Bet Codes</a></li>
-				</ul>
-			</div>	
-
-			<div class="item">
-				<div class="tit">Navigation</div>
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About Us</a></li>
-					<li><a href="../page/navigation/policy_details">Privacy Policy</a></li>
-					<li><a href="#">Terms and Conditions</a></li>
-					<li><a href="#">Site Map</a></li>																														
-				</ul>
-			</div>	
-
-			<div class="item">
-				<div class="tit">Site Information</div>
-				<ul>
-					<li><a href="#">About Us</a></li>
-					<li><a href="#">Privacy Policy</a></li>
-					<li><a href="#">Terms and Conditions</a></li>
-					<li><a href="#">Conditions</a></li>
-					<li><a href="#">Glossary</a></li>																														
-				</ul>
-			</div>	
-
-			<div class="item">
-				<div class="tit">Other</div>
-				<ul>
-					<li><a href="#">Deposit Methods</a></li>																												
-				</ul>
-			</div>	
+				
 
 		</div> <!-- .bonuses-other-items -->
 	</div>

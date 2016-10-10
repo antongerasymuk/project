@@ -31,10 +31,10 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            [
-                'class' => 'yii\filters\PageCache',
-                'duration' => 300
-            ],
+           // [
+           //     'class' => 'yii\filters\PageCache',
+           //     'duration' => 300
+           // ],
             'access' => [
                 'class' => AccessControl::className(),
                 'only'  => ['logout', 'signup'],

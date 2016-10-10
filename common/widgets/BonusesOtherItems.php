@@ -19,8 +19,8 @@ class BonusesOtherItems extends Widget
                 <div class="tit">'.ucfirst($item['label']).' Bonuses</div>
                 <ul>
                     <li><a href="/'.$item['url'][0].'?id='.$item['url']['id'].'">'.ucfirst($item['label']).' Sites</a></li>
-                    <li><a href="#">No Deposit</a></li>
-                    <li><a href="#">Codes</a></li>
+                    <li><a href="/'.$item['url'][0].'?id='.$item['url']['id'].'&filter_by=0">No Deposit</a></li>
+                    <li><a href="/'.$item['url'][0].'?id='.$item['url']['id'].'&filter_by=2">Codes</a></li>
                 </ul>
                 </div>';
 

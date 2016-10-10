@@ -166,8 +166,6 @@ use \common\models\Plus;
 
 <?= Html::submitButton('Update', [
     'class' => 'btn btn-primary',
-    'id'    => 'review-create',
-    'name'  => 'review-button'
 ])
 ?>
 <?php ActiveForm::end(); ?>

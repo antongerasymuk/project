@@ -125,7 +125,10 @@ class ReviewController extends BackEndController
         return $this->render('create', ['model' => $model]);
     }
 
-    public function actionEdit()
+    public function actionEdit($id)
     {
+        $model = Review::findOne($id);
+
+        return $this->renderAjax('update', ['model' => $model]);
     }
 }

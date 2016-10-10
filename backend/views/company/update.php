@@ -9,7 +9,7 @@ use kartik\select2\Select2;
  * @var $this \yii\web\View
  * @var $model \common\models\Company
  */
-$this->title = 'Create company';
+$this->title = 'Edit company';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -22,11 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
 //        'yii\web\YiiAsset'
 //    ]
 //]);
-$this->registerJsFile('js/stan.custom.js', [
-    'depends' => [
-        'yii\web\YiiAsset'
-    ]
-]);
+//$this->registerJsFile('js/stan.custom.js', [
+//    'depends' => [
+//        'yii\web\YiiAsset'
+//    ]
+//]);
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -88,12 +88,12 @@ $this->registerJsFile('js/stan.custom.js', [
 ])->label('Licenses');
 ?>
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
-    'data' => [],
+    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Review::className()),
     'language' => 'en',
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
-    ],
+    ]
 ])->label('Reviews');
 ?>
 <div class="form-group">

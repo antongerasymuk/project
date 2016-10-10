@@ -41,7 +41,7 @@ class Company extends \yii\db\ActiveRecord
             [['reviewIds', 'licenseIds'], 'safe'],
             [['description'], 'string'],
             [['bg_color'], 'default', 'value' => '#000'],
-            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png']
+            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit']
 		];
 	}
 
@@ -101,5 +101,10 @@ class Company extends \yii\db\ActiveRecord
             ->where(['id' => $company_id])
             ->asArray()
             ->one();
+    }
+
+    public function scenarios()
+    {
+        return parent::scenarios();
     }
 }

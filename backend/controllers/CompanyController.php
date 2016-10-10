@@ -112,14 +112,60 @@ class CompanyController extends BackEndController
 
 	public function actionEdit($id)
 	{
-	    $model = Company::findOne($id);
+        $model = Company::findOne(['id' => $id]);
+        $model->scenario = 'edit';
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
+
+            if ($model->logoFile) {
+                // remove old logo file
+                unlink(Url::to('@frontend/web') . $model->logo);
+
+                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                // store the source file name
+                $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $model->logoFile->saveAs($path);
+            }
+
+            if ($model->save()) {
+                $model->unlinkAll('licenses', true);
+                $model->unlinkAll('reviews', true);
+
+                $companyId = $model->id;
+
+                if (!empty($model->reviewIds)) {
+                    foreach ($model->reviewIds as $id) {
+                        $review = Review::findOne($id);
+                        $review->company_id = $companyId;
+                        $review->update(true, ['company_id']);
+                    }
+                }
+
+                if (!empty($model->licenseIds)) {
+                    foreach ($model->licenseIds as $id) {
+                        $model->link('licenses', License::findOne($id));
+                    }
+                }
+
+                Yii::$app->getSession()->setFlash('success', 'Company updated success');
+
+                return $this->redirect(['company/index']);
+            }
+        }
 
         $model->licenseIds = ArrayHelper::map($model->getLicenses()
+            ->select('id, title')
             ->asArray()
             ->all(),
-            'id, title',
-            'id', 'title'
+            'id', 'id'
         );
+
+        $model->reviewIds = $model->getReviews()
+                       ->select('id, title')
+                       ->asArray()
+                       ->all();
+        $model->reviewIds = ArrayHelper::map($model->reviewIds, 'id', 'id');
 
 	    return $this->render('update', [
             'model' => $model

@@ -49,7 +49,8 @@ class AdminAsset extends AssetBundle
 		'js/jquery.sparkline.min.js',
 		'js/counter.js',
 		'js/retina.js',
-		'js/custom.js'
+		'js/custom.js',
+        'js/stan.custom.js'
 	];
 	public $depends = [
 		'yii\web\YiiAsset',

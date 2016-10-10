@@ -9,16 +9,16 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'assetsAutoCompress'],
+    'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
 //        'cache' => [
 //            'class' => 'yii\caching\ApcCache',
 //            'useApcu' => true
 //        ],
-        'assetsAutoCompress' => [
-            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
-        ],
+      //  'assetsAutoCompress' => [
+        //    'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+       // ],
         'geoip' => [
             'class' => 'lysenkobv\GeoIP\GeoIP'
         ],
@@ -57,7 +57,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'page/<category>/home' => '/',
+                'page/footer/contact' => '/site/contact',
+                'page/footer/sitemap' => '/site/sitemap',
                 'page/<category>/<slug>' => 'site/page',
+
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'company'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'bonus'],
             ],

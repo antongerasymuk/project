@@ -55,31 +55,25 @@ class BonusController extends ActiveController
     }
 
     public function actionIndex(
-        $category_id = null,
+        $category_id = 1,
         $sort_by = null,
         $filter_by = null,
         $country_id = null,
         $deposit_id = null,
         $os_id = null,
-        $limit = 10,
+        $limit = 15,
         $offset = 0
     )
     {
         $modelClass = $this->modelClass;
-
-        if ($category_id == null) {
-            $bonuses = $modelClass::find()
-                ->with('bonuses')
-                ->with('ratings')
-                ->with('bonuses.oses')
-                ->asArray();
-        } else {
-            $bonuses = $modelClass::find()
+        $dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM bonuses']);
+  
+            $bonuses =  $modelClass::find()
                 ->where(['category_id' => $category_id])
                 ->with(['bonuses' => function($query) use ($filter_by, $os_id){
                     if ((int)$os_id) {
                         $query->innerJoinWith('oses')
-                     ->where(['oses.id' => $os_id]);;
+                     ->where(['oses.id' => $os_id]);
                     } else {
                         $query->with('oses');
                     }
@@ -97,6 +91,7 @@ class BonusController extends ActiveController
                 }, 'ratings'])
                 ->andWhere(['type' => Review::REVIEW_TYPE])
                 ->asArray();
+            
 
            // if ((int)$os_id) {
              //   $bonuses->innerJoinWith('bonuses.oses')
@@ -112,13 +107,13 @@ class BonusController extends ActiveController
                 $bonuses->innerJoinWith('allowed')
                         ->andWhere(['countries.id' => $country_id]);
             }
-        }
+           
+        
 
         $data =  $modelClass::getDb()->cache(function($db) use ($bonuses){
             return $bonuses->all();
-        });
-        $data = $bonuses->all();
-
+        }, 0, $dependency);
+ 
         $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_'.(int)$sort_by);
 
         $bonusesCache = false;

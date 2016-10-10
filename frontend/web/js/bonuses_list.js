@@ -33,7 +33,7 @@ riot.tag2('bonuses-filter-list',
     {
         os = '\{"mac":"mac","windows":"windows", "android":"android"\}';
         console.log("MY");
-        console.log(opts.filter);
+        //console.log(opts.filter);
         var self = this;
         self.i = 0;
         self.bonuses_list = [];
@@ -41,9 +41,13 @@ riot.tag2('bonuses-filter-list',
             self.trigger('get');
         });
         this.on('get', function () {
-            console.log('/bonus?category_id='+opts.category+opts.filter);
-             oboe({
-                url: '/bonus?category_id='+opts.category+opts.filter,
+            opts.category_filter = '';
+            if(opts.category) {
+                opts.category_filter = 'category_id='+opts.category;
+            }
+            console.log('/bonus?'+opts.category_filter+opts.filter);
+            oboe({
+                url: '/bonus?'+opts.category_filter+opts.filter,
                 headers:  {Accept: 'application/json'}, 
             })
             .node('!.*', function(data){

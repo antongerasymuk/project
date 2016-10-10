@@ -34,6 +34,7 @@ class SiteController extends Controller
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 300,
+                'only' => ['index'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT COUNT(*) FROM categories',

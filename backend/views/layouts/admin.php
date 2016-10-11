@@ -100,7 +100,7 @@ AdminAsset::register( $this );
 						</li>
 						<li>
 							<a href="<?= Url::to(['review/index']) ?>">
-								<i class="icon-credit-card"></i>
+								<i class="icon-eye-open"></i>
 								<span class="hidden-tablet">Reviews</span>
 							</a>
 						</li>

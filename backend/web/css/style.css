@@ -2997,3 +2997,205 @@ ul.messagesList li span.date {
     max-height: calc(100vh - 210px);
     overflow-y: auto;
 }
+
+input[type="text"], input[type="password"] {
+    height: 34px;
+    line-height: 1.428571429;
+    padding: 6px 24px 6px 12px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    font-size: 14px;
+    outline: 0;
+}
+input[type="search"]{
+	margin: 0;
+}
+.navbar{
+border: none;
+}
+.navbar-inner{
+min-height: 50px;
+}
+.header-nav{
+text-align: center;
+line-height: 50px;
+}
+.box-header{
+height: 35px;
+}
+label{
+	margin: 15px 0;
+}
+.form-group{
+	margin: 0;
+}
+div.uploader{
+	width: auto;
+	margin-left: 15px;
+}
+div.uploader span.filename{
+	width: 190px;
+}
+.form-group.field-company-director_id.required {
+    width: 95%;
+    float: left;
+}
+.form-group.field-company-licenseids{
+	width: 95%;
+    float: left;
+}
+.form-group-director button[type="button"] {
+    border-radius: 4px !important;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+.form-group-license button[type="button"] {
+    border-radius: 4px !important;
+    margin-top: 60px;
+    margin-left: 20px;
+}
+.form-group.field-company-reviewids{
+	float: left;
+	width: 88%;
+}
+.form-group-reviews button[type="button"],
+.form-group-reviews button[type="submit"] {
+    border-radius: 4px !important;
+    margin-top: 50px;
+    margin-left: 20px;
+	float: left;
+}
+.form-group-reviews button[type="submit"]{
+	margin-left: 5px;
+}
+.select2-search--dropdown .select2-search__field{
+	 height: 34px;
+    line-height: 1.428571429;
+    padding: 6px 24px 6px 12px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    font-size: 14px;
+    outline: 0;
+}
+.select2-container--krajee .select2-search--dropdown .select2-search__field{
+	background: url(search.png) right 15px top 10px no-repeat #fff;
+}
+.dataTables_length select{
+	margin-right: 15px;
+	height: 34px !important;
+	border-radius: 4px;
+}
+.dataTables_filter input[type="text"]{
+	margin-left: 15px;
+}
+.dataTables_paginate.paging_bootstrap.pagination ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.dataTables_paginate.paging_bootstrap.pagination ul li{
+	display: inline-block;
+	margin: 0 5px;
+	font-weight: bold;
+    font-size: 13px;
+}
+.dataTables_paginate.paging_bootstrap.pagination ul li.prev,
+.dataTables_paginate.paging_bootstrap.pagination ul li.next{
+	background-color: #357ebd;
+    border-color: #3071a9;
+	border-radius: 4px;
+}
+.dataTables_paginate ul li a
+.dataTables_paginate ul li a{
+	display: block;
+}
+li.prev.disabled a,
+li.next.disabled a {
+    color: #fff;
+    padding: 8px 10px;
+    display: block;
+}
+.dataTable + .row-fluid > .span12 {
+    text-align: center !important;
+    margin: 0;
+}
+.dataTable {
+    border-collapse: collapse !important;
+	width: 100% !important; 
+}
+.dataTable td, .dataTable th{
+	text-align: center;
+	vertical-align: middle !important;
+}
+.dataTable > thead > tr > th{
+	border-bottom: none;
+}
+.dataTable > thead > tr > td{
+	border-bottom: none;
+}
+.dataTable td > img.company-logo {
+    width: 35%;
+    height: auto;
+}
+div#DataTables_Table_0_length,
+div#DataTables_Table_0_filter,
+div#DataTables_Table_0_info,
+.dataTables_paginate {
+    display: none;
+}
+.sweet-alert.showSweetAlert.visible fieldset > input[type="text"] {
+    display: none !important;
+	opacity: 0;
+}
+.colorpicker_rgb_r,
+.colorpicker_rgb_g,
+.colorpicker_rgb_b{
+	left: auto !important;
+	right: 10px !important;
+}
+.colorpicker-holder .colorpicker_rgb_r ,
+.colorpicker-holder .colorpicker_rgb_g ,
+.colorpicker-holder .colorpicker_rgb_b ,
+.colorpicker-holder .colorpicker_rgb_hex{
+    background-repeat: no-repeat;
+}
+.colorpicker_hex{
+	left: auto !important;
+	right: 40px !important;
+}
+.colorpicker input{
+	width: 85%;
+	background: transparent;
+    font-size: 12px;
+    border: none;
+	margin-right: 8px;
+	box-shadow: none;
+}
+.colorpicker_hex input{
+	margin-right: 2px;
+}
+.colorpicker_field{
+	width: 20%;
+}
+.colorpicker_hex{
+	width: 20%;
+}
+#company-bg_color-colorpicker-holder{
+	min-width: auto !important;
+	max-width: 100% !important;
+	width: 356px;
+}
+.dropdown-menu{
+	max-width: 100%;
+}
+#company-bg_color-colorpicker-holder:after, 
+#company-bg_color-colorpicker-holder:before{
+	content: "" !important;
+	display: none !important;
+}

@@ -133,6 +133,10 @@ class ReviewController extends BackEndController
     {
         $model = Review::findOne($id);
 
+        if ($model->load(Yii::$app->request->post())) {
+            $model->scenarion = 'edit';
+        }
+
         $model->bonusIds = ArrayHelper::map($model
             ->getBonuses()
             ->select('id')

@@ -50,7 +50,8 @@ class Review extends \yii\db\ActiveRecord
                 ['previewFile', 'logoFile'],
                 'file',
                 'skipOnEmpty' => false,
-                'extensions' => ['jpg', 'png', 'gif']
+                'extensions' => ['jpg', 'png', 'gif'],
+                'except' => 'edit'
             ],
             [['gallery'], 'file', 'extensions' => ['jpg', 'png', 'gif']],
             [['preview', 'logo', 'preview_title', 'address'], 'string']

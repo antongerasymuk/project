@@ -47,9 +47,16 @@ function makeActive($button) {
 }
 
 $(document).ready(function() {
-
-    $('.close-filters').on('click', function () {
-       $('.h-filters').toggle();
+     $('.close-filters').on('click', function () {
+        $('.header-top').css('z-index' , '20');
+        if ($('.hpoker').height() != '260') {
+            $('.hpoker').animate({ 
+            height: "260"}, 300, function() {});
+            $('.h-filters').slideToggle( 300 );
+        } else {
+            $('.hpoker').height('auto');
+            $('.h-filters').slideToggle( 300 );
+        }
     });
 
     $(".f-select").change(function() { 

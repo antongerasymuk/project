@@ -24,6 +24,16 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        // test user
+        $this->insert('{{%user}}', [
+            'username' => 'admin',
+            'password_hash' => '$2y$13$lp4CYZELKF6W5vqwKHDvXuBzWf4akaPHfZDWhWcsBbisNu/a7KwlK', //admin999
+            'status' => \common\models\User::STATUS_ACTIVE,
+            'email' => 'admin',
+            'created_at' => 1476192012,
+            'updated_at' => 1476192012
+        ]);
     }
 
     public function down()

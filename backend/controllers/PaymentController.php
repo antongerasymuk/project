@@ -52,8 +52,8 @@ class PaymentController extends BackEndController
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
 
             if ($model->logoFile) {
+                unlink(Url::to('@frontend/web') . $model->logo);
                 $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
-
                 // store the source file name
                 $model->logo = Url::to(Yii::$app->params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 

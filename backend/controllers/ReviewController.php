@@ -146,12 +146,14 @@ class ReviewController extends BackEndController
             $params = Yii::$app->params;
 
             if ($model->previewFile) {
+                unlink(Url::to('@frontend/web') . $model->preview);
                 $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . '.' . $model->previewFile->extension;
                 $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension;
                 $model->previewFile->saveAs($previewPath);
             }
 
             if ($model->logoFile) {
+                unlink(Url::to('@frontend/web') . $model->logo);
                 $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 $model->logoFile->saveAs($logoPath);

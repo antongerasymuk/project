@@ -122,6 +122,18 @@ AdminAsset::register( $this );
                                 <span class="hidden-tablet">Review minuses</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="<?= Url::to(['license/index']) ?>">
+                                <i class="icon-lock"></i>
+                                <span class="hidden-tablet">Licenses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= Url::to(['director/index']) ?>">
+                                <i class="icon-user"></i>
+                                <span class="hidden-tablet">Directors</span>
+                            </a>
+                        </li>
 					</ul>
 				</div>
 			</div>

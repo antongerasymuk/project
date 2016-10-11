@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\helpers\ModelMapHelper;
 use common\models\Bonus;
 use common\models\Bonuse;
 use common\models\Company;
@@ -13,6 +14,7 @@ use common\models\Pros;
 use common\models\Rating;
 use common\models\Review;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
@@ -24,7 +26,9 @@ class ReviewController extends BackEndController
 {
     public function actionIndex()
     {
+        $reviews = Review::find()->all();
 
+        return $this->render('index', ['reviews' => $reviews]);
     }
 
     public function actionCreate()
@@ -125,7 +129,61 @@ class ReviewController extends BackEndController
         return $this->render('create', ['model' => $model]);
     }
 
-    public function actionEdit()
+    public function actionEdit($id)
     {
+        $model = Review::findOne($id);
+
+        $model->bonusIds = ArrayHelper::map($model
+            ->getBonuses()
+            ->select('id')
+            ->asArray()
+            ->all(), 'id', 'id');
+
+        $model->ratingIds = ArrayHelper::map($model
+            ->getRatings()
+            ->select('id')
+            ->asArray()
+            ->all(), 'id', 'id');
+
+        $model->plusIds = ArrayHelper::map($model
+            ->getPluses()
+            ->select('id')
+            ->asArray()
+            ->all(), 'id', 'id');
+
+        $model->minusIds = ArrayHelper::map($model
+            ->getMinuses()
+            ->select('id')
+            ->asArray()
+            ->all(), 'id', 'id');
+
+        $model->depositIds = ArrayHelper::map($model
+            ->getDeposits()
+            ->select('id')
+            ->asArray()
+            ->all(), 'id', 'id');
+
+        $model->osIds = ArrayHelper::map($model
+            ->getOses()
+            ->select('id')
+            ->asArray()
+            ->all(), 'id', 'id');
+
+        $model->allowedIds = ArrayHelper::map($model
+            ->getAllowed()
+            ->select('id')
+            ->asArray()
+            ->all(), 'id', 'id');
+
+        $model->deniedIds = ArrayHelper::map($model
+            ->getDenied()
+            ->select('id')
+            ->asArray()
+            ->all(), 'id', 'id');
+
+//        var_dump($model->bonusIds);
+//        var_dump(ModelMapHelper::getIdTitleMap(\common\models\Bonus::class));
+
+        return $this->render('update', ['model' => $model]);
     }
 }

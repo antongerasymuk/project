@@ -99,6 +99,12 @@ AdminAsset::register( $this );
 							</a>
 						</li>
 						<li>
+							<a href="<?= Url::to(['review/index']) ?>">
+								<i class="icon-credit-card"></i>
+								<span class="hidden-tablet">Reviews</span>
+							</a>
+						</li>
+						<li>
 							<a href="<?= Url::to(['payment/index']) ?>">
 								<i class="icon-credit-card"></i>
 								<span class="hidden-tablet">Payment methods</span>

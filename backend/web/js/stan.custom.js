@@ -1,3 +1,10 @@
+var $eventSelect = $(".select13-hidden-accessible");
+
+$eventSelect.on("select2:open", function () {
+   console.log('Open');
+});
+
+
 // Create bonus event
 $('#bonus-create').on('click', function (e) {
     e.preventDefault();

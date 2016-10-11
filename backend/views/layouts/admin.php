@@ -110,6 +110,18 @@ AdminAsset::register( $this );
 								<span class="hidden-tablet">Payment methods</span>
 							</a>
 						</li>
+						<li>
+							<a href="<?= Url::to(['plus/index']) ?>">
+								<i class="icon-thumbs-up"></i>
+								<span class="hidden-tablet">Review pluses</span>
+							</a>
+						</li>
+                        <li>
+                            <a href="<?= Url::to(['minus/index']) ?>">
+                                <i class="icon-thumbs-down"></i>
+                                <span class="hidden-tablet">Review minuses</span>
+                            </a>
+                        </li>
 					</ul>
 				</div>
 			</div>

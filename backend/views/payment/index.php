@@ -49,12 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tr>
                             <td><?= $payment->title ?></td>
                             <td class="center">
-                                <img src="/<?= $payment->logo ?>">
+                                <img src="<?= $payment->logo ?>">
                             </td>
                             <td class="center">
-                                <a class="btn btn-success" href="#">
-                                    <i class="halflings-icon white zoom-in"></i>
-                                </a>
                                 <a class="btn btn-info" href="<?= Url::to(['payment/edit', 'id' => $payment->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>

@@ -30,10 +30,9 @@ class DepositMethod extends \yii\db\ActiveRecord
     {
         return [
             [['logo'], 'string', 'max' => 255],
-//            ['title', 'required'],
             [['title'], 'string', 'max' => 15],
-            [['logoFile'], 'safe'],
-            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png'],
+            [['logoFile'], 'safe', 'except' => 'edit'],
+            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit'],
         ];
     }
 

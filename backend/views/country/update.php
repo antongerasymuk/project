@@ -9,13 +9,13 @@ use kartik\select2\Select2;
  * @var $this \yii\web\View
  * @var $model \common\models\Company
  */
-$this->title = 'Create country';
+$this->title = 'Edit country';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'country-form']); ?>
 <?= $form->field($model, 'title')->textInput() ?>
 <div class="form-group">
-    <?= Html::submitButton('Create', ['class' => 'btn btn-primary', 'name' => 'country-button']) ?>
+    <?= Html::submitButton('Update', ['class' => 'btn btn-primary', 'name' => 'country-button']) ?>
 </div>
 <?php ActiveForm::end(); ?>

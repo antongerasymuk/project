@@ -27,15 +27,16 @@ class LicenseController extends BackEndController
             $params = Yii::$app->params;
 
             $model->licenseFile = UploadedFile::getInstance($model, 'licenseFile');
-            $path = Url::to($params['uploadPath']) . $model->licenseFile->baseName . '.' . $model->licenseFile->extension;
 
-            // store the source file name
-            $model->url = $params['uploadUrl'] . $model->licenseFile->baseName . '.' . $model->licenseFile->extension;
+            if ($model->licenseFile) {
+                unlink(Url::to('@frontend/web') . $model->url);
+                $path = Url::to($params['uploadPath']) . $model->licenseFile->baseName . '.' . $model->licenseFile->extension;
+                // store the source file name
+                $model->url = $params['uploadUrl'] . $model->licenseFile->baseName . '.' . $model->licenseFile->extension;
+                $model->licenseFile->saveAs($path);
+            }
 
             if ($model->save()) {
-                unlink(Url::to('@frontend/web') . $model->url);
-                $model->licenseFile->saveAs($path);
-
                 Yii::$app->getSession()->setFlash('success', 'License update success');
 
                 return $this->redirect(['license/index']);

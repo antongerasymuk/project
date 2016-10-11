@@ -11,7 +11,43 @@ use yii\web\UploadedFile;
  */
 class DirectorController extends BackEndController
 {
-    public function actionCreate()
+    public function actionIndex()
+    {
+        $directors = Director::find()->all();
+
+        return $this->render('index', ['directors' => $directors]);
+    }
+
+    public function actionEdit($id)
+    {
+        $model = Director::findOne($id);
+        $model->scenario = 'edit';
+
+        if ($model->load(Yii::$app->request->post())) {
+            $params = Yii::$app->params;
+
+            $model->photoFile = UploadedFile::getInstance($model, 'photoFile');
+
+            if ($model->photoFile) {
+                unlink(Url::to('@frontend/web') . $model->photo);
+                $path = Url::to($params['uploadPath']) . $model->photoFile->baseName . '.' . $model->photoFile->extension;
+
+                // store the source file name
+                $model->photo = $params['uploadUrl'] . $model->photoFile->baseName . '.' . $model->photoFile->extension;
+                $model->photoFile->saveAs($path);
+            }
+
+            if($model->save()) {
+                Yii::$app->getSession()->setFlash('success', 'Director update success');
+
+                return $this->redirect(['director/index']);
+            }
+        }
+
+        return $this->render('update', ['model' => $model]);
+    }
+
+    public function actionCreate($isAjax = true)
     {
         $model = new Director();
 
@@ -24,16 +60,25 @@ class DirectorController extends BackEndController
             // store the source file name
             $model->photo = $params['uploadUrl'] . $photoFile->baseName . '.' . $photoFile->extension;
 
-            if($model->save()) $photoFile->saveAs($path);
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if($model->save()) {
+                $photoFile->saveAs($path);
 
-            return [
-                'success' => $model->id,
-                'item' => [
-                    'id' => $model->id,
-                    'value' => $model->title
-                ]
-            ];
+                if ($isAjax) {
+                    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+                    return [
+                        'success' => $model->id,
+                        'item' => [
+                            'id' => $model->id,
+                            'value' => $model->title
+                        ]
+                    ];
+                }
+
+                Yii::$app->getSession()->setFlash('success', 'Director created success');
+
+                return $this->redirect(['director/index']);
+            }
         }
 
         return $this->render('create', ['model' => $model]);

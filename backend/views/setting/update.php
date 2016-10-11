@@ -9,16 +9,17 @@ use yii\bootstrap\Html;
 ?>
 
 <?php $form = ActiveForm::begin([]); ?>
-<?= $form->field($model, 'title')
+<?= $form->field($model, 'username')
          ->textInput(['autofocus' => true])
-         ->label('Title')
+         ->label('Login')
 ?>
-<?= $form->field($model, 'file_label')->textInput() ?>
-<?php if (!empty($model->url)) : ?>
-    <div class="form-group">
-        <a href="<?= $model->url ?>"><?= $model->file_label ?></a>
-    </div>
-<?php endif; ?>
-<?= $form->field($model, 'licenseFile')->fileInput() ?>
+<?= $form->field($model, 'password')
+         ->passwordInput()
+         ->label('Password')
+?>
+<?= $form->field($model, 'pass_confirm')
+         ->passwordInput()
+         ->label('Password confirm')
+?>
 <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
 <?php ActiveForm::end(); ?>

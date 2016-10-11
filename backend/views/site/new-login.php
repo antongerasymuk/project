@@ -54,17 +54,11 @@ $this->title = 'Login';
 						</span>
 					</div>
 					Remember me</label>
-
 				<div class="button-login">
 					<?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 				</div>
 				<div class="clearfix"></div>
-
 				<hr>
-				<h3>Forgot Password?</h3>
-				<p>
-					No problem, <a href="#">click here</a> to get a new password.
-				</p>
 			</fieldset>
 		<?php ActiveForm::end(); ?>
 	</div><!--/span-->

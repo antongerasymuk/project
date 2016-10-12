@@ -33,6 +33,7 @@ class Site extends \yii\db\ActiveRecord
             [['content'], 'required'],
             [['title', 'slug'], 'string', 'max' => 50],
             [['category'], 'string', 'max' => 20],
+            [['content'], 'string'],
         ];
     }
 

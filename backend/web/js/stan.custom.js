@@ -133,6 +133,8 @@ var Model = {
             // !!!!!don't saved without this line
             var form = document.getElementById(options.formId);
             var formData = new FormData(form);
+            console.log($form.find('button[type="submit"]').selector);
+            Loader.submitBtnSelector = $form.find('button[type="submit"]').selector;
             // submit form - saving file form via ajax
             $.ajax({
                 url: options.createActionUrl,

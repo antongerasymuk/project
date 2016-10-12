@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th>Category</th>
                     <th>Slug</th>
                     <th>Content</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td><?= $site->title ?></td>
                             <td class="center"><?= $site->category ?></td>
                             <td class="center"><?= $site->slug ?></td>
-                            <td class="center"><?= $rest = substr("$site->content", 0, 100);?></td>
+                            <td class="center"><?= $rest = substr("$site->content", 0, 80);?></td>
                             <td class="center">
                                 <a class="btn btn-info" href="<?= Url::to(['page/edit', 'id' => $site->id]) ?>">
                                     <i class="halflings-icon white edit"></i>

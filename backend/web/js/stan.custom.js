@@ -1,13 +1,7 @@
-$('#submit_page_update').on('click', function (e) {
-tinyMCE.triggerSave();
-});
-
-
 // Create bonus event
-$('#bonus-create').on('click', function (e) {
-    e.preventDefault();
-
+$('#bonus-create-form').on('click', function (e) {
     Model.create({
+        validated: $(this).data('yiiActiveForm').validated,
         formId: 'bonus-create-form',
         formIndex: 2,
         createActionUrl: '/backend/bonus/create',
@@ -15,12 +9,14 @@ $('#bonus-create').on('click', function (e) {
         modalSelector: '#bonus-create-modal'
     });
 
+    return false;
+}).on('submit', function (e) {
+    e.preventDefault();
 });
 
-$('#rating-create').on('click', function (e) {
-    e.preventDefault();
-
+$('#rating-create-form').on('click', function (e) {
     Model.create({
+        validated: $(this).data('yiiActiveForm').validated,
         formId: 'rating-create-form',
         formIndex: 3,
         createActionUrl: '/backend/rating/create',
@@ -28,12 +24,14 @@ $('#rating-create').on('click', function (e) {
         modalSelector: '#rating-create-modal'
     });
 
+    return false;
+}).on('submit', function (e) {
+    e.preventDefault();
 });
 
-$('#plus-create').on('click', function (e) {
-    e.preventDefault();
-
+$('#plus-create-form').on('click', function (e) {
     Model.create({
+        validated: $(this).data('yiiActiveForm').validated,
         formId: 'plus-create-form',
         formIndex: 3,
         createActionUrl: '/backend/plus/create',
@@ -41,12 +39,12 @@ $('#plus-create').on('click', function (e) {
         modalSelector: '#plus-create-modal'
     });
 
+    return false;
 });
 
-$('#director-create').on('click', function (e) {
-    e.preventDefault();
-
+$('#director-create-form').on('beforeSubmit', function(event) {
     Model.create({
+        validated: $(this).data('yiiActiveForm').validated,
         formId: 'director-create-form',
         formIndex: 6,
         createActionUrl: '/backend/director/create',
@@ -54,25 +52,30 @@ $('#director-create').on('click', function (e) {
         modalSelector: '#director-create-modal'
     });
 
+    return false;
+}).on('submit', function(e){
+    e.preventDefault();
 });
 
-$('#page-create').on('click', function (e) {
-    e.preventDefault();
 
+$('#license-create-form').on('beforeSubmit', function (e) {
     Model.create({
-        formId: 'page-create-form',
+        validated: $(this).data('yiiActiveForm').validated,
+        formId: 'license-create-form',
         formIndex: 7,
-        createActionUrl: '/backend/page/create',
+        createActionUrl: '/backend/license/create',
         select2Selector: '#company-licenseids',
         modalSelector: '#license-create-modal'
     });
 
+    return false;
+}).on('submit', function (e) {
+    e.preventDefault();
 });
 
-$('#minus-create').on('click', function (e) {
-    e.preventDefault();
-
+$('#minus-create-form').on('beforeSubmit', function (e) {
     Model.create({
+        validated: $(this).data('yiiActiveForm').validated,
         formId: 'minus-create-form',
         formIndex: 4,
         createActionUrl: '/backend/minus/create',
@@ -80,12 +83,13 @@ $('#minus-create').on('click', function (e) {
         modalSelector: '#minus-create-modal'
     });
 
+}).on('submit', function (e) {
+    e.preventDefault();
 });
 
-$('#deposit-create').on('click', function (e) {
-    e.preventDefault();
-
+$('#deposit-create-form').on('beforeSubmit', function (e) {
     Model.create({
+        validated: $(this).data('yiiActiveForm').validated,
         formId: 'deposit-create-form',
         formIndex: 5,
         createActionUrl: '/backend/deposit/create',
@@ -93,13 +97,15 @@ $('#deposit-create').on('click', function (e) {
         modalSelector: '#deposit-create-modal'
     });
 
+    return false;
+}).on('submit', function (e) {
+    e.preventDefault();
 });
 
 // Create review event
-$('#review-create').on('click', function (e) {
-    e.preventDefault();
-
+$('#review-create-form').on('beforeSubmit', function (e) {
     Model.create({
+        validated: $(this).data('yiiActiveForm').validated,
         formId: 'review-create-form',
         formIndex: 1,
         createActionUrl: '/backend/review/create',
@@ -107,83 +113,57 @@ $('#review-create').on('click', function (e) {
         modalSelector: '#review-create-modal'
     });
 
+    return false;
+}).on('submit', function (e) {
+    e.preventDefault();
 });
 
 function beforeSendHandler() {
     Loader.show();
 }
 
-var validationEnabled = false;
-/**
- * Validates form.
- * Note: after first successful validation of form this state of form will be cached (this is yii.activeForm.js-native feature).
- * @param {Function} callback Function as first argument passes result of validation.
- */
-function validateForm(callback, $form) {
-
-    if (!validationEnabled) {
-        $form.on('submit', function () {
-            var $form       = $(this),
-                yiiFormData = $form.yiiActiveForm('data');
-
-            callback(yiiFormData.validated);
-
-            return false;                   // we stop submitting of form (we submit only for performing of validation)
-        });
-
-        validationEnabled = true;           // don't use of .one(handler), because it can't prevent form submitting
-    }
-
-
-    $form.trigger('submit');    // this runs validation of form
-
-    return false;
-}
-
 var Model = {
     create: function (options) {
-        options.fileSelector = options.fileSelector || '.filename';
+        if (options.validated) {
+            options.fileSelector = options.fileSelector || '.filename';
 
-        var $form = $('#' + options.formId);
+            var $form = $('#' + options.formId);
 
-        tinyMCE.triggerSave();
-        validationEnabled = false;
+            tinyMCE.triggerSave();
+            // !!!!!don't saved without this line
+            var form = document.getElementById(options.formId);
+            var formData = new FormData(form);
+            // submit form - saving file form via ajax
+            $.ajax({
+                url: options.createActionUrl,
+                type: 'POST',
+                beforeSend: beforeSendHandler,
+                data: formData,
+                success: function (response) {
+                    Loader.hide();
 
-        validateForm(function (successValidated) {
-            if (successValidated) {
-                // !!!!!don't saved without this line
-                var form = document.getElementById(options.formId);
-                var formData = new FormData(form);
-                // submit form - saving file form via ajax
-                $.ajax({
-                    url: options.createActionUrl,
-                    type: 'POST',
-                    beforeSend: beforeSendHandler,
-                    data: formData,
-                    success: function (response) {
-                        Loader.hide();
+                    if (response.success) {
+                        Select2.appendItem(options.select2Selector, response.item);
+                        form.reset();
 
-                        if (response.success) {
-                            Select2.appendItem(options.select2Selector, response.item);
-                            form.reset();
-
-                            Swalt.success('Success', 'Created');
-                            // clear file input
-                            $form.find(options.fileSelector).text('No file selected');
-                            $(options.modalSelector).modal('hide');
-                        } else {
-                            Swalt.warning('Ops!', 'Not saved');
-                        }
-                    },
-                    error: function (response) {
-                        Swalt.warning('Oops!', 'Please, check review fields and try again');
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                });
-            }
-        }, $form);
+                        Swalt.success('Success', 'Created');
+                        // clear file input
+                        $form.find(options.fileSelector).text('No file selected');
+                        $(options.modalSelector).modal('hide');
+                    } else {
+                        Swalt.warning('Ops!', 'Not saved');
+                    }
+                },
+                error: function (response) {
+                    Swalt.warning('Oops!', 'Please, check review fields and try again');
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        } else {
+            Swalt.warning('Oops!', 'Please, check review fields and try again');
+        }
     }
 };
 

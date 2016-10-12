@@ -1,5 +1,6 @@
 // Create bonus event
-$('#bonus-create-form').on('click', function (e) {
+$('#bonus-create-form').on('beforeSubmit', function (e) {
+    console.log('Create bonus');return false;
     Model.create({
         validated: $(this).data('yiiActiveForm').validated,
         formId: 'bonus-create-form',
@@ -14,7 +15,7 @@ $('#bonus-create-form').on('click', function (e) {
     e.preventDefault();
 });
 
-$('#rating-create-form').on('click', function (e) {
+$('#rating-create-form').on('beforeSubmit', function (e) {
     Model.create({
         validated: $(this).data('yiiActiveForm').validated,
         formId: 'rating-create-form',
@@ -29,7 +30,7 @@ $('#rating-create-form').on('click', function (e) {
     e.preventDefault();
 });
 
-$('#plus-create-form').on('click', function (e) {
+$('#plus-create-form').on('beforeSubmit', function (e) {
     Model.create({
         validated: $(this).data('yiiActiveForm').validated,
         formId: 'plus-create-form',

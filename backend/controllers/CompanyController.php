@@ -131,7 +131,6 @@ class CompanyController extends BackEndController
             if ($model->save()) {
                 $model->unlinkAll('licenses', true);
                 $model->unlinkAll('reviews', false);
-//                var_dump($model->id);exit;
 
                 if (!empty($model->reviewIds)) {
                     foreach ($model->reviewIds as $id) {

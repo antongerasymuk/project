@@ -9,6 +9,7 @@ $('#bonus-create').on('click', function (e) {
         select2Selector: '#review-bonusids',
         modalSelector: '#bonus-create-modal'
     });
+
 });
 
 $('#rating-create').on('click', function (e) {
@@ -21,6 +22,7 @@ $('#rating-create').on('click', function (e) {
         select2Selector: '#review-ratingids',
         modalSelector: '#rating-create-modal'
     });
+
 });
 
 $('#plus-create').on('click', function (e) {
@@ -33,6 +35,7 @@ $('#plus-create').on('click', function (e) {
         select2Selector: '#review-plusids',
         modalSelector: '#plus-create-modal'
     });
+
 });
 
 $('#director-create').on('click', function (e) {
@@ -45,6 +48,7 @@ $('#director-create').on('click', function (e) {
         select2Selector: '#company-director_id',
         modalSelector: '#director-create-modal'
     });
+
 });
 $('#license-create').on('click', function (e) {
     e.preventDefault();
@@ -56,6 +60,7 @@ $('#license-create').on('click', function (e) {
         select2Selector: '#company-licenseids',
         modalSelector: '#license-create-modal'
     });
+
 });
 
 $('#minus-create').on('click', function (e) {
@@ -68,6 +73,7 @@ $('#minus-create').on('click', function (e) {
         select2Selector: '#review-minusids',
         modalSelector: '#minus-create-modal'
     });
+
 });
 
 $('#deposit-create').on('click', function (e) {
@@ -80,6 +86,7 @@ $('#deposit-create').on('click', function (e) {
         select2Selector: '#review-depositids',
         modalSelector: '#deposit-create-modal'
     });
+
 });
 
 // Create review event
@@ -93,6 +100,7 @@ $('#review-create').on('click', function (e) {
         select2Selector: '#company-reviewids',
         modalSelector: '#review-create-modal'
     });
+
 });
 
 function beforeSendHandler() {
@@ -122,6 +130,8 @@ function validateForm(callback, $form) {
 
 
     $form.trigger('submit');    // this runs validation of form
+
+    return false;
 }
 
 var Model = {
@@ -131,6 +141,7 @@ var Model = {
         var $form = $('#' + options.formId);
 
         tinyMCE.triggerSave();
+        validationEnabled = false;
 
         validateForm(function (successValidated) {
             if (successValidated) {

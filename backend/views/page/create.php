@@ -13,13 +13,12 @@ use \common\models\Plus;
 ?>
 <?php $this->title = 'Create review'; ?>
 
-<?php $form = ActiveForm::begin(['id' => 'review-form', 'action' => \yii\helpers\Url::to(['review/create', 'isAjax' => false]), 'options' => ['enctype' => 'multipart/form-data']]); ?>
-
+<?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'title')
          ->textInput(['autofocus' => true])
          ->label('Title')
 ?>
-<?= $form->field($model, 'description')->widget(TinyMce::className(), [
+<?= $form->field($model, 'content')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
     'language'      => 'es',
     'clientOptions' => [
@@ -32,123 +31,18 @@ use \common\models\Plus;
     ]
 ])
 ?>
-<?= $form->field($model, 'category_id')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Categorie::class),
-    'language'      => 'en',
-    'options'       => ['placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-])->label('Category');
+<?= $form->field($model, 'slug')
+         ->textInput()
+         ->label('Slug')
 ?>
 
-<?= $form->field($model, 'type')
-         ->checkbox([
-                 'uncheck' => \common\models\Review::REVIEW_TYPE,
-                 'value'   => \common\models\Review::COMPANY_TYPE
-             ]
-         )
-         ->label('Company review?');
+<?= $form->field($model, 'category')
+         ->textInput()
+         ->label('Category')
 ?>
 
-<?= $form->field($model, 'logoFile')->fileInput() ?>
-<?= $form->field($model, 'previewFile')->fileInput() ?>
-<?= $form->field($model, 'preview_title')->textInput() ?>
-<?= $form->field($model, 'address')->widget(TinyMce::className(), [
-    'options'       => [
-        'rows' => 6,
-    ],
-    'language'      => 'es',
-    'clientOptions' => [
-        "init_instance_callback" => "reviewAddressCallback",
-        'plugins'                => [
-            "advlist autolink lists link charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table contextmenu paste"
-        ],
-        'toolbar'                => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-    ]
-])
-?>
-<?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class),
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-])->label('Bonuses');
-?>
-<?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Rating::class),
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-])->label('Ratings');
-?>
-<?= $form->field($model, 'plusIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(Plus::class),
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-])->label('Pluses');
-?>
-<?= $form->field($model, 'minusIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Minuse::class),
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-])->label('Minuses');
-?>
-<?= $form->field($model, 'depositIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\DepositMethod::class),
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-]);
-?>
-<?= $form->field($model, 'osIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Os::class),
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-]);
-?>
-
-<?php $countries = \common\models\Country::getArr(); ?>
-<?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
-    'data'          => $countries,
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-]);
-?>
-
-<?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
-    'data'          => $countries,
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-]);
-?>
-
-<?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true]) ?>
-<?= Html::submitButton('Create', [
-    'class' => 'btn btn-primary'
+<?= Html::submitButton('Save', [ 'id' => "submit_page_update",
+    'class' => 'btn btn-primary',
 ])
 ?>
 <?php ActiveForm::end(); ?>

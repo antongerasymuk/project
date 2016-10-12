@@ -51,10 +51,6 @@ class CompanyController extends BackEndController
                 if($model->save()){
                     $model->logoFile->saveAs($path);
 
-                    //safe company reviews
-//                    foreach ($model->reviewIds as $id) {
-//                        $model->link('reviews', Review::findOne(['id' => $id]));
-//                    }
                     if (!empty($model->reviewIds)) {
                         foreach ($model->reviewIds as $id) {
                             $review = Review::findOne($id);

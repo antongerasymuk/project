@@ -25,7 +25,7 @@ class AdminAsset extends AssetBundle
 		'js/jquery-ui-1.10.0.custom.min.js',
 		'js/jquery.ui.touch-punch.js',
 		'js/modernizr.js',
-		'js/bootstrap.min.js',
+//		'js/bootstrap.min.js',
 		'js/jquery.cookie.js',
 		'js/fullcalendar.min.js',
 		'js/jquery.dataTables.min.js',

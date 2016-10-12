@@ -1,3 +1,8 @@
+$('#submit_page_update').on('click', function (e) {
+tinyMCE.triggerSave();
+});
+
+
 // Create bonus event
 $('#bonus-create').on('click', function (e) {
     e.preventDefault();
@@ -50,13 +55,14 @@ $('#director-create').on('click', function (e) {
     });
 
 });
-$('#license-create').on('click', function (e) {
+
+$('#page-create').on('click', function (e) {
     e.preventDefault();
 
     Model.create({
-        formId: 'license-create-form',
+        formId: 'page-create-form',
         formIndex: 7,
-        createActionUrl: '/backend/license/create',
+        createActionUrl: '/backend/page/create',
         select2Selector: '#company-licenseids',
         modalSelector: '#license-create-modal'
     });
@@ -218,7 +224,6 @@ var Select2 = {
       $(blockId).append(element);
   }
 };
-
 
 function reviewAddressCallback(Editor) {
     Editor.on('NodeChange', function(e){

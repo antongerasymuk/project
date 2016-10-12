@@ -31,18 +31,25 @@ class CompanyController extends ActiveController
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex($offset = 0, $limit = 2)
     {
         $modelClass = $this->modelClass;
 
         $dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM companies']);
 
-        $data = $modelClass::getDb()->cache(function($db) use ($modelClass){
-            return $modelClass::find()
+       // $data = $modelClass::getDb()->cache(function($db) 
+       //     return $modelClass::find()
+       //         ->with(['reviews.category', 'reviews.bonuses'])
+       //         ->asArray()
+  
+       //         ->all();
+       // }, 0, $dependency);
+            $data = $modelClass::find()
                 ->with(['reviews.category', 'reviews.bonuses'])
                 ->asArray()
+                ->limit($limit)
+                ->offset($offset)
                 ->all();
-        }, 0, $dependency);
 
         return $data;
     }

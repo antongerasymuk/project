@@ -141,7 +141,7 @@ var Model = {
         var $form = $('#' + options.formId);
 
         tinyMCE.triggerSave();
-        validationEnabled = false;
+        console.log(validationEnabled);
 
         validateForm(function (successValidated) {
             if (successValidated) {
@@ -158,6 +158,7 @@ var Model = {
                         Loader.hide();
 
                         if (response.success) {
+                            validationEnabled = false;
                             Select2.appendItem(options.select2Selector, response.item);
                             form.reset();
 

@@ -28,7 +28,7 @@ use \common\models\Plus;
                     ?>
                     <?= $form->field($model, 'description')->widget(TinyMce::className(), [
                         'options'       => ['rows' => 6],
-                        'language'      => 'es',
+                        'language' => 'en_GB',
                         'clientOptions' => [
                             'plugins' => [
                                 "advlist autolink lists link charmap print preview anchor",
@@ -64,7 +64,7 @@ use \common\models\Plus;
                         'options'       => [
                             'rows' => 6,
                         ],
-                        'language'      => 'es',
+                        'language' => 'en_GB',
                         'clientOptions' => [
                             "init_instance_callback" => "reviewAddressCallback",
                             'plugins' => [

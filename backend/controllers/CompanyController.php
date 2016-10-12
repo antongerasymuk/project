@@ -39,7 +39,7 @@ class CompanyController extends BackEndController
 
         if ($model->load(Yii::$app->request->post())) {
             // get the uploaded file instance. for multiple file uploads
-            // the following data will return an array
+            // the following data will return an array 
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
 
             if ($model->logoFile) {

@@ -165,7 +165,7 @@ var Model = {
                 processData: false
             });
         } else {
-            Swalt.warning('Oops!', 'Please, check review fields and try again');
+            Swalt.warning('Oops!', 'Please, check fields and try again');
         }
     }
 };

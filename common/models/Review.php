@@ -42,9 +42,9 @@ class Review extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'category_id', 'preview_title', 'address', 'type'], 'required'],
+            [['title', 'preview_title', 'address', 'type'], 'required'],
             [['type'], 'default', 'value' => self::REVIEW_TYPE],
-            [['company_id'], 'integer'],
+            [['company_id', 'category_id'], 'integer'],
             [['type'], 'in', 'range' => [self::REVIEW_TYPE, self::COMPANY_TYPE]],
             [
                 ['previewFile', 'logoFile'],
@@ -53,7 +53,7 @@ class Review extends \yii\db\ActiveRecord
                 'extensions' => ['jpg', 'png', 'gif'],
                 'except' => 'edit'
             ],
-            [['gallery'], 'file', 'extensions' => ['jpg', 'png', 'gif']],
+            ['gallery', 'file', 'extensions' => ['jpg', 'gif', 'png'], 'maxFiles' => 4],
             [['preview', 'logo', 'preview_title', 'address'], 'string']
         ];
     }

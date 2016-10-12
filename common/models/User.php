@@ -26,6 +26,8 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+    public $password;
+    public $pass_confirm;
 
     /**
      * @inheritdoc
@@ -51,6 +53,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['username', 'password', 'pass_confirm'] , 'required'],
+            ['username', 'unique'],
+            ['password', 'string', 'min' => 6],
+            ['pass_confirm', 'compare', 'compareAttribute'=>'password'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];

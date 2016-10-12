@@ -1,17 +1,39 @@
 <?php
 namespace backend\controllers;
 
-use Yii;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
+use Yii;
+use yii\filters\AccessControl;
+use yii\web\Controller;
 
 /**
  * Site controller
  */
-class SiteController extends BackEndController
+class SiteController extends Controller
 {
+
+    public $layout = 'login';
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                        'roles' => ['?']
+                    ],
+                    [
+                        'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
+        ];
+    }
     /**
      * Displays homepage.
      *
@@ -19,6 +41,8 @@ class SiteController extends BackEndController
      */
     public function actionIndex()
     {
+        $this->layout = 'admin';
+
         return $this->render('index');
     }
 
@@ -34,10 +58,10 @@ class SiteController extends BackEndController
         }
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
-        	$this->layout = 'login';
 
             return $this->render('new-login', [
                 'model' => $model,
@@ -55,5 +79,14 @@ class SiteController extends BackEndController
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
     }
 }

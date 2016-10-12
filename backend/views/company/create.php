@@ -68,6 +68,7 @@ $this->registerJsFile('js/stan.custom.js', [
 ?>
 <?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
+<div class="form-group-director">
 <?= $form->field($model, 'director_id')->widget(Select2::classname(), [
     'data' => $directorsData,
     'language' => 'en',
@@ -77,7 +78,8 @@ $this->registerJsFile('js/stan.custom.js', [
     ],
 ])->label('Director');
 ?>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#director-create-modal">+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#director-create-modal">+</button></div>
+<div class="form-group-license">
 <?= $form->field($model, 'licenseIds')->widget(Select2::classname(), [
     'data' => [],
     'language' => 'en',
@@ -87,7 +89,8 @@ $this->registerJsFile('js/stan.custom.js', [
     ],
 ])->label('Licenses');
 ?>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#license-create-modal">+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#license-create-modal">+</button></div>
+<div class="form-group-reviews">
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
     'data' => $reviewsData,
     'language' => 'en',
@@ -98,10 +101,10 @@ $this->registerJsFile('js/stan.custom.js', [
 ])->label('Reviews');
 ?>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#review-create-modal">+</button>
-<div class="form-group">
+<!--<div class="form-group">-->
     <?= Html::submitButton('Create', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+<!--</div>-->
 </div>
-
 <?php ActiveForm::end(); ?>
 <?= $this->render('//review/create_modal', ['model' => $review]) ?>
 <?= $this->render('//bonus/create_modal', ['model' => $bonus]) ?>

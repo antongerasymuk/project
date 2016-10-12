@@ -31,7 +31,7 @@ class ReviewController extends BackEndController
         return $this->render('index', ['reviews' => $reviews]);
     }
 
-    public function actionCreate()
+    public function actionCreate($isAjax = true)
     {
         $model = new Review();
 
@@ -89,25 +89,25 @@ class ReviewController extends BackEndController
 
                     if (!empty($model->depositIds)) {
                         foreach ($model->depositIds as $id) {
-                            $model->load('deposits', DepositMethod::findOne(['id' => $id]));
+                            $model->link('deposits', DepositMethod::findOne(['id' => $id]));
                         }
                     }
 
                     if (!empty($model->osIds)) {
                         foreach ($model->osIds as $id) {
-                            $model->load('oses', Os::findOne(['id' => $id]));
+                            $model->link('oses', Os::findOne(['id' => $id]));
                         }
                     }
 
                     if (!empty($model->allowedIds)) {
                         foreach ($model->allowedIds as $id) {
-                            $model->load('allowed', Country::findOne(['id' => $id]));
+                            $model->link('allowed', Country::findOne(['id' => $id]));
                         }
                     }
 
                     if (!empty($model->deniedIds)) {
                         foreach ($model->deniedIds as $id) {
-                            $model->load('denied', Country::findOne(['id' => $id]));
+                            $model->link('denied', Country::findOne(['id' => $id]));
                         }
                     }
                 }
@@ -115,15 +115,21 @@ class ReviewController extends BackEndController
                 $model->addError('previewFile', 'Preview file not choose');
             }
 
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($isAjax) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-            return [
-                'success' => $model->id,
-                'item' => [
-                    'id' => $model->id,
-                    'value' => $model->title,
-                ]
-            ];
+                return [
+                    'success' => $model->id,
+                    'item' => [
+                        'id' => $model->id,
+                        'value' => $model->title,
+                    ]
+                ];
+            }
+
+            Yii::$app->getSession()->setFlash('success', 'Review create success');
+
+            return $this->redirect(['review/index']);
         }
 
         return $this->render('create', ['model' => $model]);
@@ -132,6 +138,110 @@ class ReviewController extends BackEndController
     public function actionEdit($id)
     {
         $model = Review::findOne($id);
+        $model->scenario = 'edit';
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->previewFile = UploadedFile::getInstance($model, 'previewFile');
+            $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
+            $params = Yii::$app->params;
+
+            if ($model->previewFile) {
+                unlink(Url::to('@frontend/web') . $model->preview);
+                $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . '.' . $model->previewFile->extension;
+                $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension;
+                $model->previewFile->saveAs($previewPath);
+            }
+
+            if ($model->logoFile) {
+                unlink(Url::to('@frontend/web') . $model->logo);
+                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $model->logoFile->saveAs($logoPath);
+            }
+
+            $galleryFiles = UploadedFile::getInstances($model, 'gallery');
+
+            if ($galleryFiles) {
+                $model->unlinkAll('galleries', true);
+                Gallery::upload($galleryFiles);
+            }
+
+            if (!empty($model->bonusIds)) {
+                // untouch bonuses
+                foreach ($model->bonuses as $bonus) {
+                    $bonus->review_id = null;
+                    $bonus->update(true, ['review_id']);
+                }
+
+                foreach ($model->bonusIds as $id) {
+                    $bonus = Bonus::findOne($id);
+                    $bonus->review_id = $model->id;
+                    $bonus->update(true, ['review_id']);
+                }
+            }
+
+            if (!empty($model->ratingIds)) {
+                $model->unlinkAll('ratings');
+
+                foreach ($model->ratingIds as $id) {
+                    $model->link('ratings', Rating::findOne(['id' => $id]));
+                }
+            }
+
+            if (!empty($model->plusIds)) {
+                $model->unlinkAll('pluses');
+
+                foreach ($model->plusIds as $id) {
+                    $model->link('pluses', Plus::findOne(['id' => $id]));
+                }
+            }
+
+            if (!empty($model->minusIds)) {
+                $model->unlinkAll('minuses');
+
+                foreach ($model->minusIds as $id) {
+                    $model->link('minuses', Minuse::findOne(['id' => $id]));
+                }
+            }
+
+            if (!empty($model->depositIds)) {
+                $model->unlinkAll('deposits');
+
+                foreach ($model->depositIds as $id) {
+                    $model->link('deposits', DepositMethod::findOne(['id' => $id]));
+                }
+            }
+
+            if (!empty($model->osIds)) {
+                $model->unlinkAll('oses');
+
+                foreach ($model->osIds as $id) {
+                    $model->link('oses', Os::findOne(['id' => $id]));
+                }
+            }
+
+            if (!empty($model->allowedIds)) {
+                $model->unlinkAll('allowed');
+
+                foreach ($model->allowedIds as $id) {
+                    $model->link('allowed', Country::findOne(['id' => $id]));
+                }
+            }
+
+            if (!empty($model->deniedIds)) {
+                $model->unlinkAll('denied');
+
+                foreach ($model->deniedIds as $id) {
+                    $model->link('denied', Country::findOne(['id' => $id]));
+                }
+            }
+
+            if ($model->save()) {
+                Yii::$app->getSession()->setFlash('success', 'Review update success');
+
+                return $this->redirect(['review/index']);
+            }
+        }
 
         $model->bonusIds = ArrayHelper::map($model
             ->getBonuses()
@@ -180,9 +290,6 @@ class ReviewController extends BackEndController
             ->select('id')
             ->asArray()
             ->all(), 'id', 'id');
-
-//        var_dump($model->bonusIds);
-//        var_dump(ModelMapHelper::getIdTitleMap(\common\models\Bonus::class));
 
         return $this->render('update', ['model' => $model]);
     }

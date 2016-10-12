@@ -35,7 +35,7 @@ AdminAsset::register( $this );
 		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
 		<![endif]-->
 		<!-- start: Favicon -->
-		<link rel="shortcut icon" href="images/favicon.ico">
+		<link rel="shortcut icon" href="/favicon.ico">
 		<!-- end: Favicon -->
 		<?php $this->head() ?>
 	</head>
@@ -48,6 +48,19 @@ AdminAsset::register( $this );
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<a class="brand" href="<?= Url::to(['site/index']) ?>"><span>Bonus Dashboard</span></a>
+
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="halflings-icon white user"></i> <?= Yii::$app->user->getIdentity()->username ?>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?= Url::to(['setting/edit', 'id' => Yii::$app->user->getId()]) ?>"><i class="halflings-icon user"></i> Edit</a></li>
+                                <li><a href="<?= Url::to(['site/logout']) ?>"><i class="halflings-icon off"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
 				</div>
 				<!-- end: Header Menu -->
 			</div>
@@ -100,7 +113,7 @@ AdminAsset::register( $this );
 						</li>
 						<li>
 							<a href="<?= Url::to(['review/index']) ?>">
-								<i class="icon-credit-card"></i>
+								<i class="icon-eye-open"></i>
 								<span class="hidden-tablet">Reviews</span>
 							</a>
 						</li>
@@ -110,6 +123,36 @@ AdminAsset::register( $this );
 								<span class="hidden-tablet">Payment methods</span>
 							</a>
 						</li>
+						<li>
+							<a href="<?= Url::to(['plus/index']) ?>">
+								<i class="icon-thumbs-up"></i>
+								<span class="hidden-tablet">Review pluses</span>
+							</a>
+						</li>
+                        <li>
+                            <a href="<?= Url::to(['minus/index']) ?>">
+                                <i class="icon-thumbs-down"></i>
+                                <span class="hidden-tablet">Review minuses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= Url::to(['license/index']) ?>">
+                                <i class="icon-lock"></i>
+                                <span class="hidden-tablet">Licenses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= Url::to(['director/index']) ?>">
+                                <i class="icon-user"></i>
+                                <span class="hidden-tablet">Directors</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= Url::to(['setting/index']) ?>">
+                                <i class="icon-cogs"></i>
+                                <span class="hidden-tablet">Settings</span>
+                            </a>
+                        </li>
 					</ul>
 				</div>
 			</div>

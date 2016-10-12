@@ -6,7 +6,7 @@
 use yii\bootstrap\Alert;
 use yii\helpers\Url;
 
-$this->title = 'Companies';
+$this->title = 'Categories';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -44,14 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <tbody>
                 <?php if (empty($categories)) : ?>
                 <?php else : ?>
-                    <?php foreach ($categories as $company) : ?>
+                    <?php foreach ($categories as $cat) : ?>
                         <tr>
-                            <td><?= $company->title ?></td>
+                            <td><?= $cat->title ?></td>
                             <td class="center">
-                                <a class="btn btn-success" href="#">
-                                    <i class="halflings-icon white zoom-in"></i>
-                                </a>
-                                <a class="btn btn-info" href="<?= Url::to(['company/edit', 'id' => $company->id]) ?>">
+                                <a class="btn btn-info" href="<?= Url::to(['category/edit', 'id' => $cat->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
                                 <a class="btn btn-danger" href="#">

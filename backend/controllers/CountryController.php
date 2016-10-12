@@ -43,6 +43,14 @@ class CountryController extends BackEndController
 
     public function actionEdit($id)
     {
+        $model = Country::findOne($id);
 
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Country updated success');
+
+            return $this->redirect(['country/index']);
+        }
+
+        return $this->render('update', ['model' => $model]);
     }
 }

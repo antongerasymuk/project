@@ -28,7 +28,7 @@ class License extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['licenseFile'], 'file', 'skipOnEmpty' => false],
+            [['licenseFile'], 'file', 'skipOnEmpty' => false, 'except' => 'edit'],
             [['title', 'url'], 'required'],
             [['title'], 'string', 'max' => 25],
             [['file_label'], 'string', 'max' => 25],

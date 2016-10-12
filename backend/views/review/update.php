@@ -11,6 +11,7 @@ use \common\helpers\ModelMapHelper;
 use \common\models\Plus;
 
 ?>
+<?php $this->title = 'Update review'; ?>
 
 <?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'title')
@@ -56,7 +57,7 @@ use \common\models\Plus;
 <?= $form->field($model, 'logoFile')->fileInput() ?>
 <?php if (!empty($model->preview)) : ?>
     <div class="form-group">
-        <img src="<?= $model->preview ?>">
+        <img src="<?= $model->preview ?>" width="150" height="150">
     </div>
 <?php endif; ?>
 <?= $form->field($model, 'previewFile')->fileInput() ?>
@@ -158,7 +159,7 @@ use \common\models\Plus;
 <?php if (!empty($model->gallery)) : ?>
     <div class="form-group">
         <?php foreach ($model->gallery as $img) : ?>
-            <img src="<?= $img->src ?>">
+            <img src="<?= $img->src ?>" width="150" height="150">
         <?php endforeach; ?>
     </div>
 <?php endif; ?>

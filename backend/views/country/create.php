@@ -13,7 +13,7 @@ $this->title = 'Create country';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php $form = ActiveForm::begin(['id' => 'country-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['id' => 'country-form']); ?>
 <?= $form->field($model, 'title')->textInput() ?>
 <div class="form-group">
     <?= Html::submitButton('Create', ['class' => 'btn btn-primary', 'name' => 'country-button']) ?>

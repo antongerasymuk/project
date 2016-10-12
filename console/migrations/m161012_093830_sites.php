@@ -8,6 +8,7 @@ class m161012_093830_sites extends Migration
     {
         $this->createTable('{{%sites}}', [
             'id' => $this->primaryKey(),
+            'title' => $this->string(),
             'slug' => $this->string(),
             'content' => $this->text(),
             'category' => $this->string()

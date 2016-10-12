@@ -51,7 +51,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
                if ($(document).height() - $(window).height() <= parseInt($(window).scrollTop()*100/persent)) {
                //if ( (parseInt($(window).height()*(index)) < parseInt($(window).scrollTop())) && (parseInt($(window).height()*(index+1)) > parseInt($(window).scrollTop()))&& ($.inArray(index, current_index)<0) ){
                
-               offset = offset+limit*i;
+               
                 if ($.inArray(i, current_index)>=0) {
                 console.log('offset'+offset);
                 oboe({
@@ -66,6 +66,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
                     console.log('Fail');
                 });
                 console.log("index:"+i)
+                offset = offset+limit;
                 i++;
                 current_index.push(i);
                 }

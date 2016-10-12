@@ -1,6 +1,5 @@
 // Create bonus event
 $('#bonus-create-form').on('beforeSubmit', function (e) {
-    console.log('Create bonus');return false;
     Model.create({
         validated: $(this).data('yiiActiveForm').validated,
         formId: 'bonus-create-form',

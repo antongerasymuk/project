@@ -1,10 +1,3 @@
-var $eventSelect = $(".select13-hidden-accessible");
-
-$eventSelect.on("select2:open", function () {
-   console.log('Open');
-});
-
-
 // Create bonus event
 $('#bonus-create').on('click', function (e) {
     e.preventDefault();
@@ -106,20 +99,41 @@ function beforeSendHandler() {
     Loader.show();
 }
 
+var validationEnabled = false;
+/**
+ * Validates form.
+ * Note: after first successful validation of form this state of form will be cached (this is yii.activeForm.js-native feature).
+ * @param {Function} callback Function as first argument passes result of validation.
+ */
+function validateForm(callback, $form) {
+
+    if (!validationEnabled) {
+        $form.on('submit', function () {
+            var $form       = $(this),
+                yiiFormData = $form.yiiActiveForm('data');
+
+            callback(yiiFormData.validated);
+
+            return false;                   // we stop submitting of form (we submit only for performing of validation)
+        });
+
+        validationEnabled = true;           // don't use of .one(handler), because it can't prevent form submitting
+    }
+
+
+    $form.trigger('submit');    // this runs validation of form
+}
+
 var Model = {
     create: function (options) {
         options.fileSelector = options.fileSelector || '.filename';
 
         var $form = $('#' + options.formId);
 
-        // yiiActiveForm events
-        $form.on('beforeValidate', function (event, message, c) {
-            console.log('beforeValidate');
-            tinyMCE.triggerSave();
-        });
+        tinyMCE.triggerSave();
 
-        $form.on('afterValidate', function (event, message, errorAttributes) {
-            if (!errorAttributes.length) {
+        validateForm(function (successValidated) {
+            if (successValidated) {
                 // !!!!!don't saved without this line
                 var form = document.getElementById(options.formId);
                 var formData = new FormData(form);
@@ -146,19 +160,14 @@ var Model = {
                         }
                     },
                     error: function (response) {
-                        console.log(response);
+                        Swalt.warning('Oops!', 'Please, check review fields and try again');
                     },
                     cache: false,
                     contentType: false,
                     processData: false
                 });
-            } else {
-                Swalt.warning('Oops!', 'Please, check review fields and try again');
             }
-        });
-
-        $form.yiiActiveForm('submitForm');
-        $form.data('yiiActiveForm').validated = false;
+        }, $form);
     }
 };
 

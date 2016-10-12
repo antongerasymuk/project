@@ -66,9 +66,9 @@ AppAsset::register($this);
 					<div class="row">
 						<div class="col-md-9 col-sm-8 col-xs-12">
 							<nav class="footer-menu clearfix">
-								<?= \common\widgets\FooterNav::widget([
+								 <?php if(\common\models\Site::getForOther()['footer']) { echo \common\widgets\FooterNav::widget([
 									'items' => \common\models\Site::getForOther()['footer']
-									]); ?>
+									]);} ?>
 							</nav>
 
 							<div class="footer-info">

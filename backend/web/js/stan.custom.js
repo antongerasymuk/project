@@ -1,4 +1,8 @@
-var validationEnabled = false;
+$('#submit_page_update').on('click', function (e) {
+tinyMCE.triggerSave();
+});
+
+
 // Create bonus event
 $('#bonus-create').on('click', function (e) {
     e.preventDefault();
@@ -39,30 +43,26 @@ $('#plus-create').on('click', function (e) {
 
 });
 
-$('#director-create-form').on('submit', function (e) {
-    console.log('Submit director');
-    var $form = $('#director-create-form');
-    $form.yiiActiveForm('data').validated = false;
-
-    if ($form.yiiActiveForm('data').validated) {
-        Model.create({
-            formId: 'director-create-form',
-            formIndex: 6,
-            createActionUrl: '/backend/director/create',
-            select2Selector: '#company-director_id',
-            modalSelector: '#director-create-modal'
-        });
-    }
-
-    return false;
-});
-$('#license-create').on('click', function (e) {
+$('#director-create').on('click', function (e) {
     e.preventDefault();
 
     Model.create({
-        formId: 'license-create-form',
+        formId: 'director-create-form',
+        formIndex: 6,
+        createActionUrl: '/backend/director/create',
+        select2Selector: '#company-director_id',
+        modalSelector: '#director-create-modal'
+    });
+
+});
+
+$('#page-create').on('click', function (e) {
+    e.preventDefault();
+
+    Model.create({
+        formId: 'page-create-form',
         formIndex: 7,
-        createActionUrl: '/backend/license/create',
+        createActionUrl: '/backend/page/create',
         select2Selector: '#company-licenseids',
         modalSelector: '#license-create-modal'
     });
@@ -112,12 +112,15 @@ $('#review-create').on('click', function (e) {
 function beforeSendHandler() {
     Loader.show();
 }
+
+var validationEnabled = false;
 /**
  * Validates form.
  * Note: after first successful validation of form this state of form will be cached (this is yii.activeForm.js-native feature).
  * @param {Function} callback Function as first argument passes result of validation.
  */
 function validateForm(callback, $form) {
+
     if (!validationEnabled) {
         $form.on('submit', function () {
             var $form       = $(this),
@@ -133,6 +136,8 @@ function validateForm(callback, $form) {
 
 
     $form.trigger('submit');    // this runs validation of form
+
+    return false;
 }
 
 var Model = {
@@ -142,38 +147,43 @@ var Model = {
         var $form = $('#' + options.formId);
 
         tinyMCE.triggerSave();
+        validationEnabled = false;
 
-        // !!!!!don't saved without this line
-        var form = document.getElementById(options.formId);
-        var formData = new FormData(form);
-        // submit form - saving file form via ajax
-        $.ajax({
-            url: options.createActionUrl,
-            type: 'POST',
-            beforeSend: beforeSendHandler,
-            data: formData,
-            success: function (response) {
-                Loader.hide();
+        validateForm(function (successValidated) {
+            if (successValidated) {
+                // !!!!!don't saved without this line
+                var form = document.getElementById(options.formId);
+                var formData = new FormData(form);
+                // submit form - saving file form via ajax
+                $.ajax({
+                    url: options.createActionUrl,
+                    type: 'POST',
+                    beforeSend: beforeSendHandler,
+                    data: formData,
+                    success: function (response) {
+                        Loader.hide();
 
-                if (response.success) {
-                    Select2.appendItem(options.select2Selector, response.item);
-                    form.reset();
+                        if (response.success) {
+                            Select2.appendItem(options.select2Selector, response.item);
+                            form.reset();
 
-                    Swalt.success('Success', 'Created');
-                    // clear file input
-                    $form.find(options.fileSelector).text('No file selected');
-                    $(options.modalSelector).modal('hide');
-                } else {
-                    Swalt.warning('Ops!', 'Not saved');
-                }
-            },
-            error: function (response) {
-                Swalt.warning('Oops!', 'Please, check review fields and try again');
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
+                            Swalt.success('Success', 'Created');
+                            // clear file input
+                            $form.find(options.fileSelector).text('No file selected');
+                            $(options.modalSelector).modal('hide');
+                        } else {
+                            Swalt.warning('Ops!', 'Not saved');
+                        }
+                    },
+                    error: function (response) {
+                        Swalt.warning('Oops!', 'Please, check review fields and try again');
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            }
+        }, $form);
     }
 };
 
@@ -214,7 +224,6 @@ var Select2 = {
       $(blockId).append(element);
   }
 };
-
 
 function reviewAddressCallback(Editor) {
     Editor.on('NodeChange', function(e){

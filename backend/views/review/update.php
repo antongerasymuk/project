@@ -13,7 +13,7 @@ use \common\models\Plus;
 ?>
 <?php $this->title = 'Update review'; ?>
 
-<?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['id' => 'review-update-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'title')
          ->textInput(['autofocus' => true])
          ->label('Title')

@@ -41,6 +41,7 @@ class Bonus extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['price'], 'number'],
             [['reviewIds'], 'safe'], // test
+            [['osIds'], 'safe'],
             [['review_id'], 'integer'],
             [['percent'], 'number'],
             [['currency'], 'string', 'max' => 1],

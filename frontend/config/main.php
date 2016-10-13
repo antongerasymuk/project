@@ -7,32 +7,28 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-frontend',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'id'                  => 'app-frontend',
+    'basePath'            => dirname(__DIR__),
+    'bootstrap'           => ['log', 'assetsAutoCompress'],
     'controllerNamespace' => 'frontend\controllers',
-    'components' => [
-//        'cache' => [
-//            'class' => 'yii\caching\ApcCache',
-//            'useApcu' => true
-//        ],
-      //  'assetsAutoCompress' => [
-        //    'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
-       // ],
-        'geoip' => [
+    'components'          => [
+        'assetsAutoCompress' => [
+            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+        ],
+        'geoip'              => [
             'class' => 'lysenkobv\GeoIP\GeoIP'
         ],
-        'starMaker' => [
+        'starMaker'          => [
             'class' => \common\helpers\StarMaker::class
         ],
-        'request' => [
+        'request'            => [
             'csrfParam' => '_csrf-frontend',
             'cookieValidationKey' => 'QuT8PzD6l6oG5x-22IsZEWDBBVumnbBd',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
-        'user' => [
+        'user'               => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],

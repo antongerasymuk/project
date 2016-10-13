@@ -33,7 +33,6 @@ class BonusController extends BackEndController
 
             // store the source file name
             $model->logo = Url::to($params['uploadUrl']) . $logoFile->baseName . '.' . $logoFile->extension;
-            var_dump($model->logo); 
             if ($isAjax) {
                 $logoFile->saveAs($path);
                 if (!empty($model->osIds)) {

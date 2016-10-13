@@ -57,6 +57,12 @@ class ReviewController extends BackEndController
                         $galleryIds = Gallery::upload($galleryFiles);
                     }
 
+                    if (!empty($galleryIds)) {
+                        foreach ($galleryIds as $id) {
+                            $model->link('galleries', Gallery::findOne($id));
+                        }
+                    }
+
                     if (!empty($model->bonusIds)) {
                         foreach ($model->bonusIds as $id) {
                             $bonus = Bonus::findOne($id);

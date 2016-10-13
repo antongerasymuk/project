@@ -54,8 +54,7 @@ class Review extends \yii\db\ActiveRecord
                     'ratingIds',
                     'plusIds',
                     'minusIds',
-                    'depositIds'
-                    ,
+                    'depositIds',
                     'osIds',
                     'allowedIds',
                     'deniedIds'

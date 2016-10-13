@@ -50,34 +50,22 @@ class LicenseController extends BackEndController
     {
         $model = new License();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $params = Yii::$app->params;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($isAjax) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-            $model->licenseFile = UploadedFile::getInstance($model, 'licenseFile');
-            $path = Url::to($params['uploadPath']) . $model->licenseFile->baseName . '.' . $model->licenseFile->extension;
-
-            // store the source file name
-            $model->url = $params['uploadUrl'] . $model->licenseFile->baseName . '.' . $model->licenseFile->extension;
-
-            if($model->save()) {
-                $model->licenseFile->saveAs($path);
-
-                if ($isAjax) {
-                    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-                    return [
-                        'success' => $model->id,
-                        'item' => [
-                            'id' => $model->id,
-                            'value' => $model->title
-                        ]
-                    ];
-                }
-
-                Yii::$app->getSession()->setFlash('success', 'License created success');
-
-                return $this->redirect(['license/index']);
+                return [
+                    'success' => $model->id,
+                    'item' => [
+                        'id' => $model->id,
+                        'value' => $model->title
+                    ]
+                ];
             }
+
+            Yii::$app->getSession()->setFlash('success', 'License created success');
+
+            return $this->redirect(['license/index']);
         }
 
         return $this->render('create', ['model' => $model]);

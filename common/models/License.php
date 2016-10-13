@@ -28,8 +28,8 @@ class License extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['licenseFile'], 'file', 'skipOnEmpty' => false, 'except' => 'edit'],
-            [['title', 'url'], 'required'],
+            [['title', 'url', 'file_label'], 'required'],
+            ['url', 'url', 'validSchemes' => ['http', 'https']],
             [['title'], 'string', 'max' => 25],
             [['file_label'], 'string', 'max' => 25],
             [['url'], 'string', 'max' => 255],
@@ -45,6 +45,7 @@ class License extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'url' => 'Url',
+            'file_label' => 'Link text'
         ];
     }
 }

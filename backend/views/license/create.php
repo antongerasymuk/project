@@ -16,6 +16,6 @@ use yii\bootstrap\Html;
          ->label('Title')
 ?>
 <?= $form->field($model, 'file_label')->textInput() ?>
-<?= $form->field($model, 'licenseFile')->fileInput() ?>
+<?= $form->field($model, 'url')->textInput() ?>
 <?= Html::submitButton('Create', ['class' => 'btn btn-primary']) ?>
 <?php ActiveForm::end(); ?>

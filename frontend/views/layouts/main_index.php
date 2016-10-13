@@ -78,7 +78,6 @@ We provide no guarantee as to the timeliness or accuracy of the information foun
 
 							<div class="copyright hidden-xs">
 								<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
-								<p>Design by <a href="http://perfecto-web.pro" target="_blank">Perfecto Web</a></p>
 							</div>
 
 						</div>

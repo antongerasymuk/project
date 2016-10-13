@@ -1,22 +1,18 @@
 <?php
 namespace backend\controllers;
 
-use common\helpers\ModelMapHelper;
 use common\models\Bonus;
-use common\models\Bonuse;
-use common\models\Company;
 use common\models\Country;
 use common\models\DepositMethod;
 use common\models\Gallery;
 use common\models\Minuse;
 use common\models\Os;
-use common\models\Pros;
+use common\models\Plus;
 use common\models\Rating;
 use common\models\Review;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
-use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
 
 /**

@@ -1,10 +1,6 @@
 <?php
 
 namespace common\models;
-
-use Yii;
-use yii\helpers\ArrayHelper;
-
 /**
  * This is the model class for table "pros".
  *

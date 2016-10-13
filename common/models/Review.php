@@ -47,6 +47,21 @@ class Review extends \yii\db\ActiveRecord
             [['company_id', 'category_id'], 'integer'],
             [['type'], 'in', 'range' => [self::REVIEW_TYPE, self::COMPANY_TYPE]],
             [
+                [
+                    'bonusIds',
+                    'galleryIds',
+                    'ratingIds',
+                    'plusIds',
+                    'minusIds',
+                    'depositIds'
+                    ,
+                    'osIds',
+                    'allowedIds',
+                    'deniedIds'
+                ],
+                'safe'
+            ],
+            [
                 ['previewFile', 'logoFile'],
                 'file',
                 'skipOnEmpty' => false,

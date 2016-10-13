@@ -22,21 +22,6 @@ use \yii\helpers\Url;
                             <?= $companyReview->title ?> Review
                         </a>
                     </div>
-                    <?php $mainBonus = $companyReview->getBonuses()
-                        ->where(['type' => \common\models\Bonus::MAIN])
-                        ->one();
-                    ?>
-                    <?php if (!empty($mainBonus)) : ?>
-                        <p>
-                            <?= $mainBonus->description ?>
-                        </p>
-                        <div class="btn">
-                            <a href="<?= $mainBonus->referal_url ?>">
-                                <button class="btn-hulf" type="button">Claim now</button>
-                            </a>
-                        </div>
-                    <?php endif; ?>
-
                 </div><!-- .item -->
                 <?php endforeach; ?>
             </div>
@@ -94,6 +79,20 @@ use \yii\helpers\Url;
                     </div><!-- .sr-menu (Review Summary) -->
                     <?php endif; ?>
 
+                    <?php if (!empty($review->company->licenses)) : ?>
+                        <?php foreach ($review->company->licenses as $lic) : ?>
+                            <div class="sr-menu">
+                                <div class="srm-head"><?= $lic->title ?></div>
+                                <div class="srm-list srm-docs">
+                                    <p>
+                                        <i class="flaticon-docs"></i>
+                                        <a href="<?= $lic->url ?>"><?= $lic->file_label ?></a>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
                     <?php if (!empty($review->oses)) : ?>
                         <div class="sr-menu">
                             <div class="srm-head">Compatible With</div>
@@ -105,6 +104,17 @@ use \yii\helpers\Url;
                         </div><!-- .sr-menu (Compatible With) -->
                     <?php endif; ?>
 
+                    <?php if (!empty($review->company->director)) : ?>
+                        <div class="sr-menu">
+                            <div class="srm-head"><?= $review->company->director->title ?></div>
+                            <div class="srm-list srm-ceo clearfix">
+                                <p>
+                                    <img class="img-left" src="<?= $review->company->director->photo ?>" alt="">
+                                    <?= $review->company->director->description ?>
+                                </p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <?php if (!empty($review->deposits)) : ?>
                         <div class="sr-menu">
                             <div class="srm-head">Deposit Methods</div>

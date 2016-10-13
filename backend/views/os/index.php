@@ -45,7 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Logo</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -55,11 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php foreach ($oses as $os) : ?>
                         <tr>
                             <td><?= $os->title ?></td>
-                            <td class="center">
-                                <?php if (!empty($os->src)) : ?>
-                                    <img src="<?= $os->src ?>" alt="<?= basename($os->src) ?>" class="company-logo">
-                                <?php endif; ?>
-                            </td>
                             <td class="center">
                                 <a class="btn btn-info" href="<?= Url::to(['os/edit', 'id' => $os->id]) ?>">
                                     <i class="halflings-icon white edit"></i>

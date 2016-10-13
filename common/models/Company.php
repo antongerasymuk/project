@@ -77,7 +77,7 @@ class Company extends \yii\db\ActiveRecord
 
     public function getDirector()
     {
-        return $this->hasOne(Director::className(), ['director_id' => 'id']);
+        return $this->hasOne(Director::className(), ['id' => 'director_id']);
     }
 
     public function getLicenses()

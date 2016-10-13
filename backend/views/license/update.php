@@ -19,6 +19,6 @@ use yii\bootstrap\Html;
         <a href="<?= $model->url ?>"><?= $model->file_label ?></a>
     </div>
 <?php endif; ?>
-<?= $form->field($model, 'licenseFile')->fileInput() ?>
+<?= $form->field($model, 'url')->textInput() ?>
 <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
 <?php ActiveForm::end(); ?>

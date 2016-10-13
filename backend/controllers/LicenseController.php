@@ -3,8 +3,6 @@ namespace backend\controllers;
 
 use common\models\License;
 use Yii;
-use yii\helpers\Url;
-use yii\web\UploadedFile;
 
 /**
  * Company controller
@@ -23,24 +21,10 @@ class LicenseController extends BackEndController
         $model = License::findOne($id);
         $model->scenario = 'edit';
 
-        if ($model->load(Yii::$app->request->post())) {
-            $params = Yii::$app->params;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'License update success');
 
-            $model->licenseFile = UploadedFile::getInstance($model, 'licenseFile');
-
-            if ($model->licenseFile) {
-                unlink(Url::to('@frontend/web') . $model->url);
-                $path = Url::to($params['uploadPath']) . $model->licenseFile->baseName . '.' . $model->licenseFile->extension;
-                // store the source file name
-                $model->url = $params['uploadUrl'] . $model->licenseFile->baseName . '.' . $model->licenseFile->extension;
-                $model->licenseFile->saveAs($path);
-            }
-
-            if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', 'License update success');
-
-                return $this->redirect(['license/index']);
-            }
+            return $this->redirect(['license/index']);
         }
 
         return $this->render('update', ['model' => $model]);

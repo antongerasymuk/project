@@ -13,7 +13,6 @@ use Yii;
  */
 class License extends \yii\db\ActiveRecord
 {
-    public $licenseFile;
     /**
      * @inheritdoc
      */

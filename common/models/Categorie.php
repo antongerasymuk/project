@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\caching\DbDependency;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -47,10 +48,11 @@ class Categorie extends \yii\db\ActiveRecord
 
     public static function getForNav()
     {
+        $dependency = new DbDependency(['sql' => 'SELECT count(*) FROM categories']);
         // cached
         $categories = Categorie::getDb()->cache(function ($db){
             return Categorie::find()->all();
-        });
+        }, 0, $dependency);
 
         $items = [];
 

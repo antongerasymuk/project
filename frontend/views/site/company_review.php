@@ -171,3 +171,39 @@ use \yii\helpers\Url;
 
     </div>
 </div>
+
+    <div class="claim-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="tit">Like <?= $review->title ?> ?</div>
+                    <p>Claim your <?= $review->title ?> Bonus Today!</p>
+                    <div class="btn">
+                        <a href="<?= $review->company->site_url ?>">
+                            <button type="button" class="btn-dft">Claim now</button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- .claim-block -->
+
+<?php $relatedReviews = $review->getRelated(); ?>
+
+<?php if (!empty($relatedReviews)) : ?>
+    <div class="websites-block">
+        <div class="container">
+            <div class="row">
+                <?php foreach ($relatedReviews as $relatedReview) : ?>
+                    <div class="item">
+                        <div class="tit"><a href="#"><?= $relatedReview->title ?></a>
+                            <p><?= $relatedReview->description ?></div>
+                        <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
+                        <div class="inf"><?= $relatedReview->preview_title ?></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div><!-- .websites-block -->
+<?php endif; ?>

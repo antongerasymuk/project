@@ -104,7 +104,6 @@ AppAsset::register($this);
 
                 <div class="copyright hidden-lg hidden-md hidden-sm visible-xs-block">
                     <p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
-                    <p>Design by <a href="http://perfecto-web.pro" target="_blank">Perfecto Web</a></p>
                 </div>
 
             </div>

@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= $form->field($model, 'description')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= $form->field($model, 'address')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",

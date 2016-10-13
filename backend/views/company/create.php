@@ -37,7 +37,7 @@ $this->registerJsFile('js/stan.custom.js', [
 ?>
 <?= $form->field($model, 'description')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",
@@ -50,7 +50,7 @@ $this->registerJsFile('js/stan.custom.js', [
 ?>
 <?= $form->field($model, 'address')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",
@@ -71,7 +71,6 @@ $this->registerJsFile('js/stan.custom.js', [
 <div class="form-group-director">
 <?= $form->field($model, 'director_id')->widget(Select2::classname(), [
     'data' => $directorsData,
-    'language' => 'en',
     'options' => ['placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -82,7 +81,6 @@ $this->registerJsFile('js/stan.custom.js', [
 <div class="form-group-license">
 <?= $form->field($model, 'licenseIds')->widget(Select2::classname(), [
     'data' => [],
-    'language' => 'en',
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -93,7 +91,6 @@ $this->registerJsFile('js/stan.custom.js', [
 <div class="form-group-reviews">
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
     'data' => $reviewsData,
-    'language' => 'en',
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
     'allowClear' => true

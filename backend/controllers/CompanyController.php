@@ -51,10 +51,6 @@ class CompanyController extends BackEndController
                 if($model->save()){
                     $model->logoFile->saveAs($path);
 
-                    //safe company reviews
-//                    foreach ($model->reviewIds as $id) {
-//                        $model->link('reviews', Review::findOne(['id' => $id]));
-//                    }
                     if (!empty($model->reviewIds)) {
                         foreach ($model->reviewIds as $id) {
                             $review = Review::findOne($id);
@@ -130,14 +126,12 @@ class CompanyController extends BackEndController
 
             if ($model->save()) {
                 $model->unlinkAll('licenses', true);
-                $model->unlinkAll('reviews', true);
-
-                $companyId = $model->id;
+                $model->unlinkAll('reviews', false);
 
                 if (!empty($model->reviewIds)) {
                     foreach ($model->reviewIds as $id) {
                         $review = Review::findOne($id);
-                        $review->company_id = $companyId;
+                        $review->company_id = $model->id;
                         $review->update(true, ['company_id']);
                     }
                 }

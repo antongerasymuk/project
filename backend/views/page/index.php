@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="row-fluid">
     <div class="box span12">
-        <a href="<?= Url::to(['page/create']) ?>" class="btn btn-primary">Create review</a>
+        <a href="<?= Url::to(['page/create']) ?>" class="btn btn-primary">Create page</a>
         <div class="box-content">
             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                 <thead>

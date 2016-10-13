@@ -19,7 +19,6 @@ class LicenseController extends BackEndController
     public function actionEdit($id)
     {
         $model = License::findOne($id);
-        $model->scenario = 'edit';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', 'License update success');

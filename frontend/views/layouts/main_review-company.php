@@ -59,18 +59,25 @@ AppAsset::register($this);
       </div>
 
     </header><!-- .Header -->
-<main>
-  <div class="main-top">
-        <div class="container">
-              <div class="row">
-                <div class="col-sm-8">
-            <?= BreadcrumbsBonus::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-      </div>
+    <main>
+        <div class="main-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <?= BreadcrumbsBonus::widget([
+                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                            ]) ?>
+                        </div>
+                        <div class="col-sm-4 clearfix pdl0">
+                            <div class="share-block">
+                                <a href="#" class="shareBl s-tw"> <i class="flaticon-soc-tw"></i> <span>Share</span></a>
+                                <a href="#" class="shareBl s-fb"> <i class="flaticon-soc-fb"></i> <span>Share</span></a>
+                                <a href="#" class="shareBl s-gp"> <i class="flaticon-soc-gp"></i> <span>Share</span></a>
+                            </div>
+                        </div><!-- .share-block -->
 
-        </div>
-    </div>
+                    </div>
+                </div>
 
       </div><!-- .main-top -->
         <?= Alert::widget() ?>

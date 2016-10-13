@@ -44,8 +44,10 @@ riot.tag2('bonuses-filter-list',
             opts.category_filter = '';
             if(opts.category) {
                 opts.category_filter = 'category_id='+opts.category;
-            }
+                opts.category_filter_url = 'id='+opts.category;
+            } 
             console.log('/bonus?'+opts.category_filter+opts.filter);
+            history.pushState(null, null, '/site/category?'+opts.category_filter_url+opts.filter);
             oboe({
                 url: '/bonus?'+opts.category_filter+opts.filter,
                 headers:  {Accept: 'application/json'}, 

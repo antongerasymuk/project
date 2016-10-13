@@ -57,7 +57,7 @@ class Categorie extends \yii\db\ActiveRecord
         foreach ($categories as $category) {
             $items[] = [
                 'label' => $category->title,
-                'url' => ['site/category', 'id' => $category->id]
+                'url' => ['site/category', 'id' => $category->id , 'filter_by' => 1, 'sort_by' =>1]
             ];
         }
 

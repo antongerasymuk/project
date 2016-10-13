@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
 				<thead>
 				<tr>
 					<th>Name</th>
-					<th>Description</th>
 					<th>Logo</th>
 					<th>Actions</th>
 				</tr>
@@ -41,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php foreach ($companies as $company) : ?>
                         <tr>
                             <td><?= $company->title ?></td>
-                            <td class="center"><?= $company->description ?></td>
                             <td class="center">
                                 <?php if (!empty($company->logo)) : ?>
                                     <img src="<?= $company->logo ?>" alt="<?= basename($company->logo) ?>" class="company-logo">

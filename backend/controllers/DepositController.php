@@ -18,13 +18,15 @@ class DepositController extends BackEndController
         if ($model->load(Yii::$app->request->post())) {
             $params = Yii::$app->params;
 
-            $logoFile = UploadedFile::getInstance($model, 'logoFile');
-            $path = Url::to($params['uploadPath']) . $logoFile->baseName . '.' . $logoFile->extension;
+            $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
+            $path = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
             // store the source file name
-            $model->logo = $params['uploadUrl'] . $logoFile->baseName . '.' . $logoFile->extension;
+            $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
-            if($model->save()) $logoFile->saveAs($path);
+            if ($model->save()) {
+                $model->logoFile->saveAs($path);
+            }
 
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 

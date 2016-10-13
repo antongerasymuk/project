@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use common\models\Bonus;
+use common\models\Os;
 use Yii;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
@@ -13,8 +14,15 @@ class BonusController extends BackEndController
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        $bonuses = Bonus::find()->all();
+        //echo "<pre>";
+        //var_dump($bonuses);
+        //echo "</pre>";
+        return $this->render('index', ['bonuses' => $bonuses]);
+        
     }
+
+
 
     public function actionCreate()
     {
@@ -28,8 +36,24 @@ class BonusController extends BackEndController
 
             // store the source file name
             $model->logo = $params['uploadUrl'] . $logoFile->baseName . '.' . $logoFile->extension;
+ echo "<pre>";
+                       var_dump($model);
+                       echo "</pre>";
+                       exit;
 
-            if($model->save()) $logoFile->saveAs($path);
+
+            if($model->save()) {
+            if (!empty($model->osIds)) {
+                        foreach ($model->osIds as $id) {
+                            $model->link('oses', Os::findOne(['id' => $id]));
+                        echo "<pre>";
+                       var_dump($bonuses);
+                       echo "</pre>";
+                       exit;
+                        }
+                    }
+            //$logoFile->saveAs($path);
+            }
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
             return [

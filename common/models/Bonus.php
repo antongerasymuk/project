@@ -22,6 +22,7 @@ class Bonus extends \yii\db\ActiveRecord
     const MAIN = 1;
     public $logoFile;
     public $reviewIds;
+    public $osIds;
     /**
      * @inheritdoc
      */
@@ -65,6 +66,7 @@ class Bonus extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'osIds' => 'Compatible With',
             'description' => 'Description',
             'logo' => 'Logo',
             'price' => 'Price',

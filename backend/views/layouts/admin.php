@@ -100,6 +100,12 @@ AdminAsset::register( $this );
 							</a>
 						</li>
 						<li>
+							<a href="<?= Url::to(['bonus/index']) ?>">
+								<i class="icon-gift"></i>
+								<span class="hidden-tablet">Bonuses</span>
+							</a>
+						</li>
+						<li>
 							<a href="<?= Url::to(['country/index']) ?>">
 								<i class="icon-flag"></i>
 								<span class="hidden-tablet">Countries</span>

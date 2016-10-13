@@ -11,7 +11,7 @@ use \common\helpers\ModelMapHelper;
 use \common\models\Plus;
 
 ?>
-<?php $this->title = 'Create review'; ?>
+<?php $this->title = 'Create page'; ?>
 
 <?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'title')
@@ -20,7 +20,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'content')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",

@@ -20,7 +20,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'content')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",

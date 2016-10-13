@@ -15,12 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php $form = ActiveForm::begin(['id' => 'os-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'title')->textInput() ?>
-<?php if (!empty($model->src)) : ?>
-    <div class="form-group">
-        <img src="<?= $model->src ?>">
-    </div>
-<?php endif; ?>
-<?= $form->field($model, 'logoFile')->fileInput() ?>
 <div class="form-group">
     <?= Html::submitButton('Update', ['class' => 'btn btn-primary', 'name' => 'os-button']) ?>
 </div>

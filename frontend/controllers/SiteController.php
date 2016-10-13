@@ -99,14 +99,7 @@ class SiteController extends Controller
 
    public function actionPage($category,$slug)
    {
-      $modelClass = 'common\models\Site';
-      $dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM sites']);
-      
-    //  $site =  $modelClass::getDb()->cache(function($db) use ($modelClass){ return $modelClass::find()
-    //  ->where(['slug' => $slug, 'category' => $category])
-    //  ->asArray()->one();  
-    // }, 0, $dependency);
-     $site = Site::find()->where(['slug' => $slug, 'category' => $category])->asArray()->one();  
+       $site = Site::find()->where(['slug' => $slug, 'category' => $category])->asArray()->one();
   
        $this->layout = "main";
 

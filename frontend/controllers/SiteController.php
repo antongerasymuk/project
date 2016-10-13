@@ -38,7 +38,7 @@ class SiteController extends Controller
                 'only' => ['index'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM categorie',
+                    'sql' => 'SELECT COUNT(*) FROM categories',
                 ],
             ],
 

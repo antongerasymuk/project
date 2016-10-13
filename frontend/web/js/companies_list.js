@@ -14,7 +14,6 @@ riot.tag2('companies-list', '<div class="row"> ' +
         var self = this;
         self.companies_list = [];
         this.on('mount', function () {
-            //console.log(this);
             self.trigger('get');
         });
         this.on('get', function () {

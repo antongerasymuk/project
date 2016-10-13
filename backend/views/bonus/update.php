@@ -11,7 +11,7 @@ use \common\helpers\ModelMapHelper;
  * @var $this \yii\web\View
  * @var $model \common\models\Company
  */
-$this->title = 'Create bonus';
+$this->title = 'Update bonus';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -33,6 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ]
 ])
 ?>
+<td class="center">
+    <?php if (!empty($model->logo)) : ?>
+        <img src="<?= $model->logo ?>" alt="<?= basename($model->logo) ?>" class="company-logo">
+    <?php endif; ?>
+</td>
 <?= $form->field($model, 'logoFile')->fileInput() ?>
 <?= $form->field($model, 'price')->textInput() ?>
 <?= $form->field($model, 'code')->textInput() ?>
@@ -50,6 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="form-group">
-    <?= Html::submitButton('Create', ['class' => 'btn btn-primary', 'name' => 'category-button']) ?>
+    <?= Html::submitButton('Update', ['class' => 'btn btn-primary', 'name' => 'category-button']) ?>
 </div>
 <?php ActiveForm::end(); ?>

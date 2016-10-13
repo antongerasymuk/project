@@ -36,8 +36,9 @@ class Company extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['title', 'director_id', 'address', 'rating'], 'required'],
+            [['title', 'site_url', 'director_id', 'address', 'rating'], 'required'],
             ['rating', 'double'],
+            [['site_url'], 'url', 'validSchemes' => ['http', 'https']],
             [['reviewIds', 'licenseIds'], 'safe'],
             [['description'], 'string'],
             [['bg_color'], 'default', 'value' => '#000'],

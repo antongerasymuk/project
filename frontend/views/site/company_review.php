@@ -22,6 +22,15 @@ use \yii\helpers\Url;
                             <?= $companyReview->title ?> Review
                         </a>
                     </div>
+                    <p>
+                        <?php $mainBonus = $companyReview->getMainBonus() ?>
+                        <?= $mainBonus->description ?>
+                    </p>
+                    <div class="btn">
+                        <a href="<?= $mainBonus->referal_url; ?>">
+                            <button class="btn-hulf" type="button">Claim now</button>
+                        </a>
+                    </div>
                 </div><!-- .item -->
                 <?php endforeach; ?>
             </div>

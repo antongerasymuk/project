@@ -168,13 +168,18 @@ class Review extends \yii\db\ActiveRecord
         return $this->hasOne(Categorie::className(), ['id' => 'category_id']);
     }
 
-    public function getRelated()
+    public function getRelated($limit = null)
     {
-        return self::find()
+        $reviews = self::find()
             ->where(['company_id' => $this->company_id])
             ->andWhere(['type' => self::REVIEW_TYPE])
-            ->andWhere(['<>', 'id', $this->id])
-            ->all();
+            ->andWhere(['<>', 'id', $this->id]);
+
+        if ($limit != null && is_numeric($limit)) {
+            $reviews->limit($limit);
+        }
+
+        return $reviews->all();
     }
 
     public function getTop($limit = 5)

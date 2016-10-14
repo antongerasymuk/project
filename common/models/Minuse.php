@@ -31,6 +31,7 @@ class Minuse extends \yii\db\ActiveRecord
         ];
     }
 
+
     /**
      * @inheritdoc
      */
@@ -40,5 +41,10 @@ class Minuse extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
         ];
+    }
+       public function getReviews()
+    {
+        return $this->hasMany(Review::className(), ['id' => 'review_id'])
+                    ->viaTable('review_minus', ['minus_id' => 'id']);
     }
 }

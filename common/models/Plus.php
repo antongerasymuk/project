@@ -37,4 +37,12 @@ class Plus extends \yii\db\ActiveRecord
             'title' => 'Title',
         ];
     }
+
+    // for relation with pros(pluses)
+
+    public function getReviews()
+    {
+        return $this->hasMany(Review::className(), ['id' => 'review_id'])
+            ->viaTable('review_plus', ['plus_id' => 'id']);
+    }
 }

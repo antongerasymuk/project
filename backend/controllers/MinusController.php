@@ -56,4 +56,12 @@ class MinusController extends BackEndController
 
         return $this->render('update', ['model' => $model]);
     }
+    public function actionDelete($id)
+    {
+       $model = Minuse::findOne($id);
+       $model->delete();
+       $model->unlinkAll('reviews',true);
+ 
+       return $this->redirect(['minus/index']);
+    }
 }

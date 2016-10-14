@@ -51,4 +51,17 @@ class Country extends \yii\db\ActiveRecord
 
         return ArrayHelper::map($prosData, 'id', 'title');
     }
+
+    public function getReviewsAllowed()
+    {
+        return $this->hasMany(Review::className(), ['id' => 'review_id'])
+                    ->viaTable('allowed_country', ['country_id' => 'id']);
+    }
+
+    public function getReviewsDenied()
+    {
+        return $this->hasMany(Review::className(), ['id' => 'review_id'])
+                    ->viaTable('denied_country', ['country_id' => 'id']);
+    }
+
 }

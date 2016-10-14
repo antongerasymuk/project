@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <a class="btn btn-info" href="<?= Url::to(['minus/edit', 'id' => $minus->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <a class="btn btn-danger" href="#">
+                                <a class="btn btn-danger" href="<?= Url::to(['minus/delete', 'id' => $minus->id]) ?>">
                                     <i class="halflings-icon white trash"></i>
                                 </a>
                             </td>

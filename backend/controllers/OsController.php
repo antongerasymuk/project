@@ -43,5 +43,14 @@ class OsController extends BackEndController
 
         return $this->render('update', ['model' => $model]);
     }
+       public function actionDelete($id)
+    {
+       $model = Os::findOne($id);
+       $model->delete();
+       $model->unlinkAll('osesReview',true);
+       $model->unlinkAll('osesBonus',true);
+ 
+       return $this->redirect(['os/index']);
+    }
 
 }

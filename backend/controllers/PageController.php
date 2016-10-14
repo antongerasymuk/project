@@ -45,4 +45,12 @@ class PageController extends BackEndController
 
 		return $this->render('update', ['model' => $model]);
 	}
+	
+	public function actionDelete($id)
+    {
+       $model = Site::findOne($id);
+       $model->delete();
+  
+       return $this->redirect(['page/index']);
+    }
 }

@@ -36,4 +36,13 @@ class RatingController extends BackEndController
 
         return $this->render('create', ['model' => $model]);
     }
+
+    public function actionDelete($id)
+    {
+       $model = Rating::findOne($id);
+       $model->delete();
+       $model->unlinkAll('reviews',true);
+ 
+       return $this->redirect(['plus/index']);
+    }
 }

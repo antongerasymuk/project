@@ -4,7 +4,6 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-
 /**
  * This is the model class for table "os".
  *
@@ -52,5 +51,22 @@ class Os extends \yii\db\ActiveRecord
                              ->all();
 
         return ArrayHelper::map($prosData, 'id', 'title');
+    }
+    
+    // for relations with  reviews
+
+
+    public function getOsesReview()
+    {
+        return $this->hasMany(Review::className(), ['id' => 'review_id'])
+                    ->viaTable('os_review', ['os_id' => 'id']);
+    }
+ 
+    
+    // for relations with  bonuses
+    public function getOsesBonus()
+    {
+        return $this->hasMany(Bonus::className(), ['id' => 'bonus_id'])
+                    ->viaTable('os_bonus', ['os_id' => 'id']);
     }
 }

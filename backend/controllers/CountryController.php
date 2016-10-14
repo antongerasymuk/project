@@ -53,4 +53,14 @@ class CountryController extends BackEndController
 
         return $this->render('update', ['model' => $model]);
     }
+    public function actionDelete($id)
+    {
+       $model = Country::findOne($id);
+       $model->delete();
+       $model->unlinkAll('reviewsAllowed',true);
+       $model->unlinkAll('reviewsDenied',true);
+ 
+       return $this->redirect(['country/index']);
+    }
+
 }

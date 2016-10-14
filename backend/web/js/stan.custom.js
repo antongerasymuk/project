@@ -92,7 +92,7 @@ $('#deposit-create-form').on('beforeSubmit', function (e) {
         validated: $(this).data('yiiActiveForm').validated,
         formId: 'deposit-create-form',
         formIndex: 5,
-        createActionUrl: '/backend/deposit/create',
+        createActionUrl: '/backend/payment/create',
         select2Selector: '#review-depositids',
         modalSelector: '#deposit-create-modal'
     });

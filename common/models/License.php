@@ -47,4 +47,9 @@ class License extends \yii\db\ActiveRecord
             'file_label' => 'Link text'
         ];
     }
+    public function getCompanies()
+    {
+        return $this->hasMany(License::className(), ['id' => 'company_id'])
+            ->viaTable('company_license', ['license_id' => 'id']);
+    }
 }

@@ -53,4 +53,12 @@ class LicenseController extends BackEndController
 
         return $this->render('create', ['model' => $model]);
     }
+      public function actionDelete($id)
+    {
+       $model = License::findOne($id);
+       $model->unlinkAll('companies',true);
+       $model->delete();
+  
+       return $this->redirect(['setting/index']);
+    }
 }

@@ -15,9 +15,7 @@ class BonusController extends BackEndController
     public function actionIndex()
     {
         $bonuses = Bonus::find()->all();
-        //echo "<pre>";
-        //var_dump($bonuses);
-        //echo "</pre>";
+
         return $this->render('index', ['bonuses' => $bonuses]);
         
     }
@@ -28,13 +26,14 @@ class BonusController extends BackEndController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $params = Yii::$app->params;
-            $logoFile = UploadedFile::getInstance($model, 'logoFile');
-            $path = Url::to($params['uploadPath']) . $logoFile->baseName . '.' . $logoFile->extension;
+            $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
+            $path = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
             // store the source file name
-            $model->logo = Url::to($params['uploadUrl']) . $logoFile->baseName . '.' . $logoFile->extension;
+            $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+            $model->logoFile->saveAs($path);
+            
             if ($isAjax) {
-                $logoFile->saveAs($path);
                 if (!empty($model->osIds)) {
                         foreach ($model->osIds as $id) {
                             $model->link('oses', Os::findOne(['id' => $id]));
@@ -63,6 +62,7 @@ class BonusController extends BackEndController
         $model = Bonus::findOne($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $params = Yii::$app->params;
             if (!empty($model->osIds)) {
                 foreach ($model->osIds as $id) {
                     $model->link('oses', Os::findOne(['id' => $id]));

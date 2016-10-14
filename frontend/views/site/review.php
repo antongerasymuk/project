@@ -214,8 +214,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <?php foreach ($relatedReviews as $relatedReview) : ?>
                     <div class="item">
-                        <div class="tit"><a href="#"><?= $relatedReview->title ?></a>
-                            <p><?= $relatedReview->description ?></div>
+                        <div class="tit"><a href="<?= Url::to([
+                                'site/review',
+                                'id' => $relatedReview->id
+                            ]) ?>"><?= $relatedReview->title ?></a>
+                            <p><?= $review->getMainBonus()->description ?></p>
+                        </div>
                         <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
                         <div class="inf"><?= $relatedReview->preview_title ?></div>
                     </div>

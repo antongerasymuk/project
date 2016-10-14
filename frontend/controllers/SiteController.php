@@ -44,22 +44,22 @@ class SiteController extends Controller
 
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['logout', 'signup'],
+                'only' => ['logout', 'signup'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
-                        'allow'   => true,
-                        'roles'   => ['?'],
+                        'allow' => true,
+                        'roles' => ['?'],
                     ],
                     [
                         'actions' => ['logout'],
-                        'allow'   => true,
-                        'roles'   => ['@'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
-            'verbs'  => [
-                'class'   => VerbFilter::className(),
+            'verbs' => [
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -74,11 +74,11 @@ class SiteController extends Controller
     public function actions()
     {
         return [
-            'error'   => [
+            'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
             'captcha' => [
-                'class'           => 'yii\captcha\CaptchaAction',
+                'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
@@ -93,17 +93,17 @@ class SiteController extends Controller
     {
         $this->layout = "main_index";
 
-       return $this->render('index');
+        return $this->render('index');
     }
-    
 
-   public function actionPage($category,$slug)
-   {
-       $site = Site::find()->where(['slug' => $slug, 'category' => $category])->asArray()->one();
-  
-       $this->layout = "main";
 
-       return $this->render('page' ,['content' => $site['content'], 'title' => $site['title']]);
+    public function actionPage($category, $slug)
+    {
+        $site = Site::find()->where(['slug' => $slug, 'category' => $category])->asArray()->one();
+
+        $this->layout = "main";
+
+        return $this->render('page', ['content' => $site['content'], 'title' => $site['title']]);
     }
 
 
@@ -132,11 +132,11 @@ class SiteController extends Controller
         }
 
         $this->view->params['company'] = [
-            'id'   => $review->company->id,
-            'url'  => $review->company->site_url,
+            'id' => $review->company->id,
+            'url' => $review->company->site_url,
             'name' => $review->company->title
         ];
-        $this->view->params['logo']    = $review->company->logo;
+        $this->view->params['logo'] = $review->company->logo;
 
         if ($review->type == Review::REVIEW_TYPE) {
             // render review
@@ -160,7 +160,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if ( ! Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -196,7 +196,7 @@ class SiteController extends Controller
     public function actionContact()
     {
         $this->layout = "main_contact";
-        $model        = new ContactForm();
+        $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
@@ -328,8 +328,8 @@ class SiteController extends Controller
 
     public function actionCategory($id = null)
     {
-        $this->layout                         = 'main_bonus';
-        $title                                = Categorie::findOne($id)->title;
+        $this->layout = 'main_bonus';
+        $title = Categorie::findOne($id)->title;
         $this->view->params['category_title'] = $title;
 
         return $this->render('bonuses_by_filter', ['title' => $title]);

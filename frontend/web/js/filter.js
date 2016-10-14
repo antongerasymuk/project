@@ -68,7 +68,7 @@ $(document).ready(function() {
             filter_string = makeFilterSelector('deposit_id',deposit_id);
         }
         if ($(this).attr('id') == 'countries') {
-            filter_string = makeFilterSelector('country_id',deposit_id);
+            filter_string = makeFilterSelector('country_id', country_id);
         }
 
         $('#bonuses-filter-list').attr("filter" , filter_string);

@@ -102,11 +102,12 @@ class BonusController extends ActiveController
                 ->andWhere(['countries.id' => $country_id]);
         }
 
-        $bonuses->where(['reviews.category_id' => $category_id]);
+        $bonuses->andWhere(['reviews.category_id' => $category_id]);
 
         $data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
             return $bonuses->all();
         }, 0, $dependency);
+        $data = $bonuses->all();
 
         $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_' . (int)$sort_by);
 

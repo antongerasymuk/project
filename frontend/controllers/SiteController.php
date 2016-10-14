@@ -328,10 +328,13 @@ class SiteController extends Controller
 
     public function actionCategory($id = null)
     {
-        $this->layout                         = 'main_bonus';
-        $title                                = Categorie::findOne($id)->title;
+        $this->layout = 'main_bonus';
+        if ($title = Categorie::findOne($id)) {
+        $title = Categorie::findOne($id)->title;
         $this->view->params['category_title'] = $title;
-
+        } else {
+            throw new NotFoundHttpException('Unknown id of categorie');
+        }
         return $this->render('bonuses_by_filter', ['title' => $title]);
     }
 }

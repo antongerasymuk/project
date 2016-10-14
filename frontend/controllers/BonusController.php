@@ -62,7 +62,7 @@ class BonusController extends ActiveController
     ) {
         $modelClass = $this->modelClass;
         $dependency = new \yii\caching\DbDependency([
-            'sql' => 'SELECT (SELECT COUNT(*) FROM bonuses) + (SELECT COUNT(*) FROM os_review)'
+            'sql' => 'SELECT (SELECT COUNT(*) FROM bonuses) + (SELECT COUNT(*) FROM os_review) + (SELECT COUNT(*) FROM allowed_country)'
         ]);
 
         $bonuses = $modelClass::find()
@@ -91,7 +91,6 @@ class BonusController extends ActiveController
             $bonuses->innerJoinWith('oses')
                 ->where(['oses.id' => $os_id]);
         }
-
 
         if ((int)$deposit_id) {
             $bonuses->innerJoinWith('deposits')

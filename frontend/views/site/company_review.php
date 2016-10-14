@@ -22,21 +22,6 @@ use \yii\helpers\Url;
                             <?= $companyReview->title ?> Review
                         </a>
                     </div>
-                    <?php $mainBonus = $companyReview->getBonuses()
-                        ->where(['type' => \common\models\Bonus::MAIN])
-                        ->one();
-                    ?>
-                    <?php if (!empty($mainBonus)) : ?>
-                        <p>
-                            <?= $mainBonus->description ?>
-                        </p>
-                        <div class="btn">
-                            <a href="<?= $mainBonus->referal_url ?>">
-                                <button class="btn-hulf" type="button">Claim now</button>
-                            </a>
-                        </div>
-                    <?php endif; ?>
-
                 </div><!-- .item -->
                 <?php endforeach; ?>
             </div>
@@ -46,7 +31,6 @@ use \yii\helpers\Url;
 
             <div class="col-md-9">
                 <div class="side-left">
-
                     <div class="sl-content">
                         <h1><?= $review->title ?> Review</h1>
                         <?= $review->description ?>
@@ -94,6 +78,20 @@ use \yii\helpers\Url;
                     </div><!-- .sr-menu (Review Summary) -->
                     <?php endif; ?>
 
+                    <?php if (!empty($review->company->licenses)) : ?>
+                        <?php foreach ($review->company->licenses as $lic) : ?>
+                            <div class="sr-menu">
+                                <div class="srm-head"><?= $lic->title ?></div>
+                                <div class="srm-list srm-docs">
+                                    <p>
+                                        <i class="flaticon-docs"></i>
+                                        <a href="<?= $lic->url ?>"><?= $lic->file_label ?></a>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
                     <?php if (!empty($review->oses)) : ?>
                         <div class="sr-menu">
                             <div class="srm-head">Compatible With</div>
@@ -105,6 +103,17 @@ use \yii\helpers\Url;
                         </div><!-- .sr-menu (Compatible With) -->
                     <?php endif; ?>
 
+                    <?php if (!empty($review->company->director)) : ?>
+                        <div class="sr-menu">
+                            <div class="srm-head"><?= $review->company->director->title ?></div>
+                            <div class="srm-list srm-ceo clearfix">
+                                <p>
+                                    <img class="img-left" src="<?= $review->company->director->photo ?>" alt="">
+                                    <?= $review->company->director->description ?>
+                                </p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <?php if (!empty($review->deposits)) : ?>
                         <div class="sr-menu">
                             <div class="srm-head">Deposit Methods</div>
@@ -161,3 +170,39 @@ use \yii\helpers\Url;
 
     </div>
 </div>
+
+    <div class="claim-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="tit">Like <?= $review->title ?> ?</div>
+                    <p>Claim your <?= $review->title ?> Bonus Today!</p>
+                    <div class="btn">
+                        <a href="<?= $review->company->site_url ?>">
+                            <button type="button" class="btn-dft">Claim now</button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- .claim-block -->
+
+<?php $relatedReviews = $review->getRelated(); ?>
+
+<?php if (!empty($relatedReviews)) : ?>
+    <div class="websites-block">
+        <div class="container">
+            <div class="row">
+                <?php foreach ($relatedReviews as $relatedReview) : ?>
+                    <div class="item">
+                        <div class="tit"><a href="#"><?= $relatedReview->title ?></a>
+                            <p><?php //TODO Main bonus description ?></div>
+                        <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
+                        <div class="inf"><?= $relatedReview->preview_title ?></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div><!-- .websites-block -->
+<?php endif; ?>

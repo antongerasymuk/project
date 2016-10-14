@@ -32,8 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                     <div class="right">
-                        <p>Minimum Deposit<strong><?= $bonus->min_deposit ?></strong></p>
-                        <p>Expiry<strong><?= $bonus->expiry ?></strong></p>
+                        <?php $min_deposit = empty($bonus->min_deposit) ? '-' : $bonus->currency . $bonus->min_deposit ?>
+                        <p>Minimum Deposit<strong><?= $min_deposit ?></strong></p>
+                        <p>Expiry<strong><?= $bonus->expiry ?>&nbsp;days</strong></p>
                         <p>Rollover Requirement<strong><?= $bonus->rollover_requirement ?></strong></p>
                         <p>Restrictions<strong><?= $bonus->restrictions ?></strong></p>
                     </div>
@@ -208,18 +209,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $relatedReviews = $review->getRelated(); ?>
 
 <?php if (!empty($relatedReviews)) : ?>
-<div class="websites-block">
-    <div class="container">
-        <div class="row">
-            <?php foreach ($relatedReviews as $relatedReview) : ?>
-            <div class="item">
-                <div class="tit"><a href="#"><?= $relatedReview->title ?></a>
-                    <p><?= $relatedReview->description ?></div>
-                <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
-                <div class="inf"><?= $relatedReview->preview_title ?></div>
+    <div class="websites-block">
+        <div class="container">
+            <div class="row">
+                <?php foreach ($relatedReviews as $relatedReview) : ?>
+                    <div class="item">
+                        <div class="tit"><a href="#"><?= $relatedReview->title ?></a>
+                            <p><?= $relatedReview->description ?></div>
+                        <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
+                        <div class="inf"><?= $relatedReview->preview_title ?></div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
-    </div>
-</div><!-- .websites-block -->
+    </div><!-- .websites-block -->
 <?php endif; ?>

@@ -127,6 +127,10 @@ class SiteController extends Controller
 
         $review = Review::findOne($id);
 
+        if ($review == null) {
+            throw new NotFoundHttpException('Review not found');
+        }
+
         $this->view->params['company'] = [
             'id'   => $review->company->id,
             'url'  => $review->company->site_url,

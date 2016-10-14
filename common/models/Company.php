@@ -36,7 +36,7 @@ class Company extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-            [['title', 'site_url', 'director_id', 'address', 'rating'], 'required'],
+            [['title', 'site_url', 'director_id', 'rating'], 'required'],
             ['rating', 'double'],
             [['site_url'], 'url', 'validSchemes' => ['http', 'https']],
             [['reviewIds', 'licenseIds'], 'safe'],
@@ -77,7 +77,7 @@ class Company extends \yii\db\ActiveRecord
 
     public function getDirector()
     {
-        return $this->hasOne(Director::className(), ['director_id' => 'id']);
+        return $this->hasOne(Director::className(), ['id' => 'director_id']);
     }
 
     public function getLicenses()

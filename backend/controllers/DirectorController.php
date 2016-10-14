@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use common\models\Director;
+use common\models\Company;
 use Yii;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
@@ -82,5 +83,22 @@ class DirectorController extends BackEndController
         }
 
         return $this->render('create', ['model' => $model]);
+    }
+
+    public function actionDelete($id)
+    {
+       $model = Director::findOne($id);
+       $modelCompany = Company::find()->where(['director_id' => $id])->all();
+       foreach ($modelCompany as $company) {
+           $company->director_id = NULL;
+           $company->save(false);
+         
+       } 
+       $model->delete();
+       //$name = Nameoftable::findOne("10");
+       //$name->fieldname = "new information";
+       //$name->filedname2 = "about information";
+       //$name->update();
+       return $this->redirect(['director/index']);
     }
 }

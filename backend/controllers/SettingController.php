@@ -46,4 +46,11 @@ class SettingController extends BackEndController
 
         return $this->render('create', ['model' => $model]);
     }
+    public function actionDelete($id)
+    {
+       $model = User::findOne($id);
+       $model->delete();
+  
+       return $this->redirect(['setting/index']);
+    }
 }

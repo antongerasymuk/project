@@ -15,7 +15,7 @@ $this->title = 'Create bonus';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php $form = ActiveForm::begin(['id' => 'bonus-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['id' => 'bonus-form', 'options' => ['enctype' => 'multipart/form-data'],'action' => \yii\helpers\Url::to(['bonus/create', 'isAjax' => false])]); ?>
 <?= $form->field($model, 'title')
          ->textInput(['autofocus' => true])
          ->label('Title')

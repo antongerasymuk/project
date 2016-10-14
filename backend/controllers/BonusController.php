@@ -25,36 +25,39 @@ class BonusController extends BackEndController
     {
         $model = new Bonus();;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
             $params = Yii::$app->params;
             $logoFile = UploadedFile::getInstance($model, 'logoFile');
+            //var_dump($logoFile);
+            //exit;
             $path = Url::to($params['uploadPath']) . $logoFile->baseName . '.' . $logoFile->extension;
 
             // store the source file name
             $model->logo = Url::to($params['uploadUrl']) . $logoFile->baseName . '.' . $logoFile->extension;
             var_dump($model->logo); 
-            if ($isAjax) {
+            if ($model->save()) {
                 $logoFile->saveAs($path);
-                if (!empty($model->osIds)) {
+                if ($isAjax ) {
+                    if (!empty($model->osIds)) {
                         foreach ($model->osIds as $id) {
                             $model->link('oses', Os::findOne(['id' => $id]));
                         }
                     }
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-                return [
+                    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                    return [
                     'success' => $model->id,
                     'item' => [
-                        'id' => $model->id,
-                        'value' => $model->title
+                    'id' => $model->id,
+                    'value' => $model->title
                     ]
-                ];
+                    ];
+                }
+
+                Yii::$app->getSession()->setFlash('success', 'Bonus created success');
+
+                return $this->redirect(['bonus/index']);
             }
-
-            Yii::$app->getSession()->setFlash('success', 'Bonus created success');
-
-            return $this->redirect(['bonus/index']);
         }
 
         return $this->render('create', ['model' => $model]);
@@ -89,6 +92,14 @@ class BonusController extends BackEndController
         
 
         return $this->render('update', ['model' => $model]);
+    }
+
+     public function actionDelete($id)
+    {
+       $model = Bonus::findOne($id);
+       $model->delete();
+       $model->unlinkAll('oses',true);
+       return $this->redirect(['bonus/index']);
     }
 
 

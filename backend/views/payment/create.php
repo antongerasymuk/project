@@ -13,7 +13,11 @@ $this->title = 'Create payment method';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php $form = ActiveForm::begin(['id' => 'payment-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin([
+    'id' => 'payment-form',
+    'action' => \yii\helpers\Url::to(['payment/create', 'isAjax' => false]),
+    'options' => ['enctype' => 'multipart/form-data']
+]); ?>
 <?= $form->field($model, 'title')->textInput() ?>
 <?= $form->field($model, 'logoFile')->fileInput() ?>
 <div class="form-group">

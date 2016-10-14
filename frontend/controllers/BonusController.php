@@ -1,11 +1,7 @@
 <?php
 namespace frontend\controllers;
 
-use common\models\Bonus;
 use common\models\Review;
-use frontend\models\BonusFilter;
-use yii\data\ActiveDataProvider;
-use yii\helpers\Url;
 use Yii;
 use yii\rest\ActiveController;
 
@@ -63,20 +59,16 @@ class BonusController extends ActiveController
         $os_id = null,
         $limit = 15,
         $offset = 0
-    )
-    {
+    ) {
         $modelClass = $this->modelClass;
-        $dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM bonuses']);
-  
-            $bonuses =  $modelClass::find()
-                ->where(['category_id' => $category_id])
-                ->with(['bonuses' => function($query) use ($filter_by, $os_id){
-                    if ((int)$os_id) {
-                        $query->innerJoinWith('oses')
-                     ->where(['oses.id' => $os_id]);
-                    } else {
-                        $query->with('oses');
-                    }
+        $dependency = new \yii\caching\DbDependency([
+            'sql' => 'SELECT (SELECT COUNT(*) FROM bonuses) + (SELECT COUNT(*) FROM os_review)'
+        ]);
+
+        $bonuses = $modelClass::find()
+            ->where(['category_id' => $category_id])
+            ->with([
+                'bonuses' => function ($query) use ($filter_by, $os_id) {
                     if ((int)$filter_by) {
                         switch ($filter_by) {
                             case 1 :
@@ -88,41 +80,46 @@ class BonusController extends ActiveController
                         }
                     }
 
-                }, 'ratings'])
-                ->andWhere(['type' => Review::REVIEW_TYPE])
-                ->asArray();
-            
+                },
+                'ratings',
+                'oses'
+            ])
+            ->andWhere(['type' => Review::REVIEW_TYPE])
+            ->asArray();
 
-           // if ((int)$os_id) {
-             //   $bonuses->innerJoinWith('bonuses.oses')
-              //        ->where(['oses.id' => $os_id]);
-            //}
+        if ((int)$os_id) {
+            $bonuses->innerJoinWith('oses')
+                ->where(['oses.id' => $os_id]);
+        }
 
-            if ((int)$deposit_id) {
-                $bonuses->innerJoinWith('deposits')
-                    ->andWhere(['deposit_methods.id' => $deposit_id]);
-            }
 
-            if ((int)$country_id) {
-                $bonuses->innerJoinWith('allowed')
-                        ->andWhere(['countries.id' => $country_id]);
-            }
-           
-        
+        if ((int)$deposit_id) {
+            $bonuses->innerJoinWith('deposits')
+                ->andWhere(['deposit_methods.id' => $deposit_id]);
+        }
 
-        $data =  $modelClass::getDb()->cache(function($db) use ($bonuses){
+        if ((int)$country_id) {
+            $bonuses->innerJoinWith('allowed')
+                ->andWhere(['countries.id' => $country_id]);
+        }
+
+        $data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
             return $bonuses->all();
         }, 0, $dependency);
- 
-        $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_'.(int)$sort_by);
+
+        $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_' . (int)$sort_by);
 
         $bonusesCache = false;
         if ($bonusesCache === false) {
             $data = $this->calcRating($data);
 
-            usort($data, function($a, $b){
-                if ($a['ratings'] < $b['ratings']) return 1;
-                if ($a['ratings'] > $b['ratings']) return -1;
+            usort($data, function ($a, $b) {
+                if ($a['ratings'] < $b['ratings']) {
+                    return 1;
+                }
+                if ($a['ratings'] > $b['ratings']) {
+                    return -1;
+                }
 
                 return 0;
             });
@@ -169,9 +166,13 @@ class BonusController extends ActiveController
 
     protected function sortByPercent($bonuses)
     {
-        usort($bonuses, function ($a, $b){
-            if ($a['percent'] < $b['percent']) return 1;
-            if ($a['percent'] > $b['percent']) return -1;
+        usort($bonuses, function ($a, $b) {
+            if ($a['percent'] < $b['percent']) {
+                return 1;
+            }
+            if ($a['percent'] > $b['percent']) {
+                return -1;
+            }
 
             return 0;
         });
@@ -181,9 +182,13 @@ class BonusController extends ActiveController
 
     protected function sortByPrice($bonuses)
     {
-        usort($bonuses, function ($a, $b){
-            if ($a['price'] < $b['price']) return 1;
-            if ($a['price'] > $b['price']) return -1;
+        usort($bonuses, function ($a, $b) {
+            if ($a['price'] < $b['price']) {
+                return 1;
+            }
+            if ($a['price'] > $b['price']) {
+                return -1;
+            }
 
             return 0;
         });
@@ -199,9 +204,10 @@ class BonusController extends ActiveController
         for ($i = 0; $i < $length; $i++) {
             $arr_ratings[$i]['rank'] = $r;
 
-            if (isset($arr_ratings[$i+1])) {
-                if ($arr_ratings[$i]['ratings'] > $arr_ratings[$i+1]['ratings'])
+            if (isset($arr_ratings[$i + 1])) {
+                if ($arr_ratings[$i]['ratings'] > $arr_ratings[$i + 1]['ratings']) {
                     $r++;
+                }
             }
         }
 
@@ -217,6 +223,7 @@ class BonusController extends ActiveController
                 $bonus['rank'] = $review['rank'];
                 $bonus['rating'] = $review['ratings'];
                 $bonus['review_id'] = $review['id'];
+                $bonus['oses'] = $review['oses'];
                 $bonuses[] = $bonus;
             }
         }

@@ -32,6 +32,7 @@ class LicenseController extends BackEndController
     public function actionCreate($isAjax = true)
     {
         $model = new License();
+        $model->updateAttributes(['director_id' => null]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($isAjax) {

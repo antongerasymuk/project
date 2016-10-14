@@ -2,7 +2,6 @@
 namespace backend\controllers;
 
 use common\models\DepositMethod;
-use common\models\Os;
 use Yii;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
@@ -19,7 +18,7 @@ class PaymentController extends BackEndController
         ]);
     }
 
-    public function actionCreate()
+    public function actionCreate($isAjax = true)
     {
         $model = new DepositMethod();
 
@@ -33,6 +32,19 @@ class PaymentController extends BackEndController
 
                 if($model->save()){
                     $model->logoFile->saveAs($path);
+
+                    if ($isAjax) {
+                        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+                        return [
+                            'success' => $model->id,
+                            'item' => [
+                                'id' => $model->id,
+                                'value' => $model->title
+                            ]
+                        ];
+                    }
+
                     Yii::$app->getSession()->setFlash('success', 'Payment method created success');
 
                     return $this->redirect(['payment/index']);

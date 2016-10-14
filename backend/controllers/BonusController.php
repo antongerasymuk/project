@@ -23,7 +23,7 @@ class BonusController extends BackEndController
     {
         $model = new Bonus();;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
             $params = Yii::$app->params;
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
@@ -31,32 +31,35 @@ class BonusController extends BackEndController
 
             // store the source file name
             $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
-            $model->logoFile->saveAs($path);
-            
-            if ($isAjax) {
-                if (!empty($model->osIds)) {
+
+            if ($model->save()) {
+                $model->logoFile->saveAs($path);
+
+                if ($isAjax) {
+                    if (!empty($model->osIds)) {
                         foreach ($model->osIds as $id) {
                             $model->link('oses', Os::findOne(['id' => $id]));
                         }
                     }
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-                return [
-                    'success' => $model->id,
-                    'item' => [
-                        'id' => $model->id,
-                        'value' => $model->title
-                    ]
-                ];
+                    return [
+                        'success' => $model->id,
+                        'item' => [
+                            'id' => $model->id,
+                            'value' => $model->title
+                        ]
+                    ];
+                }
+
+                Yii::$app->getSession()->setFlash('success', 'Bonus created success');
+
+                return $this->redirect(['bonus/index']);
             }
-
-            Yii::$app->getSession()->setFlash('success', 'Bonus created success');
-
-            return $this->redirect(['bonus/index']);
         }
 
         return $this->render('create', ['model' => $model]);
-    } 
+    }
      public function actionEdit($id)
     {
         $model = Bonus::findOne($id);
@@ -73,19 +76,18 @@ class BonusController extends BackEndController
                 $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 $model->logoFile->saveAs($logoPath);
-            }      
+            }
 
             Yii::$app->getSession()->setFlash('success', 'Bonus update success');
-            
+
             return $this->redirect(['bonus/index']);
-        } 
+        }
         $model->osIds = ArrayHelper::map($model
             ->getOses()
             ->select('id')
             ->asArray()
             ->all(), 'id', 'id');
 
-        
 
         return $this->render('update', ['model' => $model]);
     }

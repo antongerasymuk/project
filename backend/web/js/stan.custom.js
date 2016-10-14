@@ -113,6 +113,8 @@ $('#review-create-form').on('beforeSubmit', function (e) {
         modalSelector: '#review-create-modal'
     });
 
+    $('.s2-togall-review-bonusids').parent().find('.select2-results').remove();
+
     return false;
 }).on('submit', function (e) {
     e.preventDefault();
@@ -152,7 +154,8 @@ var Model = {
                         // clear file input
                         $form.find(options.fileSelector).text('No file selected');
                         // clear data from Select2 widget
-                        $form.find('.select2-selection__choice').remove();
+                        $form.find('.select2-selection__rendered').find('.select2-selection__clear').remove();
+                        $form.find('.select2-selection__rendered').find('.select2-selection__choice').remove();
                         $(options.modalSelector).modal('hide');
                     } else {
                         Swalt.warning('Ops!', 'Not saved');

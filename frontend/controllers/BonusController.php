@@ -66,7 +66,6 @@ class BonusController extends ActiveController
         ]);
 
         $bonuses = $modelClass::find()
-            ->where(['category_id' => $category_id])
             ->with([
                 'bonuses' => function ($query) use ($filter_by, $os_id) {
                     if ((int)$filter_by) {
@@ -101,6 +100,8 @@ class BonusController extends ActiveController
             $bonuses->innerJoinWith('allowed')
                 ->andWhere(['countries.id' => $country_id]);
         }
+
+        $bonuses->where(['reviews.category_id' => $category_id]);
 
         $data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
             return $bonuses->all();

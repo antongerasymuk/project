@@ -54,7 +54,7 @@ $this->registerJsFile('js/stan.custom.js', [
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#director-create-modal">+</button></div>
 <div class="form-group-license">
 <?= $form->field($model, 'licenseIds')->widget(Select2::classname(), [
-    'data' => [],
+    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\License::className()),
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true

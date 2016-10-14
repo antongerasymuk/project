@@ -71,8 +71,7 @@ use \common\models\Plus;
 ])
 ?>
 <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class),
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true

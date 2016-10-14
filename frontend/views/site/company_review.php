@@ -197,7 +197,8 @@ use \yii\helpers\Url;
                 <?php foreach ($relatedReviews as $relatedReview) : ?>
                     <div class="item">
                         <div class="tit"><a href="#"><?= $relatedReview->title ?></a>
-                            <p><?php //TODO Main bonus description ?></div>
+                            <p><?php //TODO Main bonus description ?></p>
+                        </div>
                         <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
                         <div class="inf"><?= $relatedReview->preview_title ?></div>
                     </div>

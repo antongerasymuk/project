@@ -106,7 +106,14 @@ class Review extends \yii\db\ActiveRecord
             ->viaTable('review_rating', ['review_id' => 'id']);
     }
 
-    // for relation with pros(pluses)
+    public function getMainBonus()
+    {
+        $bonus = Bonus::findOne(['review_id' => $this->id, 'type' => Bonus::MAIN]);
+
+        return $bonus == null ? new Bonus() : $bonus;
+    }
+
+    // for relation with pluses
 
     public function getPluses()
     {

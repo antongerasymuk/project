@@ -13,15 +13,6 @@ $this->title = 'Create company';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php
-
-$this->registerJsFile('js/stan.custom.js', [
-    'depends' => [
-        'yii\web\YiiAsset'
-    ]
-]);
-?>
-
 <?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
 <?= $form->field($model, 'title')

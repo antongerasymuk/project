@@ -64,6 +64,7 @@ class RatingController extends BackEndController
         $model->delete();
         $model->unlinkAll('reviews', true);
 
+        Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
         return $this->redirect(['rating/index']);
     }
 

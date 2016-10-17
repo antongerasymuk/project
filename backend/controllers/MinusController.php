@@ -61,7 +61,8 @@ class MinusController extends BackEndController
        $model = Minuse::findOne($id);
        $model->delete();
        $model->unlinkAll('reviews',true);
- 
+
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['minus/index']);
     }
 }

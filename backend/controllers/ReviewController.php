@@ -314,7 +314,8 @@ class ReviewController extends BackEndController
            $bonus->save(false);
          
        } 
-       
+
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['review/index']);
     }
 

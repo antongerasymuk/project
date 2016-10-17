@@ -43,7 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <a class="btn btn-info" href="<?= Url::to(['plus/edit', 'id' => $plus->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <a class="btn btn-danger" href="<?= Url::to(['plus/delete', 'id' => $plus->id]) ?>">
+                                <a class="btn btn-danger" 
+                                   onclick="Swalt.delete_warning('Plus deleting', 
+                                   'Plus: <?= $plus->title ?> will be deleted!',
+                                   '<?= Url::to(['plus/delete', 'id' => $plus->id]) ?>',
+                                   'warning')" >
                                     <i class="halflings-icon white trash"></i>
                                 </a>
                             </td>

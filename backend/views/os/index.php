@@ -58,7 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <a class="btn btn-info" href="<?= Url::to(['os/edit', 'id' => $os->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <a class="btn btn-danger" href="<?= Url::to(['os/delete', 'id' => $os->id]) ?>">
+                                <a class="btn btn-danger" 
+                                   onclick="Swalt.delete_warning('Os deleting', 
+                                   'Os: <?= $os->title ?> will be deleted!',
+                                   '<?= Url::to(['license/delete', 'id' => $os->id]) ?>',
+                                   'warning')" >
                                     <i class="halflings-icon white trash"></i>
                                 </a>
                             </td>

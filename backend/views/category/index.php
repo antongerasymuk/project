@@ -51,7 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <a class="btn btn-info" href="<?= Url::to(['category/edit', 'id' => $cat->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <a class="btn btn-danger" href="#">
+                                <a class="btn btn-danger" 
+                                   onclick="Swalt.delete_warning('Category deleting', 
+                                   'Category: <?= $cat->title ?> will be deleted!',
+                                   '<?= Url::to(['category/delete', 'id' => $cat->id]) ?>',
+                                   'warning')" >
                                     <i class="halflings-icon white trash"></i>
                                 </a>
                             </td>

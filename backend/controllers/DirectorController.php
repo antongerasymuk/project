@@ -89,12 +89,15 @@ class DirectorController extends BackEndController
     {
        $model = Director::findOne($id);
        $modelCompany = Company::find()->where(['director_id' => $id])->all();
+       $model->delete();
+       
        foreach ($modelCompany as $company) {
            $company->director_id = NULL;
            $company->save(false);
          
        } 
-       $model->delete();
+
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['director/index']);
     }
 }

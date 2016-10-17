@@ -60,6 +60,7 @@ class CountryController extends BackEndController
        $model->unlinkAll('reviewsAllowed',true);
        $model->unlinkAll('reviewsDenied',true);
  
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['country/index']);
     }
 

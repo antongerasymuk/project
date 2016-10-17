@@ -50,7 +50,8 @@ class SettingController extends BackEndController
     {
        $model = User::findOne($id);
        $model->delete();
-  
+
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['setting/index']);
     }
 }

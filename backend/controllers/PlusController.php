@@ -62,7 +62,8 @@ class PlusController extends BackEndController
        $model = Plus::findOne($id);
        $model->delete();
        $model->unlinkAll('reviews',true);
- 
+
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['plus/index']);
     }
 }

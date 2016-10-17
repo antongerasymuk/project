@@ -58,7 +58,8 @@ class LicenseController extends BackEndController
        $model = License::findOne($id);
        $model->unlinkAll('companies',true);
        $model->delete();
-  
+       
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['setting/index']);
     }
 }

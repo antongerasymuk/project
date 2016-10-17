@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </a>
                                 <a class="btn btn-danger" 
                                    onclick="Swalt.delete_warning('Bonus deleting', 
-                                   'bonus <?= $bonus->title ?> well deleted!',
+                                   'Bonus: <?= $bonus->title ?> will be deleted!',
                                    '<?= Url::to(['bonus/delete', 'id' => $bonus->id]) ?>',
                                    'warning')" >
                                     <i class="halflings-icon white trash"></i>

@@ -95,10 +95,6 @@ class DirectorController extends BackEndController
          
        } 
        $model->delete();
-       //$name = Nameoftable::findOne("10");
-       //$name->fieldname = "new information";
-       //$name->filedname2 = "about information";
-       //$name->update();
        return $this->redirect(['director/index']);
     }
 }

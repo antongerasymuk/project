@@ -34,6 +34,12 @@ class Rating extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getReviews()
+    {
+        return $this->hasMany(Rating::className(), ['id' => 'review_id'])
+            ->viaTable('review_rating', ['rating_id' => 'id']);
+    }
+
     /**
      * @inheritdoc
      */
@@ -43,6 +49,7 @@ class Rating extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'mark' => 'Mark',
+
         ];
     }
 }

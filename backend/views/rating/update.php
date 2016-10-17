@@ -11,9 +11,9 @@ use \common\helpers\ModelMapHelper;
 use \common\models\Plus;
 
 ?>
-<?php $this->title = 'Create Rating'; ?>
+<?php $this->title = 'Update page'; ?>
 
-<?php $form = ActiveForm::begin(['id' => 'page-create-form', 'action' => \yii\helpers\Url::to(['rating/create', 'isAjax' => false])]); ?>
+<?php $form = ActiveForm::begin(['id' => 'page-update-form']); ?>
 <?= $form->field($model, 'title')
          ->textInput(['autofocus' => true])
          ->label('Title')
@@ -29,7 +29,7 @@ use \common\models\Plus;
 
 
 
-<?= Html::submitButton('Create', [ 'id' => "submit_page_create",
+<?= Html::submitButton('Update', [ 'id' => "submit_page_update",
     'class' => 'btn btn-primary',
 ])
 ?>

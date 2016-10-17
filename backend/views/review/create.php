@@ -71,10 +71,11 @@ use \common\models\Plus;
 ])
 ?>
 <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
-    'language' => 'en_GB',
+    'language'      => 'en',
+    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class),
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
-        'allowClear' => true
+    'allowClear'    => true
     ],
 ])->label('Bonuses');
 ?>

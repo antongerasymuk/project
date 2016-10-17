@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use common\models\Bonus;
+use common\models\Category;
 use common\models\Country;
 use common\models\DepositMethod;
 use common\models\Gallery;
@@ -295,4 +296,26 @@ class ReviewController extends BackEndController
 
         return $this->render('update', ['model' => $model]);
     }
+    public function actionDelete($id)
+    {
+        $model = Review::findOne($id);
+        $model->delete();
+        $model->unlinkAll('ratings', true);
+        $model->unlinkAll('pluses', true);
+        $model->unlinkAll('minuses', true);
+        $model->unlinkAll('oses', true);
+        $model->unlinkAll('allowed', true);
+        $model->unlinkAll('denied', true);
+        $model->unlinkAll('galleries', true);
+
+       $modelBonus = Bonus::find()->where(['review_id' => $id])->all();
+       foreach ($modelBonus as $bonus) {
+           $bonus->review_id = NULL;
+           $bonus->save(false);
+         
+       } 
+       
+       return $this->redirect(['review/index']);
+    }
+
 }

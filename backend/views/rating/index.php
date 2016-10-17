@@ -6,7 +6,7 @@
 use yii\bootstrap\Alert;
 use yii\helpers\Url;
 
-$this->title = 'Lisences';
+$this->title = 'Rating';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -24,30 +24,28 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="row-fluid">
     <div class="box span12">
-        <a href="<?= Url::to(['license/create']) ?>" class="btn btn-primary">Create license</a>
+        <a href="<?= Url::to(['rating/create']) ?>" class="btn btn-primary">Create rating</a>
         <div class="box-content">
             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>File</th>
+                    <th>Mark</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php if (empty($licenses)) : ?>
+                <?php if (empty($ratings)) : ?>
                 <?php else : ?>
-                    <?php foreach ($licenses as $license) : ?>
+                    <?php foreach ($ratings as $rating) : ?>
                         <tr>
-                            <td><?= $license->title ?></td>
+                            <td><?= $rating->title ?></td>
+                            <td class="center"><?= $rating->mark ?></td>
                             <td class="center">
-                                <a href="<?= $license->url ?>"><?= $license->file_label ?></a>
-                            </td>
-                            <td class="center">
-                                <a class="btn btn-info" href="<?= Url::to(['license/edit', 'id' => $license->id]) ?>">
+                                <a class="btn btn-info" href="<?= Url::to(['rating/edit', 'id' => $rating->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <a class="btn btn-danger" href="<?= Url::to(['license/delete', 'id' => $license->id]) ?>">
+                                <a class="btn btn-danger" href="<?= Url::to(['rating/delete', 'id' => $rating->id]) ?>">
                                     <i class="halflings-icon white trash"></i>
                                 </a>
                             </td>

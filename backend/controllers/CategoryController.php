@@ -43,4 +43,19 @@ class CategoryController extends BackEndController
         return $this->render('update', ['model' => $model]);
     }
 
+     public function actionDelete($id)
+    {
+       $model = Categorie::findOne($id);
+       $modelReview = Review::find()->where(['category_id' => $id])->all();
+       $model->delete();
+  
+       foreach ($modelReview as $review) {
+           $review->category_id = NULL;
+           $review->save(false);
+         
+       } 
+
+       return $this->redirect(['category/index']);
+    }
+
 }

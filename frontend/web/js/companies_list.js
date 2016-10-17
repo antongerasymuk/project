@@ -13,6 +13,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
         console.log('Here');
         var self = this;
         self.companies_list = [];
+        self.loaded_all = false;
         this.on('mount', function () {
             self.trigger('get');
         });
@@ -30,9 +31,9 @@ riot.tag2('companies-list', '<div class="row"> ' +
 
                 var itemIndex = path[path.length-1];
                 self.companies_list.push(data);
-                //if( itemIndex == item_index-1 ) {
+                /*if( itemIndex == item_index-1 ) {
                 //   this.forget();
-                //} 
+                } */
                 self.update();
              }).fail(function() {
                 console.log('Fail');
@@ -42,15 +43,13 @@ riot.tag2('companies-list', '<div class="row"> ' +
             var i=0;
             var offset= start_limit;   
             $(window).scroll(function(){ 
-            //$('.betting-sites-items').scroll(function(){ 
                 
                console.log('scrolltop: ' +parseInt($(window).scrollTop()*100/persent));
                console.log('doc height: ' + $(document).height());
                console.log('win height:' + $(window).height());
-               if ($(document).height() - $(window).height() <= parseInt($(window).scrollTop()*100/persent)) {
-               //if ( (parseInt($(window).height()*(index)) < parseInt($(window).scrollTop())) && (parseInt($(window).height()*(index+1)) > parseInt($(window).scrollTop()))&& ($.inArray(index, current_index)<0) ){
-               
-               
+               if (($(document).height() - $(window).height() <= parseInt($(window).scrollTop()*100/persent))&& self.loaded_all == false) {
+       
+                self.loaded_all = true;
                 if ($.inArray(i, current_index)>=0) {
                 console.log('offset'+offset);
                 oboe({
@@ -58,6 +57,11 @@ riot.tag2('companies-list', '<div class="row"> ' +
                     headers:  {Accept: 'application/json'},        
                 })
                 .node('!.*', function(data){
+                    console.log('data:') ;
+                    
+                   
+                        self.loaded_all = false;
+                    
                     self.companies_list.push(data);
                     self.update();
                     //console.log(JSON.stringify(self.companies_list[0].reviews));

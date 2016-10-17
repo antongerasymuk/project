@@ -165,4 +165,18 @@ class CompanyController extends BackEndController
             'model' => $model
         ]);
 	}
+    public function actionDelete($id)
+    {
+       $model = Company::findOne($id);
+       $modelReview = Review::find()->where(['company_id' => $id])->all();
+       $model->delete();
+       $model->unlinkAll('licenses',true);
+       foreach ($modelReview as $review) {
+           $review->category_id = NULL;
+           $review->save(false);
+         
+       } 
+
+       return $this->redirect(['category/index']);
+    }
 }

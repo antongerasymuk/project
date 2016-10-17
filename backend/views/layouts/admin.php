@@ -106,6 +106,12 @@ AdminAsset::register( $this );
 							</a>
 						</li>
 						<li>
+							<a href="<?= Url::to(['rating/index']) ?>">
+								<i class="icon-star"></i>
+								<span class="hidden-tablet">Rating</span>
+							</a>
+						</li>
+						<li>
 							<a href="<?= Url::to(['country/index']) ?>">
 								<i class="icon-flag"></i>
 								<span class="hidden-tablet">Countries</span>

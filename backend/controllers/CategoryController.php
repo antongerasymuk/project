@@ -47,13 +47,14 @@ class CategoryController extends BackEndController
     {
        $model = Categorie::findOne($id);
        $modelReview = Review::find()->where(['category_id' => $id])->all();
-
+       $model->delete();
+  
        foreach ($modelReview as $review) {
            $review->category_id = NULL;
            $review->save(false);
          
        } 
-       $model->delete();
+
        return $this->redirect(['category/index']);
     }
 

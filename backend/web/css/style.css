@@ -3245,3 +3245,7 @@ div#DataTables_Table_0_info,
 		text-align: center;
 	}
 }
+
+.sweet-alert fieldset input {
+    display: none;
+}

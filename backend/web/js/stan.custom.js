@@ -210,11 +210,11 @@ var Swalt = {
              });
     },
     warning: function (title, text) {
-        this.alert(title, text, "error");
+        this.alert({title: title, text: text, type: "error", inputType: false});
     },
 
     success: function (title, text) {
-        this.alert(title, text, "success");
+        this.alert({title: title, text: text, type: "success", inputType: false});
     }
 };
 

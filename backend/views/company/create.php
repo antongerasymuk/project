@@ -14,14 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php
-//list(,$url)=Yii::$app->assetManager->publish('@bower/sweetalert/dist');
-//$this->registerCssFile($url . '/sweetalert.css');
-//$this->registerJsFile($url . '/sweetalert.min.js');
-//$this->registerJsFile('js/swal.review.create.js', [
-//    'depends' => [
-//        'yii\web\YiiAsset'
-//    ]
-//]);
+
 $this->registerJsFile('js/stan.custom.js', [
     'depends' => [
         'yii\web\YiiAsset'
@@ -42,7 +35,7 @@ $this->registerJsFile('js/stan.custom.js', [
 ?>
 <?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
-<div class="form-group-director">
+<div class="form-group-select">
 <?= $form->field($model, 'director_id')->widget(Select2::classname(), [
     'data' => $directorsData,
     'options' => ['placeholder' => 'Select a state ...'],
@@ -52,7 +45,7 @@ $this->registerJsFile('js/stan.custom.js', [
 ])->label('Director');
 ?>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#director-create-modal">+</button></div>
-<div class="form-group-license">
+<div class="form-group-select">
 <?= $form->field($model, 'licenseIds')->widget(Select2::classname(), [
     'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\License::className()),
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
@@ -62,7 +55,7 @@ $this->registerJsFile('js/stan.custom.js', [
 ])->label('Licenses');
 ?>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#license-create-modal">+</button></div>
-<div class="form-group-reviews">
+<div class="form-group-select">
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
     'data' => $reviewsData,
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
@@ -72,9 +65,9 @@ $this->registerJsFile('js/stan.custom.js', [
 ])->label('Reviews');
 ?>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#review-create-modal">+</button>
-<!--<div class="form-group">-->
+</div>
+<div class="form-group">
     <?= Html::submitButton('Create', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-<!--</div>-->
 </div>
 <?php ActiveForm::end(); ?>
 <?= $this->render('//review/create_modal', ['model' => $review]) ?>

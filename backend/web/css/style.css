@@ -3038,58 +3038,25 @@ div.uploader{
 }
 div.uploader span.filename{
 	width: 190px;
-}/*
-.form-group.field-company-director_id.required {
+}
+
+.form-group-select button {
+    margin-left: 10px;
+    margin-top: -10px;
+}
+
+.form-group-select div {
+    width: 90% !important;
+}
+
+.form-group-select div {
     width: 95%;
-    float: left;
+    display: inline-block;
 }
-.form-group.field-company-licenseids{
-	width: 95%;
-    float: left;
-}*/
-.form-group-director button[type="button"] {
-    border-radius: 4px !important;
-    margin-top: 50px;
-	width: 100%;
-}
-.form-group-license button[type="button"] {
-    border-radius: 4px !important;
-    margin-top: 50px;
-	width: 100%;
-}
-/*.form-group.field-company-reviewids{
-	float: left;
-	width: 88%;
-}*/
-.form-group-reviews button[type="button"],
-.form-group-reviews button[type="submit"],
-.form-group-bonuses button[type="button"],
-.form-group-minuses button[type="button"],
-.form-group-deposit button[type="button"],
-.form-group-ratings button[type="button"],
-.form-group-pluses button[type="button"]{
-    border-radius: 4px !important;
-    margin-top: 50px;
-}
-.form-group-bonuses button[type="button"],
-.form-group-minuses button[type="button"],
-.form-group-deposit button[type="button"],
-.form-group-ratings button[type="button"],
-.form-group-pluses button[type="button"]{
-    width: 65%;
-	display: inline-block;
-	margin: auto;
-	margin-top: 50px !important;
-}
-.form-group-reviews button[type="button"],
-.form-group-reviews button[type="submit"]{
-	margin-top: 50px !important;
-	width: 47%;
-	display: inline-block;
-	margin: auto;
-}
-.form-group-reviews button[type="submit"]{
-	margin-left: 5px;
+
+.btn-primary {
+    border-radius: 5px !important;
+    display: inline-block;
 }
 .select2-search--dropdown .select2-search__field{
 	 height: 34px;

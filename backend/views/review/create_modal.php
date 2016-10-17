@@ -9,9 +9,10 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 use \common\helpers\ModelMapHelper;
 use \common\models\Plus;
+
 ?>
 
-<?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]);?>
+<?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div id="review-create-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -23,18 +24,18 @@ use \common\models\Plus;
             <div class="modal-body">
                 <p>
                     <?= $form->field($model, 'title')
-                             ->textInput(['autofocus' => true])
-                             ->label('Title')
+                        ->textInput(['autofocus' => true])
+                        ->label('Title')
                     ?>
                     <?= $form->field($model, 'description')->widget(TinyMce::className(), [
-                        'options'       => ['rows' => 6],
+                        'options' => ['rows' => 6],
                         'language' => 'en_GB',
                         'clientOptions' => [
                             'plugins' => [
                                 "advlist autolink lists link charmap print preview anchor",
                                 "searchreplace visualblocks code fullscreen",
                                 "insertdatetime media table contextmenu paste"
-                            ],
+                        ],
                             'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
                         ]
                     ])
@@ -52,7 +53,8 @@ use \common\models\Plus;
                     <?= $form->field($model, 'type')
                         ->checkbox([
                             'uncheck' => \common\models\Review::REVIEW_TYPE,
-                            'value' => \common\models\Review::COMPANY_TYPE]
+                                'value' => \common\models\Review::COMPANY_TYPE
+                        ]
                         )
                         ->label('Company review?');
                     ?>
@@ -61,7 +63,7 @@ use \common\models\Plus;
                     <?= $form->field($model, 'previewFile')->fileInput() ?>
                     <?= $form->field($model, 'preview_title')->textInput() ?>
                     <?= $form->field($model, 'address')->widget(TinyMce::className(), [
-                        'options'       => [
+                        'options' => [
                             'rows' => 6,
                         ],
                         'language' => 'en_GB',
@@ -71,11 +73,12 @@ use \common\models\Plus;
                                 "advlist autolink lists link charmap print preview anchor",
                                 "searchreplace visualblocks code fullscreen",
                                 "insertdatetime media table contextmenu paste"
-                            ],
+                        ],
                             'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
                         ]
                     ])
                     ?>
+                <div class="form-group-select">
                     <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
                         'data' => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class),
                         'language' => 'en',
@@ -85,7 +88,12 @@ use \common\models\Plus;
                         ],
                     ])->label('Bonuses');
                     ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bonus-create-modal">+</button>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bonus-create-modal">
+                        +
+                    </button>
+                </div>
+                <div class="form-group-select">
                     <?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
                         'data' => ModelMapHelper::getIdTitleMap(\common\models\Rating::class),
                         'language' => 'en',
@@ -95,8 +103,12 @@ use \common\models\Plus;
                         ],
                     ])->label('Ratings');
                     ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rating-create-modal">+</button>
 
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#rating-create-modal">+
+                    </button>
+                </div>
+                <div class="form-group-select">
                     <?= $form->field($model, 'plusIds')->widget(Select2::classname(), [
                         'data' => ModelMapHelper::getIdTitleMap(Plus::class),
                         'language' => 'en',
@@ -106,8 +118,11 @@ use \common\models\Plus;
                         ],
                     ])->label('Pluses');
                     ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#plus-create-modal">+</button>
 
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#plus-create-modal">+
+                    </button>
+            </div>
+                <div class="form-group-select">
                     <?= $form->field($model, 'minusIds')->widget(Select2::classname(), [
                         'data' => ModelMapHelper::getIdTitleMap(\common\models\Minuse::class),
                         'language' => 'en',
@@ -116,9 +131,12 @@ use \common\models\Plus;
                             'allowClear' => true
                         ],
                     ])->label('Minuses');
-                    ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#minus-create-modal">+</button>
-
+                ?>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#minus-create-modal">
+                        +
+                    </button>
+            </div>
+                <div class="form-group-select">
                     <?= $form->field($model, 'depositIds')->widget(Select2::classname(), [
                         'data' => ModelMapHelper::getIdTitleMap(\common\models\DepositMethod::class),
                         'language' => 'en',
@@ -128,8 +146,12 @@ use \common\models\Plus;
                         ],
                     ]);
                     ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deposit-create-modal">+</button>
-
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#deposit-create-modal">
+                        +
+                    </button>
+                </div>
+                <div class="form-group-select">
                     <?= $form->field($model, 'osIds')->widget(Select2::classname(), [
                         'data' => ModelMapHelper::getIdTitleMap(\common\models\Os::class),
                         'language' => 'en',
@@ -139,8 +161,9 @@ use \common\models\Plus;
                         ],
                     ]);
                     ?>
-
-                    <?php $countries = \common\models\Country::getArr(); ?>
+                </div>
+                <?php $countries = \common\models\Country::getArr(); ?>
+                <div class="form-group-select">
                     <?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
                         'data' => $countries,
                         'language' => 'en',
@@ -150,7 +173,8 @@ use \common\models\Plus;
                         ],
                     ]);
                     ?>
-
+                </div>
+                <div class="form-group-select">
                     <?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
                         'data' => $countries,
                         'language' => 'en',
@@ -160,19 +184,20 @@ use \common\models\Plus;
                         ],
                     ]);
                     ?>
-
-                    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true]) ?>
+                </div>
+                <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true]) ?>
                 </p>
-            </div>
+        </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <?= Html::submitButton('Create', [
                     'class' => 'btn btn-primary',
                     'id' => 'review-create',
-                    'name' => 'review-button'])
+                    'name' => 'review-button'
+                ])
                 ?>
             </div>
-        </div>
+    </div>
     </div>
 </div>
 <?php ActiveForm::end(); ?>

@@ -39,11 +39,11 @@ class BonusController extends BackEndController
             if ($model->save()) {
                 $model->logoFile->saveAs($path);
 
-                if (!empty($model->osIds)) {
-                    foreach ($model->osIds as $id) {
-                        $model->link('oses', Os::findOne(['id' => $id]));
-                    }
-                }
+                //if (!empty($model->osIds)) {
+                //    foreach ($model->osIds as $id) {
+                //        $model->link('oses', Os::findOne(['id' => $id]));
+                //    }
+                //}
                 if ($isAjax) {
 
                     Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -72,11 +72,11 @@ class BonusController extends BackEndController
         if ($model->load(Yii::$app->request->post())) {
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
             $params = Yii::$app->params;
-            if (!empty($model->osIds)) {
-                foreach ($model->osIds as $id) {
-                    $model->link('oses', Os::findOne(['id' => $id]));
-                }
-            }
+            //if (!empty($model->osIds)) {
+            //    foreach ($model->osIds as $id) {
+            //        $model->link('oses', Os::findOne(['id' => $id]));
+            //    }
+            //}
             if (!empty($model->logoFile)) {
 
                 unlink(Url::to('@frontend/web') . $model->logo);
@@ -97,11 +97,11 @@ class BonusController extends BackEndController
                 return $this->redirect(['bonus/index']);
             }
         }
-        $model->osIds = ArrayHelper::map($model
-            ->getOses()
-            ->select('id')
-            ->asArray()
-            ->all(), 'id', 'id');
+       //  $model->osIds = ArrayHelper::map($model
+       //     ->getOses()
+       //     ->select('id')
+       //     ->asArray()
+       //     ->all(), 'id', 'id');
         return $this->render('update', ['model' => $model]);
     }
 
@@ -109,8 +109,8 @@ class BonusController extends BackEndController
     {
         $model = Bonus::findOne($id);
         $model->delete();
-        $model->unlinkAll('oses', true);
-
+        //$model->unlinkAll('oses', true);
+        Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
         return $this->redirect(['bonus/index']);
     }
 

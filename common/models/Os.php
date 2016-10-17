@@ -61,12 +61,6 @@ class Os extends \yii\db\ActiveRecord
         return $this->hasMany(Review::className(), ['id' => 'review_id'])
                     ->viaTable('os_review', ['os_id' => 'id']);
     }
- 
-    
-    // for relations with  bonuses
-    public function getOsesBonus()
-    {
-        return $this->hasMany(Bonus::className(), ['id' => 'bonus_id'])
-                    ->viaTable('os_bonus', ['os_id' => 'id']);
-    }
+     
+     
 }

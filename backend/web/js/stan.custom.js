@@ -196,9 +196,23 @@ var Swalt = {
 
         swal(title, text, type);
     },
+    delete_warning: function (title, text, url, type) {
+        swal({   title: title,   
+                 text: text,   
+                 type: type,   
+                 showCancelButton: true,   
+                 confirmButtonColor: "#DD6B55",   
+                 confirmButtonText: "Yes, delete it!",   
+                 closeOnConfirm: false 
+             }, function()
+             {   
+               window.location.href = url;
+             });
+    },
     warning: function (title, text) {
         this.alert(title, text, "error");
     },
+
     success: function (title, text) {
         this.alert(title, text, "success");
     }

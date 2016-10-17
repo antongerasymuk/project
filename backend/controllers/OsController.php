@@ -48,7 +48,7 @@ class OsController extends BackEndController
        $model = Os::findOne($id);
        $model->delete();
        $model->unlinkAll('osesReview',true);
-       $model->unlinkAll('osesBonus',true);
+
  
        return $this->redirect(['os/index']);
     }

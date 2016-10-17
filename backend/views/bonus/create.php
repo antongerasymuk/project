@@ -39,15 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'referal_url')->textInput() ?>
 <?= $form->field($model, 'type')->checkbox() ?>
 
-<?= $form->field($model, 'osIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Os::class),
-    'language'      => 'en',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-]);
-?>
+
 
 <div class="form-group">
     <?= Html::submitButton('Create', ['class' => 'btn btn-primary', 'name' => 'category-button']) ?>

@@ -3102,12 +3102,25 @@ div.uploader span.filename{
 .dataTables_paginate ul li a{
 	display: block;
 }
+
 li.prev.disabled a,
 li.next.disabled a {
     color: #fff;
     padding: 8px 10px;
     display: block;
 }
+
+li.active a{
+   color: #337ab7;
+}
+
+li.prev a,
+li.next a {
+    color: #646464;
+    padding: 8px 10px;
+    display: block;
+}
+
 .dataTable + .row-fluid > .span12 {
     text-align: center !important;
     margin: 0;

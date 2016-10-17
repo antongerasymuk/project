@@ -3054,6 +3054,16 @@ div.uploader span.filename{
     display: inline-block;
 }
 
+li.active a {
+    color: #337ab7;
+}
+
+li.prev a,
+li.next a {
+    color: #646464;
+    padding: 8px 10px;
+    display: block;
+}
 .btn-primary {
     border-radius: 5px !important;
     display: inline-block;

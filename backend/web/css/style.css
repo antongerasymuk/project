@@ -503,20 +503,20 @@ a.brand span {
             box-shadow: none;
 }
 
-.dropdown-menu:after,
-.dropdown-menu:before {
-	top: -1px;
-	left: 10px;
-	border-right: 9px solid transparent;
-	border-bottom: 9px solid #222 !important;
-	border-left: 9px solid transparent;
-	content: '';
-}
+/*.dropdown-menu:after,*/
+/*.dropdown-menu:before {*/
+/*top: -1px;*/
+/*left: 10px;*/
+/*border-right: 9px solid transparent;*/
+/*border-bottom: 9px solid #222 !important;*/
+/*border-left: 9px solid transparent;*/
+/*content: '';*/
+/*}*/
 
 .dropdown-menu {
   	position: absolute;
   	top: 100%;
-  	left: 0;
+	left: -10px;
   	z-index: 1000;
   	display: none;
   	float: left;

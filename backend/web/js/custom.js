@@ -46,8 +46,11 @@ jQuery(document).ready(function($){
 });	
 
 $(document).ready(function(){
-		
-			
+
+    $('.dropdown').on('click', function () {
+        $(this).find('.dropdown-menu').toggle();
+    });
+
 	$("#username").focus(function() {
 		
 		$(this).parent(".input-prepend").addClass("input-prepend-focus");

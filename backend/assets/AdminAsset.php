@@ -12,15 +12,13 @@ class AdminAsset extends AssetBundle
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-		'css/bootstrap-responsive.min.css',
-		'css/style.css',
-		'css/style-responsive.css',
+        'css/backend.css',
 		'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext'
 	];
 	public $js = [
 		'js/jquery-migrate-1.0.0.min.js',
 		'js/jquery-ui-1.10.0.custom.min.js',
-		'js/jquery.ui.touch-punch.js',
+        'js/jquery.ui.touch-punch.min.js',
         'js/bootstrap.min.js',
 		'js/jquery.dataTables.min.js',
 		'js/jquery.chosen.min.js',
@@ -34,7 +32,7 @@ class AdminAsset extends AssetBundle
 	public $depends = [
 		'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
+//        'yii\bootstrap\BootstrapPluginAsset',
         'backend\assets\SwaltAsset'
 	];
 }

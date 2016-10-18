@@ -49,7 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <a class="btn btn-info" href="<?= Url::to(['page/edit', 'id' => $site->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <a class="btn btn-danger" href="<?= Url::to(['page/delete', 'id' => $site->id]) ?>">
+                                 <a class="btn btn-danger" 
+                                   onclick="Swalt.delete_warning('Site deleting', 
+                                   'Site &#34; <?= $site->title ?>&#34; will be deleted!',
+                                   '<?= Url::to(['site/delete', 'id' => $site->id]) ?>',
+                                   'warning')" >
                                     <i class="halflings-icon white trash"></i>
                                 </a>
                             </td>

@@ -36,6 +36,11 @@ class DepositMethod extends \yii\db\ActiveRecord
             [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit'],
         ];
     }
+    public function getReviews()
+    {
+        return $this->hasMany(DepositMethod::className(), ['id' => 'review_id'])
+            ->viaTable('review_dep_method', ['dep_id' => 'id']);
+    }
 
     /**
      * @inheritdoc

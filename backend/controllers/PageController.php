@@ -50,7 +50,8 @@ class PageController extends BackEndController
     {
        $model = Site::findOne($id);
        $model->delete();
-  
+
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['page/index']);
     }
 }

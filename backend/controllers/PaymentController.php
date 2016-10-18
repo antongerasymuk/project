@@ -80,4 +80,14 @@ class PaymentController extends BackEndController
 
         return $this->render('update', ['model' => $model]);
     }
+
+    public function actionDelete($id)
+    {
+       $model = DepositMethod::findOne($id);
+       $model->delete();
+       $model->unlinkAll('reviews',true);
+
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
+       return $this->redirect(['payment/index']);
+    }
 }

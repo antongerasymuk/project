@@ -49,7 +49,7 @@ class OsController extends BackEndController
        $model->delete();
        $model->unlinkAll('osesReview',true);
 
- 
+       Yii::$app->getSession()->setFlash('success', 'success of deleting '.$model->title);
        return $this->redirect(['os/index']);
     }
 

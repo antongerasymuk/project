@@ -55,7 +55,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <a class="btn btn-info" href="<?= Url::to(['payment/edit', 'id' => $payment->id]) ?>">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <a class="btn btn-danger" href="#">
+                                <a class="btn btn-danger" 
+                                   onclick="Swalt.delete_warning('Payment method deleting', 
+                                   'Payment method &#34; <?= $payment->title ?> &#34; will be deleted!',
+                                   '<?= Url::to(['payment/delete', 'id' => $payment->id]) ?>',
+                                   'warning')" >
                                     <i class="halflings-icon white trash"></i>
                                 </a>
                             </td>

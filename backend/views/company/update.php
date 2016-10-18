@@ -13,22 +13,6 @@ $this->title = 'Edit company';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php
-//list(,$url)=Yii::$app->assetManager->publish('@bower/sweetalert/dist');
-//$this->registerCssFile($url . '/sweetalert.css');
-//$this->registerJsFile($url . '/sweetalert.min.js');
-//$this->registerJsFile('js/swal.review.create.js', [
-//    'depends' => [
-//        'yii\web\YiiAsset'
-//    ]
-//]);
-//$this->registerJsFile('js/stan.custom.js', [
-//    'depends' => [
-//        'yii\web\YiiAsset'
-//    ]
-//]);
-?>
-
 <?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
 <?= $form->field($model, 'title')

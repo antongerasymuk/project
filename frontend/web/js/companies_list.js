@@ -18,10 +18,10 @@ riot.tag2('companies-list', '<div class="row"> ' +
             self.trigger('get');
         });
         this.on('get', function () {
-            
-            var start_limit = 2;
+
+            var start_limit = 15;
             var persent = 65;
-            var limit = 1;
+            var limit = 15;
          
             oboe({
                 url: '/company?&offset=0&limit='+start_limit,

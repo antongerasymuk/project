@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </a>
                                  <a class="btn btn-danger" 
                                    onclick="Swalt.delete_warning('Site deleting', 
-                                   'Site &#34; <?= $site->title ?>&#34; will be deleted!',
+                                   'Site &#34;<?= $site->title ?>&#34; will be deleted!',
                                    '<?= Url::to(['site/delete', 'id' => $site->id]) ?>',
                                    'warning')" >
                                     <i class="halflings-icon white trash"></i>

@@ -45,6 +45,7 @@ use yii\bootstrap\Html;
                     <?= $form->field($model, 'type')->checkbox()->label('Main?') ?>
                     <?= $form->field($model, 'min_deposit')->textInput() ?>
                     <?= $form->field($model, 'expiry')->textInput() ?>
+                    <?= $form->field($model, 'rollover_title')->textInput() ?>
                     <?= $form->field($model, 'rollover_requirement')->textInput() ?>
                     <?= $form->field($model, 'restrictions')->textInput() ?>
                 </p>

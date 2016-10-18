@@ -35,7 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php $min_deposit = empty($bonus->min_deposit) ? '-' : $bonus->currency . $bonus->min_deposit ?>
                         <p>Minimum Deposit<strong><?= $min_deposit ?></strong></p>
                         <p>Expiry<strong><?= $bonus->expiry ?>&nbsp;days</strong></p>
-                        <p>Rollover Requirement<strong><?= $bonus->rollover_requirement ?></strong></p>
+                        <?php $rollover_title = empty($bonus->rollover_title) ? 'Rollover Requirement' : $bonus->rollover_title ?>
+                        <p><?= $rollover_title ?><strong><?= $bonus->rollover_requirement ?></strong></p>
                         <p>Restrictions<strong><?= $bonus->restrictions ?></strong></p>
                     </div>
 

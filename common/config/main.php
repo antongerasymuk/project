@@ -8,6 +8,7 @@ return [
             'username' => 'hnzstdhf_bonus',
             'password' => '123QWEasdZXC',
             'charset'  => 'utf8',
+            'enableSchemaCache' => true
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

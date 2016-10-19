@@ -103,12 +103,12 @@ class BonusController extends ActiveController
 
         $bonuses->andWhere(['reviews.category_id' => $category_id]);
 
-        $data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
-            return $bonuses->all();
-        }, 0, $dependency);
+        //$data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
+        //return $bonuses->all();
+        //}, 0, $dependency);
 
+        $data = $bonuses->all();
         $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_' . (int)$sort_by);
-
         $bonusesCache = false;
         if ($bonusesCache === false) {
             $data = $this->calcRating($data);
@@ -140,8 +140,9 @@ class BonusController extends ActiveController
                 }
             }
 
-            // cached sorted bonuses
-//            Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses);
+        // cached sorted bonuses
+        //Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses);
+
         } else {
             $bonuses = $bonusesCache;
         }

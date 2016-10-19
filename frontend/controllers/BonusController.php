@@ -62,7 +62,7 @@ class BonusController extends ActiveController
     ) {
         $modelClass = $this->modelClass;
         $dependency = new \yii\caching\DbDependency([
-            'sql' => 'SELECT (SELECT COUNT(*) FROM bonuses) + (SELECT COUNT(*) FROM os_review) + (SELECT COUNT(*) FROM allowed_country)'
+            'sql' => 'SELECT (SELECT COUNT(*) FROM bonuses) + (SELECT COUNT(*) FROM os_review) + (SELECT COUNT(*) FROM allowed_country)+(SELECT COUNT(*) FROM oses)'
         ]);
 
         $bonuses = $modelClass::find()

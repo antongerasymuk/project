@@ -3,7 +3,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
     '<div class="h-title">' +
     '<h2>UK Betting Sites</h2>' +
     '</div> <div class="betting-sites-items clearfix" >' +
-    '<company-offer class="col-md-4 col-sm-6"  each="{ companies_list }" bg_color="{bg_color}" title="{title}" logo="{logo}" reviews="{reviews}">' +
+    '<company-offer  style="display:none;" class="col-md-4 col-sm-6"  each="{ companies_list }" id="company-offer_{index}" bg_color="{bg_color}" title="{title}" logo="{logo}" reviews="{reviews}">' +
     '</company-offer></div>' +
     '</div>' +
     '</div>',
@@ -13,6 +13,8 @@ riot.tag2('companies-list', '<div class="row"> ' +
         console.log('Here');
         var self = this;
         self.companies_list = [];
+        self.index = 0;
+        
         self.loaded_all = false;
         this.on('mount', function () {
             self.trigger('get');
@@ -30,12 +32,17 @@ riot.tag2('companies-list', '<div class="row"> ' +
             .node('!.*', function(data,path){
 
                 var itemIndex = path[path.length-1];
+                data.index = self.index;
                 self.companies_list.push(data);
-                /*if( itemIndex == item_index-1 ) {
-                //   this.forget();
-                } */
+   
                 self.update();
-             }).fail(function() {
+                $('#company-offer_'+self.index).fadeIn(900);
+                console.log('#company-offer_'+self.index);
+                self.index++;
+                
+                
+             })
+            .fail(function() {
                 console.log('Fail');
             });
 
@@ -57,14 +64,15 @@ riot.tag2('companies-list', '<div class="row"> ' +
                     headers:  {Accept: 'application/json'},        
                 })
                 .node('!.*', function(data){
-                    console.log('data:') ;
-                    
-                   
-                        self.loaded_all = false;
-                    
+                    self.loaded_all = false;
+                    data.index = self.index;
                     self.companies_list.push(data);
+ 
                     self.update();
-                    //console.log(JSON.stringify(self.companies_list[0].reviews));
+                    $('#company-offer_'+self.index).fadeIn(900);
+                    console.log('#company-offer_'+self.index);
+                    self.index++;
+                   
                 }).fail(function() {
                     console.log('Fail');
                 });

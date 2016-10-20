@@ -28,7 +28,7 @@ class SiteController extends Controller
                 'only' => ['index'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT (SELECT COUNT(*) FROM categories) + (SELECT COUNT(*) FROM bonuses)',
+                    'sql' => 'SELECT (SELECT SUM(id) FROM categories) + (SELECT SUM(id) FROM companies)+ (SELECT SUM(id) FROM bonuses)',
                 ],
             ]
         ];

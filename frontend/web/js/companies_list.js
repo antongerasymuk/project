@@ -29,9 +29,9 @@ riot.tag2('companies-list', '<div class="row"> ' +
             
             var number = 0;
             if (auto) {
-                for (var n = 0; n <= 100; n++) {
+                for (var n = 1; n <= 100; n++) {
                   if (200*n > $(window).height()) {
-                    number = (n-1)*3; 
+                    number = n*3; 
                     break;
                 }
             }

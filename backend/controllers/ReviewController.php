@@ -55,14 +55,13 @@ class ReviewController extends BackEndController
                     $galleryIds = [];
 
                     if ($galleryFiles) {
-                        $galleryIds = Gallery::upload($galleryFiles);
+                        $galleryId = Gallery::upload($galleryFiles);
                     }
 
-                    if (!empty($galleryIds)) {
-                        foreach ($galleryIds as $id) {
-                            $model->link('galleries', Gallery::findOne($id));
-                        }
+                    if (!empty($galleryId)) {
+                        $model->link('galleries', Gallery::findOne($galleryId));
                     }
+                }
 
                     if (!empty($model->bonusIds)) {
                         foreach ($model->bonusIds as $id) {
@@ -165,8 +164,10 @@ class ReviewController extends BackEndController
             $galleryFiles = UploadedFile::getInstances($model, 'gallery');
 
             if ($galleryFiles) {
-                $model->unlinkAll('galleries', true);
-                Gallery::upload($galleryFiles);
+                $galleryId = Gallery::upload($galleryFiles);
+                if (!empty($galleryId)) {
+                    $model->link('galleries', Gallery::findOne($id));
+                }
             }
 
             if (!empty($model->bonusIds)) {

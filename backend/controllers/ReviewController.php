@@ -61,7 +61,6 @@ class ReviewController extends BackEndController
                     if (!empty($galleryId)) {
                         $model->link('galleries', Gallery::findOne($galleryId));
                     }
-                }
 
                     if (!empty($model->bonusIds)) {
                         foreach ($model->bonusIds as $id) {

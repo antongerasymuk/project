@@ -21,9 +21,25 @@ riot.tag2('companies-list', '<div class="row"> ' +
         });
         this.on('get', function () {
             
-            var start_limit = 15;
-            var persent = 65;
-            var limit = 15;
+            var start_limit = 6;
+            var persent = 75;
+            var limit = 6;
+            var auto = true;
+
+            
+            var number = 0;
+            if (auto) {
+                for (var n = 0; n <= 100; n++) {
+                  if (200*n > $(window).height()) {
+                    number = (n-1)*3; 
+                    break;
+                }
+            }
+            console.log('number:'+number);
+
+            limit = number;
+            start_limit = number;
+            }
          
             oboe({
                 url: '/company?&offset=0&limit='+start_limit,
@@ -39,7 +55,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
                 $('#company-offer_'+self.index).fadeIn(900);
                 console.log('#company-offer_'+self.index);
                 self.index++;
-                
+      
                 
              })
             .fail(function() {

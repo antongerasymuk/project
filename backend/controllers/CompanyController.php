@@ -25,7 +25,7 @@ class CompanyController extends BackEndController
 	public function actionIndex()
 	{
 	    // get 10 companies
-	    $companies = Company::find()->limit(10)->all();
+	    $companies = Company::find()->all();
 
 		return $this->render('index', [
 		    'companies' => $companies

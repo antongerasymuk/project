@@ -63,7 +63,7 @@ class BonusController extends ActiveController
         $modelClass = $this->modelClass;
          $dependency = Yii::createObject([
         'class' => 'yii\caching\DbDependency',
-        'sql' => 'SELECT (SELECT SUM(CRC32(CONCAT(id,title,description,logo,code,referal_url,type,min_deposit,expiry,rollover_requirement,  restrictions,review_id,percent,currency))) FROM bonuses) + (SELECT SUM(CRC32(CONCAT(review_id,rating_id))) FROM review_rating) + (SELECT SUM(CRC32(CONCAT(os_id, review_id))) FROM os_review) + (SELECT SUM(CRC32(CONCAT(country_id, review_id))) FROM allowed_country) + (SELECT SUM(CRC32(CONCAT(dep_id, review_id))) FROM review_dep_method)'
+        'sql' => 'SELECT (SELECT SUM(CRC32(CONCAT_WS("",id,title,description,logo,code,referal_url,type,min_deposit,expiry,rollover_requirement,  restrictions,review_id,percent,currency))) FROM bonuses) + (SELECT SUM(CRC32(CONCAT_WS("",review_id,rating_id))) FROM review_rating) + (SELECT SUM(CRC32(CONCAT_WS("",os_id, review_id))) FROM os_review) + (SELECT SUM(CRC32(CONCAT_WS("",country_id, review_id))) FROM allowed_country) + (SELECT SUM(CRC32(CONCAT_WS("",dep_id, review_id))) FROM review_dep_method)'
         ]);
 
         //$dependency = new \yii\caching\DbDependency('SELECT sum(crc32(concat(id,title,description,logo,code))) AS crc FROM bonuses');

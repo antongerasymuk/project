@@ -31,36 +31,42 @@ class BonusController extends BackEndController
 
             $params = Yii::$app->params;
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
-            $path = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+            if ($model->logoFile) {
+                $path = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
-            // store the source file name
-            $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                // store the source file name
+                $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
-            if ($model->save()) {
-                $model->logoFile->saveAs($path);
+                if ($model->save()) {
+                    $model->logoFile->saveAs($path);
 
                 //if (!empty($model->osIds)) {
                 //    foreach ($model->osIds as $id) {
                 //        $model->link('oses', Os::findOne(['id' => $id]));
                 //    }
                 //}
-                if ($isAjax) {
+                    if ($isAjax) {
 
-                    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                    return [
+                        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                        return [
                         'success' => $model->id,
                         'item' => [
-                            'id' => $model->id,
-                            'value' => $model->title
+                        'id' => $model->id,
+                        'value' => $model->title
                         ]
-                    ];
-                }
+                        ];
+                    }
 
-                Yii::$app->getSession()->setFlash('success', 'Bonus created success');
+                    Yii::$app->getSession()->setFlash('success', 'Bonus created success');
 
-                return $this->redirect(['bonus/index']);
+                    return $this->redirect(['bonus/index']);
+                } 
+            } 
+            else 
+            {
+                $model->addError('logoFile', 'Logo file not choose'); 
             }
-        }
+        } 
 
         return $this->render('create', ['model' => $model]);
     }
@@ -86,7 +92,9 @@ class BonusController extends BackEndController
 
             }
             if ($model->save()) {
-                $model->logoFile->saveAs($logoPath);
+                if (!empty($model->logoFile)) {
+                    $model->logoFile->saveAs($logoPath);
+                }
                 if (!empty($model->osIds)) {
                     foreach ($model->osIds as $id) {
                         $model->link('oses', Os::findOne(['id' => $id]));

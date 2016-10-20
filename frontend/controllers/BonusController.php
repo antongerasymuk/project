@@ -61,9 +61,14 @@ class BonusController extends ActiveController
         $offset = 0
     ) {
         $modelClass = $this->modelClass;
-        $dependency = new \yii\caching\DbDependency([
-            'sql' => 'SELECT (SELECT COUNT(*) FROM bonuses) + (SELECT COUNT(*) FROM os_review) + (SELECT COUNT(*) FROM allowed_country)+(SELECT COUNT(*) FROM oses)'
+         $dependency = Yii::createObject([
+        'class' => 'yii\caching\DbDependency',
+        'sql' => 'SELECT (SELECT SUM(CRC32(CONCAT(id,title,description,logo,code,referal_url,type,min_deposit,expiry,rollover_requirement,  restrictions,review_id,percent,currency))) FROM bonuses) + (SELECT SUM(CRC32(CONCAT(review_id,rating_id))) FROM review_rating) + (SELECT SUM(CRC32(CONCAT(os_id, review_id))) FROM os_review) + (SELECT SUM(CRC32(CONCAT(country_id, review_id))) FROM allowed_country) + (SELECT SUM(CRC32(CONCAT(dep_id, review_id))) FROM review_dep_method)'
         ]);
+
+        //$dependency = new \yii\caching\DbDependency('SELECT sum(crc32(concat(id,title,description,logo,code))) AS crc FROM bonuses');
+        //var_dump($dependency);
+        //exit;
 
         $bonuses = $modelClass::find()
             ->with([
@@ -102,14 +107,14 @@ class BonusController extends ActiveController
         }
 
         $bonuses->andWhere(['reviews.category_id' => $category_id]);
+        $data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
+        return $bonuses->all();
+        }, 0, $dependency); 
+        //$data = $bonuses->all();
 
-        //$data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
-        //return $bonuses->all();
-        //}, 0, $dependency);
+        $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_'.(int)$sort_by);
 
-        $data = $bonuses->all();
-        $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_' . (int)$sort_by);
-        $bonusesCache = false;
+        //$bonusesCache = false;
         if ($bonusesCache === false) {
             $data = $this->calcRating($data);
 
@@ -141,7 +146,8 @@ class BonusController extends ActiveController
             }
 
         // cached sorted bonuses
-        //Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses);
+
+        Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses,$dependency);
 
         } else {
             $bonuses = $bonusesCache;

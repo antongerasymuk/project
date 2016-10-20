@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'price')->textInput() ?>
 <?= $form->field($model, 'code')->textInput() ?>
 <?= $form->field($model, 'referal_url')->textInput() ?>
+<?= $form->field($model, 'rollover_requirement')->textInput() ?>
 <?= $form->field($model, 'type')->checkbox() ?>
 
 

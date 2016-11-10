@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= $form->field($model, 'description')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'osIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\Os::class),
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true

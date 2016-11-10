@@ -45,6 +45,7 @@ class Review extends \yii\db\ActiveRecord
             [['title', 'preview_title', 'address', 'type'], 'required'],
             [['type'], 'default', 'value' => self::REVIEW_TYPE],
             ['description', 'string'],
+            [['position'], 'string', 'max' => 40],
             [['company_id', 'category_id'], 'integer'],
             [['type'], 'in', 'range' => [self::REVIEW_TYPE, self::COMPANY_TYPE]],
             [
@@ -78,6 +79,7 @@ class Review extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'address' => 'Address',
@@ -86,6 +88,7 @@ class Review extends \yii\db\ActiveRecord
             'category_id' => 'Category',
             'preview_title' => 'Preview Title',
             'description' => 'Description',
+            'alias_category' => 'Category Alias',
             'depositIds' => 'Deposit methods',
             'osIds' => 'Compatible With',
             'allowedIds' => 'Allowed countries',
@@ -162,7 +165,7 @@ class Review extends \yii\db\ActiveRecord
         return $this->hasMany(Gallery::className(), ['id' => 'gallery_id'])
                     ->viaTable('review_gallery', ['review_id' => 'id']);
     }
-
+    
     public function getCategory()
     {
         return $this->hasOne(Categorie::className(), ['id' => 'category_id']);
@@ -174,6 +177,19 @@ class Review extends \yii\db\ActiveRecord
             ->where(['company_id' => $this->company_id])
             ->andWhere(['type' => self::REVIEW_TYPE])
             ->andWhere(['<>', 'id', $this->id]);
+
+        if ($limit != null && is_numeric($limit)) {
+            $reviews->limit($limit);
+        }
+
+        return $reviews->all();
+    }
+
+    public function getReviews($limit = null)
+    {
+        $reviews = self::find()->select(['id','category_id'])
+            ->where(['company_id' => $this->company_id])
+            ->andWhere(['type' => self::REVIEW_TYPE])->with('category');
 
         if ($limit != null && is_numeric($limit)) {
             $reviews->limit($limit);

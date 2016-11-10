@@ -1,0 +1,1 @@
+[10-Nov-2016 13:35:15 Europe/Moscow] PHP Fatal error:  Call to undefined function frontend\controllers\orderBy() in /home/hnzstdhf/public_html/bonus/frontend/controllers/CompanyController.php on line 49

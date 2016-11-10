@@ -30,6 +30,7 @@ class Categorie extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
+            [['pos'], 'integer', 'max' => 10],
             [['title'], 'string', 'max' => 30],
         ];
     }
@@ -51,7 +52,7 @@ class Categorie extends \yii\db\ActiveRecord
         $dependency = new DbDependency(['sql' => 'SELECT count(*) FROM categories']);
         // cached
         $categories = Categorie::getDb()->cache(function ($db){
-            return Categorie::find()->all();
+            return Categorie::find()->orderBy('pos')->all();
         }, 0, $dependency);
 
         $items = [];

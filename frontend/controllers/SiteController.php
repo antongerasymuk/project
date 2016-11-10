@@ -28,7 +28,7 @@ class SiteController extends Controller
                 'only' => ['index'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT (SELECT SUM(id) FROM categories) + (SELECT SUM(id) FROM companies)+ (SELECT SUM(id) FROM bonuses)',
+                    'sql' => 'SELECT (SELECT SUM(CRC32(CONCAT(id,pos,title))) FROM categories) + (SELECT SUM(id) FROM companies)+ (SELECT SUM(id) FROM bonuses)',
                 ],
             ]
         ];
@@ -98,7 +98,9 @@ class SiteController extends Controller
             'url' => $review->company->site_url,
             'name' => $review->company->title
         ];
+
         $this->view->params['logo'] = $review->company->logo;
+        $this->view->params['review'] = $review;
 
         if ($review->type == Review::REVIEW_TYPE) {
             // render review
@@ -106,7 +108,6 @@ class SiteController extends Controller
         } elseif ($review->type == Review::COMPANY_TYPE) {
             // render company review
             $this->view->params['is_company'] = true;
-
             return $this->render('company_review', ['review' => $review]);
         } else {
             throw new NotFoundHttpException('Unknown review type');

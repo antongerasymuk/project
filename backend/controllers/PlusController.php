@@ -21,6 +21,10 @@ class PlusController extends BackEndController
     }
     public function actionCreate($isAjax = true)
     {
+        if (!$isAjax) {
+            return false;
+        }
+
         $model = new Plus();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

@@ -8,6 +8,7 @@ use \common\helpers\CategoryList;
 use common\widgets\BreadcrumbsBonus;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -53,9 +54,25 @@ AppAsset::register($this);
                 <img src="<?= $this->params['logo'] ?>" alt="">
             </a>
             <?php if (isset($this->params['is_company'])) : ?>
+
                 <p>
-                    Grab your bonus for
-                    <?= CategoryList::generate($items) ?>
+                    Grab your bonus for 
+                    <?php 
+                  
+                    $relatedReviews = $this->params['review']->getReviews();
+                    $length = count($relatedReviews);
+                    ?>
+                    <?php foreach ($relatedReviews as $key => $relatedReview) : ?>
+                    <a href="<?= Url::to([
+                                'site/review',
+                                'id' => $relatedReview->id
+                            ]) ?>"><?= $relatedReview->category->title ?>
+                                   <?php if($key != $length-1): ?>
+                                    ,
+                                   <?php endif; ?>
+                    </a>
+
+                    <?php endforeach; ?>
                 </p>
             <?php endif; ?>
         </div>

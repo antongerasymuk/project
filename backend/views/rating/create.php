@@ -20,7 +20,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'mark')->widget(Select2::classname(), [
     'data'          => [0,1,2,3,4,5,6,7,8,9,10],
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => [],
     'pluginOptions' => [],
 ]);

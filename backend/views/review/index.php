@@ -39,9 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php if (empty($reviews)) : ?>
                 <?php else : ?>
                     <?php foreach ($reviews as $review) : ?>
+                        <?php $description = substr("$review->description", 0, 200);?>
                         <tr>
                             <td><?= $review->title ?></td>
-                            <td class="center"><?= $review->description ?></td>
+                            <td class="center"><?= $result = strlen($description) == 200 ? $description."...": $description; ?></td>
                             <td class="center">
                                 <?php if (!empty($review->logo)) : ?>
                                     <img src="<?= $review->logo ?>" alt="<?= basename($review->logo) ?>" class="company-logo">

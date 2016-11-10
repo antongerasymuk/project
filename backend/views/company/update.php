@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
 <?= $form->field($model, 'director_id')->widget(Select2::classname(), [
     'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Director::className()),
-    'language' => 'en',
+    'language' => 'en_GB',
     'options' => ['placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= $form->field($model, 'licenseIds')->widget(Select2::classname(), [
     'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\License::className()),
-    'language' => 'en',
+    'language' => 'en_GB',
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
     'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Review::className()),
-    'language' => 'en',
+    'language' => 'en_GB',
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true

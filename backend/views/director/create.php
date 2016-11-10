@@ -15,7 +15,7 @@ use yii\bootstrap\Html;
 <?= $form->field($model, 'title')->textInput() ?>
 <?= $form->field($model, 'description')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",

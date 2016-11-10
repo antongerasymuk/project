@@ -27,6 +27,7 @@ riot.tag2('bonuses-filter-list',
     '</button>'+
     '</a>'+
     '</div>' +
+    '<p if={code} class="code">Code: <span>{code}</span></p>'+
     '</td> ' +
     '</tr> ' 
     , '', '', function (opts) 

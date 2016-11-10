@@ -21,6 +21,10 @@ class MinusController extends BackEndController
 
     public function actionCreate($isAjax = true)
     {
+        if (!$isAjax) {
+            return false;
+        }
+
         $model = new Minuse();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

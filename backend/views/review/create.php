@@ -19,9 +19,13 @@ use \common\models\Plus;
          ->textInput(['autofocus' => true])
          ->label('Title')
 ?>
+
+<?= $form->field($model, 'position')->textInput()->label('Alias Category')?>
+
+
 <?= $form->field($model, 'description')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         'plugins' => [
             "advlist autolink lists link charmap print preview anchor",
@@ -34,7 +38,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\Categorie::class),
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -58,7 +62,7 @@ use \common\models\Plus;
     'options'       => [
         'rows' => 6,
     ],
-    'language'      => 'es',
+    'language' => 'en_GB',
     'clientOptions' => [
         "init_instance_callback" => "reviewAddressCallback",
         'plugins'                => [
@@ -71,7 +75,7 @@ use \common\models\Plus;
 ])
 ?>
 <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
-    'language'      => 'en',
+    'language' => 'en_GB',
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class),
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
@@ -81,7 +85,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\Rating::class),
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -90,7 +94,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'plusIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(Plus::class),
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -99,7 +103,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'minusIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\Minuse::class),
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -108,7 +112,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'depositIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\DepositMethod::class),
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -117,7 +121,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'osIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\Os::class),
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -128,7 +132,7 @@ use \common\models\Plus;
 <?php $countries = \common\models\Country::getArr(); ?>
 <?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
     'data'          => $countries,
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -138,7 +142,7 @@ use \common\models\Plus;
 
 <?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
     'data'          => $countries,
-    'language'      => 'en',
+    'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true

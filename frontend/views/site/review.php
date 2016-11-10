@@ -11,7 +11,7 @@ use yii\helpers\Url;
 $this->title = $review->title;
 $this->params['breadcrumbs'][] = [
     'url' => ['site/category', 'id' => $review->category->id],
-    'label' => $review->category->title . ' Sites'];
+    'label' => $review->position ?   $review->position : $review->category->title . ' Sites'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
@@ -19,8 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if (!empty($review->bonuses)) : ?>
         <div class="bonus-blocks clearfix">
             <?php $bonusClass = 'bs-lt';?>
+            <?php $bonusOneClass = ''; ?>
+            <?php if (count($review->bonuses) == 1) $bonusOneClass = 'one_item' ?>
             <?php foreach ($review->bonuses as $bonus) : ?>
-            <div class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12 <?= $bonusOneClass ?>">
                 <div class="<?= $bonusClass ?> clearfix">
                     <div class="left">
                         <div class="tit"><?= $bonus->title ?></div>

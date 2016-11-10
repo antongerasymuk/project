@@ -1,0 +1,1 @@
+[10-Nov-2016 12:42:26 Europe/Moscow] PHP Fatal error:  Class 'm161110_093759_add_pos_column_to_company_table' not found in /home/hnzstdhf/public_html/bonus/vendor/yiisoft/yii2/console/controllers/MigrateController.php on line 191

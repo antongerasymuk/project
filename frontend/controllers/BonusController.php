@@ -73,8 +73,11 @@ class BonusController extends ActiveController
         $bonuses = $modelClass::find()
             ->with([
                 'bonuses' => function ($query) use ($filter_by, $os_id) {
-                    if ((int)$filter_by) {
+                    if (is_integer($filter_by)) {
                         switch ($filter_by) {
+                            case 0:
+                                $query->andWhere(['min_deposit' => null]);
+                                break;
                             case 1 :
                                 $query->andWhere(['not', ['min_deposit' => null]]);
                                 break;

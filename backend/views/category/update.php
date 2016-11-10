@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php $form = ActiveForm::begin(['id' => 'category-form']); ?>
 <?= $form->field($model, 'title')->textInput() ?>
+<?= $form->field($model, 'pos')->textInput()->label('Index Position') ?>
 <div class="form-group">
     <?= Html::submitButton('Update', ['class' => 'btn btn-primary', 'name' => 'category-button']) ?>
 </div>

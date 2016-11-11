@@ -55,13 +55,15 @@ class ReviewController extends BackEndController
                     $galleryIds = [];
 
                     if ($galleryFiles) {
-                        $galleryId = Gallery::upload($galleryFiles);
+                        $galleryIds = Gallery::upload($galleryFiles);
                     }
+                   
 
-                    if (!empty($galleryId)) {
-                        $model->link('galleries', Gallery::findOne($galleryId));
+                    if (!empty($galleryIds)) {
+                        foreach ($galleryIds as $id) {
+                            $model->link('galleries', Gallery::findOne($id));
+                        }
                     }
-
 
                     if (!empty($model->bonusIds)) {
                         foreach ($model->bonusIds as $id) {
@@ -161,15 +163,20 @@ class ReviewController extends BackEndController
                 $model->logoFile->saveAs($logoPath);
             }
 
+            $galleryIds = [];
             $galleryFiles = UploadedFile::getInstances($model, 'gallery');
 
             if ($galleryFiles) {
-                $galleryId = Gallery::upload($galleryFiles);
-                if (!empty($galleryId)) {
+                $model->unlinkAll('galleries', true);
+                $galleryIds = Gallery::upload($galleryFiles);
+                
+            }
+            if (!empty($galleryIds)) {
+                foreach ($galleryIds as $id) {
                     $model->link('galleries', Gallery::findOne($id));
                 }
             }
-
+          
             if (!empty($model->bonusIds)) {
                 // untouch bonuses
                 foreach ($model->bonuses as $bonus) {

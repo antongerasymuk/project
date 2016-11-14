@@ -136,7 +136,14 @@ class ReviewController extends BackEndController
             return $this->redirect(['review/index']);
         }
 
-        return $this->render('create', ['model' => $model]);
+        return $this->render('create', ['model' => $model]);        
+        /*return $this->render('create', [
+            'model' => $model,
+            'plus' => new Plus(),
+            'minus' => new Minuse(),
+            
+        ]);*/
+
     }
 
     public function actionEdit($id)
@@ -302,7 +309,13 @@ class ReviewController extends BackEndController
             ->asArray()
             ->all(), 'id', 'id');
 
-        return $this->render('update', ['model' => $model]);
+        //return $this->render('update', ['model' => $model]);
+        return $this->render('update', [
+            'model' => $model,
+            'plus' => new Plus(),
+            'minus' => new Minuse(),
+            
+        ]);
     }
     public function actionDelete($id)
     {

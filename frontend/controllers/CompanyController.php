@@ -41,14 +41,13 @@ class CompanyController extends ActiveController
        //     return $modelClass::find()
        //         ->with(['reviews.category', 'reviews.bonuses'])
        //         ->asArray()
-  
        //         ->all();
        // }, 0, $dependency);
-            $data = $modelClass::find()
+  
+          $data = $modelClass::find()
                 ->with(['reviews.category' =>  function ($query) {$query->orderBY('pos'); }, 'reviews.bonuses'])
                 ->asArray()
                 ->limit($limit)
-
                 ->offset($offset)
                 ->all();
 

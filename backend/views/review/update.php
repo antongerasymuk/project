@@ -99,7 +99,7 @@ use \common\models\Plus;
     ],
 ])->label('Ratings');
 ?>
-
+<div class="form-group-select">
 <?= $form->field($model, 'plusIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(Plus::class),
     'language' => 'en_GB',
@@ -108,8 +108,13 @@ use \common\models\Plus;
         'allowClear' => true
     ],
 ])->label('Pluses');
-?>
 
+?>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#plus-create-modal">
++
+</button>
+</div>
+<div class="form-group-select">
 <?= $form->field($model, 'minusIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\Minuse::class),
     'language' => 'en_GB',
@@ -118,7 +123,12 @@ use \common\models\Plus;
         'allowClear' => true
     ],
 ])->label('Minuses');
+
 ?>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#minus-create-modal">
++
+</button>
+</div>
 
 <?= $form->field($model, 'depositIds')->widget(Select2::classname(), [
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\DepositMethod::class),
@@ -173,3 +183,5 @@ use \common\models\Plus;
 ])
 ?>
 <?php ActiveForm::end(); ?>
+<?= $this->render('//plus/create_modal', ['model' => $plus]) ?>
+<?= $this->render('//minus/create_modal', ['model' => $minus]) ?>

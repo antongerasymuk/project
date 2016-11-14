@@ -30,6 +30,7 @@ class Director extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
+            ['title_description', 'string', 'max' => 60],
             [['photoFile'], 'file', 'skipOnEmpty' => true, 'extensions'=>'jpg, gif, png', 'except' => 'edit'],
             [['description', 'title'], 'string'],
         ];

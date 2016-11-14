@@ -24,6 +24,7 @@ use yii\bootstrap\Html;
                              ->textInput(['autofocus' => true])
                              ->label('Title')
                     ?>
+                    <?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
                 </p>
             </div>
             <div class="modal-footer">

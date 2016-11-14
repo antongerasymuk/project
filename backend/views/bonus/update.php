@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
          ->textInput(['autofocus' => true])
          ->label('Title')
 ?>
+<?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
 <?= $form->field($model, 'description')->widget(TinyMce::className(), [
     'options'       => ['rows' => 6],
     'language' => 'en_GB',

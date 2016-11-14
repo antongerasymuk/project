@@ -15,5 +15,6 @@ use yii\bootstrap\Html;
          ->textInput(['autofocus' => true])
          ->label('Title')
 ?>
+<?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
 <?= Html::submitButton('Create', ['class' => 'btn btn-primary']) ?>
 <?php ActiveForm::end(); ?>

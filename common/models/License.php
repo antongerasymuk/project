@@ -28,6 +28,7 @@ class License extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'url', 'file_label'], 'required'],
+            ['title_description', 'string', 'max' => 60],
             ['url', 'url', 'validSchemes' => ['http', 'https']],
             [['title'], 'string', 'max' => 25],
             [['file_label'], 'string', 'max' => 25],

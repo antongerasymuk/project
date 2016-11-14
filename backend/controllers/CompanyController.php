@@ -78,20 +78,7 @@ class CompanyController extends BackEndController
             }
         }
 
-        $reviewsData = Review::find()
-            ->select('id, title')
-            ->asArray()
-            ->all();
-        $reviewsData = ArrayHelper::map($reviewsData, 'id', 'title');
-
-        $directorsData = Director::find()
-            ->select('id, title')
-            ->asArray()
-            ->all();
-
-        $directorsData = ArrayHelper::map($directorsData, 'id', 'title');
-
-		return $this->render('create', [
+       	return $this->render('create', [
 		    'model' => $model,
             'review' => $review,
             'bonus' => new Bonus(),
@@ -101,8 +88,7 @@ class CompanyController extends BackEndController
             'minus' => new Minuse(),
             'deposit' => new DepositMethod(),
             'license' => new License(),
-            'reviewsData' => $reviewsData,
-            'directorsData' => $directorsData
+            
         ]);
 	}
 

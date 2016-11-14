@@ -10,6 +10,7 @@ use yii\bootstrap\Html;
 
 <?php $form = ActiveForm::begin([]); ?>
 <?= $form->field($model, 'title')->textInput() ?>
+<?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
 <?= $form->field($model, 'description')->widget(\dosamigos\tinymce\TinyMce::className(), [
     'options'       => ['rows' => 6],
     'language' => 'en_GB',

@@ -20,6 +20,8 @@ use \common\models\Plus;
          ->label('Title')
 ?>
 
+<?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
+
 <?= $form->field($model, 'position')->textInput()->label('Alias Category')?>
 
 
@@ -76,7 +78,7 @@ use \common\models\Plus;
 ?>
 <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
     'language' => 'en_GB',
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class),
+    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class, true),
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
     'allowClear'    => true
@@ -93,7 +95,7 @@ use \common\models\Plus;
 ])->label('Ratings');
 ?>
 <?= $form->field($model, 'plusIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(Plus::class),
+    'data'          => ModelMapHelper::getIdTitleMap(Plus::class, true),
     'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
@@ -102,7 +104,7 @@ use \common\models\Plus;
 ])->label('Pluses');
 ?>
 <?= $form->field($model, 'minusIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Minuse::class),
+    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Minuse::class, true),
     'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [

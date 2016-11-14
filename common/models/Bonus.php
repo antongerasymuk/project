@@ -38,6 +38,7 @@ class Bonus extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
+            ['title_description', 'string', 'max' => 60],
             [['description'], 'string'],
             [['price'], 'number'],
             [['rollover_title'], 'string', 'max' => 25],

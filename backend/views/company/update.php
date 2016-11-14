@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
 <?= $form->field($model, 'director_id')->widget(Select2::classname(), [
-    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Director::className()),
+    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Director::className(), true),
     'language' => 'en_GB',
     'options' => ['placeholder' => 'Select a state ...'],
     'pluginOptions' => [
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ])->label('Director');
 ?>
 <?= $form->field($model, 'licenseIds')->widget(Select2::classname(), [
-    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\License::className()),
+    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\License::className(), true),
     'language' => 'en_GB',
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ])->label('Licenses');
 ?>
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
-    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Review::className()),
+    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Review::className(), true),
     'language' => 'en_GB',
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [

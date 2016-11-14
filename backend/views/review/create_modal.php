@@ -28,6 +28,8 @@ use \common\models\Plus;
                         ->label('Title')
                     ?>
 
+                    <?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
+
                     <?= $form->field($model, 'position')->textInput()->label('Alias Category')?>
 
                     <?= $form->field($model, 'description')->widget(TinyMce::className(), [
@@ -83,7 +85,7 @@ use \common\models\Plus;
                     ?>
                 <div class="form-group-select">
                     <?= $form->field($model, 'bonusIds')->widget(Select2::classname(), [
-                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class),
+                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class, true),
                         'language' => 'en_GB',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [

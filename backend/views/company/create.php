@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
 <div class="form-group-select">
 <?= $form->field($model, 'director_id')->widget(Select2::classname(), [
-    'data' => $directorsData,
+    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Director::className(), true),
     'options' => ['placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#director-create-modal">+</button></div>
 <div class="form-group-select">
 <?= $form->field($model, 'licenseIds')->widget(Select2::classname(), [
-    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\License::className()),
+    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\License::className(), true),
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#license-create-modal">+</button></div>
 <div class="form-group-select">
 <?= $form->field($model, 'reviewIds')->widget(Select2::classname(), [
-    'data' => $reviewsData,
+    'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Review::className(), true),
     'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
     'allowClear' => true

@@ -24,6 +24,7 @@ class Plus extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'string', 'max' => 255],
+            ['title_description', 'string', 'max' => 60],
         ];
     }
 

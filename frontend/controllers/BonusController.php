@@ -150,7 +150,7 @@ class BonusController extends ActiveController
 
         // cached sorted bonuses
 
-        Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses,$dependency);
+        Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses, 0, $dependency);
 
         } else {
             $bonuses = $bonusesCache;

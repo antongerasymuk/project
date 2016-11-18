@@ -24,8 +24,8 @@ $get_json = json_encode($get);
 
 
 $request->get(); ?>
-<?php $this->registerJsFile('/js/bonus_filter.js', ['depends' => 'frontend\assets\AppAsset']); ?>
-<?php $this->registerJsFile('/js/filter.js', ['depends' => 'frontend\assets\AppAsset']); ?>
+<!--<?php //$this->registerJsFile('/js/bonus_filter.js', ['depends' => 'frontend\assets\AppAsset']); ?>-->
+<!--<?php //$this->registerJsFile('/js/filter.js', ['depends' => 'frontend\assets\AppAsset']); ?>-->
 <div class="row">
     <div class="h-title"><h1>The UK's Top 15 <?= ucfirst($title) ?> Sites</h1></div>
 
@@ -44,7 +44,7 @@ $request->get(); ?>
             <tbody riot-tag="bonuses-filter-list" id="bonuses-filter-list" params="{bonuses_list}" category='<?= $get["id"] ?>' filter='<?= $get_url ?>' get='<?= $get_json ?>' title='<?= ucfirst($title) ?>' > 
 
 <!--<tr><bonuses-filter-list id="bonuses-filter-list" params="{bonuses_list}" category='<?= $get["id"] ?>' filter=''' title='<?= ucfirst($title) ?>'></bonuses-filter-list></tr>-->
-    <?php $this->registerJsFile('/js/bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>
+    <!--<?php //$this->registerJsFile('/js/bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>-->
     </tbody>
     </table>
                             

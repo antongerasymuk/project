@@ -64,6 +64,13 @@ return [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'bonus'],
             ],
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => []
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];

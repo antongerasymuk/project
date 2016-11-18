@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
 	<div class="static-content">
        <bookmaker-bonuses-list params="{companies_list}"></bookmaker-bonuses-list>
-       <?php $this->registerJsFile('/js/bookmaker_bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>
+      <!-- <?php $this->registerJsFile('/js/bookmaker_bonuses_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>-->
    
       
 

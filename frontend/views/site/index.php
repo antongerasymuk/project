@@ -1,5 +1,5 @@
 <companies-list params="{companies_list}"></companies-list>
-<?php $this->registerJsFile('/js/companies_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>
+<!--<?php //$this->registerJsFile('/js/companies_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>!-->
 
 <!-- .betting-sites-items -->
 

@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'referal_url')->textInput() ?>
 <?= $form->field($model, 'rollover_requirement')->textInput() ?>
 <?= $form->field($model, 'rollover_title')->textInput() ?>
+<?= $form->field($model, 'currency')->textInput() ?>
 <?= $form->field($model, 'type')->checkbox() ?>
 
 <?= $form->field($model, 'osIds')->widget(Select2::classname(), [

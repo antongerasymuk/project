@@ -77,7 +77,7 @@ We provide no guarantee as to the timeliness or accuracy of the information foun
 							</div>
 
 							<div class="copyright hidden-xs">
-								<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
+								<p>Copyright © 2016 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
 							</div>
 
 						</div>

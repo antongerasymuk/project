@@ -113,6 +113,7 @@ class CompanyController extends BackEndController
                 $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 // store the source file name
                 $model->logoFile->saveAs($path);
+
                 if (file_exists($path)) {
                     $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 }

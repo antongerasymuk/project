@@ -126,7 +126,7 @@ AppAsset::register($this);
                 </div>
 
                 <div class="copyright hidden-xs">
-                    <p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
+                    <p>Copyright © 2016 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
                 </div>
 
             </div>
@@ -148,7 +148,7 @@ AppAsset::register($this);
                 </div>
 
                 <div class="copyright hidden-lg hidden-md hidden-sm visible-xs-block">
-                    <p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
+                    <p>Copyright © 2016 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
                 </div>
 
             </div>

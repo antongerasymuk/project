@@ -10,13 +10,18 @@ use \yii\helpers\Url;
                               ->where(['type' => Review::REVIEW_TYPE])
                               ->all()
         ?>
+        
         <?php if (!empty($companyReviews)) : ?>
         <div class="customer-offers-block clearfix">
             <div class="tit"><?= $review->company->title ?> New Customer Offers</div>
             <div class="items col-xs-12">
                 <?php foreach ($companyReviews as $companyReview) : ?>
                 <div class="item">
-                    <div class="img"><img src="<?= $companyReview->logo ?>" alt=""></div>
+                    <div class="img">
+                    <div class="img-item" style="background-color: <?= $companyReview->bg_color ?>; background:url(<?= $companyReview->logo ?>) no-repeat center;">
+                    
+                    </div>
+                    </div>
                     <div class="i-tit">
                         <a href="<?= Url::to(['site/review', 'id' => $companyReview->id]) ?>">
                             <?= $companyReview->title ?> Review
@@ -198,6 +203,9 @@ use \yii\helpers\Url;
     </div> <!-- .claim-block -->
 
 <?php $relatedReviews = $review->getRelated(3); ?>
+
+
+
 
 <?php if (!empty($relatedReviews)) : ?>
     <div class="websites-block">

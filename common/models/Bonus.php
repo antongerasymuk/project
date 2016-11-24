@@ -58,6 +58,7 @@ class Bonus extends \yii\db\ActiveRecord
             [['referal_url'], 'url', 'validSchemes' => ['http', 'https']],
             [['code'], 'string', 'max' => 15],
             [['logoFile'], 'safe'],
+            [['bg_color'], 'default', 'value' => '#000'],
             [['logoFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, gif, png'],
         ];
     }

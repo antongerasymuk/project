@@ -20,7 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="bonus-blocks clearfix">
             <?php $bonusClass = 'bs-lt';?>
             <?php $bonusOneClass = ''; ?>
-            <?php if (count($review->bonuses) == 1) $bonusOneClass = 'one_item' ?>
+             <?php if (count($review->bonuses) == 1) 
+            {
+                $bonusOneClass = 'one_item';
+                $bonusClass = 'bs-rt';
+            }
+            ?>
             <?php foreach ($review->bonuses as $bonus) : ?>
                 <div class="col-md-6 col-sm-12 <?= $bonusOneClass ?>">
                 <div class="<?= $bonusClass ?> clearfix">

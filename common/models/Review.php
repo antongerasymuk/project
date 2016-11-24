@@ -71,6 +71,7 @@ class Review extends \yii\db\ActiveRecord
                 'except' => 'edit'
             ],
             ['gallery', 'file', 'extensions' => ['jpg', 'gif', 'png'], 'maxFiles' => 4],
+            [['bg_color'], 'default', 'value' => '#000'],
             [['preview', 'logo', 'preview_title', 'address'], 'string']
         ];
     }

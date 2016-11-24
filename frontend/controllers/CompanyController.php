@@ -31,9 +31,13 @@ class CompanyController extends ActiveController
         ];
     }
 
-    public function actionIndex($offset = 0, $limit = 2)
+    public function actionIndex($offset = 0, $limit = NULL)
     {
         $modelClass = $this->modelClass;
+        
+        if (!$limit) {
+            $limit = $modelClass::find()->count();
+        }
 
         $dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM companies']);
 

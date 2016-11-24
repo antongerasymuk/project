@@ -248,6 +248,18 @@ figure {
 img {
   vertical-align: middle;
 }
+.img-item{
+  width: 180px;
+  height:45px;
+  border-radius: 5px;
+  text-align: center;
+  padding: 30px 10px 0;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  margin: 0 6px 9px 6px; 
+  background-size: 100% !important;   
+}
 .img-responsive {
   display: block;
   max-width: 100%;
@@ -2197,6 +2209,7 @@ h3{
 		vertical-align: top;
 	}
 	.betting-sites-items .item .img img{
+    max-height: 50%;
 		max-width: 50%;
 		height: auto;
 	}

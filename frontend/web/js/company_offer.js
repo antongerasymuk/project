@@ -3,7 +3,7 @@ riot.tag2('company-offer', '<div class="item" riot-style="background-color: {opt
     '<div class="img"><a href="{opts.company_url}"><img riot-src="{opts.logo}" alt=""></a></div>'+
     '<h3><a href="{opts.company_url}">{opts.title} Offers</a></h3>'+
     '<p>'+
-    '<a each="{ name, value in opts.prices }"  href="/site/review?id={value.review_id}">{name}  {value.price}£</a>' +
+    '<a each="{ name, value in opts.prices }"  href="/site/review?id={value.review_id}">{name}  {value.currency}{value.price}</a>' +
     '</p> '+
     '</div>', '', '', function(opts) {
         //console.log(JSON.stringify(opts.title));
@@ -21,7 +21,6 @@ if (opts.reviews[i].type == 2) {
 }
 
 for (var index = 0; index < opts.reviews.length; index++) {
-    //console.log(opts.reviews[index].category);
     if (opts.reviews[index].category) {
         title = opts.reviews[index].category.title;
         title = title.charAt(0).toUpperCase() + title.substr(1); 
@@ -30,8 +29,11 @@ for (var index = 0; index < opts.reviews.length; index++) {
     if (opts.reviews[index].bonuses) { 
         for (var bonus_index = 0; bonus_index < opts.reviews[index].bonuses.length; bonus_index++) { 
             if (opts.reviews[index].bonuses[bonus_index].type == 1) {
-                //console.log('hello_1');
-                opts.prices[ title ] = {price: opts.reviews[index].bonuses[bonus_index].price, review_id: opts.reviews[index].id};
+                currency = opts.reviews[index].bonuses[bonus_index].currency;
+                if (currency == '') {
+                    currency = '£';
+                } 
+                opts.prices[ title ] = {price: opts.reviews[index].bonuses[bonus_index].price, review_id: opts.reviews[index].id, currency: currency};
                 
             }
         }

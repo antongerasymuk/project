@@ -99,9 +99,12 @@ class CompanyController extends BackEndController
 
         if ($model->load(Yii::$app->request->post())) {
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
-
+             //var_dump($model->logoFile);
+             //   exit;
             if ($model->logoFile) {
                 // remove old logo file
+                //var_dump($model->logoFile);
+                //exit;
                 unlink(Url::to('@frontend/web') . $model->logo);
 
                 $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;

@@ -56,7 +56,8 @@ use \common\models\Plus;
          )
          ->label('Company review?');
 ?>
-
+<?= $form->field($model, 'bg_color')->widget(\dpodium\colorpicker\ColorPickerWidget::className(),['id' => 'color-picker', 'name' => 'color-picker'])->label('Background color')
+?>
 <?= $form->field($model, 'logoFile')->fileInput() ?>
 <?= $form->field($model, 'previewFile')->fileInput() ?>
 <?= $form->field($model, 'preview_title')->textInput() ?>

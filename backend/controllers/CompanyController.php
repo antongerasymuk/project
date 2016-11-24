@@ -46,10 +46,14 @@ class CompanyController extends BackEndController
                 $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
                 // store the source file name
-                $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $model->logoFile->saveAs($path);
+
+                if (file_exists($path)) {
+                    $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                }
 
                 if($model->save()){
-                    $model->logoFile->saveAs($path);
+                    //$model->logoFile->saveAs($path);
 
                     if (!empty($model->reviewIds)) {
                         foreach ($model->reviewIds as $id) {
@@ -102,12 +106,17 @@ class CompanyController extends BackEndController
 
             if ($model->logoFile) {
                 // remove old logo file
-                unlink(Url::to('@frontend/web') . $model->logo);
+                if (file_exists(Url::to('@frontend/web') . $model->logo)) {
+                    unlink(Url::to('@frontend/web') . $model->logo);
+                }
 
                 $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 // store the source file name
-                $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 $model->logoFile->saveAs($path);
+                if (file_exists($path)) {
+                    $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                }
+                //$model->logoFile->saveAs($path);
             }
 
             if ($model->save()) {

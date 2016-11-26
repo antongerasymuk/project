@@ -50,15 +50,27 @@ class Gallery extends \yii\db\ActiveRecord
         $gallery = null;
 
         foreach ($files as $file) {
-            $file->saveAs(Url::to(Yii::$app->params['uploadPath']) . $file->baseName . '.' . $file->extension);
-
+            
+            $path = Url::to(Yii::$app->params['uploadPath']) . $file->baseName . '.' . $file->extension;
+            $url =  Url::to(Yii::$app->params['uploadUrl']) . $file->baseName . '.' . $file->extension;
+            
+            $file->saveAs($path, false);
             $gallery = new self();
-            $gallery->src = Url::to(Yii::$app->params['uploadUrl']) . $file->baseName . '.' . $file->extension;
 
-            if ($gallery->save()) $galleryIds[] = $gallery->id;
+            if (file_exists($path)) {
+
+                $gallery->src = $url;
+
+                if ($gallery->save()) {
+                    $galleryIds[] = $gallery->id;
+                }
+             
+            }
             $gallery = null;
         }
-
+ 
         return $galleryIds;
     }
+
+  
 }

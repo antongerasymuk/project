@@ -29,9 +29,9 @@ class ModelMapHelper
                     $value['title']= $value['title'].': '. $value['title_description'];
                 }
             });
-            return ArrayHelper::map($prosData, $key, $value);
+            
         }
-
+        return ArrayHelper::map($prosData, $key, $value);
     }
 
     public static function getIdTitleMap($model, $description = false)

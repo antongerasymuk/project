@@ -41,12 +41,13 @@ class CompanyController extends BackEndController
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
+            
 
             if ($model->logoFile) {
                 $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
                 // store the source file name
-                $model->logoFile->saveAs($path);
+                $model->logoFile->saveAs($path, false);
 
                 if (file_exists($path)) {
                     $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
@@ -111,8 +112,9 @@ class CompanyController extends BackEndController
                 }
 
                 $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                
                 // store the source file name
-                $model->logoFile->saveAs($path);
+                $model->logoFile->saveAs($path, false);
 
                 if (file_exists($path)) {
                     $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;

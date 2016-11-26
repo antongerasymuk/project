@@ -42,20 +42,28 @@ class ReviewController extends BackEndController
                 $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . '.' . $model->previewFile->extension;
                 $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
                 // store the source file name
-                $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension;
-                $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                
+                $model->previewFile->saveAs($previewPath, false);
+                $model->logoFile->saveAs($logoPath, false);
+                if (file_exists($previewPath)) {
+                    $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension; 
+                }
+                
+                if (file_exists($logoPath)) {
+                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                }
 
                 if($model->save()) {
-                    $model->previewFile->saveAs($previewPath);
-                    $model->logoFile->saveAs($logoPath);
+            
+              
                     // save relations
 
-                    $galleryFiles = UploadedFile::getInstances($model, 'gallery');
+                    $model->gallery = UploadedFile::getInstances($model, 'gallery');
 
                     $galleryIds = [];
 
-                    if ($galleryFiles) {
-                        $galleryIds = Gallery::upload($galleryFiles);
+                    if ($model->gallery) {
+                        $galleryIds = Gallery::upload($model->gallery);
                     }
                    
 
@@ -157,25 +165,36 @@ class ReviewController extends BackEndController
             $params = Yii::$app->params;
 
             if ($model->previewFile) {
-                unlink(Url::to('@frontend/web') . $model->preview);
+                if (file_exists(Url::to('@frontend/web') . $model->preview)) {
+                    unlink(Url::to('@frontend/web') . $model->preview);
+                }
                 $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . '.' . $model->previewFile->extension;
-                $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension;
-                $model->previewFile->saveAs($previewPath);
+                $model->previewFile->saveAs($previewPath, false);
+
+                if (file_exists($previewPath)) {
+                    $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension;
+                }
             }
 
             if ($model->logoFile) {
-                unlink(Url::to('@frontend/web') . $model->logo);
+
+                if (file_exists(Url::to('@frontend/web') . $model->logo)) {
+                    unlink(Url::to('@frontend/web') . $model->logo);
+                }
                 $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
-                $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
-                $model->logoFile->saveAs($logoPath);
+                $model->logoFile->saveAs($logoPath, false);
+                
+                if (file_exists($logoPath)) {
+                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                }
             }
 
             $galleryIds = [];
-            $galleryFiles = UploadedFile::getInstances($model, 'gallery');
+            $model->gallery = UploadedFile::getInstances($model, 'gallery');
 
-            if ($galleryFiles) {
+            if ($model->gallery) {
                 $model->unlinkAll('galleries', true);
-                $galleryIds = Gallery::upload($galleryFiles);
+                $galleryIds = Gallery::upload($model->gallery);
                 
             }
             if (!empty($galleryIds)) {

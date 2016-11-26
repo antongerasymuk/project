@@ -78,9 +78,9 @@ $(document).ready(function(){
 				
 	/* ---------- Add class .active to current link  ---------- */
 	$('ul.main-menu li a').each(function(){
-		
-			if($($(this))[0].href==String(window.location)) {
-				
+		    var href = $($(this))[0].href.replace(/index/g, "");
+			if((href+'create' == String(window.location))||(href+'index' == String(window.location))||(href+'update' == String(window.location))) {
+			     	
 				$(this).parent().addClass('active');
 				
 			}

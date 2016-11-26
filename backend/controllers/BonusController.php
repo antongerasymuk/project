@@ -35,11 +35,14 @@ class BonusController extends BackEndController
                 $path = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
 
                 // store the source file name
-                $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
-
+                $model->logoFile->saveAs($path, false);
+                
+                if (file_exists($path)) {
+                   $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                }
+                
                 if ($model->save()) {
-                    $model->logoFile->saveAs($path);
-
+                   
                 //if (!empty($model->osIds)) {
                 //    foreach ($model->osIds as $id) {
                 //        $model->link('oses', Os::findOne(['id' => $id]));
@@ -84,17 +87,21 @@ class BonusController extends BackEndController
             //    }
             //}
             if (!empty($model->logoFile)) {
-
-                unlink(Url::to('@frontend/web') . $model->logo);
+                if (file_exists(Url::to('@frontend/web') . $model->logo)) {
+                    unlink(Url::to('@frontend/web') . $model->logo);
+                }
 
                 $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
-                $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $model->logoFile->saveAs($logoPath, false);
+
+                if (file_exists($logoPath)) {
+                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                }
+
 
             }
             if ($model->save()) {
-                if (!empty($model->logoFile)) {
-                    $model->logoFile->saveAs($logoPath);
-                }
+               
                 if (!empty($model->osIds)) {
                     foreach ($model->osIds as $id) {
                         $model->link('oses', Os::findOne(['id' => $id]));

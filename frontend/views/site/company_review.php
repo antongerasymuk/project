@@ -136,6 +136,7 @@ use \yii\helpers\Url;
                                     <a class="item " style="
                                         background-image: url(<?= $deposit->logo ?>);
                                         background-repeat: no-repeat;
+                                        background-size: 85%;
                                         background-position: center center;" href="#" target="_blank">&nbsp;</a>
                                 <?php endforeach; ?>
                             </div>

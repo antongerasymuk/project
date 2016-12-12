@@ -32,7 +32,7 @@ class License extends \yii\db\ActiveRecord
             ['url', 'url', 'validSchemes' => ['http', 'https']],
             [['title'], 'string', 'max' => 25],
             [['file_label'], 'string', 'max' => 25],
-            [['url'], 'string', 'max' => 255],
+            [['url'], 'string', 'max' => 150],
         ];
     }
 

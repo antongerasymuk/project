@@ -78,11 +78,17 @@ $(document).ready(function(){
 				
 	/* ---------- Add class .active to current link  ---------- */
 	$('ul.main-menu li a').each(function(){
+
 		    var href = $($(this))[0].href.replace(/index/g, "");
-			if((href+'create' == String(window.location))||(href+'index' == String(window.location))||(href+'update' == String(window.location))) {
-			     	
+		    var url = null;  
+		    
+		    if(String(window.location).match(/([^/]*\/){5}/) != null) {
+		    	url = String(window.location).match(/([^/]*\/){5}/)[0];
+		    }
+
+		    if (href == url){
+			{
 				$(this).parent().addClass('active');
-				
 			}
 	
 	});

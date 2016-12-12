@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                  <a class="btn btn-danger" 
                                    onclick="Swalt.delete_warning('Setting deleting', 
                                    'User <?= $user->username ?> will be deleted!',
-                                   '<?= Url::to(['setting/delete', 'id' => $user-->id]) ?>',
+                                   '<?= Url::to(['setting/delete', 'id' => $user->id]) ?>',
                                    'warning')" >
                                     <i class="halflings-icon white trash"></i>
                                 </a>

@@ -22,7 +22,10 @@ class AppAsset extends AssetBundle
         //'js/jquery-2.1.1.min.js',
         //'js/riot_mount.js',
 
+
+
         //'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/2b88a946dbabe9ae5c3d2268e906a112.js',
+       //'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/08c0f3b2114523bd258b501499d5a1bd.js',
 
         'http://d3nzdclrsrj0jr.cloudfront.net/2b88a946dbabe9ae5c3d2268e906a112.js',
         'http://d3nzdclrsrj0jr.cloudfront.net/08c0f3b2114523bd258b501499d5a1bd.js',

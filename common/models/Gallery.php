@@ -51,8 +51,8 @@ class Gallery extends \yii\db\ActiveRecord
 
         foreach ($files as $file) {
             
-            $path = Url::to(Yii::$app->params['uploadPath']) . $file->baseName . '.' . $file->extension;
-            $url =  Url::to(Yii::$app->params['uploadUrl']) . $file->baseName . '.' . $file->extension;
+            $path = Url::to(Yii::$app->params['uploadPath']) . $file->baseName . time() . '.' . $file->extension;
+            $url =  Url::to(Yii::$app->params['uploadUrl']) . $file->baseName . time() . '.' . $file->extension;
             
             $file->saveAs($path, false);
             $gallery = new self();

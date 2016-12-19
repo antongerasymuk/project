@@ -46,11 +46,13 @@ riot.tag2('bonuses-filter-list',
             if(opts.category) {
                 opts.category_filter = 'category_id='+opts.category;
                 opts.category_filter_url = 'id='+opts.category;
+                opts.filter = opts.filter.replace(new RegExp("&v="+"\\d+"), '');
+                opts.time = Math.floor(Date.now() / 1000);
             } 
             console.log('/bonus?'+opts.category_filter+opts.filter);
             history.pushState(null, null, '/site/category?'+opts.category_filter_url+opts.filter);
             oboe({
-                url: '/bonus?'+opts.category_filter+opts.filter,
+                url: '/bonus?'+opts.category_filter+opts.filter+'&v='+opts.time,
                 headers:  {Accept: 'application/json'}, 
             })
             .node('!.*', function(data){

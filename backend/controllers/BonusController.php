@@ -32,13 +32,13 @@ class BonusController extends BackEndController
             $params = Yii::$app->params;
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
             if ($model->logoFile) {
-                $path = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $path = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
 
                 // store the source file name
                 $model->logoFile->saveAs($path, false);
                 
                 if (file_exists($path)) {
-                   $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                   $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 }
                 
                 if ($model->save()) {
@@ -48,6 +48,7 @@ class BonusController extends BackEndController
                 //        $model->link('oses', Os::findOne(['id' => $id]));
                 //    }
                 //}
+
                     if ($isAjax) {
 
                         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -87,19 +88,23 @@ class BonusController extends BackEndController
             //    }
             //}
             if (!empty($model->logoFile)) {
-                if (file_exists(Url::to('@frontend/web') . $model->logo)) {
+
+
+                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                $model->logoFile->saveAs($logoPath, false);
+
+                if (file_exists(Url::to('@frontend/web') . $model->logo) && file_exists($logoPath)) {
                     unlink(Url::to('@frontend/web') . $model->logo);
                 }
 
-                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
-                $model->logoFile->saveAs($logoPath, false);
-
                 if (file_exists($logoPath)) {
-                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                } else {
+                    $model->addError('logoFile', 'File loading error!');
                 }
 
-
             }
+
             if ($model->save()) {
                
                 if (!empty($model->osIds)) {

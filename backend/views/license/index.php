@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Title Description </th>
                     <th>File</th>
                     <th>Actions</th>
                 </tr>
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php else : ?>
                     <?php foreach ($licenses as $license) : ?>
                         <tr>
-                            <td><?= $license->title ?></td>
+                            <td><?= $license->title_description ?></td>
                             <td class="center">
                                 <a href="<?= $license->url ?>"><?= $license->file_label ?></a>
                             </td>

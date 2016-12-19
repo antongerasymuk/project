@@ -60,6 +60,7 @@ class BonusController extends ActiveController
         $limit = 15,
         $offset = 0
     ) {
+
         $modelClass = $this->modelClass;
          $dependency = Yii::createObject([
         'class' => 'yii\caching\DbDependency',
@@ -94,6 +95,8 @@ class BonusController extends ActiveController
             ->andWhere(['type' => Review::REVIEW_TYPE])
             ->asArray();
 
+
+
         if ((int)$os_id) {
             $bonuses->innerJoinWith('oses')
                 ->where(['oses.id' => $os_id]);
@@ -110,14 +113,15 @@ class BonusController extends ActiveController
         }
 
         $bonuses->andWhere(['reviews.category_id' => $category_id]);
-        $data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
-        return $bonuses->all();
-        }, 0, $dependency); 
-        //$data = $bonuses->all();
+
+//        $data = $modelClass::getDb()->cache(function ($db) use ($bonuses) {
+//        return $bonuses->all();
+//        }, 0, $dependency);
+        $data = $bonuses->all();
 
         $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_'.(int)$sort_by);
 
-        //$bonusesCache = false;
+        $bonusesCache = false;
         if ($bonusesCache === false) {
             $data = $this->calcRating($data);
 
@@ -135,14 +139,13 @@ class BonusController extends ActiveController
             $bonuses = $this->normalize($this->sortRank($data));
 
             if ((int)$sort_by) {
-                //
                 switch ($sort_by) {
                     // Sort by top bonus %
-                    case 1 :
+                    case 2 :
                         $bonuses = $this->sortByPercent($bonuses);
                         break;
                     // Sort by max bonus
-                    case 2 :
+                    case 3 :
                         $bonuses = $this->sortByPrice($bonuses);
                         break;
                 }
@@ -150,7 +153,7 @@ class BonusController extends ActiveController
 
         // cached sorted bonuses
 
-        Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses, 0, $dependency);
+//        Yii::$app->cache->set('bonuses_sort_by_'.(int)$sort_by, $bonuses, 0, $dependency);
 
         } else {
             $bonuses = $bonusesCache;

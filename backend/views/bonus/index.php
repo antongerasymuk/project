@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Title Description</th>
                     <th>Description</th>
                     <th>Logo</th>
                     <th>Actions</th>
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php else : ?>
                     <?php foreach ($bonuses as $bonus) : ?>
                         <tr>
-                            <td><?= $bonus->title ?></td>
+                            <td><?= $bonus->title_description ?></td>
                             <td class="center"><?= $bonus->description ?></td>
                             <td class="center">
                                 <?php if (!empty($bonus->logo)) : ?>

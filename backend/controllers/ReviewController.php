@@ -39,18 +39,18 @@ class ReviewController extends BackEndController
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
 
             if ($model->previewFile && $model->logoFile) {
-                $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . '.' . $model->previewFile->extension;
-                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
+                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 // store the source file name
                 
                 $model->previewFile->saveAs($previewPath, false);
                 $model->logoFile->saveAs($logoPath, false);
                 if (file_exists($previewPath)) {
-                    $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension; 
+                    $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
                 }
                 
                 if (file_exists($logoPath)) {
-                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 }
 
                 if($model->save()) {
@@ -165,27 +165,34 @@ class ReviewController extends BackEndController
             $params = Yii::$app->params;
 
             if ($model->previewFile) {
-                if (file_exists(Url::to('@frontend/web') . $model->preview)) {
-                    unlink(Url::to('@frontend/web') . $model->preview);
-                }
-                $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . '.' . $model->previewFile->extension;
+
+                $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName .  time() . '.' . $model->previewFile->extension;
                 $model->previewFile->saveAs($previewPath, false);
 
+                if ((file_exists(Url::to('@frontend/web') . $model->preview))&&(file_exists($previewPath))) {
+                    unlink(Url::to('@frontend/web') . $model->preview);
+                }
+
                 if (file_exists($previewPath)) {
-                    $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . '.' . $model->previewFile->extension;
+                    $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
+                } else {
+                    $model->addError('previewFile', 'File loading error!');
                 }
             }
 
             if ($model->logoFile) {
 
-                if (file_exists(Url::to('@frontend/web') . $model->logo)) {
+                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName .  time() . '.' . $model->logoFile->extension;
+                $model->logoFile->saveAs($logoPath, false);
+
+                if (file_exists(Url::to('@frontend/web') . $model->logo)&&(file_exists($logoPath))) {
                     unlink(Url::to('@frontend/web') . $model->logo);
                 }
-                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
-                $model->logoFile->saveAs($logoPath, false);
-                
+
                 if (file_exists($logoPath)) {
-                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                } else {
+                    $model->addError('logoFile', 'File loading error!');
                 }
             }
 
@@ -193,11 +200,11 @@ class ReviewController extends BackEndController
             $model->gallery = UploadedFile::getInstances($model, 'gallery');
 
             if ($model->gallery) {
-                $model->unlinkAll('galleries', true);
                 $galleryIds = Gallery::upload($model->gallery);
-                
             }
+
             if (!empty($galleryIds)) {
+                $model->unlinkAll('galleries', true);
                 foreach ($galleryIds as $id) {
                     $model->link('galleries', Gallery::findOne($id));
                 }
@@ -315,6 +322,7 @@ class ReviewController extends BackEndController
             ->select('id')
             ->asArray()
             ->all(), 'id', 'id');
+
 
         $model->allowedIds = ArrayHelper::map($model
             ->getAllowed()

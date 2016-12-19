@@ -44,13 +44,13 @@ class CompanyController extends BackEndController
             
 
             if ($model->logoFile) {
-                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
 
                 // store the source file name
                 $model->logoFile->saveAs($path, false);
 
                 if (file_exists($path)) {
-                    $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                    $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 }
 
                 if($model->save()){
@@ -106,19 +106,23 @@ class CompanyController extends BackEndController
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
 
             if ($model->logoFile) {
-                // remove old logo file
-                if (file_exists(Url::to('@frontend/web') . $model->logo)) {
-                    unlink(Url::to('@frontend/web') . $model->logo);
-                }
 
-                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+
+                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 
                 // store the source file name
                 $model->logoFile->saveAs($path, false);
+                // remove old logo file
+                if (file_exists(Url::to('@frontend/web') . $model->logo) && file_exists($path)) {
+                    unlink(Url::to('@frontend/web') . $model->logo);
+                }
 
                 if (file_exists($path)) {
-                    $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                    $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . time() .'.' . $model->logoFile->extension;
+                } else {
+                    $model->addError('logoFile', 'File loading error!');
                 }
+
                 //$model->logoFile->saveAs($path);
             }
 

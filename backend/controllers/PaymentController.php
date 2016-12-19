@@ -25,10 +25,10 @@ class PaymentController extends BackEndController
         if ($model->load(Yii::$app->request->post())) {
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
             if ($model->logoFile) {
-                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
 
                 // store the source file name
-                $model->logo = Url::to(Yii::$app->params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $model->logo = Url::to(Yii::$app->params['uploadUrl']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
 
                 if($model->save()){
                     $model->logoFile->saveAs($path);
@@ -65,9 +65,9 @@ class PaymentController extends BackEndController
 
             if ($model->logoFile) {
                 unlink(Url::to('@frontend/web') . $model->logo);
-                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $path = Url::to(Yii::$app->params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 // store the source file name
-                $model->logo = Url::to(Yii::$app->params['uploadUrl']) . $model->logoFile->baseName . '.' . $model->logoFile->extension;
+                $model->logo = Url::to(Yii::$app->params['uploadUrl']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 $model->logoFile->saveAs($path);
             }
 

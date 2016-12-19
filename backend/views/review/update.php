@@ -94,7 +94,7 @@ use \common\models\Plus;
 ])->label('Bonuses');
 ?>
 <?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
-    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Rating::class),
+    'data'          => ModelMapHelper::getIdTitleMap(\common\models\Rating::class, true, 'mark'),
     'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
@@ -152,7 +152,7 @@ use \common\models\Plus;
 ]);
 ?>
 
-<?php $countries = \common\models\Country::getArr(); ?>
+<?php $countries = \common\models\Country::getArr();?>
 <?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
     'data'          => $countries,
     'language' => 'en_GB',

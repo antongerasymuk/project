@@ -18,7 +18,7 @@ use \yii\helpers\Url;
                 <?php foreach ($companyReviews as $companyReview) : ?>
                 <div class="item">
                     <div class="img">
-                    <div class="img-item" style="background-color: <?= $companyReview->bg_color ?>; background:url(<?= $companyReview->logo ?>) no-repeat center;">
+                    <div class="img-item" style="background-color: <?= $companyReview->bg_color ?>; background-image:url(<?= $companyReview->logo ?>); background-repeat: no-repeat; background-position: center;">
                     
                     </div>
                     </div>

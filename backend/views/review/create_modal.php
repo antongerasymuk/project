@@ -101,7 +101,7 @@ use \common\models\Plus;
                 </div>
                 <div class="form-group-select">
                     <?= $form->field($model, 'ratingIds')->widget(Select2::classname(), [
-                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Rating::class),
+                        'data' => ModelMapHelper::getIdTitleMap(\common\models\Rating::class, true, 'mark'),
                         'language' => 'en_GB',
                         'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [

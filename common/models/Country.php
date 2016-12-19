@@ -46,6 +46,7 @@ class Country extends \yii\db\ActiveRecord
     {
         $prosData = Country::find()
                       ->select('id, title')
+                      ->orderBy('title')
                       ->asArray()
                       ->all();
 

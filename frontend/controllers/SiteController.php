@@ -148,13 +148,16 @@ class SiteController extends Controller
     {
         $this->layout = 'main_bonus';
 
-        if ($title = Categorie::findOne($id)) {
+        if ($categorie = Categorie::findOne($id)) {
 
-            $title = Categorie::findOne($id)->title;
+            $title = $categorie->title;
+            $main_text = $categorie->main_text;
+            $notes = $categorie->notes;
+
             $this->view->params['category_title'] = $title;
         } else {
             throw new NotFoundHttpException('Unknown category');
         }
-        return $this->render('bonuses_by_filter', ['title' => $title]);
+        return $this->render('bonuses_by_filter', ['title' => $title , 'main_text' => $main_text, 'notes' => $notes]);
     }
 }

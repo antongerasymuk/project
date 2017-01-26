@@ -20,7 +20,7 @@ class FooterNav extends Nav
         foreach ( $this->items as $key => $item) {
          
         if (is_array ($this->items[$key])) {
-        $this->items[$key]['url'] = '/page/'.$this->items[$key]['url']; 
+        $this->items[$key]['url'] = '/'.$this->items[$key]['url'];
         }
                
         }

@@ -3,7 +3,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
     '<div class="h-title">' +
     '<h2>UK Betting Sites</h2>' +
     '</div> <div class="betting-sites-items clearfix" >' +
-    '<company-offer  style="display:none;" class="col-md-4 col-sm-6"  each="{ companies_list }" id="company-offer_{index}" bg_color="{bg_color}" title="{title}" logo="{logo}" reviews="{reviews}">' +
+    '<company-offer  style="display:none;" class="col-md-4 col-sm-6"  style="display:none;" each="{ companies_list }" id="company-offer_{index}" bg_color="{bg_color}" title="{title}" logo="{logo_small}" reviews="{reviews}">' +
     '</company-offer></div>' +
     '</div>' +
     '</div>',

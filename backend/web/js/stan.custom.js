@@ -1,4 +1,11 @@
 // Create bonus event
+$(document).ready(function() {
+    $('.switch').click(function() {
+        $('.select2-search__field').attr('style', '');
+        $(this).parent().find('.btn').toggleClass('btn-active');
+        $($(this).attr('data-cont')).parent().find('.well').toggleClass('in');
+    });
+});
 $('#bonus-create-form').on('beforeSubmit', function (e) {
     Model.create({
         validated: $(this).data('yiiActiveForm').validated,

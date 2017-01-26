@@ -93,7 +93,13 @@ AdminAsset::register( $this );
 								<span class="hidden-tablet">Pages</span>
 							</a>
 						</li>
-						<li>
+                        <li>
+                            <a href="<?= Url::to(['site-text/edit']) ?>">
+                                <i class="icon-tasks"></i>
+                                <span class="hidden-tablet">SiteTexts</span>
+                            </a>
+                        </li>
+                        <li>
 							<a href="<?= Url::to(['category/index']) ?>">
 								<i class="icon-book"></i>
 								<span class="hidden-tablet">Categories</span>

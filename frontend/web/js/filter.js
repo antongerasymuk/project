@@ -1,33 +1,41 @@
+$(document).ready(function() {
+    $('body').on('click', '.get-bonus', function() {
+        $.get("/bonus/number?mode=check");
+    });
+});
 
 if ($('#bonuses-filter-list').attr('get')) {
     get = JSON.parse($('#bonuses-filter-list').attr('get'));
 } else {
     get = '';
 }
+
 $.each(get , function( index, value ) {
-   var key;
-   switch (index) {
-    case 'filter_by':
-    key = "filter";
-    break;
-    case 'sort_by':
-    key = "sort";
-    break;
-    case 'os_id':
-    key = "os";
-    break;
-}
+    var key;
+    switch (index) {
+        case 'filter_by':
+            key = "filter";
+            break;
+        case 'sort_by':
+            key = "sort";
+            break;
+        case 'os_id':
+            key = "os";
+            break;
+    }
 
-if (index == 'country_id' ) {
-    $("#countries option[option='"+value+"']").prop('selected', true);
+    if (index == 'country_id' ) {
+        $("#countries option[option='"+value+"']").prop('selected', true);
 
-}
+    }
 
-if (index == 'deposit_id' ) {
-  $("#banking option[option='"+value+"']").prop('selected', true);
-}
+    if (index == 'deposit_id' ) {
+        $("#banking option[option='"+value+"']").prop('selected', true);
+    }
 
-makeActive($("button[data-type="+key+"][data-filter ="+value+"]"));
+    if (key != undefined){
+        makeActive($("button[data-type="+key+"][data-filter ="+value+"]"));
+    }
 
 });
 
@@ -88,16 +96,30 @@ function makeFilter(object) {
   var key = "";
   if (object.attr("data-type")) {
       switch (object.attr("data-type")) {
-        case 'filter':
-        key = "&filter_by=";
-        break;
-        case 'sort':
-        key = "&sort_by=";
-        break;
-        case 'os':
-        key = "&os_id=";
-        break;
-    }
+          case 'filter':
+              key = "&filter_by=";
+
+              get.filter_by = object.attr("data-filter");
+
+              switch(get.filter_by) {
+                  case '1':
+                      get.action = '';
+                      break;
+                  case '0':
+                      get.action = 'no-deposit';
+                      break;
+                  case '2':
+                      get.action = 'codes';
+                      break;
+              }
+              break;
+          case 'sort':
+              key = "&sort_by=";
+              break;
+          case 'os':
+              key = "&os_id=";
+              break;
+      }
     console.log('key');
     console.log(key);
     var filter_string = $('#bonuses-filter-list').attr('filter');

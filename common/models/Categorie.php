@@ -32,6 +32,8 @@ class Categorie extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['pos'], 'integer', 'max' => 10],
             [['title'], 'string', 'max' => 30],
+            [['main_text'], 'string'],
+            [['notes'], 'string'],
         ];
     }
 
@@ -60,7 +62,8 @@ class Categorie extends \yii\db\ActiveRecord
         foreach ($categories as $category) {
             $items[] = [
                 'label' => $category->title,
-                'url' => ['site/category', 'id' => $category->id , 'filter_by' => 1, 'sort_by' =>1]
+                'url' => [mb_strtolower($category->title).'/']
+                //'url' => ['site/category', 'id' => $category->id , 'filter_by' => 1, 'sort_by' =>1]
             ];
         }
 

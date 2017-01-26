@@ -15,21 +15,21 @@ class AppAsset extends AssetBundle
         //'css/grid.css',
         //'css/style.min.css'
 
-        'http://d3nzdclrsrj0jr.cloudfront.net/a62671a807877f6c5dd73436936e67a1.css'
+        'http://d3nzdclrsrj0jr.cloudfront.net/a62671a8085.css'
     ];
     public $js = [
         
         //'js/jquery-2.1.1.min.js',
         //'js/riot_mount.js',
 
-
-
         //'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/2b88a946dbabe9ae5c3d2268e906a112.js',
-       //'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/08c0f3b2114523bd258b501499d5a1bd.js',
-//        'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/akjxcvg.js'
-//        'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/bvdsdfwefwe.js'
+        //'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/08c0f3b2114523bd258b501499d5a1bd.js',
+        //'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/akjxcvg.js',
+        //'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/bvdsdfwefwe.js',
         //'http://d3nzdclrsrj0jr.cloudfront.net/e77904a7118434174efb810549f6caf3.js',
-        'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/e77904a711.js'
+
+
+        'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/e77918.js'
         //'http://d3nzdclrsrj0jr.cloudfront.net/2b88a946dbabe9ae5c3d2268e906a112.js',
         //'http://d3nzdclrsrj0jr.cloudfront.net/08c0f3b2114523bd258b501499d5a1bd.js',
         //'http://d3nzdclrsrj0jr.cloudfront.net/09118f0b34d8f2dcfb4fcde33683edcb.js',

@@ -1638,6 +1638,16 @@ fieldset[disabled] .btn:active {
   border-color: #2D89EF;
 }
 
+.btn-active {
+    background-color: #357ebd !important;
+    border-color: #3071a9 !important;
+    display: inline-block;
+}
+.btn-active:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {

@@ -13,6 +13,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $description
  * @property string $bg_color
  * @property string $logo
+ * @property string $logo_small
  * @property string $site_url
  * @property integer $created_at
  * @property integer $updated_at
@@ -21,6 +22,7 @@ class Company extends \yii\db\ActiveRecord
 {
     public $reviewIds;
     public $logoFile;
+    public $logoSmallFile;
     public $licenseIds;
 	/**
 	 * @inheritdoc
@@ -41,7 +43,8 @@ class Company extends \yii\db\ActiveRecord
             [['site_url'], 'url', 'validSchemes' => ['http', 'https']],
             [['reviewIds', 'licenseIds'], 'safe'],
             [['bg_color'], 'default', 'value' => '#000'],
-            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit']
+            [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit'],
+            [['logoSmallFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit']
 		];
 	}
 
@@ -56,6 +59,7 @@ class Company extends \yii\db\ActiveRecord
 			'description' => 'Description',
 			'bg_color' => 'Bg Color',
 			'logo' => 'Logo',
+            'logo_small' => 'Small logo',
 			'site_url' => 'Site Url',
             'director_id' => 'Director'
 		];

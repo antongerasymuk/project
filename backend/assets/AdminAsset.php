@@ -19,7 +19,7 @@ class AdminAsset extends AssetBundle
 		'js/jquery-migrate-1.0.0.min.js',
 		'js/jquery-ui-1.10.0.custom.min.js',
         'js/jquery.ui.touch-punch.min.js',
-        'js/bootstrap.min.js',
+        'js/bootstrap.min.3.3.7.js',
 		'js/jquery.dataTables.min.js',
 		'js/jquery.chosen.min.js',
 		'js/jquery.uniform.min.js',

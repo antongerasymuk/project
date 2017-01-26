@@ -45,6 +45,7 @@ class Review extends \yii\db\ActiveRecord
             [['title', 'preview_title', 'address', 'type'], 'required'],
             ['title_description', 'string', 'max' => 60],
             [['type'], 'default', 'value' => self::REVIEW_TYPE],
+            ['slug', 'string', 'max' => 60],
             ['description', 'string'],
             [['position'], 'string', 'max' => 40],
             [['company_id', 'category_id'], 'integer'],

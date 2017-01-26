@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php if (empty($sites)) : ?>
                 <?php else : ?>
                     <?php foreach ($sites as $site) : ?>
+                        <?php if (($site->category != '-')&&($site->slug != '-')): ?>
                         <tr>
                             <td><?= $site->title ?></td>
                             <td class="center"><?= $site->category ?></td>
@@ -58,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </a>
                             </td>
                         </tr>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
                 </tbody>

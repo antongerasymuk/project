@@ -40,7 +40,10 @@ class Bonus extends \yii\db\ActiveRecord
             [['title'], 'required'],
             ['title_description', 'string', 'max' => 60],
             [['description'], 'string'],
+            [['check_dep'], 'integer', 'max'=> 2],
+            [['check_no_dep'], 'integer', 'max'=> 2],
             [['price'], 'number'],
+            [['percent'], 'number', 'max' => 10000],
             [['rollover_title'], 'string', 'max' => 25],
             [['reviewIds'], 'safe'], 
             [['osIds'], 'safe'],
@@ -58,6 +61,7 @@ class Bonus extends \yii\db\ActiveRecord
             [['referal_url'], 'url', 'validSchemes' => ['http', 'https']],
             [['code'], 'string', 'max' => 15],
             [['logoFile'], 'safe'],
+            [['bg_color'], 'default', 'value' => '#000'],
             [['logoFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, gif, png'],
         ];
     }

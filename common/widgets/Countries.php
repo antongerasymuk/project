@@ -13,17 +13,18 @@ class Countries extends Widget
     {
         parent::init();
 
-        $this->countries = Country::find()->asArray()->all();
+        $this->countries = Country::find()->orderBy('title')->asArray()->all();
     }
 
     public function run()
     {
         $html = $options = '';
 
-        $options .= Html::tag('option', 'None', ['option' => 0]);
+        $options .= Html::tag('option', 'Any', ['option' => 0]);
 
         if (!empty($this->countries)) {
-            $ip = Yii::$app->geoip->ip();
+            $ip = Yii::$app->geoip->ip($_SERVER['HTTP_X_REAL_IP']);
+           //var_dump($_SERVER);
 
             foreach ($this->countries as $country) {
                 $optionArr = ['option' => $country['id']];

@@ -40,11 +40,30 @@ use yii\bootstrap\Html;
                     <?= $form->field($model, 'percent')->textInput() ?>
                     <?= $form->field($model, 'currency')->textInput() ?>
                     <?= $form->field($model, 'logoFile')->fileInput() ?>
+                    <?= $form->field($model, 'bg_color')->widget(\dpodium\colorpicker\ColorPickerWidget::className(),['id' => 'color-picker', 'name' => 'color-picker'])->label('Background color')
+                    ?>
                     <?= $form->field($model, 'price')->textInput() ?>
                     <?= $form->field($model, 'code')->textInput() ?>
                     <?= $form->field($model, 'referal_url')->textInput() ?>
-                    <?= $form->field($model, 'type')->checkbox()->label('Main?') ?>
-                    <?= $form->field($model, 'min_deposit')->textInput() ?>
+                    <?= $form->field($model, 'type')->checkbox()->label('Main bonus?') ?>
+
+                    <div class="form-group">
+                        <div class="checkbox">
+                           <label data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                               <?= $form->field($model, 'check_dep')->checkbox()->label('Deposit', ['style'=>'margin-top: 0px;']) ?>
+                           </label>
+                        </div>
+
+                        <div id="collapseOne" aria-expanded="false" class="collapse <?= ($model->check_dep)? 'in':'' ?>">
+                            <div class="well"><?= $form->field($model, 'min_deposit')->textInput() ?></div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <?= $form->field($model, 'check_no_dep')->checkbox()->label('No deposit', ['style'=>'margin-top: 0px;']) ?>
+                            </label>
+                        </div>
+                    </div>
+
                     <?= $form->field($model, 'expiry')->textInput() ?>
                     <?= $form->field($model, 'rollover_title')->textInput() ?>
                     <?= $form->field($model, 'currency')->textInput() ?>

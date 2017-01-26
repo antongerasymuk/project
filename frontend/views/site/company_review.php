@@ -33,7 +33,7 @@ use \yii\helpers\Url;
                     </p>
                     <div class="btn">
                         <a href="<?= $mainBonus->referal_url; ?>">
-                            <button class="btn-hulf" type="button">Claim now</button>
+                            <button class="btn-hulf get-bonus" type="button">Claim now</button>
                         </a>
                     </div>
                 </div><!-- .item -->
@@ -194,7 +194,7 @@ use \yii\helpers\Url;
                     <p>Claim your <?= $review->title ?> Bonus Today!</p>
                     <div class="btn">
                         <a href="<?= $review->company->site_url ?>">
-                            <button type="button" class="btn-dft">Claim now</button>
+                            <button type="button" class="btn-dft get-bonus">Claim now</button>
                         </a>
                     </div>
                 </div>
@@ -214,7 +214,10 @@ use \yii\helpers\Url;
             <div class="row">
                 <?php foreach ($relatedReviews as $relatedReview) : ?>
                     <div class="item">
-                        <div class="tit"><a href="#"><?= $relatedReview->title ?></a>
+                        <div class="tit"><a href="<?= Url::to([
+                                    'site/review',
+                                    'id' => $relatedReview->id
+                                ]) ?>"><?= $relatedReview->title ?></a>
                             <p><?= $review->getMainBonus()->description ?></p>
                         </div>
                         <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>

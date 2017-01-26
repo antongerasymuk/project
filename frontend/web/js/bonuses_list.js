@@ -4,7 +4,8 @@ riot.tag2('bonuses-filter-list',
     '<div class="rank">{rank}</div>' +
     '</td> <td data-column="{opts.title} Site">' +
     '<div class="img">' +
-    '<img riot-src="{logo}" alt="">' +
+    '<div class="img-item" style="background-color:{bg_color}; background-image:url({logo}); background-repeat: no-repeat; background-position: center; margin-left:0px;">' +
+    '</div>' +
     '</div> ' +
     '<a href="/site/review?id={review_id}" class="psite">Read Review</a> ' +
     '</td> <td data-column="Rating" class="text-left">' +
@@ -22,7 +23,7 @@ riot.tag2('bonuses-filter-list',
     '<td data-column="Join site" class="text-center"> ' +
     '<div class="join-btn">' +
     '<a href="{referal_url}">'+
-    '<button type="button" class="btn-dft">'+
+    '<button type="button" class="get-bonus btn-dft">'+
     'GET BONUS'+
     '</button>'+
     '</a>'+
@@ -47,10 +48,16 @@ riot.tag2('bonuses-filter-list',
                 opts.category_filter = 'category_id='+opts.category;
                 opts.category_filter_url = 'id='+opts.category;
                 opts.filter = opts.filter.replace(new RegExp("&v="+"\\d+"), '');
+                get = JSON.parse($('#bonuses-filter-list').attr('get'));
+                console.log(get.action);
                 opts.time = Math.floor(Date.now() / 1000);
-            } 
-            console.log('/bonus?'+opts.category_filter+opts.filter);
-            history.pushState(null, null, '/site/category?'+opts.category_filter_url+opts.filter);
+            }
+
+            //console.log('/bonus?'+opts.category_filter+opts.filter);
+
+            if (get.action != undefined) {
+                history.pushState(null, null, '/'+get.controller+'/'+get.action);
+            }
             oboe({
                 url: '/bonus?'+opts.category_filter+opts.filter+'&v='+opts.time,
                 headers:  {Accept: 'application/json'}, 

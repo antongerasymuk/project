@@ -26,6 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <img src="<?= $model->logo ?>">
 <?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
+
+<img src="<?= $model->logo_small ?>">
+<?= $form->field($model, 'logoSmallFile')->fileInput()->label('Small logo file') ?>
+
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
 <?= $form->field($model, 'director_id')->widget(Select2::classname(), [
     'data' => \common\helpers\ModelMapHelper::getIdTitleMap(\common\models\Director::className(), true),

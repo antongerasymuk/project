@@ -63,7 +63,7 @@ class Site extends \yii\db\ActiveRecord
         foreach ($sites as $site) {
             $items[$site->category][] = [
                 'label' => $site->title,
-                'url' =>  $site->category.'/'.$site->slug
+                'url' =>  $site->slug
             ];
         }
         return $items;

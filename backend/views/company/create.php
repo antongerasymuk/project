@@ -25,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
     ->label('Background color')
 ?>
 <?= $form->field($model, 'logoFile')->fileInput()->label('Logo file') ?>
+
+<?= $form->field($model, 'logoSmallFile')->fileInput()->label('Small logo file') ?>
+
 <?= $form->field($model, 'site_url')->textInput()->label('Company site url') ?>
 <div class="form-group-select">
 <?= $form->field($model, 'director_id')->widget(Select2::classname(), [

@@ -60,6 +60,12 @@ return [
                 'page/footer/sitemap' => '/site/sitemap',
                 'page/<category>/<slug>' => 'site/page',
 
+                [
+                    'pattern' => '<controller>/<action:[a-zA-Z0-9\-]{0,}>',
+                    'route' => '',
+                    'class' => \common\components\CustomUrlRule::className()
+                ],
+
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'company'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'bonus'],
             ],

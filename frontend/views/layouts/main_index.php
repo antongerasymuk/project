@@ -6,6 +6,8 @@
 use yii\helpers\Html;
 use yii\helpers\CHtml;   
 use frontend\assets\AppAsset;
+use yii\helpers\Url;
+use common\helpers\SiteText;
 
 AppAsset::register($this);
 ?>
@@ -72,19 +74,18 @@ AppAsset::register($this);
 							</nav>
 
 							<div class="footer-info">
-								It is your responsibility to verify and examine all aspects of your bonus. Please read the terms and conditions carefully.<br/>
-We provide no guarantee as to the timeliness or accuracy of the information found on this site.
+                                <?= SiteText::get('footer_text'); ?>
 							</div>
 
 							<div class="copyright hidden-xs">
-								<p>Copyright © 2016 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
+								<p>Copyright © 2017 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
 							</div>
 
 						</div>
 
 						<div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
 							<div class="b-opened">
-								<div class="cnt"><?= \common\models\Bonus::find()->count() ?></div>
+								<div class="cnt"><?= file_get_contents(Url::toRoute(['bonus/number', 'mode' => 'get'],true)) ?></div>
 								<div class="txt">Bonuses opened</div>
 							</div>
 
@@ -99,7 +100,7 @@ We provide no guarantee as to the timeliness or accuracy of the information foun
 							</div>
 
 							<div class="copyright hidden-lg hidden-md hidden-sm visible-xs-block">
-								<p>Copyright © 2016 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
+								<p>Copyright © 2017 <span>bonusonline.co.uk</span>. All Rights Reserved</p>
 							</div>
 
 						</div>

@@ -10,7 +10,7 @@
 use yii\helpers\Url;
 $this->title = $review->title;
 $this->params['breadcrumbs'][] = [
-    'url' => ['site/category', 'id' => $review->category->id],
+    'url' => ['/'.mb_strtolower($review->category->title)],
     'label' => $review->position ?   $review->position : $review->category->title . ' Sites'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -31,10 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="<?= $bonusClass ?> clearfix">
                     <div class="left">
                         <div class="tit"><?= $bonus->title ?></div>
-                        <p><?= $bonus->description ?></p>
+                        <?= $bonus->description ?>
                         <div class="btn">
                             <a href="<?= $bonus->referal_url ?>">
-                                <button type="button" class="btn-dft"><i class="flaticon-gift"></i> GET BONUS</button>
+                                <button type="button" class="get-bonus btn-dft"><i class="flaticon-gift"></i> GET BONUS</button>
                             </a>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p>Expiry<strong><?= empty($bonus->expiry) ? '-' : $bonus->expiry ?></strong></p>
                         <?php $rollover_title = empty($bonus->rollover_title) ? 'Rollover Requirement' : $bonus->rollover_title ?>
                         <p><?= $rollover_title ?><strong><?= empty($bonus->rollover_requirement) ? '-' : $bonus->rollover_requirement ?></strong></p>
-                        <p>Restrictions<strong><?= empty($bonus->restriction) ? '-' :$bonus->restrictions ?></strong></p>
+                        <p>Restrictions<strong><?= empty($bonus->restrictions) ? '-' :$bonus->restrictions ?></strong></p>
                     </div>
 
                 </div>
@@ -157,10 +157,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="srm-list srm-dmethods clearfix">
                             <?php foreach ($review->deposits as $deposit) : ?>
                                 <a class="item " style="
-                                background-image: url(<?= $deposit->logo ?>);
-                                background-repeat: no-repeat;
+                                    background-image: url(<?= $deposit->logo ?>);
+                                    background-repeat: no-repeat;
                                 background-size: 65%;
-                                background-position: center center;" href="#" target="_blank">&nbsp;</a>
+                                background-position: center center;" href="javascript:void(0)"  target="_blank">&nbsp;</a>
                             <?php endforeach; ?>
                         </div>
                     </div><!-- .sr-menu (Deposit Methods) -->
@@ -206,7 +206,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p>Claim your <?= $review->title ?> Bonus Today!</p>
                 <div class="btn">
                     <a href="<?= $review->company->site_url ?>">
-                        <button type="button" class="btn-dft">Claim now</button>
+                        <button type="button" class="btn-dft get-bonus">Claim now</button>
                     </a>
                 </div>
             </div>

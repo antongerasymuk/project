@@ -13,7 +13,7 @@ use \common\models\Plus;
 ?>
 <?php $this->title = 'Create page'; ?>
 
-<?php $form = ActiveForm::begin(['id' => 'review-create-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['id' => 'page-create-form']); ?>
 <?= $form->field($model, 'title')
          ->textInput(['autofocus' => true])
          ->label('Title')
@@ -41,7 +41,7 @@ use \common\models\Plus;
          ->label('Category')
 ?>
 
-<?= Html::submitButton('Save', [ 'id' => "submit_page_update",
+<?= Html::submitButton('Update', [ 'id' => "submit_page_update",
     'class' => 'btn btn-primary',
 ])
 ?>

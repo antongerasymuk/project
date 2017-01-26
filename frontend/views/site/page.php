@@ -6,7 +6,7 @@ use yii\helpers\Html;
  */
 $this->title = ucfirst($title)." Sites";
 $this->params['breadcrumbs'][] = [
-    'url' => ['site/sitemap'],
+    'url' => ['/sitemap'],
     'label' => 'Sites'];
 $this->params['breadcrumbs'][] = $this->title;
 $request = Yii::$app->request;

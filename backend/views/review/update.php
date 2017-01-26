@@ -18,6 +18,7 @@ use \common\models\Plus;
          ->textInput(['autofocus' => true])
          ->label('Title')
 ?>
+<?= $form->field($model, 'slug')->textInput()->label('Slug')?>
 <?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
 <?= $form->field($model, 'position')->textInput()->label('Alias Category')?>
 
@@ -153,25 +154,36 @@ use \common\models\Plus;
 ?>
 
 <?php $countries = \common\models\Country::getArr();?>
-<?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
-    'data'          => $countries,
-    'language' => 'en_GB',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-]);
-?>
 
-<?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
-    'data'          => $countries,
-    'language' => 'en_GB',
-    'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-]);
-?>
+<div class="btn-group btn-toggle">
+    <button type="button" class="btn switch <?= empty($model->deniedIds)?'btn-active':''; ?>" data-cont="#allowed">Allowed</button>
+    <button type="button" class="btn switch <?= empty($model->deniedIds)?'':'btn-active'; ?>" data-cont="#denied">Denied</button>
+</div>
+
+<div class="well collapse <?= empty($model->deniedIds)?'in':''; ?>" id="allowed">
+      <?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
+        'data'          => $countries,
+        'language' => 'en_GB',
+        'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]);
+    ?>
+</div>
+
+<div class="well collapse <?= empty($model->deniedIds)?'':'in'; ?>" id="denied">
+    <?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
+            'data'          => $countries,
+            'language' => 'en_GB',
+            'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...',  'width' => '100%'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+     ]);
+    ?>
+</div>
+
 <?php if (!empty($model->gallery)) : ?>
     <div class="form-group">
         <?php foreach ($model->gallery as $img) : ?>

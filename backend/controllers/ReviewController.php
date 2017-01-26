@@ -264,19 +264,23 @@ class ReviewController extends BackEndController
                 }
             }
 
-            if (!empty($model->allowedIds)) {
-                $model->unlinkAll('allowed');
+            if (isset($model->allowedIds)) {
+                $model->unlinkAll('allowed', true);
 
-                foreach ($model->allowedIds as $id) {
-                    $model->link('allowed', Country::findOne(['id' => $id]));
+                if (!empty($model->allowedIds)) {
+                    foreach ($model->allowedIds as $id) {
+                        $model->link('allowed', Country::findOne(['id' => $id]));
+                    }
                 }
             }
 
-            if (!empty($model->deniedIds)) {
-                $model->unlinkAll('denied');
+            if (isset($model->deniedIds)) {
+                $model->unlinkAll('denied', true);
 
-                foreach ($model->deniedIds as $id) {
-                    $model->link('denied', Country::findOne(['id' => $id]));
+                if (!empty($model->deniedIds)) {
+                    foreach ($model->deniedIds as $id) {
+                        $model->link('denied', Country::findOne(['id' => $id]));
+                    }
                 }
             }
 

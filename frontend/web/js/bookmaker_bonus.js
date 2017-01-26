@@ -3,7 +3,7 @@ riot.tag2('bookmaker-bonus', '<div class="item">'+
    '<div class="tit"><a href="{opts.company_url}">{opts.title}</a></div>'+
     '<ul>'+
      '<li each="{ name, value in opts.prices }">'+
-     '<a href="/site/review?id={value.review_id}">{name}</a>: <span>{value.currency}{value.price}</span>'+
+     '<a href="{value.url}">{name}</a>: <span>{value.currency}{value.price}</span>'+
      '</li>'+
     '</ul></div>', '', '', function(opts) {
     console.log(JSON.stringify(opts));
@@ -13,9 +13,24 @@ riot.tag2('bookmaker-bonus', '<div class="item">'+
    for (var i = 0; i < opts.reviews.length; i++) {
           // 2 - it's company review type
 
-        if (opts.reviews[i].type == 2) {
-            opts.company_url = '/site/review?id=' + opts.reviews[i].id;
-        }
+       if (opts.reviews[i].type != 2) {
+
+           if (opts.reviews[i].slug != '') {
+               opts.reviews[i].url = '/' + opts.reviews[i].slug.toLowerCase();
+           }
+           else {
+               opts.reviews[i].url = '/site/review?id=' + opts.reviews[i].id;
+           }
+       }
+
+       if (opts.reviews[i].type == 2) {
+           if (opts.reviews[i].slug != '') {
+               console.log('slug'+opts.reviews[i].slug);
+               opts.company_url = '/' + opts.reviews[i].slug.toLowerCase();
+           } else {
+               opts.company_url = '/site/review?id=' + opts.reviews[i].id;
+           }
+       }
    }
 
 
@@ -31,7 +46,7 @@ riot.tag2('bookmaker-bonus', '<div class="item">'+
                     if (currency == '') {
                         currency = '£';
                     } 
-                    opts.prices[ opts.title ] = {price: opts.reviews[index].bonuses[bonus_index].price, review_id: opts.reviews[index].id, currency: currency};
+                    opts.prices[ opts.title ] = {price: opts.reviews[index].bonuses[bonus_index].price, review_id: opts.reviews[index].id, currency: currency, url: opts.reviews[index].url};
                 }
              }
         }

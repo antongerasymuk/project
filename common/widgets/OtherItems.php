@@ -23,7 +23,7 @@ class OtherItems extends Widget
 
                 $this->message .= '           
                 
-                    <li><a href="/page/'.$row['url'].'">'.ucfirst($row['label']).'</a></li>';
+                    <li><a href="'.((mb_strtolower($row['url']) != 'home')? mb_strtolower($row['url']):'/').'">'.ucfirst($row['label']).'</a></li>';
        
                  }   
                 $this->message .= '</ul>

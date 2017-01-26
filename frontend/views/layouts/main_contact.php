@@ -10,6 +10,8 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use Yii;
+use yii\helpers\Url;
+
 AppAsset::register($this);
 ?>
 
@@ -81,19 +83,19 @@ AppAsset::register($this);
                     </div>
 
                     <div class="copyright hidden-xs">
-                        <p>Copyright © 2016 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
+                        <p>Copyright © 2017 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
                     </div>
 
                 </div>
 
                 <div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
                     <div class="b-opened">
-                        <div class="cnt"><?= \common\models\Bonus::find()->count() ?></div>
+                        <div class="cnt"><?= file_get_contents(Url::toRoute(['bonus/number', 'mode' => 'get'],true)) ?></div>
                         <div class="txt">Bonuses opened</div>
                     </div>
 
                     <div class="clearfix"></div>
-                    <sdiv class="follow">
+                    <div class="follow">
                         <p>Follow us to get new bonuses</p>
                         <ul class="clearfix">
                             <li class="fb"><a href="#"><i class="flaticon-soc-fb"></i></a></li>
@@ -103,7 +105,7 @@ AppAsset::register($this);
                 </div>
 
                 <div class="copyright hidden-lg hidden-md hidden-sm visible-xs-block">
-                    <p>Copyright © 2016 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
+                    <p>Copyright © 2017 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
                 </div>
 
             </div>

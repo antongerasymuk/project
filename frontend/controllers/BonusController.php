@@ -3,7 +3,9 @@ namespace frontend\controllers;
 
 use common\models\Review;
 use Yii;
+use common\models\SiteNumber;
 use yii\rest\ActiveController;
+use yii\web\Response;
 
 class BonusController extends ActiveController
 {
@@ -73,7 +75,7 @@ class BonusController extends ActiveController
 
         $bonuses = $modelClass::find()
             ->with([
-                'bonuses' => function ($query) use ($filter_by, $os_id) {
+                /*'bonuses' => function ($query) use ($filter_by, $os_id) {
                     if (is_integer($filter_by)) {
                         switch ($filter_by) {
                             case 0:
@@ -88,11 +90,38 @@ class BonusController extends ActiveController
                         }
                     }
 
+                },*/
+                'bonuses' => function ($query) use ($filter_by, $os_id) {
+
+                    if (strlen($filter_by)) {
+
+                        switch ($filter_by) {
+
+                            case 0:
+                                $query->andWhere(['check_no_dep' => 1]);
+                                break;
+                            case 1 :
+                                $query->andWhere(['check_dep' => 1])->andWhere(['not', ['min_deposit' => null]]);
+                                break;
+                            case 2 :
+                                $query->andWhere(['not', ['code' => null]]);
+                                break;
+                        }
+                    }
                 },
                 'ratings',
                 'oses'
             ])
             ->andWhere(['type' => Review::REVIEW_TYPE])
+
+            ->with(['denied' => function( \yii\db\ActiveQuery $query) use ($country_id)  {
+                        $query->andWhere (['=','id', $country_id]);
+                    }])
+            ->with(['allowed' =>
+                    function( \yii\db\ActiveQuery $query) use ($country_id)  {
+                        $query->andWhere (['=','id', $country_id]);
+                    }])
+
             ->asArray();
 
 
@@ -107,10 +136,22 @@ class BonusController extends ActiveController
                 ->andWhere(['deposit_methods.id' => $deposit_id]);
         }
 
-        if ((int)$country_id) {
+       /* if ((int)$country_id) {
+            $bonuses->innerJoinWith('denied')
+               //;
+               //->andWhere(['countries.id' => $country_id]);
+            ->andWhere(['<>','countries.id', $country_id]);
+        }*/
+
+        /*if ((int)$country_id) {
             $bonuses->innerJoinWith('allowed')
                 ->andWhere(['countries.id' => $country_id]);
-        }
+        }*/
+
+        //if ((int)$country_id) {
+       //     $bonuses->innerJoinWith('denied')
+        //        ->andWhere(['countries.id' => $country_id]);
+        //}
 
         $bonuses->andWhere(['reviews.category_id' => $category_id]);
 
@@ -120,8 +161,8 @@ class BonusController extends ActiveController
         $data = $bonuses->all();
 
         $bonusesCache = Yii::$app->cache->get('bonuses_sort_by_'.(int)$sort_by);
-
         $bonusesCache = false;
+
         if ($bonusesCache === false) {
             $data = $this->calcRating($data);
 
@@ -157,6 +198,22 @@ class BonusController extends ActiveController
 
         } else {
             $bonuses = $bonusesCache;
+        }
+
+        if ((int)$country_id) {
+            foreach ($bonuses as $key => $value) {
+                if ((!empty($value['allowed']))&&(empty($value['denied']))) {
+                    if ($bonuses[$key]['allowed'][0]['id'] != $country_id) {
+                        unset($bonuses[$key]);
+                    }
+                }
+                if ((!empty($value['allowed']))&&(!empty($value['denied']))) {
+                    unset($bonuses[$key]);
+                }
+                if ((empty($value['allowed']))&&(!empty($value['denied']))) {
+                    unset($bonuses[$key]);
+                }
+            }
         }
 
         return array_slice($bonuses, (int)$offset, (int)$limit);
@@ -209,6 +266,22 @@ class BonusController extends ActiveController
         return $bonuses;
     }
 
+    public function actionNumber($mode)
+    {
+        \Yii::$app->response->format = Response::FORMAT_RAW;
+        $number = SiteNumber::find()->where(['type' => 0])->one();
+
+        if ($mode == 'check') {
+            $number->value = (string)($number->value + 1);
+            $number->save();
+
+        }
+
+        if ($mode == 'get') {
+            return $number->value;
+        }
+    }
+
     protected function sortRank($arr_ratings)
     {
         $r = 1;//ранк счетчик
@@ -237,6 +310,10 @@ class BonusController extends ActiveController
                 $bonus['rating'] = $review['ratings'];
                 $bonus['review_id'] = $review['id'];
                 $bonus['oses'] = $review['oses'];
+
+                $bonus['allowed'] = $review['allowed'];
+                $bonus['denied'] = $review['denied'];
+
                 $bonuses[] = $bonus;
             }
         }

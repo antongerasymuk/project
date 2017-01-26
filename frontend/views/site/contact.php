@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
+use common\helpers\SiteText;
 
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
@@ -44,15 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 						<div class="col-sm-6">
 							<div class="contact-info">
-								<h3>We love to receive feedback, suggestions and comments about the site.</h3>
-								<div class="phn">
-									<i class="flaticon-phone"></i>
-									Phone: Call our UK office on <a href="tel: +44 (0) 0000 000-000">+44 (0) 0000 000-000</a>
-								</div>
+								<h3><?= SiteText::get('contact_text'); ?></h3>
 
 								<div class="eml">
-									<i class="flaticon-email"></i>
-									Email: Contact us via email at <a href="mailto:info@bonusonline.co.uk">info@bonusonline.co.uk</a> and we try to respond within 24 hours.
+									<i class="flaticon-email" style="float:left;"></i>
+                                    <?= SiteText::get('contact_feedback'); ?>
 								</div>
 
 							</div>

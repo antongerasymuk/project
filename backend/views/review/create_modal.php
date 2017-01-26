@@ -27,9 +27,8 @@ use \common\models\Plus;
                         ->textInput(['autofocus' => true])
                         ->label('Title')
                     ?>
-
+                    <?= $form->field($model, 'slug')->textInput()->label('Slug')?>
                     <?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
-
                     <?= $form->field($model, 'position')->textInput()->label('Alias Category')?>
 
                     <?= $form->field($model, 'description')->widget(TinyMce::className(), [
@@ -169,27 +168,34 @@ use \common\models\Plus;
                     ?>
                 </div>
                 <?php $countries = \common\models\Country::getArr(); ?>
-                <div class="form-group-select">
-                    <?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
-                        'data' => $countries,
-                        'language' => 'en_GB',
-                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]);
-                    ?>
+
+                <div class="btn-group btn-toggle">
+                    <button type="button" class="btn switch <?= empty($model->deniedIds)?'btn-active':''; ?>" data-cont="#allowed">Allowed</button>
+                    <button type="button" class="btn switch <?= empty($model->deniedIds)?'':'btn-active'; ?>" data-cont="#denied">Denied</button>
                 </div>
-                <div class="form-group-select">
-                    <?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
-                        'data' => $countries,
+
+                <div class="well collapse <?= empty($model->deniedIds)?'in':''; ?>"" id="allowed">
+                <?= $form->field($model, 'allowedIds')->widget(Select2::classname(), [
+                        'data'          => $countries,
                         'language' => 'en_GB',
-                        'options' => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
                     ]);
-                    ?>
+                ?>
+                </div>
+
+                <div class="well collapse <?= empty($model->deniedIds)?'':'in'; ?>" id="denied">
+                <?= $form->field($model, 'deniedIds')->widget(Select2::classname(), [
+                        'data'          => $countries,
+                        'language' => 'en_GB',
+                        'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                ?>
                 </div>
                 <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true]) ?>
                 </p>

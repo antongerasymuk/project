@@ -77,22 +77,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="sl-content">
                         <h1><?= $review->title ?> Review</h1>
                         <?= $review->description ?>
-                        <?php if (!empty($review->allowed)) : ?>
+                        <?php if (!empty($review->denied)) : ?>
                         <div class="warning-block">
                             <i class="flaticon-deny"></i> <span>EXCLUDE:</span>
                             <?= \common\widgets\CountryPermition::widget([
                                 'model' => $review,
-                                'type' => 'allowed'
+                                'type' => 'denied'
                             ]) ?>
                         </div>
                         <?php endif; ?>
 
-                        <?php if (!empty($review->denied)) : ?>
+                        <?php if (!empty($review->allowed)) : ?>
                         <div class="info-block">
-                            <i class="flaticon-info"></i> <span>ANY TEXT:</span>
+                            <i class="flaticon-info"></i> <span>ALLOWED:</span>
                             <?= \common\widgets\CountryPermition::widget([
                                 'model' => $review,
-                                'type' => 'denied'
+                                'type' => 'allowed'
                             ]) ?>
                         </div>
                         <?php endif; ?>

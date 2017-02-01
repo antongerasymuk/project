@@ -28,13 +28,34 @@ class AppAsset extends AssetBundle
         //'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/bvdsdfwefwe.js',
         //'http://d3nzdclrsrj0jr.cloudfront.net/e77904a7118434174efb810549f6caf3.js',
 
+         //'https://d3nzdclrsrj0jr.cloudfront.net/bonusonlinebucket/e77911.js',
+         //'https://d3nzdclrsrj0jr.cloudfront.net/bonusonlinebucket/e77918.js',
 
-        'https://s3.eu-central-1.amazonaws.com/bonusonlinebucket/e77918.js'
         //'http://d3nzdclrsrj0jr.cloudfront.net/2b88a946dbabe9ae5c3d2268e906a112.js',
         //'http://d3nzdclrsrj0jr.cloudfront.net/08c0f3b2114523bd258b501499d5a1bd.js',
         //'http://d3nzdclrsrj0jr.cloudfront.net/09118f0b34d8f2dcfb4fcde33683edcb.js',
         //'http://d3nzdclrsrj0jr.cloudfront.net/cc847f68fea354be28f898be24b5cf84.js',
+
+
+
+        'js/uncompress/riot.min.js',
+        'js/uncompress/compatible_with.js',
+        'js/uncompress/common.js',
+        'js/uncompress/company_offer.js',
+        'js/uncompress/bookmaker_bonus.js',
+        'js/uncompress/raw.js',
+        'js/uncompress/rating_by_stars.js',
+        'js/uncompress/oboe-browser.min.js',
+        'js/uncompress/companies_list.js',
+
+        'js/uncompress/bonus_filter.js',
+
+        'js/uncompress/bonuses_list.js',
+        'js/uncompress/bookmaker_bonuses_list.js',
+        'js/uncompress/filter.js',
         
+
+
         //'js/riot.min.js',
         //'js/compatible_with.js',
         //'js/common.js',
@@ -46,7 +67,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $depends = [
-        //'yii\web\YiiAsset',
-        //'yii\bootstrap\BootstrapAsset',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

@@ -1,4 +1,8 @@
-<companies-list params="{companies_list}"></companies-list>
+<?php
+use common\models\Company;
+?>
+
+<companies-list params="{companies_list}" count="<?= Company::find()->count() ?>"></companies-list>
 <!--<?php //$this->registerJsFile('/js/companies_list.js', ['depends' => [frontend\assets\AppAsset::className()]]); ?>-->
 
 <!-- .betting-sites-items -->

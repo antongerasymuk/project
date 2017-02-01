@@ -105,9 +105,9 @@ AppAsset::register($this);
                     </div>
                     <div class="col-sm-4 clearfix pdl0">
                         <div class="share-block">
-                            <a href="#" class="shareBl s-tw"> <i class="flaticon-soc-tw"></i> <span>Share</span></a>
-                            <a href="#" class="shareBl s-fb"> <i class="flaticon-soc-fb"></i> <span>Share</span></a>
-                            <a href="#" class="shareBl s-gp"> <i class="flaticon-soc-gp"></i> <span>Share</span></a>
+                            <a href="https://twitter.com/home?status=<?= urlencode(Url::to(['/site/review', 'id' => $this->params['review']->id],true)) ?>" class="shareBl s-tw"> <i class="flaticon-soc-tw"></i> <span>Share</span></a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(Url::to(['/site/review', 'id' => $this->params['review']->id],true)) ?>" class="shareBl s-fb"> <i class="flaticon-soc-fb"></i> <span>Share</span></a>
+                            <a href="https://plus.google.com/share?url=<?= urlencode(Url::to(['/site/review', 'id' => $this->params['review']->id],true)) ?>" class="shareBl s-gp"> <i class="flaticon-soc-gp"></i> <span>Share</span></a>
                         </div>
                     </div><!-- .share-block -->
                 </div>

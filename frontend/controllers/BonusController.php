@@ -202,14 +202,11 @@ class BonusController extends ActiveController
 
         if ((int)$country_id) {
             foreach ($bonuses as $key => $value) {
-                if ((!empty($value['allowed']))&&(empty($value['denied']))) {
-                    if ($bonuses[$key]['allowed'][0]['id'] != $country_id) {
-                        unset($bonuses[$key]);
-                    }
-                }
+
                 if ((!empty($value['allowed']))&&(!empty($value['denied']))) {
                     unset($bonuses[$key]);
                 }
+
                 if ((empty($value['allowed']))&&(!empty($value['denied']))) {
                     unset($bonuses[$key]);
                 }

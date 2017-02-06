@@ -81,7 +81,8 @@ use \common\models\Plus;
     'data'          => ModelMapHelper::getIdTitleMap(\common\models\Bonus::class, true),
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
-    'allowClear'    => true
+    'allowClear'    => true,
+    'maximumSelectionLength'=> 2
     ],
 ])->label('Bonuses');
 ?>

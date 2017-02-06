@@ -45,11 +45,11 @@ class ReviewController extends BackEndController
                 
                 $model->previewFile->saveAs($previewPath, false);
                 $model->logoFile->saveAs($logoPath, false);
-                if (file_exists($previewPath)) {
+                if (is_file($previewPath)) {
                     $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
                 }
                 
-                if (file_exists($logoPath)) {
+                if (is_file($logoPath)) {
                     $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 }
 
@@ -169,11 +169,11 @@ class ReviewController extends BackEndController
                 $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName .  time() . '.' . $model->previewFile->extension;
                 $model->previewFile->saveAs($previewPath, false);
 
-                if ((file_exists(Url::to('@frontend/web') . $model->preview))&&(file_exists($previewPath))) {
+                if ((is_file(Url::to('@frontend/web') . $model->preview))&&(is_file($previewPath))) {
                     unlink(Url::to('@frontend/web') . $model->preview);
                 }
 
-                if (file_exists($previewPath)) {
+                if (is_file($previewPath)) {
                     $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
                 } else {
                     $model->addError('previewFile', 'File loading error!');
@@ -185,11 +185,11 @@ class ReviewController extends BackEndController
                 $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName .  time() . '.' . $model->logoFile->extension;
                 $model->logoFile->saveAs($logoPath, false);
 
-                if (file_exists(Url::to('@frontend/web') . $model->logo)&&(file_exists($logoPath))) {
+                if (is_file(Url::to('@frontend/web') . $model->logo)&&(is_file($logoPath))) {
                     unlink(Url::to('@frontend/web') . $model->logo);
                 }
 
-                if (file_exists($logoPath)) {
+                if (is_file($logoPath)) {
                     $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 } else {
                     $model->addError('logoFile', 'File loading error!');

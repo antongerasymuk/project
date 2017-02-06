@@ -18,12 +18,15 @@ use \yii\helpers\Url;
                 <?php foreach ($companyReviews as $companyReview) : ?>
                 <div class="item">
                     <div class="img">
-                    <div class="img-item" style="background-color: <?= $companyReview->bg_color ?>; background-image:url(<?= $companyReview->logo ?>); background-repeat: no-repeat; background-position: center;">
+                    <div class="img-item" style="background-color: <?= $companyReview->bg_color ?>; background-size:contain !important;  background-image:url(<?= $companyReview->logo ?>); background-repeat: no-repeat; background-position: center; width:180px;">
                     
                     </div>
                     </div>
                     <div class="i-tit">
-                        <a href="<?= Url::to(['site/review', 'id' => $companyReview->id]) ?>">
+                        <?php
+                             $hrefCompanyReview = strlen($companyReview->slug) ? '/'.mb_strtolower($companyReview->category->title).'/'.$companyReview->slug : Url::to(['site/review','id' => $companyReview->id]);
+                        ?>
+                        <a href="<?= $hrefCompanyReview;?>">
                             <?= $companyReview->title ?> Review
                         </a>
                     </div>
@@ -137,7 +140,7 @@ use \yii\helpers\Url;
                                         background-image: url(<?= $deposit->logo ?>);
                                         background-repeat: no-repeat;
                                         background-size: 65%;
-                                        background-position: center center;" href="#" target="_blank">&nbsp;</a>
+                                        background-position: center center;" href="javascript:void(0)" target="_blank">&nbsp;</a>
                                 <?php endforeach; ?>
                             </div>
                         </div><!-- .sr-menu (Deposit Methods) -->
@@ -168,7 +171,10 @@ use \yii\helpers\Url;
                                         ?>
                                         <?php if (!empty($companyReview)) : ?>
                                         <li>
-                                            <a href="<?= Url::to(['site/review', 'id' => $companyReview->id]) ?>" target="_blank">
+                                            <?php
+                                            $hrefCompanyReview = strlen($companyReview->slug) ? '/'.mb_strtolower($companyReview->slug) : Url::to(['site/review','id' => $companyReview->id]);
+                                            ?>
+                                            <a href="<?= $hrefCompanyReview ?>">
                                                 <?= $companyReview->title ?>
                                             </a>
                                         </li>

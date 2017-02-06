@@ -41,6 +41,7 @@ class Company extends \yii\db\ActiveRecord
             [['title', 'site_url', 'director_id', 'rating'], 'required'],
             ['rating', 'double'],
             [['site_url'], 'url', 'validSchemes' => ['http', 'https']],
+            ['site_url', 'string', 'max' => 150],
             [['reviewIds', 'licenseIds'], 'safe'],
             [['bg_color'], 'default', 'value' => '#000'],
             [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit'],

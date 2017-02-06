@@ -52,12 +52,12 @@ class CompanyController extends BackEndController
                 $model->logoFile->saveAs($path, false);
                 $model->logoSmallFile->saveAs($pathSmall, false);
 
-                if (file_exists($path)) {
+                if (is_file($path)) {
                     $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
 
                 }
 
-                if (file_exists($pathSmall)) {
+                if (is_file($pathSmall)) {
                     $model->logo_small = Yii::$app->params['uploadUrl'] . $model->logoSmallFile->baseName . '.' . $model->logoSmallFile->extension;
                 }
 
@@ -121,11 +121,11 @@ class CompanyController extends BackEndController
                 // store the source file name
                 $model->logoFile->saveAs($path, false);
                 // remove old logo file
-                if (file_exists(Url::to('@frontend/web') . $model->logo) && file_exists($path)) {
+                if (is_file(Url::to('@frontend/web') . $model->logo) && is_file($path)) {
                     unlink(Url::to('@frontend/web') . $model->logo);
                 }
 
-                if (file_exists($path)) {
+                if (is_file($path)) {
                     $model->logo = Yii::$app->params['uploadUrl'] . $model->logoFile->baseName . time() .'.' . $model->logoFile->extension;
                 } else {
                     $model->addError('logoFile', 'File loading error!');

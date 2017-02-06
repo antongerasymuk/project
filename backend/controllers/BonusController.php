@@ -37,7 +37,7 @@ class BonusController extends BackEndController
                 // store the source file name
                 $model->logoFile->saveAs($path, false);
                 
-                if (file_exists($path)) {
+                if (is_file($path)) {
                    $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 }
                 
@@ -92,12 +92,13 @@ class BonusController extends BackEndController
 
                 $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 $model->logoFile->saveAs($logoPath, false);
+                echo Url::to('@frontend/web') . $model->logo;
 
-                if (file_exists(Url::to('@frontend/web') . $model->logo) && file_exists($logoPath)) {
+                if (is_file(Url::to('@frontend/web') . $model->logo) && is_file($logoPath)) {
                     unlink(Url::to('@frontend/web') . $model->logo);
                 }
 
-                if (file_exists($logoPath)) {
+                if (is_file($logoPath)) {
                     $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 } else {
                     $model->addError('logoFile', 'File loading error!');

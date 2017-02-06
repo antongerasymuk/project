@@ -104,7 +104,7 @@ class BonusController extends ActiveController
                                 $query->andWhere(['check_dep' => 1])->andWhere(['not', ['min_deposit' => null]]);
                                 break;
                             case 2 :
-                                $query->andWhere(['not', ['code' => null]]);
+                                $query->andWhere(['not', ['code' => '']]);
                                 break;
                         }
                     }
@@ -310,6 +310,7 @@ class BonusController extends ActiveController
 
                 $bonus['allowed'] = $review['allowed'];
                 $bonus['denied'] = $review['denied'];
+                $bonus['slug'] = $review['slug'];
 
                 $bonuses[] = $bonus;
             }

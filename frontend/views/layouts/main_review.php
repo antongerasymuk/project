@@ -52,7 +52,11 @@ AppAsset::register($this);
         </div>
 
         <div class="header-lg">
-            <a target="_blank" href="<?= $this->params['company']['url'] ?>">
+            <?php
+            $href = strlen($this->params['review_company']->slug) ? '/'.$this->params['review_company']->slug : Url::to(['site/review','id' => $this->params['review_company']->id]);
+            ?>
+
+            <a href="<?= $href ?>">
                 <img src="<?= $this->params['logo'] ?>" alt="">
             </a>
             <?php if (isset($this->params['is_company'])) : ?>

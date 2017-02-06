@@ -11,7 +11,7 @@ riot.tag2('bonuses-filter-list',
      //background-color:<?= $companyReview->bg_color ?>; background-image:url(<?= $companyReview->logo ?>);background-repeat: no-repeat; background-position: center;
     //'<img riot-src="{logo}" alt="">' +
     '</div> ' +
-    '<a href="/site/review?id={review_id}" class="psite">Read Review</a> ' +
+    '<a href="{href}" class="psite">Read Review</a> ' +
     '</td> <td data-column="Rating" class="text-left">' +
     '<rating-by-stars rating="{rating}">' +
     '</rating-by-stars>' +
@@ -26,7 +26,7 @@ riot.tag2('bonuses-filter-list',
     '</td> ' +
     '<td data-column="Join site" class="text-center"> ' +
     '<div class="join-btn">' +
-    '<a href="{referal_url}">'+
+    '<a href="{encodeURI(referal_url)}">'+
     '<button type="button"  class="get-bonus btn-dft">'+
     'GET BONUS'+
     '</button>'+
@@ -68,6 +68,11 @@ riot.tag2('bonuses-filter-list',
             .node('!.*', function(data){
 
                 //console.log(JSON.stringify(data.bonuses));
+                if (data.slug.length) {
+                    data.href = '/'+opts.title.toLowerCase()+'/'+data.slug.toLowerCase();
+                } else {
+                    data.href = '/site/review?id='+data.review_id;
+                }
                 self.bonuses_list[self.i++] = data;
                 //console.log(JSON.stringify(self.bonuses_list));
                 self.update();

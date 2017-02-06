@@ -23,9 +23,9 @@ class SiteTextForm extends Model
     {
         return [
         
-        [['footer_text_model'],'string', 'max' => 250],
-        [['contact_text_model'], 'string', 'max' => 250],
-        [['contact_feedback_model'], 'string', 'max' => 250],
+        [['footer_text_model'],'string'],
+        [['contact_text_model'], 'string'],
+        [['contact_feedback_model'], 'string'],
         ];
     }
     public function attributeLabels()

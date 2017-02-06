@@ -90,7 +90,8 @@ use \common\models\Plus;
     'language' => 'en_GB',
     'options'       => ['multiple' => true, 'placeholder' => 'Select a state ...'],
     'pluginOptions' => [
-        'allowClear' => true
+        'allowClear' => true,
+        'maximumSelectionLength'=> 2
     ],
 ])->label('Bonuses');
 ?>

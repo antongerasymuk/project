@@ -88,6 +88,8 @@ class SiteController extends Controller
         $this->layout = "main_review";
 
         $review = Review::findOne($id);
+        $reviewCompany = Review::findOne(['company_id' => $review->company->id, 'type' => Review::COMPANY_TYPE]);
+
 
         if ($review == null) {
             throw new NotFoundHttpException('Review not found');
@@ -101,6 +103,7 @@ class SiteController extends Controller
 
         $this->view->params['logo'] = $review->company->logo;
         $this->view->params['review'] = $review;
+        $this->view->params['review_company'] = $reviewCompany;
 
         if ($review->type == Review::REVIEW_TYPE) {
             // render review

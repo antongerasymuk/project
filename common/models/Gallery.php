@@ -57,7 +57,7 @@ class Gallery extends \yii\db\ActiveRecord
             $file->saveAs($path, false);
             $gallery = new self();
 
-            if (file_exists($path)) {
+            if (is_file($path)) {
 
                 $gallery->src = $url;
 

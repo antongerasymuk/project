@@ -14,7 +14,7 @@ riot.tag2('bookmaker-bonus', '<div class="item">'+
     if (opts.reviews[i].type != 2) {
 
         if (opts.reviews[i].slug != '') {
-            opts.reviews[i].url = '/' + opts.reviews[i].slug.toLowerCase();
+            opts.reviews[i].url =  '/' +opts.reviews[i].category.title.toLowerCase() + '/' + opts.reviews[i].slug.toLowerCase();
         } 
         else {
             opts.reviews[i].url = '/site/review?id=' + opts.reviews[i].id;

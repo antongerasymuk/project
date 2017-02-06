@@ -182,8 +182,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="srm-list srm-pwebsites">
                             <ul>
                                 <?php foreach ($topReviews as $topReview) : ?>
+                                    <?php
+                                    $hrefReview = strlen( $topReview['slug']) ? '/'.mb_strtolower($review->category->title) .'/'.mb_strtolower($topReview['slug']) : Url::to(['site/review','id' => $topReview['id']]);
+                                    ?>
                                     <li>
-                                        <a href="<?= Url::to(['site/review', 'id' => $topReview['id']]) ?>" target="_blank"><?= $topReview['title'] ?></a>
+                                        <a href="<?= $hrefReview ?>" ><?= $topReview['title'] ?></a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -223,11 +226,15 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <?php foreach ($relatedReviews as $relatedReview) : ?>
                     <div class="item">
-                        <div class="tit"><a href="<?= Url::to([
-                                'site/review',
-                                'id' => $relatedReview->id
-                            ]) ?>"><?= $relatedReview->title ?></a>
-                            <p><?= $review->getMainBonus()->description ?></p>
+                        <div class="tit">
+                            <?php
+                            $hrefReview = strlen($relatedReview->slug) ? '/' . mb_strtolower($review->category->title)  . '/' . mb_strtolower($relatedReview->category->title). '/' .$relatedReview->slug : Url::to(['site/review','id' => $relatedReview->id]);
+                            ?>
+
+                            <a href="<?= $hrefReview
+                             ?>"><?= $relatedReview->title ?></a>
+                            <p><?=$relatedReview->getMainBonus()->description ?></p>
+                            
                         </div>
                         <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
                         <div class="inf"><?= $relatedReview->preview_title ?></div>

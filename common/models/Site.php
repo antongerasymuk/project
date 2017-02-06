@@ -54,7 +54,7 @@ class Site extends \yii\db\ActiveRecord
     public static function getForOther()
     {
         // cached
-        $sites = Site::find()->all();
+        $sites = Site::find()->where(['<>','title','-'])->andWhere(['<>','slug','-'])->all();
         //$sites = Site::getDb()->cache(function ($db){
         //    return Site::find()->all();
         //});

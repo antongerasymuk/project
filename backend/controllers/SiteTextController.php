@@ -8,6 +8,7 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Site;
 use backend\models\SiteTextForm;
+use common\models\MetaTag;
 
 /**
  * SiteText controller
@@ -19,6 +20,7 @@ class SiteTextController extends BackEndController
 	{
 		
 		$model = new SiteTextForm;
+		$model->getMetaTags();
 		$model->get();
 		if (($model->load(Yii::$app->request->post()))&&($model->save())) {
 			{         

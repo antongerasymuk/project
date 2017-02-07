@@ -14,6 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php $form = ActiveForm::begin(['id' => 'category-form']); ?>
+
+<?= $form->field($model, 'meta_title')->textInput()?>
+<?= $form->field($model, 'meta_description')->textInput()?>
+<?= $form->field($model, 'meta_keywords')->textInput()?>
+
 <?= $form->field($model, 'title')->textInput() ?>
 <?= $form->field($model, 'pos')->textInput()->label('Index Position') ?>
 

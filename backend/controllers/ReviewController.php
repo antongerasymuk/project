@@ -158,7 +158,8 @@ class ReviewController extends BackEndController
     {
         $model = Review::findOne($id);
         $model->scenario = 'edit';
-
+        $model->getMetaTags();
+   
         if ($model->load(Yii::$app->request->post())) {
             $model->previewFile = UploadedFile::getInstance($model, 'previewFile');
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');

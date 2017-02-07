@@ -19,6 +19,11 @@ use \common\models\Plus;
          ->textInput(['autofocus' => true])
          ->label('Title')
 ?>
+
+<?= $form->field($model, 'meta_title')->textInput()?>
+<?= $form->field($model, 'meta_description')->textInput()?>
+<?= $form->field($model, 'meta_keywords')->textInput()?>
+
 <?= $form->field($model, 'slug')->textInput()->label('Slug')?>
 <?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
 <?= $form->field($model, 'position')->textInput()->label('Alias Category')?>

@@ -74,6 +74,10 @@ use yii\bootstrap\Alert;
 ])
 ?>
 
+<?= $form->field($model, 'meta_title')->textInput()?>
+<?= $form->field($model, 'meta_description')->textInput()?>
+<?= $form->field($model, 'meta_keywords')->textInput()?>
+
 <?= Html::submitButton('Update', [ 'id' => "submit_page_update",
     'class' => 'btn btn-primary',
 ])

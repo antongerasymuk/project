@@ -33,6 +33,7 @@ class CategoryController extends BackEndController
     public function actionEdit($id)
     {
         $model = Categorie::findOne($id);
+        $model->getMetaTags();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', 'Category updated success');

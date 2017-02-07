@@ -55,6 +55,31 @@ class SiteController extends Controller
     {
         $this->layout = "main_index";
 
+        $siteText = new \backend\models\SiteTextForm;
+        $siteText->getMetaTags();
+        
+        if ($siteText->meta_description) {
+            \Yii::$app->view->registerMetaTag([
+                'name' => 'description',
+                'content' => $siteText->meta_description,
+                ]);
+        }
+
+        if ($siteText->meta_keywords) {
+            \Yii::$app->view->registerMetaTag([
+                'name' => 'keywords',
+                'content' => $siteText->meta_keywords,
+                ]);
+        }
+
+        if ($siteText>meta_title) {
+            \Yii::$app->view->registerMetaTag([
+                'name' => 'title',
+                'content' => $siteText->meta_title,
+                ]);
+        }
+        
+
         return $this->render('index');
     }
 
@@ -80,6 +105,7 @@ class SiteController extends Controller
     {
         $this->layout = "main_review-company";
 
+
         return $this->render('company');
     }
 
@@ -88,6 +114,29 @@ class SiteController extends Controller
         $this->layout = "main_review";
 
         $review = Review::findOne($id);
+        $review->getMetaTags();
+
+        if ($review->meta_description) {
+            \Yii::$app->view->registerMetaTag([
+                'name' => 'description',
+                'content' => $review->meta_description,
+                ]);
+        }
+
+        if ($review->meta_keywords) {
+            \Yii::$app->view->registerMetaTag([
+                'name' => 'keywords',
+                'content' => $review->meta_keywords,
+                ]);
+        }
+
+        if ($review->meta_title) {
+            \Yii::$app->view->registerMetaTag([
+                'name' => 'title',
+                'content' => $review->meta_title,
+                ]);
+        }
+
         $reviewCompany = Review::findOne(['company_id' => $review->company->id, 'type' => Review::COMPANY_TYPE]);
 
 
@@ -151,11 +200,38 @@ class SiteController extends Controller
     {
         $this->layout = 'main_bonus';
 
+
+        
+
         if ($categorie = Categorie::findOne($id)) {
 
             $title = $categorie->title;
             $main_text = $categorie->main_text;
             $notes = $categorie->notes;
+            $categorie->getMetaTags();
+
+            if ($categorie->meta_description) {
+                \Yii::$app->view->registerMetaTag([
+                    'name' => 'description',
+                    'content' => $categorie->meta_description,
+                ]);
+            }
+            
+            if ($categorie->meta_keywords) {
+                \Yii::$app->view->registerMetaTag([
+                    'name' => 'keywords',
+                    'content' => $categorie->meta_keywords,
+                    ]);
+            }
+            
+            if ($categorie->meta_title) {
+                \Yii::$app->view->registerMetaTag([
+                    'name' => 'title',
+                    'content' => $categorie->meta_title,
+                    ]);
+            }
+            
+
 
             $this->view->params['category_title'] = $title;
         } else {

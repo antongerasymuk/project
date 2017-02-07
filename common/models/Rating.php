@@ -49,7 +49,6 @@ class Rating extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'mark' => 'Mark',
-
         ];
     }
 }

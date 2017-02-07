@@ -16,6 +16,11 @@ class Review extends \yii\db\ActiveRecord
 {
     const REVIEW_TYPE = 1;
     const COMPANY_TYPE = 2;
+
+    const TITLE_TAG_TYPE = 1;
+    const DESCRIPTION_TAG_TYPE = 2;
+    const KEYWORDS_TAG_TYPE = 3;
+    
     public $bonusIds;
     public $gallery;
     public $logoFile;
@@ -28,6 +33,11 @@ class Review extends \yii\db\ActiveRecord
     public $osIds;
     public $allowedIds;
     public $deniedIds;
+
+    public $meta_title;
+    public $meta_description;
+    public $meta_keywords;
+
     /**
      * @inheritdoc
      */
@@ -36,6 +46,69 @@ class Review extends \yii\db\ActiveRecord
         return 'reviews';
     }
 
+
+    public function save($runValidation = true, $attributeNames = null)
+    {
+       
+        $metaTags = MetaTag::find()->where(['review_id' => $this->id])->all();
+           
+        foreach ($metaTags as $key => $metaTag) {
+            if (!empty($this->meta_title)&&($metaTag->type == self::TITLE_TAG_TYPE)) {
+                $metaTag->value = $this->meta_title;
+                if (!($metaTag->save())) {
+                    return false;
+                }
+                $this->meta_title = null;
+                continue;
+            }
+
+            if (!empty($this->meta_description)&&($metaTag->type == self::DESCRIPTION_TAG_TYPE)) {
+                $metaTag->value  = $this->meta_description;
+                if (!($metaTag->save())) {
+                    return false;
+                }
+                $this->meta_description = null;
+                continue;
+            }
+
+            if (!empty($this->meta_keywords)&&($metaTag->type == self::KEYWORDS_TAG_TYPE)) {
+                $metaTag->value = $this->meta_keywords;
+                if (!($metaTag->save())) {
+                    return false;
+                }
+                $this->meta_keywords = null;
+                continue;
+            } 
+        }
+
+        if ($this->meta_title) {
+            $metaTag = new MetaTag;
+            
+            $metaTag->setAttributes(['value' => $this->meta_title , 'type' => self::TITLE_TAG_TYPE, 'review_id' => $this->id]);
+          
+            if (!($metaTag->save())) {
+                return false;
+            }
+        }
+        if ($this->meta_description) {
+            $metaTag = new MetaTag;
+            $metaTag->setAttributes(['value' => $this->meta_description , 'type' => self::DESCRIPTION_TAG_TYPE, 'review_id' => $this->id]);
+        
+            if (!($metaTag->save())) {
+                return false;
+            }
+        }
+        if ($this->meta_keywords) {
+            $metaTag = new MetaTag;
+            $metaTag->setAttributes(['value' => $this->meta_keywords , 'type' => self::KEYWORDS_TAG_TYPE, 'review_id' => $this->id]);
+           
+            if (!($metaTag->save())) {
+                return false;
+            }
+        }
+        
+        return parent::save($runValidation,$attributeNames);
+    }
     /**
      * @inheritdoc
      */
@@ -45,7 +118,6 @@ class Review extends \yii\db\ActiveRecord
             [['title', 'preview_title', 'address', 'type'], 'required'],
             ['title_description', 'string', 'max' => 60],
             [['type'], 'default', 'value' => self::REVIEW_TYPE],
-            ['slug', 'string', 'max' => 60],
             ['description', 'string'],
             [['position'], 'string', 'max' => 40],
             [['company_id', 'category_id'], 'integer'],
@@ -60,7 +132,10 @@ class Review extends \yii\db\ActiveRecord
                     'depositIds',
                     'osIds',
                     'allowedIds',
-                    'deniedIds'
+                    'deniedIds',
+                    'meta_title',
+                    'meta_description',
+                    'meta_keywords'
                 ],
                 'safe'
             ],
@@ -95,7 +170,10 @@ class Review extends \yii\db\ActiveRecord
             'depositIds' => 'Deposit methods',
             'osIds' => 'Compatible With',
             'allowedIds' => 'Allowed countries',
-            'deniedIds' => 'Denied countries'
+            'deniedIds' => 'Denied countries',
+            'meta_title' => 'Meta Title',
+            'meta_description' => 'Meta Description',
+            'meta_keywords' => 'Meta Keywords'
         ];
     }
 
@@ -199,6 +277,30 @@ class Review extends \yii\db\ActiveRecord
         }
 
         return $reviews->all();
+    }
+    public function getAllowedCount() {
+        return $this->getAllowed()->where(['review_id' => $this->id]);
+    }
+
+    public function getMetaTags()
+    {
+        $metaTags = MetaTag::find()->where(['review_id' => $this->id])->all();
+
+        foreach ($metaTags as $key => $metaTag) {
+            
+            if ($metaTag->type == self::TITLE_TAG_TYPE) {
+               $this->meta_title = $metaTag->value;
+            }
+            if ($metaTag->type == self::DESCRIPTION_TAG_TYPE) {
+               $this->meta_description = $metaTag->value;
+            }
+            if ($metaTag->type == self::KEYWORDS_TAG_TYPE) {
+               $this->meta_keywords = $metaTag->value;
+            }
+
+        }
+
+        return  $metaTags;
     }
 
     public function getTop($limit = 5)

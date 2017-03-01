@@ -94,7 +94,7 @@ AdminAsset::register( $this );
 							</a>
 						</li>
                         <li>
-                            <a href="<?= Url::to(['site-text/edit']) ?>">
+                            <a href="<?= Url::to(['site-text/index']) ?>">
                                 <i class="icon-tasks"></i>
                                 <span class="hidden-tablet">SiteTexts</span>
                             </a>

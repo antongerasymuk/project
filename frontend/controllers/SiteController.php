@@ -72,7 +72,7 @@ class SiteController extends Controller
                 ]);
         }
 
-        if ($siteText>meta_title) {
+        if ($siteText->meta_title) {
             \Yii::$app->view->registerMetaTag([
                 'name' => 'title',
                 'content' => $siteText->meta_title,
@@ -206,10 +206,37 @@ class SiteController extends Controller
         if ($categorie = Categorie::findOne($id)) {
 
             $title = $categorie->title;
-            $main_text = $categorie->main_text;
-            $notes = $categorie->notes;
+
+            $texts = [
+                'main_text' => $categorie->main_text,
+                'notes' => $categorie->notes,
+                'list_title' => $categorie->list_title,
+                'no_deposit_main_text' => $categorie->no_deposit_main_text,
+                'no_deposit_notes' => $categorie->no_deposit_notes,
+                'no_deposit_list_title' => $categorie->no_deposit_list_title,
+                'code_main_text' => $categorie->code_main_text,
+                'code_notes' => $categorie->code_notes,
+                'code_list_title' => $categorie->code_list_title,
+            ];
+
             $categorie->getMetaTags();
 
+            $metaTags = [
+                'meta_title' => $categorie->meta_title,
+                'meta_description' => $categorie->meta_description,
+                'meta_keywords' => $categorie->meta_keywords,
+
+                'meta_title_no_deposit' => $categorie->meta_title_no_deposit,
+                'meta_description_no_deposit' => $categorie->meta_description_no_deposit,
+                'meta_keywords_no_deposit' => $categorie->meta_keywords_no_deposit,
+
+                'meta_title_code' => $categorie->meta_title_code,
+                'meta_description_code' => $categorie->meta_description_code,
+                'meta_keywords_code' => $categorie->meta_keywords_code,
+            ];
+
+            //var_dump($categorie);
+            //exit;
             if ($categorie->meta_description) {
                 \Yii::$app->view->registerMetaTag([
                     'name' => 'description',
@@ -230,13 +257,11 @@ class SiteController extends Controller
                     'content' => $categorie->meta_title,
                     ]);
             }
-            
-
 
             $this->view->params['category_title'] = $title;
         } else {
             throw new NotFoundHttpException('Unknown category');
         }
-        return $this->render('bonuses_by_filter', ['title' => $title , 'main_text' => $main_text, 'notes' => $notes]);
+        return $this->render('bonuses_by_filter', ['title' => $title, 'texts' => $texts ,'metaTags' => $metaTags]);
     }
 }

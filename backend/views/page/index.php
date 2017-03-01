@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Category</th>
                     <th>Slug</th>
                     <th>Content</th>
                     <th>Actions</th>
@@ -43,7 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php if (($site->category != '-')&&($site->slug != '-')): ?>
                         <tr>
                             <td><?= $site->title ?></td>
-                            <td class="center"><?= $site->category ?></td>
                             <td class="center"><?= $site->slug ?></td>
                             <td class="center"><?= $rest = substr("$site->content", 0, 80);?></td>
                             <td class="center">
@@ -53,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                  <a class="btn btn-danger" 
                                    onclick="Swalt.delete_warning('Site deleting', 
                                    'Site &#34;<?= $site->title ?>&#34; will be deleted!',
-                                   '<?= Url::to(['site/delete', 'id' => $site->id]) ?>',
+                                   '<?= Url::to(['page/delete', 'id' => $site->id]) ?>',
                                    'warning')" >
                                     <i class="halflings-icon white trash"></i>
                                 </a>

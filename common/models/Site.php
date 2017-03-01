@@ -29,10 +29,11 @@ class Site extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'slug', 'category'], 'required'],
+            [['title', 'slug'], 'required'],
             [['content'], 'required'],
             [['title', 'slug'], 'string', 'max' => 50],
-            [['category'], 'string', 'max' => 20],
+            [['category'], 'default', 'value' => 'footer'],
+            [['category'], 'string', 'max' => 20 ],
             [['content'], 'string'],
         ];
     }

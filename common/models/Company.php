@@ -42,6 +42,8 @@ class Company extends \yii\db\ActiveRecord
             ['rating', 'double'],
             [['site_url'], 'url', 'validSchemes' => ['http', 'https']],
             ['site_url', 'string', 'max' => 150],
+            ['hide_ext_url', 'integer', 'max' => 3],
+            ['rel', 'integer'],
             [['reviewIds', 'licenseIds'], 'safe'],
             [['bg_color'], 'default', 'value' => '#000'],
             [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit'],
@@ -62,7 +64,8 @@ class Company extends \yii\db\ActiveRecord
 			'logo' => 'Logo',
             'logo_small' => 'Small logo',
 			'site_url' => 'Site Url',
-            'director_id' => 'Director'
+            'director_id' => 'Director',
+            'hide_ext_url' => 'Hide external URL'
 		];
 	}
 

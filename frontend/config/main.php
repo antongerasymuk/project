@@ -55,10 +55,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'page/<category>/home' => '/',
-                'page/footer/contact' => '/site/contact',
-                'page/footer/sitemap' => '/site/sitemap',
-                'page/<category>/<slug>' => 'site/page',
+
+                '/contact' => '/site/contact',
+                '/sitemap' => '/site/sitemap',
 
                 [
                     'pattern' => '<controller>/<action:[a-zA-Z0-9\-]{0,}>',

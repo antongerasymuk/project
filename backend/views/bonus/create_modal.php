@@ -45,6 +45,8 @@ use yii\bootstrap\Html;
                     <?= $form->field($model, 'price')->textInput() ?>
                     <?= $form->field($model, 'code')->textInput() ?>
                     <?= $form->field($model, 'referal_url')->textInput() ?>
+                    <?= $form->field($model, 'rel')->checkbox()->label('Put url rel nofollow') ?>
+                    <?= $form->field($model, 'hide_ext_url')->checkbox() ?>
                     <?= $form->field($model, 'type')->checkbox()->label('Main bonus?') ?>
 
                     <div class="form-group">

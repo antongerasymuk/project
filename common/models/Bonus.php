@@ -53,12 +53,14 @@ class Bonus extends \yii\db\ActiveRecord
             [['type'], 'default', 'value' => 0],
             [['type'], 'in', 'range' => [0, Bonus::MAIN]],
             [['min_deposit'], 'number'],
-            [['expiry'], 'integer'],
+            [['expiry'], 'string', 'max' => 50 ],
             [['rollover_requirement'], 'string'],
             [['restrictions'], 'string'],
             [['title'], 'string', 'max' => 50],
             [['logo', 'referal_url'], 'string', 'max' => 255],
+            ['rel', 'integer'],
             [['referal_url'], 'url', 'validSchemes' => ['http', 'https']],
+            ['hide_ext_url', 'integer', 'max' => 3],
             [['code'], 'string', 'max' => 15],
             [['logoFile'], 'safe'],
             [['bg_color'], 'default', 'value' => '#000'],
@@ -84,7 +86,8 @@ class Bonus extends \yii\db\ActiveRecord
             'min_deposit' => 'Minimum Deposit',
             'expiry' => 'Expiry',
             'rollover_requirement' => 'Rollover Requirement',
-            'restrictions' => 'Restrictions'
+            'restrictions' => 'Restrictions',
+            'hide_ext_url' => 'Hide external URL'
         ];
     }
 

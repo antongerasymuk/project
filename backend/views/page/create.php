@@ -36,10 +36,6 @@ use \common\models\Plus;
          ->label('Slug')
 ?>
 
-<?= $form->field($model, 'category')
-         ->textInput()
-         ->label('Category')
-?>
 
 <?= Html::submitButton('Update', [ 'id' => "submit_page_update",
     'class' => 'btn btn-primary',

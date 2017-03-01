@@ -4,7 +4,8 @@
 
 riot.tag2('companies-list', '<div class="row"> ' +
     '<div class="h-title">' +
-    '<h2>UK Betting Sites</h2>' +
+    
+    '<h2>{opts.title}</h2>' +
     '</div> <div class="betting-sites-items clearfix" >' +
     '<div riot-tag="company-offer"   class="col-md-4 col-sm-6"   id="company-offer_{id}" each="{ companies_list }" style="{style}" bg_color="{bg_color}" title="{title}" logo="{logo_small}" reviews="{reviews}">' +
     '</div>' +
@@ -69,6 +70,7 @@ riot.tag2('companies-list', '<div class="row"> ' +
             self.trigger('get');
 
         });
+
         
         this.on('get', function () {
                    
@@ -78,7 +80,8 @@ riot.tag2('companies-list', '<div class="row"> ' +
             })
 
             .node('!.*', function(data, path) {
-                
+                    console.log('limit:');
+                    console.log(start_limit);
                 data.style = 'display:none;';
                 self.companies_list[parseInt(path.toString())] = data;
                 self.index++;
@@ -133,6 +136,9 @@ riot.tag2('companies-list', '<div class="row"> ' +
                         //time = 400;
 
                         start_index = self.index;
+
+
+
                         console.log('start_index'+start_index);
                         oboe({
                             url: '/company?&offset='+offset+'&limit='+limit,

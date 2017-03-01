@@ -11,6 +11,7 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use Yii;
 use yii\helpers\Url;
+use common\helpers\SiteText;
 
 AppAsset::register($this);
 ?>
@@ -52,8 +53,8 @@ AppAsset::register($this);
         </div>
 
         <div class="hc-info">
-            <p>Contact us</p>
-            <span>Have a question? Don’t cry, contact us!</span>
+            <p><?= SiteText::get('contact_title'); ?></p>
+            <span><?= SiteText::get('contact_subtitle'); ?></span>
         </div>
     </header><!-- .Header -->
 

@@ -16,7 +16,7 @@ use common\models\MetaTag;
 class SiteTextController extends BackEndController
 {
 	
-	public function actionEdit()
+	public function actionIndex()
 	{
 		
 		$model = new SiteTextForm;
@@ -25,11 +25,11 @@ class SiteTextController extends BackEndController
 		if (($model->load(Yii::$app->request->post()))&&($model->save())) {
 			{         
 				Yii::$app->getSession()->setFlash('success', 'Site texts update success');
-				return $this->redirect(['site-text/edit']);
+				return $this->redirect(['index']);
 			}
 		}
 
-		return $this->render('update', ['model' => $model]);
+		return $this->render('index', ['model' => $model]);
 	}
 	
 	

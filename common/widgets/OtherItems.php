@@ -15,21 +15,27 @@ class OtherItems extends Widget
         parent::init();
         if ($this->message === null) {
 
-            foreach ($this->items as $key =>  $item) {
-                if ($key != 'footer') {
-                $this->message .='<div class="item"><div class="tit">'.ucfirst($key).'</div>
-                <ul>';
-                foreach ($item as $row) {
+            $contactUs[0] = [
+              'label' => 'Contact Us',
+              'url' => 'contact'
+            ];
 
+            $home[0] = [
+              'label' => 'Home',
+              'url' => 'home'
+            ];
+
+            $this->items = array_merge($contactUs, $this->items, $home); 
+            $this->message .='<div class="item"><div class="tit">'.'Navigation'.'</div><ul>';
+            
+            foreach ($this->items as $key =>  $item) {
+   
                 $this->message .= '           
                 
-                    <li><a href="'.((mb_strtolower($row['url']) != 'home')? mb_strtolower($row['url']):'/').'">'.ucfirst($row['label']).'</a></li>';
+                    <li><a href="'.((mb_strtolower($item['url']) != 'home')? mb_strtolower($item['url']):'/').'">'.ucfirst($item['label']).'</a></li>';
        
-                 }   
-                $this->message .= '</ul>
-                </div>';}
-
-        }
+            }
+            $this->message .= '</ul></div>';
 
     }
 }

@@ -33,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="tit"><?= $bonus->title ?></div>
                         <?= $bonus->description ?>
                         <div class="btn">
-                            <a href="<?= $bonus->referal_url ?>">
-                                <button type="button" class="get-bonus btn-dft"><i class="flaticon-gift"></i> GET BONUS</button>
-                            </a>
+                            <button type="button" class="get-bonus btn-dft" onclick="window.location.href='<?= $bonus->hide_ext_url ? '/' : $bonus->referal_url ?>'">
+                                <i class="flaticon-gift">
+                                </i> GET BONUS</button>
                         </div>
                     </div>
                     <div class="right">
@@ -157,6 +157,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="srm-list srm-dmethods clearfix">
                             <?php foreach ($review->deposits as $deposit) : ?>
                                 <a class="item " style="
+                                    cursor: default;
                                     background-image: url(<?= $deposit->logo ?>);
                                     background-repeat: no-repeat;
                                 background-size: 65%;
@@ -208,12 +209,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="tit">Like <?= $review->title ?> ?</div>
                 <p>Claim your <?= $review->title ?> Bonus Today!</p>
                 <div class="btn">
-                    <a href="<?= $review->company->site_url ?>">
-                        <button type="button" class="btn-dft get-bonus">Claim now</button>
-                    </a>
+                    <button type="button" class="btn-dft get-bonus"  onclick="window.location.href='<?= $review->getMainBonus()->hide_ext_url ? '/' : $review->getMainBonus()->referal_url ?>'" >Claim now</button>
                 </div>
             </div>
-
         </div>
     </div>
 </div> <!-- .claim-block -->
@@ -228,7 +226,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="item">
                         <div class="tit">
                             <?php
-                            $hrefReview = strlen($relatedReview->slug) ? '/' . mb_strtolower($review->category->title)  . '/' . mb_strtolower($relatedReview->category->title). '/' .$relatedReview->slug : Url::to(['site/review','id' => $relatedReview->id]);
+                            $hrefReview = strlen($relatedReview->slug) ? '/' . mb_strtolower($relatedReview->category->title). '/' .$relatedReview->slug : Url::to(['site/review','id' => $relatedReview->id]);
                             ?>
 
                             <a href="<?= $hrefReview

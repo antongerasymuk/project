@@ -49,8 +49,8 @@ AppAsset::register($this);
 				</div>
 
 				<div class="header-info">
-					<h1>UK's Top Gambling Sites</h1>
-					<p>Grab your bonus for
+					<h1><?= SiteText::get('main_title'); ?></h1>
+					<p><?= SiteText::get('main_subtitle'); ?>
                         <?= \common\helpers\CategoryList::generate($items) ?>
                     </p>
 				</div>

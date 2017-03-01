@@ -12,6 +12,19 @@ class FooterNav extends Nav
     {
  
      
+        $contactUs[0] = [
+              'label' => 'Contact Us',
+              'url' => 'contact'
+        ];
+
+        $sitemap[0] = [
+           'label' => 'Sitemap',
+           'url' => 'sitemap'
+        ];
+
+        $this->items = array_merge($contactUs, $this->items, $sitemap); 
+       
+       
         for ($i = 1; $i < count($this->items); $i++) {
         $inserted = array( '<li><span>·</span></li>' ); // Not necessarily an array
         array_splice($this->items, $i, 0, $inserted); 
@@ -25,8 +38,6 @@ class FooterNav extends Nav
                
         }
        
-       
-
         parent::init();
 
         if ($this->route === null && Yii::$app->controller !== null) {

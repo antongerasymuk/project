@@ -33,6 +33,8 @@ class License extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 25],
             [['file_label'], 'string', 'max' => 25],
             [['url'], 'string', 'max' => 150],
+
+            ['rel', 'integer'],
         ];
     }
 

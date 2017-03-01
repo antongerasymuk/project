@@ -1,6 +1,6 @@
 riot.tag2('bookmaker-bonuses-list' ,
     
-    '<h1>Bookmaker Bonuses</h1>'+
+    '<h1>Gambling Bonuses</h1>'+
     '<div class="bonuses-items"> ' +
     '<bookmaker-bonus each="{ companies_list }" bg_color="{bg_color}" title="{title}" logo="{logo}" reviews="{reviews}">' +
     '</bookmaker-bonus>',

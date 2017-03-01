@@ -18,5 +18,6 @@ use yii\bootstrap\Html;
 <?= $form->field($model, 'title_description')->textInput()->label('Title Description')?>
 <?= $form->field($model, 'file_label')->textInput() ?>
 <?= $form->field($model, 'url')->textInput() ?>
+<?= $form->field($model, 'rel')->checkbox()->label('Put url rel nofollow') ?>
 <?= Html::submitButton('Create', ['class' => 'btn btn-primary']) ?>
 <?php ActiveForm::end(); ?>

@@ -41,6 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'percent')->textInput() ?>
 <?= $form->field($model, 'code')->textInput() ?>
 <?= $form->field($model, 'referal_url')->textInput() ?>
+<?= $form->field($model, 'rel')->checkbox()->label('Put url rel nofollow') ?>
+<?= $form->field($model, 'hide_ext_url')->checkbox() ?>
 <div class="form-group">
     <div class="checkbox">
         <label data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">

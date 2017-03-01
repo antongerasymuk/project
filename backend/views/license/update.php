@@ -21,5 +21,6 @@ use yii\bootstrap\Html;
     </div>
 <?php endif; ?>
 <?= $form->field($model, 'url')->textInput() ?>
+<?= $form->field($model, 'rel')->checkbox()->label('Put url rel nofollow') ?>
 <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
 <?php ActiveForm::end(); ?>

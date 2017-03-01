@@ -35,9 +35,7 @@ use \yii\helpers\Url;
                         <?= $mainBonus->description ?>
                     </p>
                     <div class="btn">
-                        <a href="<?= $mainBonus->referal_url; ?>">
-                            <button class="btn-hulf get-bonus" type="button">Claim now</button>
-                        </a>
+                        <button class="btn-hulf get-bonus" type="button" onclick="window.location.href='<?= $mainBonus->hide_ext_url? "/" : $mainBonus->referal_url; ?>'">Claim now</button>
                     </div>
                 </div><!-- .item -->
                 <?php endforeach; ?>
@@ -102,7 +100,7 @@ use \yii\helpers\Url;
                                 <div class="srm-list srm-docs">
                                     <p>
                                         <i class="flaticon-docs"></i>
-                                        <a href="<?= $lic->url ?>"><?= $lic->file_label ?></a>
+                                        <a rel="<?= $lic->rel?'nofollow':''?>" href="<?= $lic->url ?>"><?= $lic->file_label ?></a>
                                     </p>
                                 </div>
                             </div>
@@ -137,6 +135,7 @@ use \yii\helpers\Url;
                             <div class="srm-list srm-dmethods clearfix">
                                 <?php foreach ($review->deposits as $deposit) : ?>
                                     <a class="item " style="
+                                        cursor: default;
                                         background-image: url(<?= $deposit->logo ?>);
                                         background-repeat: no-repeat;
                                         background-size: 65%;
@@ -199,7 +198,7 @@ use \yii\helpers\Url;
                     <div class="tit">Like <?= $review->title ?> ?</div>
                     <p>Claim your <?= $review->title ?> Bonus Today!</p>
                     <div class="btn">
-                        <a href="<?= $review->company->site_url ?>">
+                        <a rel="<?= $review->company->rel?'nofollow':''?>" href="<?= $review->company->hide_ext_url ? "/" : $review->company->site_url ?>">
                             <button type="button" class="btn-dft get-bonus">Claim now</button>
                         </a>
                     </div>

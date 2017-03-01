@@ -39,22 +39,45 @@ class CompanyController extends ActiveController
             $limit = $modelClass::find()->count();
         }
 
-        $dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM companies']);
+        //$dependency = new \yii\caching\DbDependency(['sql' => 'SELECT COUNT(*) FROM companies']);
 
-       // $data = $modelClass::getDb()->cache(function($db) 
-       //     return $modelClass::find()
-       //         ->with(['reviews.category', 'reviews.bonuses'])
-       //         ->asArray()
-       //         ->all();
-       // }, 0, $dependency);
+        $data = $modelClass::find()
+            ->innerJoinWith(['reviews'])
+            ->with(['reviews.category', 'reviews.bonuses'])
+            ->asArray()
+            ->limit($limit)
+            ->offset($offset)
+            ->groupBy('id')
+            ->all();
+
+
+
+        // $data = $modelClass::getDb()->cache(function($db)
+        //     return $modelClass::find()
+        //         ->with(['reviews.category', 'reviews.bonuses'])
+        //         ->asArray()
+        //         ->all();
+        // }, 0, $dependency);
 
   
-          $data = $modelClass::find()
+        /*
+
+            $data = $modelClass::find()
                 ->with(['reviews.category' , 'reviews.bonuses'])
                 ->asArray()
                 ->limit($limit)
                 ->offset($offset)
                 ->all();
+
+
+
+
+        $dataOrder = array();
+        foreach ($data as $row) {
+            $dataOrder[] = $row;
+        }
+
+        */
 
         return $data;
     }

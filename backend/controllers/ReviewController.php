@@ -211,17 +211,20 @@ class ReviewController extends BackEndController
                 }
             }
           
-            if (!empty($model->bonusIds)) {
+            if (isset($model->bonusIds)) {
+
                 // untouch bonuses
                 foreach ($model->bonuses as $bonus) {
                     $bonus->review_id = null;
                     $bonus->update(true, ['review_id']);
                 }
 
-                foreach ($model->bonusIds as $id) {
-                    $bonus = Bonus::findOne($id);
-                    $bonus->review_id = $model->id;
-                    $bonus->update(true, ['review_id']);
+                if (!empty($model->bonusIds)) {
+                    foreach ($model->bonusIds as $id) {
+                        $bonus = Bonus::findOne($id);
+                        $bonus->review_id = $model->id;
+                        $bonus->update(true, ['review_id']);
+                    }
                 }
             }
 

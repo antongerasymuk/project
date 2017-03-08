@@ -233,13 +233,13 @@ class Review extends \yii\db\ActiveRecord
     public function getAllowed()
     {
         return $this->hasMany(Country::className(), ['id' => 'country_id'])
-                    ->viaTable('allowed_country', ['review_id' => 'id']);
+                    ->viaTable('allowed_country', ['review_id' => 'id'])->orderBy('title');
     }
 
     public function getDenied()
     {
         return $this->hasMany(Country::className(), ['id' => 'country_id'])
-                    ->viaTable('denied_country', ['review_id' => 'id']);
+                    ->viaTable('denied_country', ['review_id' => 'id'])->orderBy('title');
     }
 
     public function getGalleries()

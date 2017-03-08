@@ -20,6 +20,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+    <?= \common\helpers\AddGTM::generate('head', '5CZTR4F') ?>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
@@ -27,6 +28,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+<?= \common\helpers\AddGTM::generate('body', '5CZTR4F') ?>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -91,7 +93,7 @@ AppAsset::register($this);
 
                 <div class="col-md-3 col-sm-4 col-xs-12 clearfix pdl0 ftx">
                     <div class="b-opened">
-                        <div class="cnt"><?= file_get_contents(Url::toRoute(['bonus/number', 'mode' => 'get'],true)) ?></div>
+                        <div class="cnt"><?= file_get_contents(Url::toRoute(['bonus/number', 'mode' => 'get', 'v' => time()],true)) ?></div>
                         <div class="txt">Bonuses opened</div>
                     </div>
 

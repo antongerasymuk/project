@@ -6,17 +6,21 @@ $(document).ready(function() {
         window.open($(this).attr('href'), 'ShareWindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' + ($(window).width() / 2 - 225) + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
         return false;
     });
-    
+
     $('body').on('click', '.get-bonus', function() {
-        $.get("/bonus/number?mode=check"); 
+        var url = $(this).attr('url');
+        var time = Math.floor(Date.now() / 1000);
+        $.get("/bonus/number?mode=check&v="+time).done(function() {
+            window.location.href = url;
+        });
     });
+
+    /*$('body').on('click', '.get-bonus', function() {
+        $.get("/bonus/number?mode=check"); 
+    });*/
 
 });
 
-/*function check(){
-    console.log('hell');
-    $.get("http://bonus/bonus/number?mode=check" ); 
-}*/
 
 if ($('#bonuses-filter-list').attr('get')) {
     get = JSON.parse($('#bonuses-filter-list').attr('get'));

@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="tit"><?= $bonus->title ?></div>
                         <?= $bonus->description ?>
                         <div class="btn">
-                            <button type="button" class="get-bonus btn-dft" onclick="window.location.href='<?= $bonus->hide_ext_url ? '/' : $bonus->referal_url ?>'">
+                            <button type="button" class="get-bonus btn-dft" url="<?= $bonus->hide_ext_url ? '/' : $bonus->referal_url ?>" >
                                 <i class="flaticon-gift">
                                 </i> GET BONUS</button>
                         </div>
@@ -156,12 +156,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="srm-head">Deposit Methods</div>
                         <div class="srm-list srm-dmethods clearfix">
                             <?php foreach ($review->deposits as $deposit) : ?>
-                                <a class="item " style="
-                                    cursor: default;
-                                    background-image: url(<?= $deposit->logo ?>);
-                                    background-repeat: no-repeat;
-                                background-size: 65%;
-                                background-position: center center;" href="javascript:void(0)"  target="_blank">&nbsp;</a>
+                                <button class="payment-button" style="cursor: default; background-image: url(<?= $deposit->logo ?>);"></button>
                             <?php endforeach; ?>
                         </div>
                     </div><!-- .sr-menu (Deposit Methods) -->
@@ -209,7 +204,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="tit">Like <?= $review->title ?> ?</div>
                 <p>Claim your <?= $review->title ?> Bonus Today!</p>
                 <div class="btn">
-                    <button type="button" class="btn-dft get-bonus"  onclick="window.location.href='<?= $review->getMainBonus()->hide_ext_url ? '/' : $review->getMainBonus()->referal_url ?>'" >Claim now</button>
+                    <button type="button" class="btn-dft get-bonus"  url="<?= $review->getMainBonus()->hide_ext_url ? '/' : $review->getMainBonus()->referal_url ?>" >Claim now</button>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ class AppAsset extends AssetBundle
         //'css/grid.css',
         //'css/style.min.css'
 
-        'http://d3nzdclrsrj0jr.cloudfront.net/a62671a8094.css'
+        'http://d3nzdclrsrj0jr.cloudfront.net/a62671a8098.css'
     ];
     public $js = [
         

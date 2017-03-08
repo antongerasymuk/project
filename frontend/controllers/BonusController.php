@@ -184,6 +184,16 @@ class BonusController extends ActiveController
 
 
             foreach ($data as $key => $value) {
+                if (!count($value['bonuses'])) {
+                    unset($data[$key]);
+                    continue;
+                }
+
+                if (!count($value['company_id'])) {
+                    unset($data[$key]);
+                    continue;
+                }
+
                 if (count($value['bonuses']) == 2) {
                     foreach ($value['bonuses'] as $bonusKey => $bonus) {
                         if ($bonus['type'] != 1) {
@@ -192,13 +202,16 @@ class BonusController extends ActiveController
                         }
                     }
                 }
+                
                 if ((int)$country_id) {
                     if ((!empty($value['allowed']))&&(!empty($value['denied']))) {
                         unset($data[$key]);
+                        continue;
                     }
 
                     if ((empty($value['allowed']))&&(!empty($value['denied']))) {
                         unset($data[$key]);
+                        continue;
                     }
                 }
             }
@@ -284,7 +297,7 @@ class BonusController extends ActiveController
         return $bonuses;
     }
 
-    public function actionNumber($mode)
+    public function actionNumber($mode, $v = NULL)
     {
         \Yii::$app->response->format = Response::FORMAT_RAW;
         $number = SiteNumber::find()->where(['type' => 0])->one();

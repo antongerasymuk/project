@@ -28,7 +28,7 @@ class SiteController extends Controller
                 'only' => ['index'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT (SELECT SUM(CRC32(CONCAT(id,pos,title))) FROM categories) + (SELECT SUM(id) FROM companies)+ (SELECT SUM(id) FROM bonuses)',
+                    'sql' => 'SELECT (SELECT SUM(CRC32(CONCAT(id,pos,title))) FROM categories) + (SELECT SUM(id) FROM companies)+ (SELECT SUM(id) FROM bonuses)+ (SELECT SUM(value) FROM site_numbers)+ (SELECT SUM(CRC32(CONCAT_WS("",content, category))) FROM sites) +(SELECT SUM(CRC32(CONCAT_WS("",value, type))) FROM meta_tags)',
                 ],
             ]
         ];

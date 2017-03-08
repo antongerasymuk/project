@@ -38,11 +38,9 @@ riot.tag2('bonuses-filter-list',
     '</td> ' +
     '<td data-column="Join site" class="text-center"> ' +
     '<div class="join-btn">' +
-    '<a href="{encodeURI(referal_url)}">'+
-    '<button type="button"  class="get-bonus btn-dft">'+
+    '<button type="button"  class="get-bonus btn-dft" url="{encodeURI(referal_url)}" >'+
     'GET BONUS'+
     '</button>'+
-    '</a>'+
     '</div>' +
     '<p if={code} class="code">Code: <span>{code}</span></p>'+
     '</td> ' +

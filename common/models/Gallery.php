@@ -5,6 +5,13 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Url;
+use common\helpers\ImageNameHelper;
+
+use yii\imagine\Image;
+use Imagine\Gd;
+use Imagine\Image\Box;
+use Imagine\Image\BoxInterface;
+ 
 
 /**
  * This is the model class for table "categories".
@@ -29,7 +36,7 @@ class Gallery extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['src'], 'string', 'max' => 255],
+            [['src','scr_mini'], 'string', 'max' => 255],
         ];
     }
 
@@ -40,7 +47,8 @@ class Gallery extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'src' => 'Source'
+            'src' => 'Source',
+            'scr_mini' => 'Mini screen'
         ];
     }
 
@@ -51,22 +59,34 @@ class Gallery extends \yii\db\ActiveRecord
 
         foreach ($files as $file) {
 
-            $baseName = preg_replace('/[^a-zA-Z0-9_.]/', '_', $file->baseName) . time();
-            $path = Url::to(Yii::$app->params['uploadPath']) . $baseName . '.' . $file->extension;
-            $url =  Url::to(Yii::$app->params['uploadUrl']) . $baseName . '.' . $file->extension;
+            $baseName = ImageNameHelper::getImageName($file);
+            $baseNameMini = ImageNameHelper::getImageName($file, 'mini');
+                       
+            $path = Url::to(Yii::$app->params['uploadPath']) . $baseName;
+            $pathMini =  Url::to(Yii::$app->params['uploadPath']) . $baseNameMini;
+            
+            $url =  Url::to(Yii::$app->params['uploadUrl']) . $baseName;
+            $urlMini =  Url::to(Yii::$app->params['uploadUrl']) . $baseNameMini;
+            
             
             $file->saveAs($path, false);
             $gallery = new self();
 
             if (is_file($path)) {
 
-                $gallery->src = $url;
+                $imageMini = Image::getImagine()->open($path)->thumbnail(new Box('300', '225'));
+                
+                if ($imageMini->save($pathMini , ['quality' => 90])) {
+                    
+                    $gallery->scr_mini = $urlMini;
+                    $gallery->src = $url;
 
-                if ($gallery->save()) {
-                    $galleryIds[] = $gallery->id;
+                    if ($gallery->save()) {
+                       $galleryIds[] = $gallery->id;
+                    }
                 }
-             
             }
+
             $gallery = null;
         }
  

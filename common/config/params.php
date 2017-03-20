@@ -4,5 +4,7 @@ return [
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
     'uploadPath' => '@frontend/web/uploads/',
-    'uploadUrl' => '/uploads/'
+    'uploadUrl' => '/uploads/',
+    //'cdnHost' => 'http://d3nzdclrsrj0jr.cloudfront.net'
+    'cdnHost' => ''
 ];

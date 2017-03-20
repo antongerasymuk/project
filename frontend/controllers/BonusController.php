@@ -181,37 +181,39 @@ class BonusController extends ActiveController
 
                 return 0;
             });
-
-
+            
             foreach ($data as $key => $value) {
+               
                 if (!count($value['bonuses'])) {
                     unset($data[$key]);
                     continue;
                 }
-
                 if (!count($value['company_id'])) {
+
                     unset($data[$key]);
                     continue;
                 }
+            }
 
+
+            foreach ($data as $key => $value) {
                 if (count($value['bonuses']) == 2) {
                     foreach ($value['bonuses'] as $bonusKey => $bonus) {
+                        
                         if ($bonus['type'] != 1) {
                             unset($data[$key]['bonuses'][$bonusKey]);
                             break;
                         }
                     }
-                }
-                
+                } 
+
                 if ((int)$country_id) {
                     if ((!empty($value['allowed']))&&(!empty($value['denied']))) {
                         unset($data[$key]);
-                        continue;
                     }
 
                     if ((empty($value['allowed']))&&(!empty($value['denied']))) {
                         unset($data[$key]);
-                        continue;
                     }
                 }
             }
@@ -297,14 +299,15 @@ class BonusController extends ActiveController
         return $bonuses;
     }
 
-    public function actionNumber($mode, $v = NULL)
+    public function actionNumber($mode)
     {
-        \Yii::$app->response->format = Response::FORMAT_RAW;
+        //\Yii::$app->response->format = Response::FORMAT_RAW;
         $number = SiteNumber::find()->where(['type' => 0])->one();
 
         if ($mode == 'check') {
             $number->value = (string)($number->value + 1);
             $number->save();
+            return $number->value;
 
         }
 
@@ -341,11 +344,11 @@ class BonusController extends ActiveController
     protected function normalize($arr)
     {
 
-        $bonuses = [];
+       
+        foreach ($arr as $key => $review) {
 
-        foreach ($arr as $review) {
-
-            foreach ($review['bonuses'] as $bonus) {
+            foreach ($review['bonuses'] as $bonusKey => $bonus) {
+                $bonus['logo'] = \Yii::$app->params['cdnHost'] . $bonus['logo'];
                 $bonuses[] = $bonus + [
                         'rank' => $review['rank'],
                         'rating' => $review['ratings'],

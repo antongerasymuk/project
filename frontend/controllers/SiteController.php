@@ -106,7 +106,7 @@ class SiteController extends Controller
         $this->layout = "main_review-company";
 
 
-        return $this->render('company');
+        return $this->render('company', ['cdnHost' => \Yii::$app->params['cdnHost']]);
     }
 
     public function actionReview($id)
@@ -153,6 +153,7 @@ class SiteController extends Controller
         $this->view->params['logo'] = $review->company->logo;
         $this->view->params['review'] = $review;
         $this->view->params['review_company'] = $reviewCompany;
+        $this->view->params['cdnHost'] = \Yii::$app->params['cdnHost'];
 
         if ($review->type == Review::REVIEW_TYPE) {
             // render review

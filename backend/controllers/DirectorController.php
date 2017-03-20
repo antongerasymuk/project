@@ -6,6 +6,7 @@ use common\models\Company;
 use Yii;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
+use common\helpers\ImageNameHelper;
 
 /**
  * Company controller
@@ -31,10 +32,11 @@ class DirectorController extends BackEndController
 
             if ($model->photoFile) {
                 unlink(Url::to('@frontend/web') . $model->photo);
-                $path = Url::to($params['uploadPath']) . $model->photoFile->baseName . '.' . $model->photoFile->extension;
+                $basePath =  ImageNameHelper::getImageName($model->photoFile);
+                $path = Url::to($params['uploadPath']) . $basePath;
 
                 // store the source file name
-                $model->photo = $params['uploadUrl'] . $model->photoFile->baseName . '.' . $model->photoFile->extension;
+                $model->photo = $params['uploadUrl'] . $basePath ;
                 $model->photoFile->saveAs($path);
             }
 
@@ -56,10 +58,11 @@ class DirectorController extends BackEndController
             $params = Yii::$app->params;
 
             $photoFile = UploadedFile::getInstance($model, 'photoFile');
-            $path = Url::to($params['uploadPath']) . $photoFile->baseName . '.' . $photoFile->extension;
+            $basePath =  ImageNameHelper::getImageName($model->photoFile);
+            $path = Url::to($params['uploadPath']) . $basePath;
 
             // store the source file name
-            $model->photo = $params['uploadUrl'] . $photoFile->baseName . '.' . $photoFile->extension;
+            $model->photo = $params['uploadUrl'] . $basePath ;
 
             if($model->save()) {
                 $photoFile->saveAs($path);

@@ -15,6 +15,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
+use common\helpers\ImageNameHelper;
 
 /**
  * Company controller
@@ -39,18 +40,23 @@ class ReviewController extends BackEndController
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
 
             if ($model->previewFile && $model->logoFile) {
-                $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
-                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                $basePreviewPath = ImageNameHelper::getImageName($model->previewFile);
+                $baseLogoPath = ImageNameHelper::getImageName($model->logoFile);
+                $previewPath = Url::to($params['uploadPath']) . $basePreviewPath;
+                $logoPath = Url::to($params['uploadPath']) . $baseLogoPath;
+
+                //$previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
+                //$logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 // store the source file name
                 
                 $model->previewFile->saveAs($previewPath, false);
                 $model->logoFile->saveAs($logoPath, false);
                 if (is_file($previewPath)) {
-                    $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
+                    $model->preview = $params['uploadUrl'] . $basePreviewPath;
                 }
                 
                 if (is_file($logoPath)) {
-                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                    $model->logo = $params['uploadUrl'] . $baseLogoPath;
                 }
 
                 if($model->save()) {
@@ -166,8 +172,11 @@ class ReviewController extends BackEndController
             $params = Yii::$app->params;
 
             if ($model->previewFile) {
+                $basePreviewPath = ImageNameHelper::getImageName($model->previewFile);
+                                
+                $previewPath =  Url::to($params['uploadPath']) . $basePreviewPath;
+                //$previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName .  time() . '.' . $model->previewFile->extension;
 
-                $previewPath = Url::to($params['uploadPath']) . $model->previewFile->baseName .  time() . '.' . $model->previewFile->extension;
                 $model->previewFile->saveAs($previewPath, false);
 
                 if ((is_file(Url::to('@frontend/web') . $model->preview))&&(is_file($previewPath))) {
@@ -175,15 +184,18 @@ class ReviewController extends BackEndController
                 }
 
                 if (is_file($previewPath)) {
-                    $model->preview = $params['uploadUrl'] . $model->previewFile->baseName . time() . '.' . $model->previewFile->extension;
+                    $model->preview = $params['uploadUrl'] . $basePreviewPath;
                 } else {
                     $model->addError('previewFile', 'File loading error!');
                 }
             }
 
             if ($model->logoFile) {
+                $baseLogoPath = ImageNameHelper::getImageName($model->logoFile);
 
-                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName .  time() . '.' . $model->logoFile->extension;
+                $logoPath = Url::to($params['uploadPath']) . $baseLogoPath;
+                //$logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName .  time() . '.' . $model->logoFile->extension;
+                
                 $model->logoFile->saveAs($logoPath, false);
 
                 if (is_file(Url::to('@frontend/web') . $model->logo)&&(is_file($logoPath))) {
@@ -191,7 +203,7 @@ class ReviewController extends BackEndController
                 }
 
                 if (is_file($logoPath)) {
-                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                    $model->logo = $params['uploadUrl'] . $baseLogoPath;
                 } else {
                     $model->addError('logoFile', 'File loading error!');
                 }

@@ -53,7 +53,7 @@ AppAsset::register($this);
       </div>
 
       <div class="header-lg">
-        <a target="_blank" href="#"><img src="<?= $this->params['logo'] ?>" alt=""></a>
+        <a target="_blank" href="#"><img src="<?= $cdnHost.$this->params['logo'] ?>" alt=""></a>
         <p>Grab your bonus for <a href="#">Casino,</a> <a href="#">Sport,</a> <a href="#">Bingo,</a> <a href="#">Poker</a></p>
       </div>
 

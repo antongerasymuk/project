@@ -17,6 +17,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
+use common\helpers\ImageNameHelper;
 
 /**
  * Company controller
@@ -50,14 +51,19 @@ class CompanyController extends BackEndController
                 $pathSmall = '';
 
                 if ($model->logoFile) {
-                    $basePath = $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                    $basePath = ImageNameHelper::getImageName($model->logoFile);
+                    //$basePath = $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+
                     $path = Url::to(Yii::$app->params['uploadPath']) . $basePath;
 
                     // store the source file name
                     $model->logoFile->saveAs($path, false);
                 }
+
                 if ($model->logoSmallFile) {
-                    $basePathSmall = $model->logoSmallFile->baseName . time() . '.' . $model->logoSmallFile->extension;
+                    $basePathSmall = ImageNameHelper::getImageName($model->logoSmallFile);
+                    //$basePathSmall = $model->logoSmallFile->baseName . time() . '.' . $model->logoSmallFile->extension;
+                    
                     $pathSmall = Url::to(Yii::$app->params['uploadPath']) . $basePathSmall;
 
                     // store the source file name
@@ -73,11 +79,11 @@ class CompanyController extends BackEndController
 
                 if (is_file($path)||is_file($pathSmall)) {
                     if (is_file($path)) {
-                        $model->logo = Yii::$app->params['uploadUrl'].$basePath;
+                        $model->logo = Yii::$app->params['uploadUrl'] . $basePath;
                     }
 
                     if(is_file($pathSmall)) {
-                        $model->logo_small = Yii::$app->params['uploadUrl'].$basePathSmall;
+                        $model->logo_small = Yii::$app->params['uploadUrl'] . $basePathSmall;
                     }
                 } else {
                     $model->addError('logoFile', 'File url loading  to DB error!');
@@ -147,7 +153,9 @@ class CompanyController extends BackEndController
                 $pathSmall = '';
 
                 if ($model->logoFile) {
-                    $basePath = $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                    
+                    $basePath = ImageNameHelper::getImageName($model->logoFile);
+                    //$basePath = $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                     $path = Url::to(Yii::$app->params['uploadPath']) .$basePath;
 
                     // store the source file name
@@ -155,7 +163,9 @@ class CompanyController extends BackEndController
                 }
 
                 if ($model->logoSmallFile) {
-                    $basePathSmall = $model->logoSmallFile->baseName . time() . '.' . $model->logoSmallFile->extension;
+                    
+                    $basePathSmall = ImageNameHelper::getImageName($model->logoSmallFile);
+                    //$basePathSmall = $model->logoSmallFile->baseName . time() . '.' . $model->logoSmallFile->extension;
                     $pathSmall = Url::to(Yii::$app->params['uploadPath']) . $basePathSmall;
 
                     // store the source file name

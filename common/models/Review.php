@@ -23,6 +23,7 @@ class Review extends \yii\db\ActiveRecord
     
     public $bonusIds;
     public $gallery;
+    public $gallery_mini;
     public $logoFile;
     public $galleryIds;
     public $previewFile;

@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = [
     'label' => $review->position ?   $review->position : $review->category->title . ' Sites'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php $cdnHost = $this->params['cdnHost'];?>
 <div class="container">
     <div class="row">
         <?php if (!empty($review->bonuses)) : ?>
@@ -63,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php foreach ($review->galleries as $image) : ?>
                 <div class="item">
                     <a href="<?= $image->src; ?>" data-effect="mfp-zoom-in">
-                        <img src="<?= $image->src; ?>" alt=""/>
+                        <img src="<?= $cdnHost . $image->scr_mini; ?>" alt=""/>
                     </a>
                 </div>
                 <?php endforeach; ?>
@@ -156,7 +157,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="srm-head">Deposit Methods</div>
                         <div class="srm-list srm-dmethods clearfix">
                             <?php foreach ($review->deposits as $deposit) : ?>
-                                <button class="payment-button" style="cursor: default; background-image: url(<?= $deposit->logo ?>);"></button>
+                                <button class="payment-button" style="cursor: default; background-image: url(<?= $cdnHost . $deposit->logo ?>);"></button>
                             <?php endforeach; ?>
                         </div>
                     </div><!-- .sr-menu (Deposit Methods) -->
@@ -229,7 +230,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <p><?=$relatedReview->getMainBonus()->description ?></p>
                             
                         </div>
-                        <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
+                        <div class="img"><img src="<?= $cdnHost . $relatedReview->preview ?>" alt=""></div>
                         <div class="inf"><?= $relatedReview->preview_title ?></div>
                     </div>
                 <?php endforeach; ?>

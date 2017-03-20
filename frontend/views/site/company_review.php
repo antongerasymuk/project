@@ -4,6 +4,9 @@ $this->params['breadcrumbs'][] = $this->title;
 use \common\models\Review;
 use \yii\helpers\Url;
 ?>
+
+<?php $cdnHost = $this->params['cdnHost'];?>
+
 <div class="container">
     <div class="row">
         <?php $companyReviews = $review->company->getReviews()
@@ -18,7 +21,7 @@ use \yii\helpers\Url;
                 <?php foreach ($companyReviews as $companyReview) : ?>
                 <div class="item">
                     <div class="img">
-                    <div class="img-item" style="background-color: <?= $companyReview->bg_color ?>; background-size:contain !important;  background-image:url(<?= $companyReview->logo ?>); background-repeat: no-repeat; background-position: center; width:180px;">
+                    <div class="img-item" style="background-color: <?= $companyReview->bg_color ?>; background-size:contain !important;  background-image:url(<?= $cdnHost.$companyReview->logo ?>); background-repeat: no-repeat; background-position: center; width:180px;">
                     
                     </div>
                     </div>
@@ -123,7 +126,7 @@ use \yii\helpers\Url;
                             <div class="srm-head"><?= $review->company->director->title ?></div>
                             <div class="srm-list srm-ceo clearfix">
                                 <p>
-                                    <img class="img-left" src="<?= $review->company->director->photo ?>" alt="">
+                                    <img class="img-left" src="<?= $cdnHost.$review->company->director->photo ?>" alt="">
                                     <?= $review->company->director->description ?>
                                 </p>
                             </div>
@@ -134,7 +137,7 @@ use \yii\helpers\Url;
                             <div class="srm-head">Deposit Methods</div>
                             <div class="srm-list srm-dmethods clearfix">
                                 <?php foreach ($review->deposits as $deposit) : ?>
-                                    <button class="payment-button" style="cursor:default; background-image:url(<?= $deposit->logo ?>);"></button>
+                                    <button class="payment-button" style="cursor:default; background-image:url(<?= $cdnHost.$deposit->logo ?>);"></button>
                                 <?php endforeach; ?>
                             </div>
                         </div><!-- .sr-menu (Deposit Methods) -->
@@ -218,7 +221,7 @@ use \yii\helpers\Url;
                                 ]) ?>"><?= $relatedReview->title ?></a>
                             <p><?= $review->getMainBonus()->description ?></p>
                         </div>
-                        <div class="img"><img src="<?= $relatedReview->preview ?>" alt=""></div>
+                        <div class="img"><img src="<?= $cdnHost.$relatedReview->preview ?>" alt=""></div>
                         <div class="inf"><?= $relatedReview->preview_title ?></div>
                     </div>
                 <?php endforeach; ?>

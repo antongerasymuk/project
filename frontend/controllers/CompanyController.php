@@ -49,8 +49,11 @@ class CompanyController extends ActiveController
             ->offset($offset)
             ->groupBy('id')
             ->all();
-
-
+        
+        foreach ($data as $key => $value) {
+            $data[$key]['logo_small']  = \Yii::$app->params['cdnHost'].$data[$key]['logo_small'];
+        }
+        
 
         // $data = $modelClass::getDb()->cache(function($db)
         //     return $modelClass::find()

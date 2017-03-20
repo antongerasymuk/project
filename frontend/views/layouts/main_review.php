@@ -13,7 +13,10 @@ use yii\helpers\Url;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<?php $mainBonus = $this->params['review']->getMainBonus(); ?>
+<?php 
+$cdnHost = $this->params['cdnHost'];
+$mainBonus = $this->params['review']->getMainBonus(); 
+?>
 
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -59,7 +62,7 @@ AppAsset::register($this);
             ?>
 
             <a href="<?= $href ?>">
-                <img src="<?= $this->params['logo'] ?>" alt="">
+                <img src="<?= $cdnHost.$this->params['logo'] ?>" alt="">
             </a>
             <?php if (isset($this->params['is_company'])) : ?>
 

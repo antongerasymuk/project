@@ -7,6 +7,7 @@ use common\models\Os;
 use Yii;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
+use common\helpers\ImageNameHelper;
 
 /**
  * Company controller
@@ -32,13 +33,18 @@ class BonusController extends BackEndController
             $params = Yii::$app->params;
             $model->logoFile = UploadedFile::getInstance($model, 'logoFile');
             if ($model->logoFile) {
-                $path = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                $basepath = ImageNameHelper::getImageName($model->logoFile);
+                
+                $path = Url::to($params['uploadPath']) . $basepath;
+                $url = Url::to(Yii::$app->params['uploadUrl']) . $basepath;
+                
+                //$path = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
 
                 // store the source file name
                 $model->logoFile->saveAs($path, false);
                 
                 if (is_file($path)) {
-                   $model->logo = Url::to($params['uploadUrl']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                   $model->logo = $url;
                 }
                 
                 if ($model->save()) {
@@ -89,17 +95,19 @@ class BonusController extends BackEndController
             //}
             if (!empty($model->logoFile)) {
 
-
-                $logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                $basepath = ImageNameHelper::getImageName($model->logoFile);
+                $logoPath = Url::to($params['uploadPath']) . $basepath;
+                $url = Url::to($params['uploadUrl']) . $basepath;
+                //$logoPath = Url::to($params['uploadPath']) . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
                 $model->logoFile->saveAs($logoPath, false);
-                echo Url::to('@frontend/web') . $model->logo;
+                //echo Url::to('@frontend/web') . $model->logo;
 
                 if (is_file(Url::to('@frontend/web') . $model->logo) && is_file($logoPath)) {
                     unlink(Url::to('@frontend/web') . $model->logo);
                 }
 
                 if (is_file($logoPath)) {
-                    $model->logo = $params['uploadUrl'] . $model->logoFile->baseName . time() . '.' . $model->logoFile->extension;
+                    $model->logo = $url;
                 } else {
                     $model->addError('logoFile', 'File loading error!');
                 }

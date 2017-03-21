@@ -37,10 +37,9 @@ class CategoryController extends BackEndController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', 'Category updated success');
-
+            
             return $this->redirect(['category/index']);
-        }
-
+        } 
         return $this->render('update', ['model' => $model]);
     }
 

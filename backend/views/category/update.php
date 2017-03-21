@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'title')->textInput() ?>
 <?= $form->field($model, 'pos')->textInput()->label('Index Position') ?>
 
-</div>
+
 
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#panel1">Deposit Page</a></li>
@@ -27,8 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
 </ul>
 
 <div class="tab-content">
+
     <div id="panel1" class="tab-pane fade in active">
+
         <div class="well">
+            
             <h2 class="text-center"><strong >Deposit Page</strong></h2>
 
             <?= $form->field($model, 'meta_title')->textInput()?>

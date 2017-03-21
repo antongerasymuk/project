@@ -5,7 +5,7 @@
 riot.tag2('companies-list', '<div class="row"> ' +
     '<div class="h-title">' +
     
-    '<h2>{opts.title}</h2>' +
+    '<h1>{opts.title}</h1>' +
     '</div> <div class="betting-sites-items clearfix" >' +
     '<div riot-tag="company-offer"   class="col-md-4 col-sm-6"   id="company-offer_{id}" each="{ companies_list }" style="{style}" bg_color="{bg_color}" title="{title}" logo="{logo_small}" reviews="{reviews}">' +
     '</div>' +

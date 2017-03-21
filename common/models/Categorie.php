@@ -58,7 +58,7 @@ class Categorie extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['pos'], 'integer', 'max' => 10],
-            [['title'], 'string', 'max' => 30],
+            [['title'], 'string', 'max' => 50],
 
             [['meta_title', 'meta_description', 'meta_keywords'], 'safe'],
             [['meta_title_no_deposit', 'meta_description_no_deposit', 'meta_keywords_no_deposit'], 'safe'],

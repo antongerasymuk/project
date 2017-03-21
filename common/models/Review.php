@@ -135,11 +135,17 @@ class Review extends \yii\db\ActiveRecord
                     'osIds',
                     'allowedIds',
                     'deniedIds',
+                ],
+                'safe'
+            ],
+            [   
+                [
                     'meta_title',
                     'meta_description',
                     'meta_keywords'
                 ],
-                'safe'
+                'match', 
+                'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s/,-]+$/', 'message' => 'Your text string is incorrect!'
             ],
             [
                 ['previewFile', 'logoFile'],

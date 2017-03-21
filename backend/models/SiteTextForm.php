@@ -42,21 +42,29 @@ class SiteTextForm extends Model
     {
         return [
         
-        [['footer_text_model'],'string'],
+            [['footer_text_model'],'string'],
 
-        [['contact_title_model'],'string'],
-        [['contact_subtitle_model'],'string'],
-        [['contact_text_model'], 'string'],
-        [['contact_feedback_model'], 'string'],
+            [['contact_title_model'],'string'],
+            [['contact_subtitle_model'],'string'],
+            [['contact_text_model'], 'string'],
+            [['contact_feedback_model'], 'string'],
 
-        [['main_title_model'],'string'],
-        [['main_subtitle_model'], 'string'],
-        [['main_list_title_model'], 'string'],
-        [['main_text_model'], 'string'],
+            [['main_title_model'],'string'],
+            [['main_subtitle_model'], 'string'],
+            [['main_list_title_model'], 'string'],
+            [['main_text_model'], 'string'],
 
-        [['sitemap_title_model'], 'string'],
+            [['sitemap_title_model'], 'string'],
 
-        [['meta_title', 'meta_description', 'meta_keywords'], 'safe']
+            [   
+                [
+                    'meta_title', 
+                    'meta_description', 
+                    'meta_keywords'
+                ], 
+                'match', 
+                'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s/,-]+$/', 'message' => 'Your text string is incorrect!'
+            ]
         ];
     }
     public function attributeLabels()

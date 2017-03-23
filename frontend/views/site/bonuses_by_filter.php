@@ -26,6 +26,11 @@ $request->get(); ?>
 
 <script>
     texts = <?= $texts_json?>;
+    
+    main_text = null;
+    notes = null;
+    list_title = null;
+
     meta_tags = <?= $meta_tags_json?>;
 </script>
 

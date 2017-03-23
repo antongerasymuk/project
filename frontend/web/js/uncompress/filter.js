@@ -11,7 +11,7 @@ $(document).ready(function() {
         var url = $(this).attr('url');
         var time = Math.floor(Date.now() / 1000);
         $.get("/bonus/number?mode=check&v="+time).done(function() {
-            window.location.href = url;
+            window.open(url);
         });
     });
 

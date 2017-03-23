@@ -247,9 +247,12 @@ class BonusController extends ActiveController
             $bonuses = $bonusesCache;
         }
 
-       
-
-        return array_slice($bonuses, (int)$offset, (int)$limit);
+        if ($bonuses) {
+            return array_slice($bonuses, (int)$offset, (int)$limit);
+        } else {
+            return  $bonuses;
+        }
+        
     }
 
     /**

@@ -230,7 +230,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <p><?=$relatedReview->getMainBonus()->description ?></p>
                             
                         </div>
-                        <div class="img"><img src="<?= $cdnHost . $relatedReview->preview ?>" alt=""></div>
+                        <div class="img"><img onclick='window.location.href="<?= $hrefReview ?>"' src="<?= $cdnHost . $relatedReview->preview ?>" alt=""></div>
                         <div class="inf"><?= $relatedReview->preview_title ?></div>
                     </div>
                 <?php endforeach; ?>

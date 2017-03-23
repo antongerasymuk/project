@@ -109,31 +109,58 @@ riot.tag2('bonuses-filter-list',
                 .done(function(data){
 
                     switch(parseInt(get.filter_by)) {
+
                         case 0:
+                            main_text = texts.no_deposit_main_text;
+                            notes = texts.no_deposit_notes;
                             self.list_title = texts.no_deposit_list_title;
-                            self.main_text = texts.no_deposit_main_text;
-                            self.notes = texts.no_deposit_notes;
+                            
+                            if (main_text) {
+                                self.main_text = 'main_text';
+                            }                          
+                            
+                            if (notes) {
+                                self.notes = 'notes';
+                            }
 
                             $("meta[name='title']").attr("content", meta_tags.meta_title_no_deposit);
                             $("meta[name='description']").attr("content", meta_tags.meta_description_no_deposit);
                             $("meta[name='keywords']").attr("content", meta_tags.meta_keywords_no_deposit);
 
                             break;
-                        case 2:
-                            self.list_title = texts.code_list_title;
-                            self.main_text = texts.code_main_text;
-                            self.notes = texts.code_notes;
 
+                        case 2:
+                            main_text = texts.code_main_text;
+                            notes = texts.code_notes;
+                            self.list_title = texts.code_list_title;
+                            
+                            if (main_text) {
+                                self.main_text = 'main_text';
+                            }
+                            
+                            if (notes) {
+                                self.notes = 'notes';
+                            }
+                            
                             $("meta[name='title']").attr("content", meta_tags.meta_title_code);
                             $("meta[name='description']").attr("content", meta_tags.meta_description_code);
                             $("meta[name='keywords']").attr("content", meta_tags.meta_keywords_code);
 
                             break;
-                        default:
-                            self.list_title = texts.list_title;
-                            self.main_text = texts.main_text;
-                            self.notes = texts.notes;
 
+                        default:
+                            main_text = texts.main_text;
+                            notes = texts.notes;
+                            self.list_title = texts.list_title;
+                            
+                            if (main_text) {
+                                self.main_text = 'main_text';
+                            }
+                            
+                            if (notes) {
+                                self.notes = 'notes';
+                            }
+                            
                             $("meta[name='title']").attr("content", meta_tags.meta_title);
                             $("meta[name='description']").attr("content", meta_tags.meta_description);
                             $("meta[name='keywords']").attr("content", meta_tags.meta_keywords);

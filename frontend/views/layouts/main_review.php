@@ -95,7 +95,7 @@ $mainBonus = $this->params['review']->getMainBonus();
                     <?php $visit_url = $this->params['company']['url'];?>
                 <?php endif; ?>
 
-                <a class="get-bonus" url="<?= $visit_url; ?>" href="#">
+                <a class="get-bonus" target="_blank" url="<?= $visit_url; ?>" href="#">
                     Visit <?= $this->params['company']['name'] ?>
                     <i class="flaticon-arr-right"></i>
                 </a>

@@ -36,7 +36,7 @@ class Gallery extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['src','scr_mini'], 'string', 'max' => 255],
+            [['src','scr_mini'], 'string', 'max' => 150],
         ];
     }
 

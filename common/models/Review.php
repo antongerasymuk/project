@@ -145,7 +145,7 @@ class Review extends \yii\db\ActiveRecord
                     'meta_keywords'
                 ],
                 'match', 
-                'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s/,/./|-]+$/', 'message' => 'Your text string is incorrect!'
+                'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s,.|\'-]+$/', 'message' => 'Your text string is incorrect!'
             ],
             [
                 ['previewFile', 'logoFile'],

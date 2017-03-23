@@ -60,9 +60,9 @@ class Categorie extends \yii\db\ActiveRecord
             [['pos'], 'integer', 'max' => 10],
             [['title'], 'string', 'max' => 50],
 
-            [['meta_title', 'meta_description', 'meta_keywords'], 'match', 'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s/,/./|-]+$/', 'message' => 'Your text string is incorrect!'],
-            [['meta_title_no_deposit', 'meta_description_no_deposit', 'meta_keywords_no_deposit'], 'match', 'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s/,/./|-]+$/', 'message' => 'Your text string is incorrect!'],
-            [['meta_title_code', 'meta_description_code', 'meta_keywords_code'], 'match', 'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s/,/./|-]+$/', 'message' => 'Your text string is incorrect!'],
+            [['meta_title', 'meta_description', 'meta_keywords'], 'match', 'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s,.|\'-]+$/', 'message' => 'Your text string is incorrect!'],
+            [['meta_title_no_deposit', 'meta_description_no_deposit', 'meta_keywords_no_deposit'], 'match', 'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s,.|\'-]+$/', 'message' => 'Your text string is incorrect!'],
+            [['meta_title_code', 'meta_description_code', 'meta_keywords_code'], 'match', 'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s,.|\'-]+$/', 'message' => 'Your text string is incorrect!'],
             
             [['main_text'], 'string'],
             [['notes'], 'string'],

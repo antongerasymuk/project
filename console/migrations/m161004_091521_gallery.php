@@ -12,7 +12,7 @@ class m161004_091521_gallery extends Migration
         }
         $this->createTable('{{%gallery}}', [
             'id' => $this->primaryKey(),
-            'src' => $this->string(100)
+            'src' => $this->string(150)
         ]);
     }
 

@@ -11,6 +11,7 @@ use common\helpers\SiteText;
 
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="row">
 	<div class="col-sm-6">

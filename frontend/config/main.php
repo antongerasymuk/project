@@ -9,14 +9,14 @@ $params = array_merge(
 return [
     'id'                  => 'app-frontend',
     'basePath'            => dirname(__DIR__),
-    //'bootstrap'           => ['log', 'assetsAutoCompress'],
-    'bootstrap'           => ['log'],
+    'bootstrap'           => ['log', 'assetsAutoCompress'],
+    //'bootstrap'           => ['log'],
 
     'controllerNamespace' => 'frontend\controllers',
     'components'          => [
-        //'assetsAutoCompress' => [
-        //    'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
-        //],
+        'assetsAutoCompress' => [
+            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+        ],
         'geoip'              => [
             'class' => 'lysenkobv\GeoIP\GeoIP'
         ],

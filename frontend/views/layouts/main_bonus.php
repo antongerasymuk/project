@@ -186,17 +186,5 @@ AppAsset::register($this);
 
 		<?php $this->endBody() ?>
 	</body>
-	<script>
-		
-
-
-		$(function(){
-			$(".f-select").chosen({
-				inherit_select_classes: true,
-				disable_search: true
-			});
-		});
-		
-	</script>
 	</html>
 	<?php $this->endPage() ?>

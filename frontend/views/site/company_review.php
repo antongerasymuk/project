@@ -3,6 +3,7 @@ $this->title = $review->title;
 $this->params['breadcrumbs'][] = $this->title;
 use \common\models\Review;
 use \yii\helpers\Url;
+use common\widgets\ExternalRefButton;
 ?>
 
 <?php $cdnHost = $this->params['cdnHost'];?>
@@ -38,7 +39,8 @@ use \yii\helpers\Url;
                         <?= $mainBonus->description ?>
                     </p>
                     <div class="btn">
-                        <button class="btn-hulf get-bonus" type="button" url="<?= $mainBonus->hide_ext_url? '/' : $mainBonus->referal_url; ?>">Claim now</button>
+                        <?= ExternalRefButton::widget(['model' => $mainBonus, 'text' => 'Claim now', 'btn_class' => 'btn-hulf' , 'relative' => null]) ?>
+                    
                     </div>
                 </div><!-- .item -->
                 <?php endforeach; ?>
@@ -196,10 +198,9 @@ use \yii\helpers\Url;
                     <div class="tit">Like <?= $review->title ?> ?</div>
                     <p>Claim your <?= $review->title ?> Bonus Today!</p>
                     <div class="btn">
-                        <button type="button" class="btn-dft get-bonus" url="<?= $review->company->hide_ext_url ? '/' : $review->company->site_url ?>">Claim now</button>
+                        <?= ExternalRefButton::widget(['model' => $review->company, 'text' => 'Claim now', 'btn_class' => 'btn-dft']) ?>
                     </div>
                 </div>
-
             </div>
         </div>
     </div> <!-- .claim-block -->
@@ -215,13 +216,13 @@ use \yii\helpers\Url;
             <div class="row">
                 <?php foreach ($relatedReviews as $relatedReview) : ?>
                     <div class="item">
-                        <div class="tit"><a href="<?= Url::to([
-                                    'site/review',
-                                    'id' => $relatedReview->id
-                                ]) ?>"><?= $relatedReview->title ?></a>
-                            <p><?= $review->getMainBonus()->description ?></p>
+                        <?php
+                            $hrefReview = strlen($relatedReview->slug) ? '/' . mb_strtolower($relatedReview->category->title). '/' . $relatedReview->slug : Url::to(['site/review','id' => $relatedReview->id]);
+                        ?>
+                        <div class="tit"><a href="<?= $cdnHost . $hrefReview ?>"><?= $relatedReview->title ?></a>
+                        <p><?=$relatedReview->getMainBonus()->description ?></p>
                         </div>
-                        <div class="img"><img src="<?= $cdnHost.$relatedReview->preview ?>" alt=""></div>
+                        <div class="img"><img style="cursor:pointer;" onclick='window.location.href="<?= $cdnHost . $hrefReview ?>"' src="<?= $cdnHost . $relatedReview->preview ?>" alt=""></div>
                         <div class="inf"><?= $relatedReview->preview_title ?></div>
                     </div>
                 <?php endforeach; ?>

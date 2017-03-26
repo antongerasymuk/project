@@ -151,7 +151,7 @@ class Categorie extends \yii\db\ActiveRecord
                 continue;
             } 
 
-            if (!empty($this->meta_description_code)&&($metaTag->type == self::DESCRIPTION_TAG_TYPE_NO_CODE)) {
+            if (!empty($this->meta_description_code)&&($metaTag->type == self::DESCRIPTION_TAG_TYPE_CODE)) {
                 $metaTag->value = $this->meta_description_code;
                 if (!($metaTag->save())) {
                     return false;
@@ -160,7 +160,7 @@ class Categorie extends \yii\db\ActiveRecord
                 continue;
             } 
 
-            if (!empty($this->meta_keywords_code)&&($metaTag->type == self::KEYWORDS_TAG_TYPE_NO_CODE)) {
+            if (!empty($this->meta_keywords_code)&&($metaTag->type == self::KEYWORDS_TAG_TYPE_CODE)) {
                 $metaTag->value = $this->meta_keywords_code;
                 if (!($metaTag->save())) {
                     return false;
@@ -321,7 +321,9 @@ class Categorie extends \yii\db\ActiveRecord
 
     public static function getForNav()
     {
-        $dependency = new DbDependency(['sql' => 'SELECT count(*) FROM categories']);
+
+        $dependency = new DbDependency(['sql' => 'SELECT SUM(CRC32(CONCAT(id,pos,title))) FROM categories']);
+
         // cached
         $categories = Categorie::getDb()->cache(function ($db){
             return Categorie::find()->orderBy('pos')->all();

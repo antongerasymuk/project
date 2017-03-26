@@ -8,6 +8,8 @@
  * @var $plus \common\models\Plus
  */
 use yii\helpers\Url;
+use common\widgets\ExternalRefButton;
+
 $this->title = $review->title;
 $this->params['breadcrumbs'][] = [
     'url' => ['/'.mb_strtolower($review->category->title)],
@@ -34,9 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="tit"><?= $bonus->title ?></div>
                         <?= $bonus->description ?>
                         <div class="btn">
-                            <button type="button" class="get-bonus btn-dft" url="<?= $bonus->hide_ext_url ? '/' : $bonus->referal_url ?>" >
-                                <i class="flaticon-gift">
-                                </i> GET BONUS</button>
+                            <?= ExternalRefButton::widget(['model' => $bonus, 'giftIcon' => true, 'text' => 'GET BONUS', 'btn_class' => 'btn-dft']) ?>
                         </div>
                     </div>
                     <div class="right">
@@ -205,7 +205,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="tit">Like <?= $review->title ?> ?</div>
                 <p>Claim your <?= $review->title ?> Bonus Today!</p>
                 <div class="btn">
-                    <button type="button" class="btn-dft get-bonus"  url="<?= $review->getMainBonus()->hide_ext_url ? '/' : $review->getMainBonus()->referal_url ?>" >Claim now</button>
+                    <?= ExternalRefButton::widget(['model' => $review->getMainBonus(), 'text' => 'Claim now', 'btn_class' => 'btn-dft']) ?>                    
                 </div>
             </div>
         </div>
@@ -230,7 +230,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <p><?=$relatedReview->getMainBonus()->description ?></p>
                             
                         </div>
-                        <div class="img"><img onclick='window.location.href="<?= $hrefReview ?>"' src="<?= $cdnHost . $relatedReview->preview ?>" alt=""></div>
+                        <div class="img"><img style="cursor:pointer;" onclick='window.location.href="<?= $hrefReview ?>"' src="<?= $cdnHost . $relatedReview->preview ?>" alt=""></div>
                         <div class="inf"><?= $relatedReview->preview_title ?></div>
                     </div>
                 <?php endforeach; ?>

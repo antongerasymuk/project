@@ -90,12 +90,7 @@ $mainBonus = $this->params['review']->getMainBonus();
 
         <div class="container">
             <div class="visit-btn">
-                <?php $visit_url = $mainBonus->referal_url; ?>
-                <?php if (isset($this->params['is_company'])) : ?>
-                    <?php $visit_url = $this->params['company']['url'];?>
-                <?php endif; ?>
-
-                <a class="get-bonus" target="_blank" url="<?= $visit_url; ?>" href="#">
+                <a class="get-bonus" rel="<?= $this->params['visit_rel']; ?>" target="_blank" href="<?= $this->params['visit_url']; ?>">
                     Visit <?= $this->params['company']['name'] ?>
                     <i class="flaticon-arr-right"></i>
                 </a>

@@ -15,7 +15,7 @@ class AppAsset extends AssetBundle
         //'css/grid.css',
         //'css/style.min.css'
 
-        'http://d3nzdclrsrj0jr.cloudfront.net/a62671a8098.css'
+        'http://d3nzdclrsrj0jr.cloudfront.net/compressed_styles_v_2.css'
     ];
     public $js = [
         
@@ -36,9 +36,9 @@ class AppAsset extends AssetBundle
         //'http://d3nzdclrsrj0jr.cloudfront.net/09118f0b34d8f2dcfb4fcde33683edcb.js',
         //'http://d3nzdclrsrj0jr.cloudfront.net/cc847f68fea354be28f898be24b5cf84.js',
 
-        'http://d3nzdclrsrj0jr.cloudfront.net/compressed_v_6.js'
+        //'http://d3nzdclrsrj0jr.cloudfront.net/compressed_v_6.js'
 
-        /*'js/uncompress/riot.min.js',
+        'js/uncompress/riot.min.js',
         'js/uncompress/compatible_with.js',
         'js/uncompress/common.js',
         'js/uncompress/company_offer.js',
@@ -52,7 +52,7 @@ class AppAsset extends AssetBundle
 
         'js/uncompress/bonuses_list.js',
         'js/uncompress/bookmaker_bonuses_list.js',
-        'js/uncompress/filter.js',*/
+        'js/uncompress/filter.js',
         
 
 
@@ -67,7 +67,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $depends = [
-        //'yii\web\YiiAsset',
-        //'yii\bootstrap\BootstrapAsset',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

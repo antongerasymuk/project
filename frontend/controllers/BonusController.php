@@ -352,6 +352,15 @@ class BonusController extends ActiveController
 
             foreach ($review['bonuses'] as $bonusKey => $bonus) {
                 $bonus['logo'] = \Yii::$app->params['cdnHost'] . $bonus['logo'];
+                
+                if ($bonus['rel']) {
+                    $bonus['rel'] = 'nofollow';                    
+                }
+
+                if ($bonus['hide_ext_url']) {
+                    $bonus['referal_url'] = '/';
+                }
+                              
                 $bonuses[] = $bonus + [
                         'rank' => $review['rank'],
                         'rating' => $review['ratings'],

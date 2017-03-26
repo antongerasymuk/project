@@ -200,8 +200,8 @@ class Review extends \yii\db\ActiveRecord
 
     public function getMainBonus()
     {
-        $bonus = Bonus::findOne(['review_id' => $this->id, 'type' => Bonus::MAIN]);
-
+        
+        $bonus = Bonus::findOne(['review_id' => $this->id, 'type' => Bonus::MAIN]);        
         return $bonus == null ? new Bonus() : $bonus;
     }
 

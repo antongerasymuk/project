@@ -143,24 +143,33 @@ class SiteController extends Controller
         if ($review == null) {
             throw new NotFoundHttpException('Review not found');
         }
-
+         
+       
         $this->view->params['company'] = [
             'id' => $review->company->id,
-            'url' => $review->company->site_url,
-            'name' => $review->company->title
+            'name' => $review->company->title,
+        
         ];
 
         $this->view->params['logo'] = $review->company->logo;
         $this->view->params['review'] = $review;
+
         $this->view->params['review_company'] = $reviewCompany;
         $this->view->params['cdnHost'] = \Yii::$app->params['cdnHost'];
 
         if ($review->type == Review::REVIEW_TYPE) {
+            
+            $this->view->params['visit_url'] = $review->getMainBonus()->referal_url; 
+            $this->view->params['visit_rel'] = $review->getMainBonus()->rel;
+            
             // render review
             return $this->render('review', ['review' => $review]);
         } elseif ($review->type == Review::COMPANY_TYPE) {
+            
+            $this->view->params['visit_url'] = $review->company->hide_ext_url ? '/' : $review->company->site_url;
+            $this->view->params['visit_rel'] = $review->company->rel ? 'nofollow' : '';
+
             // render company review
-            $this->view->params['is_company'] = true;
             return $this->render('company_review', ['review' => $review]);
         } else {
             throw new NotFoundHttpException('Unknown review type');

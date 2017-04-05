@@ -86,7 +86,7 @@ ContactAsset::register($this);
                     </div>
 
                     <div class="copyright hidden-xs">
-                        <p>Copyright © 2017 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
+                        <p>Copyright © 2017 <span>bestonlinebonuses.uk</span>. All Rights Reserved</p>
                     </div>
 
                 </div>
@@ -108,7 +108,7 @@ ContactAsset::register($this);
                 </div>
 
                 <div class="copyright hidden-lg hidden-md hidden-sm visible-xs-block">
-                    <p>Copyright © 2017 <span>bestonlinebonuses.co.uk</span>. All Rights Reserved</p>
+                    <p>Copyright © 2017 <span>bestonlinebonuses.uk</span>. All Rights Reserved</p>
                 </div>
 
             </div>

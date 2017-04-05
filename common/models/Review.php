@@ -144,8 +144,9 @@ class Review extends \yii\db\ActiveRecord
                     'meta_description',
                     'meta_keywords'
                 ],
-                'match', 
-                'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s,.|\'-]+$/', 'message' => 'Your text string is incorrect!'
+                'safe'
+                //'match',
+                //'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s,.\%|$€£\/\\=\+&№\"\:\;\'-]+$/', 'message' => 'Your text string is incorrect!'
             ],
             [
                 ['previewFile', 'logoFile'],
@@ -316,8 +317,17 @@ class Review extends \yii\db\ActiveRecord
         $reviews = Review::find()
             ->where(['<>', 'id', $this->id])
             ->andWhere(['category_id' => $this->category_id])
-            ->with('ratings')
-            ->asArray()->all();
+            ->with('ratings')->with('bonuses')->asArray()->all();
+        foreach ($reviews as $key => $review) {
+            if (!count($review['bonuses'])) {
+                unset($reviews[$key]);
+                continue;
+            }
+            if (!($review['company_id'])) {
+                unset($reviews[$key]);
+                continue;
+            }
+        }
 
         $length = count($reviews);
         $sum = $count = 0;

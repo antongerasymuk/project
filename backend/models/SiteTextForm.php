@@ -61,9 +61,10 @@ class SiteTextForm extends Model
                     'meta_title', 
                     'meta_description', 
                     'meta_keywords'
-                ], 
-                'match', 
-                'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s,.|\'-]+$/', 'message' => 'Your text string is incorrect!'
+                ],
+                'safe'
+               // 'match',
+               // 'pattern' => '/^[а-яА-ЯёЁa-zA-Z0-9_\s,.\%|$€£\/\\=\+&№\"\:\;\'-]+$/', 'message' => 'Your text string is incorrect!'
             ]
         ];
     }

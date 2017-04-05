@@ -74,9 +74,10 @@ class Gallery extends \yii\db\ActiveRecord
 
             if (is_file($path)) {
 
-                $imageMini = Image::getImagine()->open($path)->thumbnail(new Box('300', '225'));
+                //$imageMini = Image::getImagine()->open($path)->thumbnail(new Box('300', '225'));
+                $imageMini = Image::getImagine()->open($path)->thumbnail(new Box('450', '338'));
                 
-                if ($imageMini->save($pathMini , ['quality' => 90])) {
+                if ($imageMini->save($pathMini , ['quality' => 95])) {
                     
                     $gallery->scr_mini = $urlMini;
                     $gallery->src = $url;

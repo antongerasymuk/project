@@ -18,9 +18,9 @@ class ExternalRefButton extends Widget
     public function init()
     {
         parent::init();
-        if (gettype($this->model) == object) {
+        if (gettype($this->model) == 'object') {
             if (($this->result === null)&&(($this->model->className() == 'common\models\Bonus')||($this->model->className() == 'common\models\Company'))) {
-                
+                $giftHTML = null;
 
                 if ($this->model->rel) {
                     $this->model->rel = 'nofollow';

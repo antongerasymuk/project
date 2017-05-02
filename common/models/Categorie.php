@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 use yii\caching\DbDependency;
 use yii\helpers\ArrayHelper;
-
+use yii\helpers\Url;
 /**
  * This is the model class for table "categories".
  *
@@ -335,13 +335,17 @@ class Categorie extends \yii\db\ActiveRecord
         }, 0, $dependency);
 
         $items = [];
-
+		$current_url = Url::to('');
         foreach ($categories as $category) {
-            $items[] = [
+            $item = [
                 'label' => $category->title,
                 'url' => [mb_strtolower($category->title).'/']
                 //'url' => ['site/category', 'id' => $category->id , 'filter_by' => 1, 'sort_by' =>1]
             ];
+			if ('/'.mb_strtolower($category->title).'/' == $current_url) {
+				$item['options'] = ['class' => 'active'];
+			}
+			$items[] = $item;
         }
 
         return $items;

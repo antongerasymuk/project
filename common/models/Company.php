@@ -38,13 +38,13 @@ class Company extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-            [['title', 'site_url', 'director_id', 'rating'], 'required'],
+            [['title', 'site_url', 'rating'], 'required'],
             ['rating', 'double'],
             [['site_url'], 'url', 'validSchemes' => ['http', 'https']],
             ['site_url', 'string', 'max' => 150],
             ['hide_ext_url', 'integer', 'max' => 3],
             ['rel', 'integer'],
-            [['reviewIds', 'licenseIds'], 'safe'],
+            [['reviewIds', 'licenseIds', 'director_id'], 'safe'],
             [['bg_color'], 'default', 'value' => '#000'],
             [['logoFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit'],
             [['logoSmallFile'], 'file', 'skipOnEmpty' => false, 'extensions'=>'jpg, gif, png', 'except' => 'edit']

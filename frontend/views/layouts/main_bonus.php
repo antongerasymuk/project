@@ -22,7 +22,26 @@ AppAsset::register($this);
 	<meta charset="<?= Yii::$app->charset ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?= Html::csrfMetaTags() ?>
-	<title><?= Html::encode($this->title) ?></title>
+	<title><?//= Html::encode($this->title) ?><?
+		$for_title = '';
+		if (isset($this->metaTags)):
+		foreach ($this->metaTags as $onemetatag) {
+			if (mb_strpos($onemetatag, 'name="title"')) {
+				$arTagParts = explode('"', $onemetatag);
+				$for_title = $arTagParts[count($arTagParts)-2];
+			}
+		}
+		endif;
+		if ($for_title) {
+			echo $for_title;
+		} else {
+			$arTitleParts = explode(' ', Html::encode($this->title));
+			if ($arTitleParts[count($arTitleParts)-1] == 'Sites') {
+				unset($arTitleParts[count($arTitleParts)-1]);
+				echo implode(' ', $arTitleParts);
+			}
+		}
+	?></title>
 	<?php $this->head() ?>
 </head>
 <body>
@@ -120,7 +139,7 @@ AppAsset::register($this);
 									]) ?>
 								</div>
 								<div class="col-sm-4 clearfix pdl0">
-									<a href="#" class="close-filters">CLOSE FILTERS</a>
+									<a href="#" onclick="$(this).text( ($(this).text()=='CLOSE FILTERS')?'OPEN FILTERS':'CLOSE FILTERS' ); return false;" class="close-filters">CLOSE FILTERS</a>
 								</div>
 							</div>
 						</div>

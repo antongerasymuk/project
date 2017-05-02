@@ -24,7 +24,8 @@
         "2amigos/yii2-file-input-widget": "~1.0",
         "lysenkobv/yii2-geoip": "~1.0",
         "skeeks/yii2-assets-auto-compress": "*",
-        "yiisoft/yii2-imagine": "^2.1"
+        "yiisoft/yii2-imagine": "^2.1",
+        "skeeks/yii2-external-links": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

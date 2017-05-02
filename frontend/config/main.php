@@ -9,11 +9,36 @@ $params = array_merge(
 return [
     'id'                  => 'app-frontend',
     'basePath'            => dirname(__DIR__),
-    'bootstrap'           => ['log', 'assetsAutoCompress'],
-    //'bootstrap'           => ['log'],
+    //'bootstrap'           => ['log', 'assetsAutoCompress','externalLinks'],
+    'bootstrap'           => ['log','externalLinks'],
 
     'controllerNamespace' => 'frontend\controllers',
+    'modules' =>
+    [
+        //....
+        'externallinks' =>
+        [
+            'class' => 'skeeks\yii2\externalLinks\ExternalLinksModule',
+        ],
+        //....
+    ],
     'components'          => [
+        'externalLinks' =>
+        [
+            'class' => 'skeeks\yii2\externalLinks\ExternalLinksComponent',
+
+            //Additional
+            'enabled'                           => true,
+            'noReplaceLocalDomain'              => true,
+            'backendRoute'                      => '/externallinks/redirect/redirect',
+            'backendRouteParam'                 => 'url',
+            'enabledB64Encode'                  => true,
+            'noReplaceLinksOnDomains'           => [
+                'site1.ru',
+                'www.site1.ru',
+                'site2.ru',
+            ],
+        ],
         'assetsAutoCompress' => [
             'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
         ],
@@ -55,6 +80,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '~skeeks-redirect' => '/externallinks/redirect/redirect',
 
                 '/contact' => '/site/contact',
                 '/sitemap' => '/site/sitemap',

@@ -46,6 +46,13 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($event)
+    {
+        Yii::$app->view->params['cdnHost'] = \Yii::$app->params['cdnHost'];
+        return parent::beforeAction($event);
+
+    }
+
     /**
      * Displays homepage.
      *

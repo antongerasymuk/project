@@ -33,7 +33,7 @@ AppAsset::register($this);
 						<div class="row">
 
 							<div class="col-sm-3">
-								<div class="logo"><a href="<?= Yii::$app->getHomeUrl() ?>"><img src="/images/logo.png" alt=""></a></div>
+								<div class="logo"><a href="<?= Yii::$app->getHomeUrl() ?>"><img src="<?= $this->params['cdnHost'].'/images/logo.png' ?>" alt=""></a></div>
 							</div>
 
 							<div class="col-sm-9">
